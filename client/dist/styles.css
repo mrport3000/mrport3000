@@ -1,0 +1,58 @@
+p {
+  margin: 0px;
+}
+
+.duke-card-container {
+  border: 1px solid black;
+  height: 500px;
+  width: 300px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+.duke-productcard-inner {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.duke-card-image {
+  border-bottom: 1px solid black;
+  height: 60%;
+  width: 100%;
+}
+
+.duke-card-stars {
+  height: auto;
+  width: 30%;
+}
+
+.duke-outfitlist {
+  display: flex;
+  gap: 30px;
+}
+
+.duke-addoutfit-container {
+  border: 1px solid black;
+  height: 500px;
+  width: 300px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.duke-addoutfit-image {
+  height: 100px;
+  width: 100px;
+}
+
