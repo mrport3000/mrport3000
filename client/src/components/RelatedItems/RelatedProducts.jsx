@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { IconContext } from 'react-icons';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import ProductCard from './ProductCard.jsx';
 
@@ -35,6 +36,7 @@ const dummyData = [
 class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
+    // manages indexes shown in carousel
     this.state = {
       startIndex: 0,
       endIndex: 2,
@@ -73,15 +75,29 @@ class RelatedProducts extends React.Component {
       <>
         <h4>RELATED PRODUCTS</h4>
         <div className="duke-product-carousel-container">
-          {this.state.startIndex > 0
-          && <MdArrowBackIos onClick={this.handleBackArrowClick} />}
-          {dummyData.map((jacket, index) => {
-            if (index >= this.state.startIndex && index <= this.state.endIndex) {
-              return <ProductCard product={jacket} key={index} />;
-            }
-          })}
-          {this.state.endIndex !== (dummyData.length - 1)
-          && <MdArrowForwardIos onClick={this.handleForwardArrowClick} />}
+          {
+            this.state.startIndex > 0
+            && (
+            <IconContext.Provider value={{ className: "duke-arrow-button" }}>
+              <MdArrowBackIos onClick={this.handleBackArrowClick} />
+            </IconContext.Provider>
+            )
+          }
+          {
+            dummyData.map((product, index) => {
+              if (index >= this.state.startIndex && index <= this.state.endIndex) {
+                return <ProductCard product={product} key={index} />;
+              }
+            })
+          }
+          {
+            this.state.endIndex !== (dummyData.length - 1)
+            && (
+            <IconContext.Provider value={{ className: "duke-arrow-button" }}>
+              <MdArrowForwardIos onClick={this.handleForwardArrowClick} />
+            </IconContext.Provider>
+            )
+          }
         </div>
       </>
     );

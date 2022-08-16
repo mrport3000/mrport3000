@@ -40,9 +40,11 @@ p {
   width: 30%;
 }
 
-.duke-outfitlist {
+.duke-outfit-carousel-container {
   display: flex;
-  gap: 30px;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 .duke-addoutfit-container {
@@ -63,3 +65,7 @@ p {
   width: 100px;
 }
 
+.duke-arrow-button {
+  vertical-align: middle;
+  size: 2em;
+}
