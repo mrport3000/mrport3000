@@ -2,5 +2,7 @@ node_modules
 
 ./client/dist/bundle.js
 
+./client/dist/main.js
+
 .env
 
