@@ -2,9 +2,16 @@ p {
   margin: 0px;
 }
 
+.duke-product-carousel-container {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 10px;
+}
+
 .duke-card-container {
   border: 1px solid black;
-  height: 500px;
+  height: 400px;
   width: 300px;
   background-color: white;
   display: flex;
@@ -40,7 +47,7 @@ p {
 
 .duke-addoutfit-container {
   border: 1px solid black;
-  height: 500px;
+  height: 400px;
   width: 300px;
   background-color: white;
   display: flex;
