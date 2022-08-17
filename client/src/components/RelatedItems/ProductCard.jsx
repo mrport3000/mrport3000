@@ -6,11 +6,14 @@ import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 function ProductCard({ product, handleModalButtonClick }) {
   return (
     <div className="duke-card-container">
-      <div className="duke-card-header">
+      <div
+        className="duke-card-header"
+        style={{ backgroundImage: `url(${product.url})` }}
+      >
         <IconContext.Provider value={{ className: "duke-star-icon" }}>
           <AiOutlineStar onClick={handleModalButtonClick} />
         </IconContext.Provider>
-        <img className="duke-card-image" src={product.url} alt="placeholder" />
+        {/* <img className="duke-card-image" src={product.url} alt="placeholder" /> */}
       </div>
       <div className="duke-productcard-body">
         <p>{product.category}</p>
