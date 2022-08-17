@@ -1,0 +1,46 @@
+.keith-unexpanded-gallery-div {
+  float: left;
+  width: 46%;
+  height: 400px;
+  margin: 40px 0px 10px 50px;
+}
+
+.keith-product-info-div {
+  font-family: Helvetica, sans-serif;
+  float: right;
+  width: 46%;
+  height: 250px;
+  margin: 40px 20px 10px 0px;
+}
+
+.keith-category {
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.keith-product-name {
+  margin-top: 2px;
+}
+
+.keith-desc-div {
+  font-family: Helvetica, sans-serif;
+  float: left;
+  width: 50%;
+  height: 100%;
+  padding: 15px;
+  margin: 40px 20px 10px 70px;
+}
+
+.keith-feature-div {
+  border-left: 1px solid black;
+  float: right;
+  width: 35%;
+  height: 100%;
+  padding: 10px 10px 20px 10px;
+  margin: 40px 60px 10px 0px;
+}
+
+.keith-feature {
+  font-family: Helvetica, sans-serif;
+  margin: 7px;
+}
