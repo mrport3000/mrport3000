@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import axios from 'axios';
 import { IconContext } from 'react-icons';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import ProductCard from './ProductCard.jsx';
+import CompareModal from './CompareModal.jsx';
 
 const dummyData = [
   {
@@ -40,9 +41,11 @@ class RelatedProducts extends React.Component {
     this.state = {
       startIndex: 0,
       endIndex: 2,
+      show: false,
     };
     this.handleBackArrowClick = this.handleBackArrowClick.bind(this);
     this.handleForwardArrowClick = this.handleForwardArrowClick.bind(this);
+    this.handleModalButtonClick = this.handleModalButtonClick.bind(this);
   }
 
   componentDidMount() {
@@ -70,9 +73,16 @@ class RelatedProducts extends React.Component {
     });
   }
 
+  handleModalButtonClick() {
+    this.setState({
+      show: false,
+    });
+  }
+
   render() {
     return (
       <>
+        <CompareModal show={this.state.show} handleModalButtonClick={this.handleModalButtonClick} />
         <h4>RELATED PRODUCTS</h4>
         <div className="duke-product-carousel-container">
           {

@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Individual card in related product carousel
 function ProductCard({ product }) {
   return (
     <div className="duke-card-container">
