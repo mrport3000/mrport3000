@@ -49,15 +49,8 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products', {
-      headers: {
-        Authorization: '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',
-      },
-    })
-      .then((res) => {
-        console.log('RESPONSE', res.data);
-      });
   }
+
 
   handleBackArrowClick() {
     this.setState({

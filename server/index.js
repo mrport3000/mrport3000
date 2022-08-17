@@ -11,8 +11,8 @@ app.use(express.json());
 
 const config = {
   headers: {
-    Authorization: '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'
-  },
+    Authorization: process.env.AUTH_KEY
+  }
 };
 
 app.get('/product-info/:id', (req, res) => {
