@@ -1,11 +1,18 @@
 import React from 'react';
+import { IconContext } from 'react-icons';
+import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 
 // Individual card in related product carousel
-function ProductCard({ product }) {
+function ProductCard({ product, handleModalButtonClick }) {
   return (
     <div className="duke-card-container">
-      <img className="duke-card-image" src={product.url} alt="placeholder" />
-      <div className="duke-productcard-inner">
+      <div className="duke-card-header">
+        <IconContext.Provider value={{ className: "duke-star-icon" }}>
+          <AiOutlineStar onClick={handleModalButtonClick} />
+        </IconContext.Provider>
+        <img className="duke-card-image" src={product.url} alt="placeholder" />
+      </div>
+      <div className="duke-productcard-body">
         <p>{product.category}</p>
         <p>{product.description}</p>
         <p>{product.default_price}</p>

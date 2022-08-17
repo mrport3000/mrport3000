@@ -49,13 +49,13 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/rpp/products', {
+    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products', {
       headers: {
         Authorization: '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',
       },
     })
       .then((res) => {
-        console.log('RESPONSE', res);
+        console.log('RESPONSE', res.data);
       });
   }
 
@@ -75,7 +75,7 @@ class RelatedProducts extends React.Component {
 
   handleModalButtonClick() {
     this.setState({
-      show: false,
+      show: !this.state.show,
     });
   }
 
@@ -96,7 +96,13 @@ class RelatedProducts extends React.Component {
           {
             dummyData.map((product, index) => {
               if (index >= this.state.startIndex && index <= this.state.endIndex) {
-                return <ProductCard product={product} key={index} />;
+                return (
+                  <ProductCard
+                    product={product}
+                    key={index}
+                    handleModalButtonClick={this.handleModalButtonClick}
+                  />
+                );
               }
             })
           }

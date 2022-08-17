@@ -3,8 +3,10 @@ import React from 'react';
 function OutfitCard({ product }) {
   return (
     <div className="duke-card-container">
-      <img className="duke-card-image" src={product.url} alt="placeholder" />
-      <div className="duke-productcard-inner">
+      <div className="duke-card-header">
+        <img className="duke-card-image" src={product.url} alt="placeholder" />
+      </div>
+      <div className="duke-productcard-body">
         <p>{product.category}</p>
         <p>{product.description}</p>
         <p>{product.default_price}</p>
