@@ -81,9 +81,11 @@ class RelatedProducts extends React.Component {
           {
             this.state.startIndex > 0
             && (
-            <IconContext.Provider value={{ className: "duke-arrow-button" }}>
-              <MdArrowBackIos onClick={this.handleBackArrowClick} />
-            </IconContext.Provider>
+            <div className="duke-arrow-container">
+              <IconContext.Provider value={{ className: "duke-arrow-button" }}>
+                <MdArrowBackIos onClick={this.handleBackArrowClick} />
+              </IconContext.Provider>
+            </div>
             )
           }
           {
@@ -102,9 +104,11 @@ class RelatedProducts extends React.Component {
           {
             this.state.endIndex !== (dummyData.length - 1)
             && (
-            <IconContext.Provider value={{ className: "duke-arrow-button" }}>
-              <MdArrowForwardIos onClick={this.handleForwardArrowClick} />
-            </IconContext.Provider>
+            <div className="duke-arrow-container">
+              <IconContext.Provider value={{ className: "duke-arrow-button" }}>
+                <MdArrowForwardIos onClick={this.handleForwardArrowClick} />
+              </IconContext.Provider>
+            </div>
             )
           }
         </div>

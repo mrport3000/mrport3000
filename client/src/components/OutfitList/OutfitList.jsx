@@ -62,7 +62,11 @@ class OutfitList extends React.Component {
       <>
         <h4>YOUR OUTFIT</h4>
         <div className="duke-outfit-carousel-container">
-          {this.state.startIndex > 0 && <MdArrowBackIos className="duke-arrow-button" onClick={this.handleBackArrowClick} />}
+          {this.state.startIndex > 0 && (
+          <div className="duke-arrow-container">
+            <MdArrowBackIos className="duke-arrow-button" onClick={this.handleBackArrowClick} />
+          </div>
+          )}
           <AddOutfit />
           {
             dummyData.map((product, index) => {
@@ -71,7 +75,11 @@ class OutfitList extends React.Component {
               }
             })
           }
-          {this.state.endIndex < (dummyData.length - 1) && <MdArrowForwardIos className="duke-arrow-button" onClick={this.handleForwardArrowClick} />}
+          {this.state.endIndex < (dummyData.length - 1) && (
+          <div className="duke-arrow-container">
+            <MdArrowForwardIos className="duke-arrow-button" onClick={this.handleForwardArrowClick} />
+          </div>
+          )}
         </div>
       </>
     );

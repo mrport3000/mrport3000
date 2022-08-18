@@ -1,10 +1,14 @@
 import React from 'react';
+import { IconContext } from 'react-icons';
+import { FiXCircle } from 'react-icons/fi';
 
 function OutfitCard({ product }) {
   return (
     <div className="duke-card-container">
-      <div className="duke-card-header">
-        <img className="duke-card-image" src={product.url} alt="placeholder" />
+      <div className="duke-card-header" style={{ backgroundImage: `url(${product.url})` }}>
+        <IconContext.Provider value={{ className: "duke-action-icon" }}>
+          <FiXCircle />
+        </IconContext.Provider>
       </div>
       <div className="duke-productcard-body">
         <p>{product.category}</p>
