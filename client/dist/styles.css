@@ -1,0 +1,104 @@
+p {
+  margin: 0px;
+}
+
+.duke-product-carousel-container {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.duke-card-container {
+  border: 1px solid black;
+  height: 400px;
+  width: 300px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+.duke-productcard-inner {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.duke-card-image {
+  border-bottom: 1px solid black;
+  height: 60%;
+  width: 100%;
+}
+
+.duke-card-stars {
+  height: auto;
+  width: 30%;
+}
+
+.duke-outfit-carousel-container {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.duke-addoutfit-container {
+  border: 1px solid black;
+  height: 400px;
+  width: 300px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.duke-addoutfit-image {
+  height: 100px;
+  width: 100px;
+}
+
+.duke-arrow-button {
+  vertical-align: middle;
+  size: 2em;
+}
+
+.duke-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.duke-modal-content {
+  width: 500px;
+  background-color: #fff;
+}
+
+.duke-modal-footer {
+  padding: 10px;
+}
+
+.duke-modal-body {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.duke-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

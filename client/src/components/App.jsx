@@ -1,4 +1,6 @@
 import React from 'react';
+import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
+import OutfitList from './OutfitList/OutfitList.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,6 +15,8 @@ class App extends React.Component {
     return (
       <div>
         Place Widgets here:
+        <RelatedProducts />
+        <OutfitList />
       </div>
     );
   }
