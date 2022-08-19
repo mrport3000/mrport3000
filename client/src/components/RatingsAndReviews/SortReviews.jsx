@@ -1,5 +1,7 @@
 import React from 'react';
 
+import ReviewsList from './ReviewsList.jsx';
+
 class SortReviews extends React.Component {
   constructor(props) {
     super(props);
@@ -10,8 +12,13 @@ class SortReviews extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidUpdate(e) {
+    console.log('updated event: ', e);
+  }
+
   handleChange(e) {
     this.setState({ sortTerm: e.target.value }, () => {
+      // eslint-disable-next-line react/destructuring-assignment
       console.log('sortTerm: ', this.state.sortTerm);
     });
   }
@@ -36,7 +43,7 @@ class SortReviews extends React.Component {
           </div>
         </div>
         <div className="eric-RR-reviewContainer">
-          ReviewList Rendered Here!
+          <ReviewsList reviews={this.props.reviews} />
         </div>
         <div className="eric-RR-sortBottomNavBar">
           <div className="eric-RR-moreReviewsContainer">

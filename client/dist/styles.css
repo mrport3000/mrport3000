@@ -22,7 +22,7 @@
 }
 
 .eric-RR-sortReviews {
-  height: 400px;
+  height: 50px;
   width: 200px;
 }
 
@@ -34,4 +34,43 @@
 .eric-RR-sortBottomNavBar {
   display: flex;
   flex-direction: row;
+}
+
+.eric-RR-tileEntryContainer {
+  display: flex;
+  flex-direction: column;
+  border: .5px solid black;
+  border-left: 0px solid;
+  border-right: 0px solid;
+  margin-bottom: 8px;
+  height: 200px;
+  width: 500px;
+}
+
+.eric-RR-tileRatingAndUsername {
+  flex-direction: row;
+}
+
+.eric-RR-tileRating {
+  margin: 5px;
+  height: 15px;
+  width: 100px;
+}
+
+.eric-RR-tileUsername {
+  margin: 5px;
+  height: 15px;
+  width: 50%;
+}
+
+.eric-RR-tileSummary {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 18.5px;
+  font-weight: bold;
+}
+
+.eric-RR-tileResponse {
+  background-color: lightgray;
+  border-radius: 30px;
 }
