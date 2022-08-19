@@ -122,6 +122,23 @@
   border-bottom: 1px solid #eee;
 }
 
+.duke-modal-body table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.duke-modal-body table, th, td {
+  border: 1px solid;
+}
+
+.duke-modal-body th, td {
+  padding: 10px;
+}
+
+.duke-modal-body td {
+  text-align: center;
+}
+
 .duke-button {
   display: flex;
   justify-content: center;

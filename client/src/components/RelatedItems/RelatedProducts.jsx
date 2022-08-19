@@ -30,6 +30,11 @@ class RelatedProducts extends React.Component {
     this.getRelatedProductsInfo(this.props.productId);
   }
 
+  componentDidUpdate() {
+    // breaking code when run
+      // this.getRelatedProductsInfo(this.props.productId);
+  }
+
   handleBackArrowClick() {
     this.setState((prevState) => ({
       startIndex: prevState.startIndex - 1,
