@@ -9,7 +9,7 @@
   position: relative;
   border: 1px solid black;
   height: 400px;
-  width: 300px;
+  width: 275px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -68,7 +68,7 @@
 .duke-addoutfit-container {
   border: 1px solid black;
   height: 400px;
-  width: 300px;
+  width: 275px;
   background-color: white;
   display: flex;
   flex-direction: column;

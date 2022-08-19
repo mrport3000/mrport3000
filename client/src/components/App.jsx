@@ -51,6 +51,7 @@ class App extends React.Component {
                 rating: averageRating(ratings),
                 reviewCount: totalReviews(ratings),
               });
+              console.log('APP Product Info', this.state.productInfo);
             });
           });
       });
@@ -74,8 +75,8 @@ class App extends React.Component {
     return (
       <div>
         Place Widgets here:
-        <RelatedProducts productId={productId} />
-        <OutfitList />
+        <RelatedProducts productId={productId} currProduct={productInfo} />
+        <OutfitList currProduct={productInfo} />
       </div>
     );
   }

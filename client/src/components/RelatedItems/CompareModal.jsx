@@ -1,10 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function CompareModal({ show, handleModalButtonClick }) {
+function CompareModal({ show, handleModalButtonClick, product, currProduct }) {
   if (!show) {
     return null;
   }
+
+  // create unique feature obj from product and currProduct
+  const prodFeatures = product.features.reduce((acc, item) => {
+    let { feature, value } = item;
+    return {...acc, [feature]: value}
+  }, {});
+
+  const currFeatures = currProduct.features.reduce((acc, item) => {
+    let { feature, value } = item;
+    return {...acc, [feature]: value}
+  }, {});
+
+  // create unique array of all features
+  const allFeaturesArr = [...new Set(Object.keys(prodFeatures).concat(Object.keys(currFeatures)))];
+
+  console.log('prodFeatures: ', prodFeatures);
+  console.log('currFeatures: ', currFeatures);
+  console.log('allFeaturesArr: ', allFeaturesArr);
+
+  const rowCreator = allFeaturesArr.map((value) => (
+    <tr>
+      <td>{currFeatures[value] ? currFeatures[value] : ''}</td>
+      <td>{value}</td>
+      <td>{prodFeatures[value] ? prodFeatures[value] : ''}</td>
+    </tr>
+  ));
+
   return ReactDOM.createPortal(
     (
       <div className="duke-modal">
@@ -16,11 +43,7 @@ function CompareModal({ show, handleModalButtonClick }) {
                 <td>&nbsp;</td>
                 <th>Compared Product Name</th>
               </tr>
-              <tr>
-                <td>Current Product Value</td>
-                <td>Characteristic</td>
-                <td>Compare Product Value</td>
-              </tr>
+              {rowCreator}
             </table>
           </div>
           <div className="duke-modal-footer">
