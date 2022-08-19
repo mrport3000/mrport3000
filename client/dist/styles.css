@@ -105,16 +105,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* opacity: 0;
-  transition: all 0.3s ease-in-out;
-  pointer-events: none; */
 }
 
 .duke-modal-content {
   width: 500px;
   background-color: #fff;
-  /* transform: translateY(-200px);
-  transition: all 0.3s ease-in-out; */
 }
 
 .duke-modal-footer {
