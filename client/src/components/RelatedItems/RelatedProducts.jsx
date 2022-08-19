@@ -15,6 +15,7 @@ class RelatedProducts extends React.Component {
       startIndex: 0,
       endIndex: 2,
       show: false,
+      relatedProducts: [],
     };
     this.handleBackArrowClick = this.handleBackArrowClick.bind(this);
     this.handleForwardArrowClick = this.handleForwardArrowClick.bind(this);
@@ -72,10 +73,7 @@ class RelatedProducts extends React.Component {
   }
 
   getRelatedProductsInfo(id) {
-    // create promise array storage
-    // create master result array
-    let stylesArr = [];
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/related`, {
+    return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/related`, {
       headers: {
         Authorization: AUTH,
       },
@@ -100,23 +98,35 @@ class RelatedProducts extends React.Component {
         });
         return promiseArr;
       })
-      .then((promiseArr) => {
-        console.log('PROMISE ARR', promiseArr);
-        return Promise.all(promiseArr);
-      })
-      .then((result) => console.log('RESULT:', result));
-        // iterate through related product id array
-          // create promise for axios call
-          // push to correct array variable
-      // Promise.all
-        // iterate through array
-          // if empty array
-            // create object
-          // if id key exists
-            // create an object and push to master result array
-          // if product id === id
-            // add to object desired information
-      // set state with master array
+      .then((promiseArr) => Promise.all(promiseArr))
+      .then((result) => {
+        const finalResult = [];
+        // push productInfo
+        result.forEach((value) => {
+          if (value.id) {
+            finalResult.push({
+              id: value.id,
+              category: value.category,
+              name: value.name,
+              description: value.description,
+              features: value.features,
+              slogan: value.slogan,
+              default_price: value.default_price,
+            });
+          }
+        });
+        // push styles info
+        finalResult.forEach((product) => {
+          result.forEach((style) => {
+            if (product.id === Number(style.product_id)) {
+              product.styles = style.results;
+            }
+          });
+        });
+        this.setState({
+          relatedProducts: finalResult
+        });
+      });
   }
 
   render() {
