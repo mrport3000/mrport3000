@@ -1,20 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function CompareModal({ show, handleModalButtonClick, product, currProduct }) {
+function CompareModal({
+  show, handleModalButtonClick, product, currProduct
+}) {
   if (!show) {
     return null;
   }
 
   // create unique feature obj from product and currProduct
   const prodFeatures = product.features.reduce((acc, item) => {
-    let { feature, value } = item;
-    return {...acc, [feature]: value}
+    const { feature, value } = item;
+    return { ...acc, [feature]: value };
   }, {});
 
   const currFeatures = currProduct.features.reduce((acc, item) => {
-    let { feature, value } = item;
-    return {...acc, [feature]: value}
+    const { feature, value } = item;
+    return { ...acc, [feature]: value };
   }, {});
 
   // create unique array of all features
@@ -25,7 +27,7 @@ function CompareModal({ show, handleModalButtonClick, product, currProduct }) {
   console.log('allFeaturesArr: ', allFeaturesArr);
 
   const rowCreator = allFeaturesArr.map((value) => (
-    <tr>
+    <tr key={value}>
       <td>{currFeatures[value] ? currFeatures[value] : ''}</td>
       <td>{value}</td>
       <td>{prodFeatures[value] ? prodFeatures[value] : ''}</td>
@@ -38,12 +40,16 @@ function CompareModal({ show, handleModalButtonClick, product, currProduct }) {
         <div className="duke-modal-content">
           <div className="duke-modal-body">
             <table>
-              <tr>
-                <th>Current Product Name</th>
-                <td>&nbsp;</td>
-                <th>Compared Product Name</th>
-              </tr>
-              {rowCreator}
+              <thead>
+                <tr>
+                  <th>Current Product Name</th>
+                  <td>&nbsp;</td>
+                  <th>Compared Product Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rowCreator}
+              </tbody>
             </table>
           </div>
           <div className="duke-modal-footer">

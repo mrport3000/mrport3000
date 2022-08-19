@@ -31,23 +31,21 @@ class RelatedProducts extends React.Component {
   }
 
   handleBackArrowClick() {
-    this.setState({
-      startIndex: this.state.startIndex - 1,
-      endIndex: this.state.endIndex - 1,
-    });
+    this.setState((prevState) => ({
+      startIndex: prevState.startIndex - 1,
+      endIndex: prevState.endIndex - 1,
+    }));
   }
 
   handleForwardArrowClick() {
-    this.setState({
-      startIndex: this.state.startIndex + 1,
-      endIndex: this.state.endIndex + 1,
-    });
+    this.setState((prevState) => ({
+      startIndex: prevState.startIndex + 1,
+      endIndex: prevState.endIndex + 1,
+    }));
   }
 
   handleModalButtonClick() {
-    this.setState({
-      show: !this.state.show,
-    });
+    this.setState((prevState) => ({ show: !prevState.show }));
   }
 
   getProductInfo(id) {
