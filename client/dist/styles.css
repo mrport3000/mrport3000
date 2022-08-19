@@ -1,0 +1,37 @@
+.eric-RR-container {
+  display: flex;
+  flex-direction: row;
+  margin-left: 30px;
+}
+
+.eric-RR-breakDown {
+  flex-direction: column;
+  gap: 30px;
+}
+
+.eric-RR-productAverageText {
+  font-size: 45px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.eric-RR-productRatingAverage {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+}
+
+.eric-RR-sortReviews {
+  height: 400px;
+  width: 200px;
+}
+
+.eric-RR-sortContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.eric-RR-sortBottomNavBar {
+  display: flex;
+  flex-direction: row;
+}

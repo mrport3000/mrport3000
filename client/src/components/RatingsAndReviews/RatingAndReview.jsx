@@ -8,26 +8,26 @@ class RatingAndReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      reviews: [],
     };
   }
 
   render() {
     return (
-      <div className="RR-container">
-        <div className="RR-breakdown">
-          <div className="RR-rating-breakdown">
+      <div className="eric-RR-container">
+        <div className="eric-RR-breakdown">
+          <div className="eric-RR-ratingBreakdown">
             {/* rating breakdown component goes here */}
             <RatingBreakdown />
           </div>
-          <div className="RR-product-breakdown">
+          <div className="eric-RR-productBreakdown">
             {/* product breakdown component goes here */}
             <ProductBreakdown />
           </div>
         </div>
-        <div className="RR-sort-reviews">
+        <div className="eric-RR-sortReviews">
           {/* sort component goes here */}
-          <SortReviews />
+          <SortReviews reviews={this.state.reviews}/>
         </div>
       </div>
     );
