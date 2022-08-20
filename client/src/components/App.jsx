@@ -3,6 +3,8 @@ import axios from 'axios';
 import { AUTH } from '../config.js';
 import { averageRating, totalReviews } from '../utilities.js';
 import ProductOverview from './ProductOverview/OverviewIndex.jsx';
+import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
+import OutfitList from './OutfitList/OutfitList.jsx';
 
 const defaultId = 71704;
 
@@ -81,6 +83,8 @@ class App extends React.Component {
           rating={rating}
           reviewCount={reviewCount}
         />
+        <RelatedProducts />
+        <OutfitList />
       </div>
     );
   }
