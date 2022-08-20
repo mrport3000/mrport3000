@@ -1,6 +1,4 @@
 import React from 'react';
-import { IconContext } from 'react-icons';
-import { AiOutlineStar, AiFillStar } from 'react-icons/ai';
 
 // Individual card in related product carousel
 function ProductCard({ product, handleModalButtonClick }) {
@@ -15,9 +13,7 @@ function ProductCard({ product, handleModalButtonClick }) {
         className="duke-card-header"
         style={{ backgroundImage: `url(${defaultPhotoURL})` }}
       >
-        <IconContext.Provider value={{ className: "duke-action-icon" }}>
-          <AiOutlineStar onClick={handleModalButtonClick} />
-        </IconContext.Provider>
+        <img src="https://static.vecteezy.com/system/resources/previews/001/189/167/non_2x/star-png.png" className="duke-action-icon" onClick={handleModalButtonClick} value={product.id} alt="star-icon" />
       </div>
       <div className="duke-productcard-body">
         <p>{product.category}</p>

@@ -16,6 +16,7 @@ class RelatedProducts extends React.Component {
       endIndex: 2,
       show: false,
       relatedProducts: [],
+      cardProduct: {},
     };
     this.handleBackArrowClick = this.handleBackArrowClick.bind(this);
     this.handleForwardArrowClick = this.handleForwardArrowClick.bind(this);
@@ -49,7 +50,15 @@ class RelatedProducts extends React.Component {
     }));
   }
 
-  handleModalButtonClick() {
+  handleModalButtonClick(e) {
+    const { relatedProducts } = this.state;
+
+    // retrieves productId from product card to pass to modal
+    const prodId = e.target.getAttribute('value');
+    const newCardProduct = relatedProducts.filter((product) => Number(prodId) === product.id);
+    this.setState({ cardProduct: newCardProduct[0] });
+
+    // Show modal
     this.setState((prevState) => ({ show: !prevState.show }));
   }
 
@@ -135,7 +144,7 @@ class RelatedProducts extends React.Component {
 
   render() {
     const {
-      show, startIndex, endIndex, relatedProducts,
+      show, startIndex, endIndex, relatedProducts, cardProduct,
     } = this.state;
 
     const { currProduct } = this.props;
@@ -154,24 +163,21 @@ class RelatedProducts extends React.Component {
             </div>
             )
           }
+          <CompareModal
+            show={show}
+            handleModalButtonClick={this.handleModalButtonClick}
+            cardProduct={cardProduct}
+            currProduct={currProduct}
+          />
           {
             relatedProducts.map((product, index) => {
               if (index >= startIndex && index <= endIndex) {
                 return (
-                  <>
-                    <CompareModal
-                      key={product.id.toString()}
-                      show={show}
-                      handleModalButtonClick={this.handleModalButtonClick}
-                      product={product}
-                      currProduct={currProduct}
-                    />
-                    <ProductCard
-                      product={product}
-                      key={product.name}
-                      handleModalButtonClick={this.handleModalButtonClick}
-                    />
-                  </>
+                  <ProductCard
+                    product={product}
+                    key={product.name}
+                    handleModalButtonClick={this.handleModalButtonClick}
+                  />
                 );
               }
             })

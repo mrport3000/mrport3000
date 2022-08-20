@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 function CompareModal({
-  show, handleModalButtonClick, product, currProduct
+  show, handleModalButtonClick, cardProduct, currProduct
 }) {
   if (!show) {
     return null;
   }
-
+  console.log('Current Product', currProduct);
   // create unique feature obj from product and currProduct
-  const prodFeatures = product.features.reduce((acc, item) => {
+  const prodFeatures = cardProduct.features.reduce((acc, item) => {
     const { feature, value } = item;
     return { ...acc, [feature]: value };
   }, {});
