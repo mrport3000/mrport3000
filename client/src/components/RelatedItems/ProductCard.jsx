@@ -2,10 +2,30 @@ import React from 'react';
 
 // Individual card in related product carousel
 function ProductCard({ product, handleModalButtonClick }) {
-  const defaultPhoto = product.styles.filter((value) => (value['default?']));
+  console.log('Product', product);
+  const defaultStyle = product.styles.filter((value) => (value['default?']));
 
-  const defaultPhotoURL = defaultPhoto.length > 0
-    ? defaultPhoto[0].photos[0].url : product.styles[0].photos[0].url;
+  const defaultPhotoURL = defaultStyle.length > 0
+    ? defaultStyle[0].photos[0].url : product.styles[0].photos[0].url;
+
+  console.log('defaultStyle', defaultStyle);
+
+  // dummy test data for sales price
+  // defaultStyle.sale_price = "25.00";
+
+  const salesPrice = defaultStyle.length > 0
+    ? defaultStyle.sale_price : product.styles[0].sale_price;
+
+  let priceBlock = <p>{`$${product.default_price}`}</p>;
+
+  if (salesPrice) {
+    priceBlock = (
+      <p>
+        <span className="duke-sale-price">{`$${salesPrice}`}</span>
+        <span className="duke-cross-through">{`$${product.default_price}`}</span>
+      </p>
+    );
+  }
 
   return (
     <div className="duke-card-container">
@@ -21,7 +41,7 @@ function ProductCard({ product, handleModalButtonClick }) {
           <p><strong>{product.name}</strong></p>
           <p><i>{product.slogan}</i></p>
         </div>
-        <p>{product.default_price}</p>
+        {priceBlock}
         <div>
           <img className="duke-card-stars" src="https://cdn.searchenginejournal.com/wp-content/uploads/2021/08/a-guide-to-star-ratings-on-google-and-how-they-work-6123be39b9f2d-sej-760x400.jpg" alt="stars" />
         </div>

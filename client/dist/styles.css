@@ -152,3 +152,12 @@
 .duke-checkmark {
   height: 50px;
 }
+
+.duke-sale-price {
+  color: red;
+}
+
+.duke-cross-through {
+  text-decoration: line-through;
+  margin-left: 10px;
+}
