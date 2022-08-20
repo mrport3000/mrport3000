@@ -1,4 +1,5 @@
 import React from 'react';
+import { format } from 'date-fns';
 
 class ReviewTile extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class ReviewTile extends React.Component {
   }
 
   render() {
+    console.log(this.props.review)
     return (
       <div className="eric-RR-tileEntryContainer">
         <div className="eric-RR-tileRatingAndUsername">
@@ -21,7 +23,7 @@ class ReviewTile extends React.Component {
             {this.props.review.rating} stars
           </div>
           <div className="eric-RR-tileUsername">
-            {this.props.review.reviewer_name}
+            {this.props.review.reviewer_name}, {format ( new Date(this.props.review.date), 'MM/dd/yyyy')}
           </div>
         </div>
         <div className="eric-RR-tileMainBody">
@@ -41,7 +43,7 @@ class ReviewTile extends React.Component {
             {this.props.review.response}
           </div>
           <div className="eric-RR-tileHelpful">
-            Was this review helpful? <a onClick={this.handleClick}>Yes</a> ({this.props.review.helpfulness})
+            Was this review helpful? <a onClick={this.handleClick}>Yes</a> ({this.props.review.helpfulness}) | <a>Report</a>
           </div>
         </div>
       </div>
