@@ -2,13 +2,10 @@ import React from 'react';
 
 // Individual card in related product carousel
 function ProductCard({ product, handleModalButtonClick }) {
-  console.log('Product', product);
   const defaultStyle = product.styles.filter((value) => (value['default?']));
 
   const defaultPhotoURL = defaultStyle.length > 0
     ? defaultStyle[0].photos[0].url : product.styles[0].photos[0].url;
-
-  console.log('defaultStyle', defaultStyle);
 
   // dummy test data for sales price
   // defaultStyle.sale_price = "25.00";

@@ -76,7 +76,7 @@ class App extends React.Component {
       <div>
         Place Widgets here:
         <RelatedProducts productId={productId} currProduct={productInfo} />
-        <OutfitList currProduct={productInfo} />
+        <OutfitList productInfo={productInfo} productStyles={productStyles} />
       </div>
     );
   }

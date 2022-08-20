@@ -90,7 +90,7 @@ class RelatedProducts extends React.Component {
         Authorization: AUTH,
       },
     })
-      // array of related products [71702, 71702, 71704, 71705, 71697, 71699]
+      // [71702, 71702, 71704, 71705, 71697, 71699]
       .then((results) => {
         // remove original product Id
         let newProdsArr = results.data.filter((value) => value !== this.props.productId);

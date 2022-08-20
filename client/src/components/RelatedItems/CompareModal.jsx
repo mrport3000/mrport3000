@@ -7,7 +7,7 @@ function CompareModal({
   if (!show) {
     return null;
   }
-  console.log('Current Product', currProduct);
+
   // create unique feature obj from product features  and currProduct features
   const prodFeatures = cardProduct.features.reduce((acc, item) => {
     const { feature, value } = item;
@@ -21,10 +21,6 @@ function CompareModal({
 
   // create unique array of all features
   const allFeaturesArr = [...new Set(Object.keys(prodFeatures).concat(Object.keys(currFeatures)))];
-
-  console.log('prodFeatures: ', prodFeatures);
-  console.log('currFeatures: ', currFeatures);
-  console.log('allFeaturesArr: ', allFeaturesArr);
 
   const rowCreator = allFeaturesArr.map((value) => {
     if (currFeatures[value] === true) {
