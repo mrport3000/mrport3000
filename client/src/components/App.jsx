@@ -1,6 +1,7 @@
 import React from 'react';
 import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
 import OutfitList from './OutfitList/OutfitList.jsx';
+import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class App extends React.Component {
         Place Widgets here:
         <RelatedProducts />
         <OutfitList />
+        <QandA />
       </div>
     );
   }
