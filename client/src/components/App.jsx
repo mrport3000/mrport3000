@@ -79,15 +79,19 @@ class App extends React.Component {
     }
 
     return (
-      <div>
-        <ProductOverview
-          productInfo={productInfo}
-          productStyles={productStyles}
-          rating={rating}
-          reviewCount={reviewCount}
-        />
-        <RelatedProducts productId={productId} currProduct={productInfo} />
-        <OutfitList productInfo={productInfo} productStyles={productStyles} />
+      <div className="all-content">
+        <div>
+          <ProductOverview
+            productInfo={productInfo}
+            productStyles={productStyles}
+            rating={rating}
+            reviewCount={reviewCount}
+          />
+        </div>
+        <div className="additional-content">
+          <RelatedProducts productId={productId} currProduct={productInfo} />
+          <OutfitList productInfo={productInfo} productStyles={productStyles} />
+        </div>
       </div>
     );
   }

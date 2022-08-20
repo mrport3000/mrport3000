@@ -13,7 +13,7 @@ class RelatedProducts extends React.Component {
     // manages indexes shown in carousel
     this.state = {
       startIndex: 0,
-      endIndex: 2,
+      endIndex: 3,
       show: false,
       relatedProducts: [],
       cardProduct: {},
@@ -150,7 +150,7 @@ class RelatedProducts extends React.Component {
     const { currProduct } = this.props;
 
     return (
-      <>
+      <div>
         <h4>RELATED PRODUCTS</h4>
         <div className="duke-product-carousel-container">
           {
@@ -193,7 +193,7 @@ class RelatedProducts extends React.Component {
             )
           }
         </div>
-      </>
+      </div>
     );
   }
 }

@@ -60,7 +60,7 @@ class OutfitList extends React.Component {
     const { outfits, startIndex, endIndex } = this.state;
     console.log('OUTFITS', outfits);
     return (
-      <>
+      <div>
         <h4>YOUR OUTFIT</h4>
         <div className="duke-outfit-carousel-container">
           {startIndex > 0 && (
@@ -84,7 +84,7 @@ class OutfitList extends React.Component {
           </div>
           )}
         </div>
-      </>
+      </div>
     );
   }
 }

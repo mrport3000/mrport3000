@@ -7,6 +7,8 @@ function ProductCard({ product, handleModalButtonClick }) {
   const defaultPhotoURL = defaultStyle.length > 0
     ? defaultStyle[0].photos[0].url : product.styles[0].photos[0].url;
 
+  console.log('PHOTO URL', defaultPhotoURL);
+  console.log('PRODUCT', product);
   // dummy test data for sales price
   // defaultStyle.sale_price = "25.00";
 

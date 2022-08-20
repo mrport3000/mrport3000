@@ -221,3 +221,12 @@
   text-decoration: line-through;
   margin-left: 10px;
 }
+
+.all-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.additional-content {
+  padding-left: 85px;
+}
