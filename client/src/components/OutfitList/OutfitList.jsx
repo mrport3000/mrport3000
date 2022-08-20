@@ -1,5 +1,4 @@
 import React from 'react';
-import Promise from 'bluebird';
 import localStorage from 'local-storage';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import OutfitCard from './OutfitCard.jsx';
@@ -10,18 +9,13 @@ class OutfitList extends React.Component {
     super(props);
     this.state = {
       startIndex: 0,
-      endIndex: 1,
-      outfits: [],
+      endIndex: 2,
     };
     this.handleBackArrowClick = this.handleBackArrowClick.bind(this);
     this.handleForwardArrowClick = this.handleForwardArrowClick.bind(this);
-    this.handleAddOutfitClick = this.handleAddOutfitClick.bind(this);
   }
 
   componentDidMount() {
-    // this.setState({
-    //   outfits: localStorage.get('outfitList') || [],
-    // });
   }
 
   handleBackArrowClick() {
@@ -38,26 +32,9 @@ class OutfitList extends React.Component {
     }));
   }
 
-  handleAddOutfitClick(e) {
-    e.preventDefault();
-    console.log('BUTTON CLICK');
-
-    // Combine Product Info and Styles to one object
-    let currentProduct = this.props.productInfo;
-    currentProduct.styles = this.props.productStyles.results;
-
-    this.setState((prevState) => ({
-      outfits: prevState.outfits.push(currentProduct),
-    }));
-    console.log('OUTFFIT STATE', this.state.outfits);
-
-    localStorage.set('outfitList', this.state.outfits);
-
-    console.log('LOCAL STORAGE', localStorage.get('outfitList'));
-  }
-
   render() {
-    const { outfits, startIndex, endIndex } = this.state;
+    const { startIndex, endIndex } = this.state;
+    const { outfits, handleAddOutfitClick, handleRemoveOutfitClick } = this.props;
     console.log('OUTFITS', outfits);
     return (
       <div>
@@ -69,12 +46,18 @@ class OutfitList extends React.Component {
           </div>
           )}
           <AddOutfit
-            handleAddOutfitClick={this.handleAddOutfitClick}
+            handleAddOutfitClick={handleAddOutfitClick}
           />
           {
             outfits.map((product, index) => {
               if (index >= startIndex && index <= endIndex) {
-                return <OutfitCard product={product} key={index} />;
+                return (
+                  <OutfitCard
+                    product={product}
+                    key={index}
+                    handleRemoveOutfitClick={handleRemoveOutfitClick}
+                  />
+                );
               }
             })
           }
