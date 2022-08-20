@@ -1,3 +1,4 @@
+/* eslint-disable no-var */
 module.exports = {
   averageRating(ratings) {
     const total = Object.keys(ratings).reduce(
@@ -9,5 +10,14 @@ module.exports = {
   totalReviews(ratings) {
     return Object.values(ratings).reduce(
       (sum, value) => sum + Number.parseInt(value, 10), 0);
+  },
+  availableSizes(skus) {
+    var sizes = [];
+    Object.values(skus).forEach((sku) => {
+      if (sku.quantity > 0) {
+        sizes.push(sku.size);
+      }
+    });
+    return sizes;
   },
 };

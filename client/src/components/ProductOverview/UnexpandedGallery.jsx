@@ -20,12 +20,13 @@ class UnexpandedGallery extends React.Component {
   }
 
   render() {
-    const { mainPhotoUrl } = this.state;
+    const { photos } = this.props;
     return (
       <img
-        src={mainPhotoUrl}
-        width="650"
-        height="450"
+        src={photos[0].url}
+        width="600"
+        height="400"
+        object-fit="cover"
         margin="10"
         float="center"
         alt="main image"

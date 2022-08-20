@@ -4,14 +4,14 @@ import { AUTH } from '../config.js';
 import { averageRating, totalReviews } from '../utilities.js';
 import ProductOverview from './ProductOverview/OverviewIndex.jsx';
 
-const defaultId = 71701;
+const defaultId = 71704;
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      productId: 71701,
+      productId: defaultId,
       productInfo: null,
       productStyles: null,
       rating: null,
