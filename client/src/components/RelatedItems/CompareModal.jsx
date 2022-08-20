@@ -8,7 +8,7 @@ function CompareModal({
     return null;
   }
   console.log('Current Product', currProduct);
-  // create unique feature obj from product and currProduct
+  // create unique feature obj from product features  and currProduct features
   const prodFeatures = cardProduct.features.reduce((acc, item) => {
     const { feature, value } = item;
     return { ...acc, [feature]: value };
@@ -26,13 +26,21 @@ function CompareModal({
   console.log('currFeatures: ', currFeatures);
   console.log('allFeaturesArr: ', allFeaturesArr);
 
-  const rowCreator = allFeaturesArr.map((value) => (
-    <tr key={value}>
-      <td>{currFeatures[value] ? currFeatures[value] : ''}</td>
-      <td>{value}</td>
-      <td>{prodFeatures[value] ? prodFeatures[value] : ''}</td>
-    </tr>
-  ));
+  const rowCreator = allFeaturesArr.map((value) => {
+    if (currFeatures[value] === true) {
+      currFeatures[value] = <img alt="checkmark" className="duke-checkmark" src="https://icon-library.com/images/green-check-mark-icon-png/green-check-mark-icon-png-13.jpg" />;
+    }
+    if (prodFeatures[value] === true) {
+      prodFeatures[value] = <img alt="checkmark" className="duke-checkmark" src="https://icon-library.com/images/green-check-mark-icon-png/green-check-mark-icon-png-13.jpg" />;
+    }
+    return (
+      <tr key={value}>
+        <td>{currFeatures[value] ? currFeatures[value] : ''}</td>
+        <td>{value}</td>
+        <td>{prodFeatures[value] ? prodFeatures[value] : ''}</td>
+      </tr>
+    );
+  });
 
   return ReactDOM.createPortal(
     (
@@ -43,7 +51,7 @@ function CompareModal({
               <thead>
                 <tr>
                   <th>Current Product Name</th>
-                  <td>&nbsp;</td>
+                  <th>&nbsp;</th>
                   <th>Compared Product Name</th>
                 </tr>
               </thead>

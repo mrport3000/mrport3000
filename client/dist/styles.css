@@ -108,18 +108,21 @@
 }
 
 .duke-modal-content {
-  width: 500px;
+  width: 700px;
   background-color: #fff;
+  padding: 30px 30px 20px 30px;
 }
 
 .duke-modal-footer {
-  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
 }
 
 .duke-modal-body {
-  padding: 10px;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  overflow: auto;
+  max-height: 300px;
 }
 
 .duke-modal-body table {
@@ -131,6 +134,13 @@
   border: 1px solid;
 }
 
+.duke-modal-body thead {
+  background-color: #B8C4BB;
+  position: sticky;
+  top: 0;
+  border: 1px solid;
+}
+
 .duke-modal-body th, td {
   padding: 10px;
 }
@@ -139,12 +149,6 @@
   text-align: center;
 }
 
-.duke-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.duke-star:before {
-  content:'\2605';
+.duke-checkmark {
+  height: 50px;
 }
