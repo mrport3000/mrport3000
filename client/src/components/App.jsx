@@ -2,15 +2,18 @@ import React from 'react';
 import axios from 'axios';
 import { AUTH } from '../config.js';
 import { averageRating, totalReviews } from '../utilities.js';
+import ProductOverview from './ProductOverview/OverviewIndex.jsx';
 import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
 import OutfitList from './OutfitList/OutfitList.jsx';
+
+const defaultId = 71704;
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      productId: 71701,
+      productId: defaultId,
       productInfo: null,
       productStyles: null,
       rating: null,
@@ -51,7 +54,6 @@ class App extends React.Component {
                 rating: averageRating(ratings),
                 reviewCount: totalReviews(ratings),
               });
-              console.log('APP Product Info', this.state.productInfo);
             });
           });
       });
@@ -72,9 +74,18 @@ class App extends React.Component {
       reviewCount,
     } = this.state;
 
+    if (!productInfo || !productStyles) {
+      return <div />;
+    }
+
     return (
       <div>
-        Place Widgets here:
+        <ProductOverview
+          productInfo={productInfo}
+          productStyles={productStyles}
+          rating={rating}
+          reviewCount={reviewCount}
+        />
         <RelatedProducts productId={productId} currProduct={productInfo} />
         <OutfitList productInfo={productInfo} productStyles={productStyles} />
       </div>
