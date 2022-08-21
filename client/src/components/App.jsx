@@ -5,6 +5,7 @@ import { averageRating, totalReviews } from '../utilities.js';
 import ProductOverview from './ProductOverview/OverviewIndex.jsx';
 import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
 import OutfitList from './OutfitList/OutfitList.jsx';
+import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 
 const defaultId = 71704;
 
@@ -85,6 +86,7 @@ class App extends React.Component {
         />
         <RelatedProducts />
         <OutfitList />
+        <QandA />
       </div>
     );
   }
