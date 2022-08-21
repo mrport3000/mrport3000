@@ -24,6 +24,7 @@ class App extends React.Component {
     this.handleProductIdChange = this.handleProductIdChange.bind(this);
     this.handleAddOutfitClick = this.handleAddOutfitClick.bind(this);
     this.handleRemoveOutfitClick = this.handleRemoveOutfitClick.bind(this);
+    this.handleProductCardClick = this.handleProductCardClick.bind(this);
   }
 
   componentDidMount() {
@@ -70,24 +71,47 @@ class App extends React.Component {
     });
   }
 
+  handleProductCardClick(e) {
+    e.preventDefault();
+    console.log('PRODUCT CARD CLICK');
+    this.setState({
+      productId: e.target.value
+    })
+  }
+
   handleAddOutfitClick(e) {
     e.preventDefault();
     console.log('ADD OUTFIT CLICK');
-    const { productInfo, productStyles, outfits } = this.state;
+    const {
+      productInfo, productStyles, outfits, productId,
+    } = this.state;
 
-    // Combine Product Info and Styles to one object
-    const currentProduct = productInfo;
-    currentProduct.styles = productStyles;
-
-    const updatedOutArr = outfits.slice();
-    updatedOutArr.push(currentProduct);
-
-    // add to local storage
-    localStorage.set('outfitList', updatedOutArr);
-
-    this.setState({
-      outfits: updatedOutArr,
+    // check for duplicates
+    let isDuplicate = false;
+    outfits.forEach((product) => {
+      if (product.id === productId) {
+        isDuplicate = true;
+      }
     });
+
+    if (isDuplicate) {
+      console.log('DUPLICATE ITEM');
+    } else {
+      // Combine Product Info and Styles to one object
+      const currentProduct = productInfo;
+      currentProduct.styles = productStyles;
+
+      // create new array for local storage
+      const updatedOutArr = outfits.slice();
+      updatedOutArr.push(currentProduct);
+
+      // add to local storage
+      localStorage.set('outfitList', updatedOutArr);
+
+      this.setState({
+        outfits: updatedOutArr,
+      });
+    }
   }
 
   handleRemoveOutfitClick(e) {

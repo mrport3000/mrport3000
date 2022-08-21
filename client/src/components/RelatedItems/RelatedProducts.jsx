@@ -10,7 +10,6 @@ import CompareModal from './CompareModal.jsx';
 class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
-    // manages indexes shown in carousel
     this.state = {
       startIndex: 0,
       endIndex: 3,
@@ -29,11 +28,6 @@ class RelatedProducts extends React.Component {
   componentDidMount() {
     console.log('current id', this.props.productId);
     this.getRelatedProductsInfo(this.props.productId);
-  }
-
-  componentDidUpdate() {
-    // breaking code when run
-      // this.getRelatedProductsInfo(this.props.productId);
   }
 
   handleBackArrowClick() {

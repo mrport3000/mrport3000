@@ -1,15 +1,10 @@
 import React from 'react';
-import { IconContext } from 'react-icons';
-import { FiXCircle } from 'react-icons/fi';
 
 function OutfitCard({ product, handleRemoveOutfitClick }) {
   const defaultStyle = product.styles.filter((value) => (value['default?']));
 
   const defaultPhotoURL = defaultStyle.length > 0
     ? defaultStyle[0].photos[0].url : product.styles[0].photos[0].url;
-
-  // dummy test data for sales price
-  // defaultStyle.sale_price = "25.00";
 
   const salesPrice = defaultStyle.length > 0
     ? defaultStyle.sale_price : product.styles[0].sale_price;
