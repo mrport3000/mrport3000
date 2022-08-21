@@ -1,3 +1,167 @@
+
+
+
+.keith-unexpanded-gallery-div {
+  float: left;
+  width: 54%;
+  height: auto;
+  margin: 40px 0px 10px 70px;
+}
+
+.keith-product-info-div {
+  font-family: Helvetica, sans-serif;
+  float: right;
+  width: 40%;
+  height: 250px;
+  margin: 0px 10px 10px 0px;
+}
+
+.keith-category {
+  text-transform: uppercase;
+  margin-bottom: 0px
+}
+
+.keith-product-name {
+  margin-top: 1px;
+  margin-bottom: 2px;
+}
+
+.keith-price {
+  margin-top: 1px;
+}
+
+.keith-style {
+  margin-top: 1px;
+}
+
+.keith-desc-div {
+  font-family: Helvetica, sans-serif;
+  float: left;
+  width: 50%;
+  height: 100%;
+  padding: 15px;
+  margin: 40px 20px 10px 70px;
+}
+
+.keith-feature-div {
+  border-left: 1px solid black;
+  float: right;
+  width: 35%;
+  height: 100%;
+  padding: 10px 10px 20px 10px;
+  margin: 60px 60px 10px 0px;
+}
+
+.keith-feature {
+  font-family: Helvetica, sans-serif;
+  margin: 7px;
+}
+
+.keith-sale-price {
+  color: red
+}
+
+.duke-product-carousel-container {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.duke-card-container {
+  border: 1px solid black;
+  height: 400px;
+  width: 300px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+.duke-productcard-inner {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: space-around;
+}
+
+.duke-card-image {
+  border-bottom: 1px solid black;
+  height: 60%;
+  width: 100%;
+}
+
+.duke-card-stars {
+  height: auto;
+  width: 30%;
+}
+
+.duke-outfit-carousel-container {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.duke-addoutfit-container {
+  border: 1px solid black;
+  height: 400px;
+  width: 300px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.duke-addoutfit-image {
+  height: 100px;
+  width: 100px;
+}
+
+.duke-arrow-button {
+  vertical-align: middle;
+  size: 2em;
+}
+
+.duke-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.duke-modal-content {
+  width: 500px;
+  background-color: #fff;
+}
+
+.duke-modal-footer {
+  padding: 10px;
+}
+
+.duke-modal-body {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.duke-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .eric-RR-container {
   display: flex;
   flex-direction: row;
