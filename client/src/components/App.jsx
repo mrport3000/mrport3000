@@ -28,41 +28,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    let productInfo, productStyles;
-    const { productId } = this.state;
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productId}`, {
-      headers: {
-        Authorization: AUTH,
-      },
-    })
-      .then((results) => {
-        productInfo = results.data;
-      })
-      .then(() => {
-        axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productId}/styles`, {
-          headers: {
-            Authorization: AUTH,
-          },
-        }).then((results) => {
-          productStyles = results.data.results;
-        })
-          .then(() => {
-            axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta/?product_id=${productId}`, {
-              headers: {
-                Authorization: AUTH,
-              },
-            }).then((results) => {
-              const { ratings } = results.data;
-              this.setState({
-                productInfo: productInfo,
-                productStyles: productStyles,
-                rating: averageRating(ratings),
-                reviewCount: totalReviews(ratings),
-                outfits: localStorage.get('outfitList') || [],
-              });
-            });
-          });
-      });
+    this.getInitialData(defaultId);
   }
 
   handleProductIdChange(newId) {
@@ -71,12 +37,9 @@ class App extends React.Component {
     });
   }
 
-  handleProductCardClick(e) {
-    e.preventDefault();
+  handleProductCardClick(id) {
     console.log('PRODUCT CARD CLICK');
-    this.setState({
-      productId: e.target.value
-    })
+    this.getInitialData(id);
   }
 
   handleAddOutfitClick(e) {
@@ -107,7 +70,6 @@ class App extends React.Component {
 
       // add to local storage
       localStorage.set('outfitList', updatedOutArr);
-
       this.setState({
         outfits: updatedOutArr,
       });
@@ -126,6 +88,44 @@ class App extends React.Component {
     this.setState({
       outfits: updatedOutArr,
     });
+  }
+
+  getInitialData(productId) {
+    let productInfo, productStyles;
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productId}`, {
+      headers: {
+        Authorization: AUTH,
+      },
+    })
+      .then((results) => {
+        productInfo = results.data;
+      })
+      .then(() => {
+        axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productId}/styles`, {
+          headers: {
+            Authorization: AUTH,
+          },
+        }).then((results) => {
+          productStyles = results.data.results;
+        })
+          .then(() => {
+            axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta/?product_id=${productId}`, {
+              headers: {
+                Authorization: AUTH,
+              },
+            }).then((results) => {
+              const { ratings } = results.data;
+              this.setState({
+                productId: productId,
+                productInfo: productInfo,
+                productStyles: productStyles,
+                rating: averageRating(ratings),
+                reviewCount: totalReviews(ratings),
+                outfits: localStorage.get('outfitList') || [],
+              });
+            });
+          });
+      });
   }
 
   render() {
@@ -153,7 +153,11 @@ class App extends React.Component {
           />
         </div>
         <div className="additional-content">
-          <RelatedProducts productId={productId} currProduct={productInfo} />
+          <RelatedProducts
+            productId={productId}
+            currProduct={productInfo}
+            handleProductCardClick={this.handleProductCardClick}
+          />
           <OutfitList
             productInfo={productInfo}
             productStyles={productStyles}

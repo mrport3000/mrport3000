@@ -30,6 +30,12 @@ class RelatedProducts extends React.Component {
     this.getRelatedProductsInfo(this.props.productId);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.productId !== this.props.productId) {
+      this.getRelatedProductsInfo(this.props.productId);
+    }
+  }
+
   handleBackArrowClick() {
     this.setState((prevState) => ({
       startIndex: prevState.startIndex - 1,
@@ -141,7 +147,7 @@ class RelatedProducts extends React.Component {
       show, startIndex, endIndex, relatedProducts, cardProduct,
     } = this.state;
 
-    const { currProduct } = this.props;
+    const { currProduct, handleProductCardClick } = this.props;
 
     return (
       <div>
@@ -171,6 +177,7 @@ class RelatedProducts extends React.Component {
                     product={product}
                     key={product.name}
                     handleModalButtonClick={this.handleModalButtonClick}
+                    handleProductCardClick={handleProductCardClick}
                   />
                 );
               }

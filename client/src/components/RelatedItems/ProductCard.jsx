@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Individual card in related product carousel
-function ProductCard({ product, handleModalButtonClick }) {
+function ProductCard({ product, handleModalButtonClick, handleProductCardClick }) {
   const defaultStyle = product.styles.filter((value) => (value['default?']));
 
   const defaultPhotoURL = defaultStyle.length > 0
@@ -25,7 +25,7 @@ function ProductCard({ product, handleModalButtonClick }) {
   }
 
   return (
-    <div className="duke-card-container">
+    <div className="duke-card-container" onClick={(() => handleProductCardClick(product.id))} value={product.id}>
       <div
         className="duke-card-header"
         style={{ backgroundImage: `url(${defaultPhotoURL})` }}
