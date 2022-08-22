@@ -58,6 +58,10 @@
   color: red
 }
 
+.keith-options-div {
+  width: 100px;
+}
+
 .duke-product-carousel-container {
   display: flex;
   flex-wrap: nowrap;
@@ -157,4 +161,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.test {
+  display: flex;
+  flex-direction: column;
 }

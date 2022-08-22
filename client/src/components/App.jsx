@@ -76,13 +76,15 @@ class App extends React.Component {
       return <div />;
     }
     return (
-      <div>
-        <ProductOverview
-          productInfo={productInfo}
-          productStyles={productStyles}
-          rating={rating}
-          reviewCount={reviewCount}
-        />
+      <div className="test">
+        <div>
+          <ProductOverview
+            productInfo={productInfo}
+            productStyles={productStyles}
+            rating={rating}
+            reviewCount={reviewCount}
+          />
+        </div>
         <RelatedProducts />
         <OutfitList />
       </div>
