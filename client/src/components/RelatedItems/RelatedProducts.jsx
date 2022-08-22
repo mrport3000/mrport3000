@@ -33,6 +33,10 @@ class RelatedProducts extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.productId !== this.props.productId) {
       this.getRelatedProductsInfo(this.props.productId);
+      this.setState({
+        startIndex: 0,
+        endIndex: 3,
+      });
     }
   }
 
