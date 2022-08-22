@@ -1,6 +1,7 @@
 import React from 'react';
 
-import productBreakdownPlaceholder from '/Users/eric/work/atelier-project/client/src/utilities/Product-breakdown-placeholder.png'
+import './RatingAndReview.css';
+// import productBreakdownPlaceholder from './assets/Product-breakdown-placeholder.png';
 
 function ProductBreakdown(props) {
   console.log('props: ', props);
@@ -9,7 +10,7 @@ function ProductBreakdown(props) {
     <div>
       {/* ProductBreakdown Placeholder! */}
       <div className="eric-RR-productBreakdown">
-        <img src={productBreakdownPlaceholder} alt="product placeholder" />
+        {/* <img src={productBreakdownPlaceholder} alt="product placeholder" /> */}
       </div>
     </div>
   );

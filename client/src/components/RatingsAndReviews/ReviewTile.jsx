@@ -1,6 +1,8 @@
 import React from 'react';
 import { format } from 'date-fns';
 
+import './RatingAndReview.css';
+
 class ReviewTile extends React.Component {
   constructor(props) {
     super(props);

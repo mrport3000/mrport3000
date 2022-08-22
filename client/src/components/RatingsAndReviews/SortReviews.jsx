@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ReviewsList from './ReviewsList.jsx';
+import './RatingAndReview.css';
 
 class SortReviews extends React.Component {
   constructor(props) {

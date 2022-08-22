@@ -1,11 +1,12 @@
 import React from 'react';
 
-import ratingBreakdownPlaceholder from '/Users/eric/work/atelier-project/client/src/utilities/Rating-breakdown-placeholder.png';
+// import ratingBreakdownPlaceholder from './assets/Rating-breakdown-placeholder.png';
+import './RatingAndReview.css';
 
 function RatingBreakdown(props) {
   console.log('props: ', props);
   return (
-    <div>
+    <div className="eric-RR-productRatingContainer">
       {/* RatingBreakdown Placeholder! */}
       <div className="eric-RR-productRatingAverage">
         <div className="eric-RR-productAverageText">
@@ -16,7 +17,7 @@ function RatingBreakdown(props) {
         </div>
       </div>
       <div className="eric-RR-ratingBreakdown">
-        <img src={ratingBreakdownPlaceholder} alt="rating placeholder" />
+        {/* <img src={ratingBreakdownPlaceholder} alt="rating placeholder" /> */}
       </div>
     </div>
   );
