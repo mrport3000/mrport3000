@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { format } from 'date-fns';
 import ReviewsList from './ReviewsList.jsx';
 import './RatingAndReview.css';
 
@@ -30,16 +31,29 @@ class SortReviews extends React.Component {
   }
 
   flowControl(term) {
+    const currentReviews = this.state.totalReviews;
+    let sorted;
     if (term === 'relevent') {
       console.log('relevent target matched');
     } else if (term === 'newest') {
-      console.log('newest target matched');
+      sorted = currentReviews.sort((a, b) => new Date(a.date) - new Date(b.date));
     } else if (term === 'helpful') {
-      console.log('helpful target matched');
+      sorted = currentReviews.sort((a, b) => b.helpfulness - a.helpfulness);
     }
+
+    this.setState({ sortedReviews: sorted }, () => {
+      console.log('updated sortedReviews: ', this.state.sortedReviews);
+    });
   }
 
   render() {
+    let dynamicProps;
+    if (this.state.sortedReviews.length === 0) {
+      dynamicProps = this.props.reviews;
+    } else {
+      dynamicProps = this.state.sortedReviews;
+    }
+
     return (
       <div className="eric-RR-sortContainer">
         <div className="eric-RR-sortReviews">
@@ -59,7 +73,7 @@ class SortReviews extends React.Component {
           </div>
         </div>
         <div className="eric-RR-reviewContainer">
-          <ReviewsList reviews={this.props.reviews} />
+          <ReviewsList reviews={dynamicProps} />
         </div>
         <div className="eric-RR-sortBottomNavBar">
           <div className="eric-RR-moreReviewsContainer">
