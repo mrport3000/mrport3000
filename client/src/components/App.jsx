@@ -6,8 +6,11 @@ import { averageRating, totalReviews } from '../utilities.js';
 import ProductOverview from './ProductOverview/OverviewIndex.jsx';
 import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
 import OutfitList from './OutfitList/OutfitList.jsx';
+import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 
 const defaultId = 71704;
+
+import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -165,6 +168,8 @@ class App extends React.Component {
             handleAddOutfitClick={this.handleAddOutfitClick}
             handleRemoveOutfitClick={this.handleRemoveOutfitClick}
           />
+          <QandA />
+          <RatingAndReview />
         </div>
       </div>
     );
