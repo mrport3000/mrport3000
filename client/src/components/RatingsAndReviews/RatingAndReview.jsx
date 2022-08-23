@@ -86,14 +86,32 @@ class RatingAndReview extends React.Component {
         },
       ],
     };
+    this.filtered = this.filtered.bind(this);
+  }
+
+  filtered(arr) {
+    const rating = [];
+    const recPercent = [];
+    arr.forEach((review) => {
+      rating.push(review.rating);
+      if (review.recommend === true) {
+        recPercent.push(true);
+      }
+    });
+
+    return {
+      ratings: rating,
+      recPercent: (recPercent.length / rating.length) * 100,
+    };
   }
 
   render() {
+    const ratingBreakdown = this.filtered(this.state.reviews);
     return (
       <div className="eric-RR-container">
         <div className="eric-RR-breakdown">
           <div className="eric-RR-ratingBreakdown">
-            <RatingBreakdown />
+            <RatingBreakdown ratings={ratingBreakdown} />
           </div>
           <div className="eric-RR-productBreakdown">
             <ProductBreakdown />

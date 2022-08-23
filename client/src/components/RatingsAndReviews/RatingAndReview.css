@@ -94,3 +94,73 @@
 .eric-RR-tileHelpful a{
   text-decoration: underline;
 }
+
+.eric-RR-5starContainer {
+  display: flex;
+}
+
+.eric-RR-5left {
+  width: 15%;
+}
+
+.eric-RR-5center {
+  height: 15px;
+  width: 75%;
+  background-color: lightgray;
+}
+
+.eric-RR-4starContainer {
+  display: flex;
+}
+
+.eric-RR-4left {
+  width: 15%;
+}
+
+.eric-RR-4center {
+  height: 15px;
+  width: 75%;
+  background-color: lightgrey;
+}
+
+.eric-RR-3starContainer {
+  display: flex;
+}
+
+.eric-RR-3left {
+  width: 15%;
+}
+
+.eric-RR-3center {
+  height: 15px;
+  width: 75%;
+  background-color: lightgrey;
+}
+
+.eric-RR-2starContainer {
+  display: flex;
+}
+
+.eric-RR-2left {
+  width: 15%;
+}
+
+.eric-RR-2center {
+  height: 15px;
+  width: 75%;
+  background-color: lightgrey;
+}
+
+.eric-RR-1starContainer {
+  display: flex;
+}
+
+.eric-RR-1left {
+  width: 15%;
+}
+
+.eric-RR-1center {
+  height: 15px;
+  width: 75%;
+  background-color: lightgrey;
+}

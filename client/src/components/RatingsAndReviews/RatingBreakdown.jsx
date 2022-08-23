@@ -4,7 +4,7 @@ import React from 'react';
 import './RatingAndReview.css';
 
 function RatingBreakdown(props) {
-  console.log('props: ', props);
+  console.log('RB props: ', props);
   return (
     <div className="eric-RR-productRatingContainer">
       {/* RatingBreakdown Placeholder! */}
@@ -18,6 +18,55 @@ function RatingBreakdown(props) {
       </div>
       <div className="eric-RR-ratingBreakdown">
         {/* <img src={ratingBreakdownPlaceholder} alt="rating placeholder" /> */}
+        {props.ratings.recPercent}
+        % of reviews recommend this product
+        <div className="eric-RR-breakdown">
+          <div className="eric-RR-5starContainer">
+            <div className="eric-RR-5left">
+              <a>5 stars</a>
+            </div>
+            <div className="eric-RR-5center">
+              <div className="eric-RR-5bar" />
+            </div>
+          </div>
+
+          <div className="eric-RR-4starContainer">
+            <div className="eric-RR-4left">
+              <a>4 stars</a>
+            </div>
+            <div className="eric-RR-4center">
+              <div className="eric-RR-4bar" />
+            </div>
+          </div>
+
+          <div className="eric-RR-3starContainer">
+            <div className="eric-RR-3left">
+              <a>3 stars</a>
+            </div>
+            <div className="eric-RR-3center">
+              <div className="eric-RR-3bar" />
+            </div>
+          </div>
+
+          <div className="eric-RR-2starContainer">
+            <div className="eric-RR-2left">
+              <a>2 stars</a>
+            </div>
+            <div className="eric-RR-2center">
+              <div className="eric-RR-2bar" />
+            </div>
+          </div>
+
+          <div className="eric-RR-1starContainer">
+            <div className="eric-RR-1left">
+              <a>1 stars</a>
+            </div>
+            <div className="eric-RR-1center">
+              <div className="eric-RR-1bar" />
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   );
