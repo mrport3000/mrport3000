@@ -1,3 +1,6 @@
+
+
+
 .keith-unexpanded-gallery-div {
   float: left;
   width: 54%;
@@ -162,8 +165,11 @@
   justify-content: center;
   align-items: center;
 }
+<<<<<<< HEAD
 
 .test {
   display: flex;
   flex-direction: column;
 }
+=======
+>>>>>>> main
