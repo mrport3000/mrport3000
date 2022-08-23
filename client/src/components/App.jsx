@@ -35,6 +35,7 @@ class App extends React.Component {
   }
 
   handleProductIdChange(newId) {
+    // this.getInitialData(id);
     this.setState({
       productId: newId,
     });
@@ -95,38 +96,28 @@ class App extends React.Component {
 
   getInitialData(productId) {
     let productInfo, productStyles;
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productId}`, {
-      headers: {
-        Authorization: AUTH,
-      },
-    })
+    axios.get(`/productinfo/${productId}`)
       .then((results) => {
         productInfo = results.data;
       })
       .then(() => {
-        axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${productId}/styles`, {
-          headers: {
-            Authorization: AUTH,
-          },
-        }).then((results) => {
-          productStyles = results.data.results;
-        })
+        axios.get(`/styles/${productId}`)
+          .then((results) => {
+            productStyles = results.data.results;
+          })
           .then(() => {
-            axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta/?product_id=${productId}`, {
-              headers: {
-                Authorization: AUTH,
-              },
-            }).then((results) => {
-              const { ratings } = results.data;
-              this.setState({
-                productId: productId,
-                productInfo: productInfo,
-                productStyles: productStyles,
-                rating: averageRating(ratings),
-                reviewCount: totalReviews(ratings),
-                outfits: localStorage.get('outfitList') || [],
+            axios.get(`/reviews/${productId}`)
+              .then((results) => {
+                const { ratings } = results.data;
+                this.setState({
+                  productId: productId,
+                  productInfo: productInfo,
+                  productStyles: productStyles,
+                  rating: averageRating(ratings),
+                  reviewCount: totalReviews(ratings),
+                  outfits: localStorage.get('outfitList') || [],
+                });
               });
-            });
           });
       });
   }

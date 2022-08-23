@@ -67,21 +67,13 @@ class RelatedProducts extends React.Component {
   }
 
   getProductInfo(id) {
-    return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}`, {
-      headers: {
-        Authorization: AUTH,
-      },
-    })
+    return axios.get(`/productinfo/${id}`)
       .then((result) => result.data)
       .catch((err) => console.log(err));
   }
 
   getProductStyles(id) {
-    return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/styles`, {
-      headers: {
-        Authorization: AUTH,
-      },
-    })
+    return axios.get(`/styles/${id}`)
       .then((result) => result.data)
       .catch((err) => {
         console.log(err);
@@ -89,15 +81,12 @@ class RelatedProducts extends React.Component {
   }
 
   getRelatedProductsInfo(id) {
-    return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${id}/related`, {
-      headers: {
-        Authorization: AUTH,
-      },
-    })
+    const { productId } = this.props;
+    return axios.get(`/related/${id}`)
       // [71702, 71702, 71704, 71705, 71697, 71699]
       .then((results) => {
         // remove original product Id
-        let newProdsArr = results.data.filter((value) => value !== this.props.productId);
+        let newProdsArr = results.data.filter((value) => value !== productId);
         // remove duplicate product Ids
         let uniqueArr = [...new Set(newProdsArr)];
         return Promise.resolve(uniqueArr);
