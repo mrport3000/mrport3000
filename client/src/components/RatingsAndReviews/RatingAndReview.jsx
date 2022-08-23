@@ -20,7 +20,7 @@ class RatingAndReview extends React.Component {
           body: 'A little tight on the waist.',
           date: '2022-01-05T00:00:00.000Z',
           reviewer_name: 'bigbrother',
-          helpfulness: 19,
+          helpfulness: 8,
           photos: [
             {
               id: 2414654,
@@ -69,7 +69,7 @@ class RatingAndReview extends React.Component {
           body: 'dahjkdhajkhdjkahdjkahdjkahjdahjkdhajdhjakhdjkahdjkahdjkahdjkahdkjahjdkahjdashkdjkashdjkahdjkashdjkashdjkashdjkasjdhiqowwueioueiwoq eiqwoeqiuwhjkqherqjwiyuiqwyqwkhrkqwhreqwiyrqwkhrjqwkhrqwiyruqiwyrhujqwhrjqkhrqwiuyrqwkwhrqwjkrghquiyrqwkhrqjkhrqiyruqwihrqjwkrhuqiwhruqihriqyrqwhhruiqirhguiqwyrqwkhrhqiwrghqwuiyghrqwhrquiwghriqhrquwrhuiqhruiqwhruqihrqihruiwqruqwiygriqwyhrqwoiy4382yrhkjhrio2hrasjkbfhkjwqhfkqh',
           date: '2018-07-25T00:00:00.000Z',
           reviewer_name: 'testLength',
-          helpfulness: 8,
+          helpfulness: 19,
           photos: [],
         },
         {
