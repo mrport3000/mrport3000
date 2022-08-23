@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { format } from 'date-fns';
 import ReviewsList from './ReviewsList.jsx';
 import './RatingAndReview.css';
 
@@ -16,34 +15,25 @@ class SortReviews extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  // componentDidUpdate(prevProps, prevState, ss) {
-  //   console.log('prevProps: ', prevProps);
-  //   console.log('prevState: ', prevState);
-  //   console.log('snapshot: ', ss);
-  // }
-
   handleChange(e) {
     this.setState({ sortTerm: e.target.value }, () => {
-      // eslint-disable-next-line react/destructuring-assignment
-      console.log('sortTerm: ', this.state);
       this.flowControl(this.state.sortTerm);
     });
   }
 
   flowControl(term) {
-    const currentReviews = this.state.totalReviews;
+    const { totalReviews } = this.state;
+    const currentReviews = totalReviews;
     let sorted;
     if (term === 'relevent') {
-      console.log('relevent target matched');
+      // Still working on relvency sort
     } else if (term === 'newest') {
-      sorted = currentReviews.sort((a, b) => new Date(a.date) - new Date(b.date));
+      sorted = currentReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
     } else if (term === 'helpful') {
       sorted = currentReviews.sort((a, b) => b.helpfulness - a.helpfulness);
     }
 
-    this.setState({ sortedReviews: sorted }, () => {
-      console.log('updated sortedReviews: ', this.state.sortedReviews);
-    });
+    this.setState({ sortedReviews: sorted });
   }
 
   render() {
@@ -57,7 +47,7 @@ class SortReviews extends React.Component {
     return (
       <div className="eric-RR-sortContainer">
         <div className="eric-RR-sortReviews">
-          {/* SortReviews Component here */}
+
           {this.props.reviews.length}
           {' '}
           reviews, sorted by
