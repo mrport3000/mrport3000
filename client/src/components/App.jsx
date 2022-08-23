@@ -9,6 +9,8 @@ import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 
 const defaultId = 71704;
 
+import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -87,6 +89,7 @@ class App extends React.Component {
         <RelatedProducts />
         <OutfitList />
         <QandA />
+        <RatingAndReview />
       </div>
     );
   }
