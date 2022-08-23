@@ -49,19 +49,41 @@ class AddToCart extends React.Component {
       quantityOptions = Array.from({ length: quantityAvailable }, (_, i) => i + 1);
       placeholder = quantityOptions[0];
     } else {
-      quantityOptions = [1];
+      quantityOptions = [{ value: 1, label: 1 }];
       placeholder = '-';
     }
     quantityOptions = quantityOptions.map((quantity) => ({ value: quantity, label: quantity }));
+    if (sizeOptions === []) {
+      return (
+        <div style={{ width: '400px' }}>
+          <p><b>OUT OF STOCK</b></p>
+          <div style={{ width: '250px', float: 'left' }}>
+            <Select options={sizeOptions} onChange={this.changeSize} isDisabled placeholder="Select Size" />
+          </div>
+          <div style={{ width: '100px' }}>
+            <Select
+              options={quantityOptions}
+              onChange={this.changeQuantity}
+              isDisabled
+              placeholder={placeholder}
+            />
+          </div>
+        </div>
+      );
+    }
     return (
-      <div className="keith-options-row">
-        <Select options={sizeOptions} onChange={this.changeSize} placeholder="Select Size" />
-        <Select
-          options={quantityOptions}
-          onChange={this.changeQuantity}
-          isDisabled={!sizeSelected}
-          placeholder={placeholder}
-        />
+      <div style={{ width: '400px' }}>
+        <div style={{ width: '250px', float: 'left' }}>
+          <Select options={sizeOptions} onChange={this.changeSize} placeholder="Select Size" />
+        </div>
+        <div style={{ width: '100px', float: 'right' }}>
+          <Select
+            options={quantityOptions}
+            onChange={this.changeQuantity}
+            isDisabled={!sizeSelected}
+            placeholder={placeholder}
+          />
+        </div>
       </div>
     );
   }
