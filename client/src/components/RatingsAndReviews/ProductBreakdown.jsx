@@ -4,7 +4,7 @@ import './RatingAndReview.css';
 // import productBreakdownPlaceholder from './assets/Product-breakdown-placeholder.png';
 
 function ProductBreakdown(props) {
-  console.log('props: ', props);
+  //console.log('props: ', props);
 
   return (
     <div>
