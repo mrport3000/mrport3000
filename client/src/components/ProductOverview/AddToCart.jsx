@@ -42,7 +42,7 @@ class AddToCart extends React.Component {
   }
 
   render() {
-    const { skus, quantityAvailable, sizeSelected } = this.state;
+    const { skus, quantityAvailable, sizeSelected, saveToOutfit } = this.state;
     const sizeOptions = availableSizes(skus).map((size) => ({ value: size, label: size }));
     let quantityOptions, placeholder;
     if (sizeSelected) {
@@ -53,6 +53,7 @@ class AddToCart extends React.Component {
       placeholder = '-';
     }
     quantityOptions = quantityOptions.map((quantity) => ({ value: quantity, label: quantity }));
+    const starButton = saveToOutfit ? <button type="button">★</button> : <button type="button">☆</button>;
     if (sizeOptions === []) {
       return (
         <div style={{ width: '400px' }}>
@@ -72,17 +73,23 @@ class AddToCart extends React.Component {
       );
     }
     return (
-      <div style={{ width: '400px' }}>
-        <div style={{ width: '250px', float: 'left' }}>
-          <Select options={sizeOptions} onChange={this.changeSize} placeholder="Select Size" />
+      <div>
+        <div className="keith-size-quantity-div">
+          <div style={{ width: '250px', float: 'left' }}>
+            <Select options={sizeOptions} onChange={this.changeSize} placeholder="Select Size" />
+          </div>
+          <div style={{ width: '100px', float: 'right' }}>
+            <Select
+              options={quantityOptions}
+              onChange={this.changeQuantity}
+              isDisabled={!sizeSelected}
+              placeholder={placeholder}
+            />
+          </div>
         </div>
-        <div style={{ width: '100px', float: 'right' }}>
-          <Select
-            options={quantityOptions}
-            onChange={this.changeQuantity}
-            isDisabled={!sizeSelected}
-            placeholder={placeholder}
-          />
+        <div className="keith-cart-star-div">
+          <button type="button">Add to Cart</button>
+          {starButton}
         </div>
       </div>
     );

@@ -11,7 +11,7 @@ function ProductInfo({
       <strike>{` $${originalPrice}`}</strike>
     </p>
   ) : <p><b>{`$${originalPrice}`}</b></p>;
-  const reviewComponent = reviewCount > 0 ? <p>{`★★★★☆ Read ${reviewCount} reviews`}</p> : <></>;
+  const reviewComponent = reviewCount > 0 ? <p className="keith-review">{`★★★★☆ Read ${reviewCount} reviews`}</p> : <div />;
   return (
     <>
       {reviewComponent}

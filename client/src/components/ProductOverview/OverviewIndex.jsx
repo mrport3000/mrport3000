@@ -67,24 +67,29 @@ class ProductOverview extends React.Component {
       );
     }
     return (
-      <>
-        <div className="keith-unexpanded-gallery-div">
-          <UnexpandedGallery className="keith-unexpanded-gallery-div" photos={galleryPhotos} />
-        </div>
-        <div className="keith-product-info-div">
-          <ProductInfo
-            productInfo={productInfo}
-            rating={rating}
-            reviewCount={reviewCount}
-            originalPrice={originalPrice}
-            salePrice={salePrice}
-            styleName={styleName}
-          />
-          <StyleSelector productStyles={productStyles} handleStyleChange={this.handleStyleChange} />
-          <AddToCart skus={skus} />
+      <div className="keith-overview-div">
+        <div className="keith-top-div">
+          <div className="keith-unexpanded-gallery-div">
+            <UnexpandedGallery photos={galleryPhotos} />
+          </div>
+          <div className="keith-product-info-div">
+            <ProductInfo
+              productInfo={productInfo}
+              rating={rating}
+              reviewCount={reviewCount}
+              originalPrice={originalPrice}
+              salePrice={salePrice}
+              styleName={styleName}
+            />
+            <StyleSelector
+              productStyles={productStyles}
+              handleStyleChange={this.handleStyleChange}
+            />
+            <AddToCart skus={skus} />
+          </div>
         </div>
         <ProductDescription productInfo={productInfo} />
-      </>
+      </div>
     );
   }
 }

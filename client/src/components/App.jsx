@@ -7,7 +7,7 @@ import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
 import OutfitList from './OutfitList/OutfitList.jsx';
 import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 
-const defaultId = 71704;
+const defaultId = 71700;
 
 import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
 
@@ -79,20 +79,18 @@ class App extends React.Component {
       return <div />;
     }
     return (
-      <div className="test">
-        <div>
-          <ProductOverview
-            productInfo={productInfo}
-            productStyles={productStyles}
-            rating={rating}
-            reviewCount={reviewCount}
-          />
-        </div>
+      <>
+        <ProductOverview
+          productInfo={productInfo}
+          productStyles={productStyles}
+          rating={rating}
+          reviewCount={reviewCount}
+        />
         <RelatedProducts />
         <OutfitList />
         <QandA />
         <RatingAndReview />
-      </div>
+      </>
     );
   }
 }

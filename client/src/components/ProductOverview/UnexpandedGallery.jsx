@@ -26,9 +26,8 @@ class UnexpandedGallery extends React.Component {
         src={photos[0].url}
         width="600"
         height="400"
-        object-fit="cover"
-        margin="10"
-        float="center"
+        object-fit="contain"
+        margin="20px"
         alt="main image"
       />
     );

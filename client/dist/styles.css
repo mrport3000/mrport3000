@@ -1,19 +1,36 @@
 
+.keith-overview-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
 
+.keith-top-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+}
 
 .keith-unexpanded-gallery-div {
-  float: left;
-  width: 54%;
-  height: auto;
-  margin: 40px 0px 10px 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 40px;
 }
 
 .keith-product-info-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   font-family: Helvetica, sans-serif;
-  float: right;
-  width: 40%;
-  height: 250px;
-  margin: 0px 10px 10px 0px;
+}
+
+.keith-review {
+  margin-bottom: 0px
 }
 
 .keith-category {
@@ -35,21 +52,25 @@
 }
 
 .keith-desc-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  margin: 20px;
+}
+
+.keith-summary-div {
   font-family: Helvetica, sans-serif;
-  float: left;
-  width: 50%;
-  height: 100%;
-  padding: 15px;
-  margin: 40px 20px 10px 70px;
+  flex-shrink: 2;
+  padding: 20px;
 }
 
 .keith-feature-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   border-left: 1px solid black;
-  float: right;
-  width: 35%;
-  height: 100%;
-  padding: 10px 10px 20px 10px;
-  margin: 60px 60px 10px 0px;
 }
 
 .keith-feature {
@@ -165,11 +186,3 @@
   justify-content: center;
   align-items: center;
 }
-<<<<<<< HEAD
-
-.test {
-  display: flex;
-  flex-direction: column;
-}
-=======
->>>>>>> main
