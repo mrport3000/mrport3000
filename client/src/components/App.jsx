@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import localStorage from 'local-storage';
-import { AUTH } from '../config.js';
 import { averageRating, totalReviews } from '../utilities.js';
 import ProductOverview from './ProductOverview/OverviewIndex.jsx';
 import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
@@ -42,15 +41,13 @@ class App extends React.Component {
   }
 
   handleProductCardClick(id) {
-    console.log('PRODUCT CARD CLICK');
     this.getInitialData(id);
   }
 
   handleAddOutfitClick(e) {
     e.preventDefault();
-    console.log('ADD OUTFIT CLICK');
     const {
-      productInfo, productStyles, outfits, productId,
+      productInfo, productStyles, outfits, productId, rating,
     } = this.state;
 
     // check for duplicates
@@ -61,12 +58,11 @@ class App extends React.Component {
       }
     });
 
-    if (isDuplicate) {
-      console.log('DUPLICATE ITEM');
-    } else {
+    if (!isDuplicate) {
       // Combine Product Info and Styles to one object
       const currentProduct = productInfo;
       currentProduct.styles = productStyles;
+      currentProduct.rating = rating;
 
       // create new array for local storage
       const updatedOutArr = outfits.slice();
@@ -158,6 +154,7 @@ class App extends React.Component {
             outfits={outfits}
             handleAddOutfitClick={this.handleAddOutfitClick}
             handleRemoveOutfitClick={this.handleRemoveOutfitClick}
+            rating={rating}
           />
           <QandA />
           <RatingAndReview />

@@ -30,7 +30,9 @@ class OutfitList extends React.Component {
 
   render() {
     const { startIndex, endIndex } = this.state;
-    const { outfits, handleAddOutfitClick, handleRemoveOutfitClick } = this.props;
+    const {
+      outfits, handleAddOutfitClick, handleRemoveOutfitClick,
+    } = this.props;
     return (
       <div>
         <h4>YOUR OUTFIT</h4>

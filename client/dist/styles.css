@@ -233,3 +233,7 @@
 .additional-content {
   padding-left: 85px;
 }
+
+.rating-star {
+  height: 20px;
+}

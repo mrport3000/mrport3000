@@ -1,7 +1,9 @@
 import React from 'react';
+import StarRating from './StarRating.jsx';
 
 // Individual card in related product carousel
 function ProductCard({ product, handleModalButtonClick, handleProductCardClick }) {
+  // console.log('PRODUCT CARD PRODUCT: ', product);
   const defaultStyle = product.styles.filter((value) => (value['default?']));
 
   const defaultPhotoURL = defaultStyle.length > 0
@@ -40,7 +42,7 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
         </div>
         {priceBlock}
         <div>
-          <img className="duke-card-stars" src="https://cdn.searchenginejournal.com/wp-content/uploads/2021/08/a-guide-to-star-ratings-on-google-and-how-they-work-6123be39b9f2d-sej-760x400.jpg" alt="stars" />
+          <StarRating rating={product.ratings}/>
         </div>
       </div>
     </div>

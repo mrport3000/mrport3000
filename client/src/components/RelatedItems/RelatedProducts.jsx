@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import axios from 'axios';
 import { IconContext } from 'react-icons';
-import { AUTH } from '../../config.js';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import { Promise } from 'bluebird';
 import ProductCard from './ProductCard.jsx';
 import CompareModal from './CompareModal.jsx';
+import { averageRating } from '../../utilities.js'
 
 class RelatedProducts extends React.Component {
   constructor(props) {
@@ -26,7 +26,6 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidMount() {
-    console.log('current id', this.props.productId);
     this.getRelatedProductsInfo(this.props.productId);
   }
 
@@ -80,6 +79,24 @@ class RelatedProducts extends React.Component {
       });
   }
 
+  // need to change id key to make identifiable second
+  getAverageReviews(id) {
+    return axios.get(`/reviews/${id}`)
+      .then((result) => {
+        return result.data;
+      })
+      .then((product) => {
+        // replace product_id key to prevent overwriting properties when merging object
+        product.review_id = product.product_id;
+        product.ratings = averageRating(product.ratings) || 0;
+        delete product.product_id;
+        return product;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   getRelatedProductsInfo(id) {
     const { productId } = this.props;
     return axios.get(`/related/${id}`)
@@ -100,6 +117,10 @@ class RelatedProducts extends React.Component {
         // push promises for product styles call
         arr.forEach((value) => {
           promiseArr.push(new Promise((resolve) => resolve(this.getProductStyles(value))));
+        });
+        // push promises for review ratings
+        arr.forEach((value) => {
+          promiseArr.push(new Promise((resolve) => resolve(this.getAverageReviews(value))));
         });
         return promiseArr;
       })
@@ -126,9 +147,11 @@ class RelatedProducts extends React.Component {
             if (product.id === Number(style.product_id)) {
               product.styles = style.results;
             }
+            if (product.id === Number(style.review_id)) {
+              product.ratings = style.ratings;
+            }
           });
         });
-        console.log('Related Products: ', finalResult);
         this.setState({
           relatedProducts: finalResult,
         });

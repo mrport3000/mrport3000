@@ -1,6 +1,7 @@
 import React from 'react';
+import StarRating from '../RelatedItems/StarRating.jsx';
 
-function OutfitCard({ product, handleRemoveOutfitClick }) {
+function OutfitCard({ product, handleRemoveOutfitClick, }) {
   const defaultStyle = product.styles.filter((value) => (value['default?']));
 
   const defaultPhotoURL = defaultStyle.length > 0
@@ -35,9 +36,7 @@ function OutfitCard({ product, handleRemoveOutfitClick }) {
           <p><i>{product.slogan}</i></p>
         </div>
         {priceBlock}
-        <div>
-          <img className="duke-card-stars" src="https://cdn.searchenginejournal.com/wp-content/uploads/2021/08/a-guide-to-star-ratings-on-google-and-how-they-work-6123be39b9f2d-sej-760x400.jpg" alt="stars" />
-        </div>
+        <StarRating rating={product.rating} />
       </div>
     </div>
   );
