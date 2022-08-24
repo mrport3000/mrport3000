@@ -17,7 +17,7 @@ class ReviewTile extends React.Component {
   }
 
   render() {
-    console.log(this.props.review)
+    //console.log(this.props.review)
     return (
       <div className="eric-RR-tileEntryContainer">
         <div className="eric-RR-tileRatingAndUsername">
