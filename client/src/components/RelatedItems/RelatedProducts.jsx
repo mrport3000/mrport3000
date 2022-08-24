@@ -2,114 +2,215 @@ import React, { Fragment } from 'react';
 import axios from 'axios';
 import { IconContext } from 'react-icons';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
+import { Promise } from 'bluebird';
 import ProductCard from './ProductCard.jsx';
 import CompareModal from './CompareModal.jsx';
-
-const dummyData = [
-  {
-    category: 'Jacket 0',
-    description: 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
-    default_price: 140,
-    url: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/cool-jackets-1601401814.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:*',
-  }, {
-    category: 'Jacket 1',
-    description: 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
-    default_price: 140,
-    url: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/biker-jackets-1657569423.png?crop=0.819xw:1.00xh;0.181xw,0&resize=640:*',
-  }, {
-    category: 'Jacket 2',
-    description: 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
-    default_price: 140,
-    url: 'https://n.nordstrommedia.com/id/sr3/603baeb0-804c-4585-8da8-00038d1500cf.jpeg?h=365&w=240&dpr=2',
-  }, {
-    category: 'Jacket 3',
-    description: 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
-    default_price: 140,
-    url: 'https://m.media-amazon.com/images/I/617SHXZ3mXL._AC_UL320_.jpg',
-  }, {
-    category: 'Jacket 4',
-    description: 'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
-    default_price: 140,
-    url: 'https://imageio.forbes.com/specials-images/imageserve/621907c6a1c1d351180dadb8/Buck-Mason-Dry-Waxed-Canvas-N1-Deck-Jacket-10/960x0.jpg?format=jpg&width=960',
-  },
-];
+import { averageRating } from '../../utilities.js'
 
 class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
-    // manages indexes shown in carousel
     this.state = {
       startIndex: 0,
-      endIndex: 2,
+      endIndex: 3,
       show: false,
+      relatedProducts: [],
+      cardProduct: {},
     };
     this.handleBackArrowClick = this.handleBackArrowClick.bind(this);
     this.handleForwardArrowClick = this.handleForwardArrowClick.bind(this);
     this.handleModalButtonClick = this.handleModalButtonClick.bind(this);
+    this.getRelatedProductsInfo = this.getRelatedProductsInfo.bind(this);
+    this.getProductInfo = this.getProductInfo.bind(this);
+    this.getProductStyles = this.getProductStyles.bind(this);
   }
 
   componentDidMount() {
-    axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/rpp/products', {
-      headers: {
-        Authorization: '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',
-      },
-    })
-      .then((res) => {
-        console.log('RESPONSE', res);
+    this.getRelatedProductsInfo(this.props.productId);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.productId !== this.props.productId) {
+      this.getRelatedProductsInfo(this.props.productId);
+      this.setState({
+        startIndex: 0,
+        endIndex: 3,
       });
+    }
   }
 
   handleBackArrowClick() {
-    this.setState({
-      startIndex: this.state.startIndex - 1,
-      endIndex: this.state.endIndex - 1,
-    });
+    this.setState((prevState) => ({
+      startIndex: prevState.startIndex - 1,
+      endIndex: prevState.endIndex - 1,
+    }));
   }
 
   handleForwardArrowClick() {
-    this.setState({
-      startIndex: this.state.startIndex + 1,
-      endIndex: this.state.endIndex + 1,
-    });
+    this.setState((prevState) => ({
+      startIndex: prevState.startIndex + 1,
+      endIndex: prevState.endIndex + 1,
+    }));
   }
 
-  handleModalButtonClick() {
-    this.setState({
-      show: false,
-    });
+  handleModalButtonClick(e) {
+    const { relatedProducts } = this.state;
+
+    // retrieves productId from product card to pass to modal
+    const prodId = e.target.getAttribute('value');
+    const newCardProduct = relatedProducts.filter((product) => Number(prodId) === product.id);
+    this.setState({ cardProduct: newCardProduct[0] });
+
+    // Show modal
+    this.setState((prevState) => ({ show: !prevState.show }));
+  }
+
+  getProductInfo(id) {
+    return axios.get(`/productinfo/${id}`)
+      .then((result) => result.data)
+      .catch((err) => console.log(err));
+  }
+
+  getProductStyles(id) {
+    return axios.get(`/styles/${id}`)
+      .then((result) => result.data)
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  // need to change id key to make identifiable second
+  getAverageReviews(id) {
+    return axios.get(`/reviews/${id}`)
+      .then((result) => {
+        return result.data;
+      })
+      .then((product) => {
+        // replace product_id key to prevent overwriting properties when merging object
+        product.review_id = product.product_id;
+        product.ratings = averageRating(product.ratings) || 0;
+        delete product.product_id;
+        return product;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  getRelatedProductsInfo(id) {
+    const { productId } = this.props;
+    return axios.get(`/related/${id}`)
+      // [71702, 71702, 71704, 71705, 71697, 71699]
+      .then((results) => {
+        // remove original product Id
+        let newProdsArr = results.data.filter((value) => value !== productId);
+        // remove duplicate product Ids
+        let uniqueArr = [...new Set(newProdsArr)];
+        return Promise.resolve(uniqueArr);
+      })
+      .then((arr) => {
+        let promiseArr = [];
+        // push promises for productID call
+        arr.forEach((value) => {
+          promiseArr.push(new Promise((resolve) => resolve(this.getProductInfo(value))));
+        });
+        // push promises for product styles call
+        arr.forEach((value) => {
+          promiseArr.push(new Promise((resolve) => resolve(this.getProductStyles(value))));
+        });
+        // push promises for review ratings
+        arr.forEach((value) => {
+          promiseArr.push(new Promise((resolve) => resolve(this.getAverageReviews(value))));
+        });
+        return promiseArr;
+      })
+      .then((promiseArr) => Promise.all(promiseArr))
+      .then((result) => {
+        const finalResult = [];
+        // push productInfo
+        result.forEach((value) => {
+          if (value.id) {
+            finalResult.push({
+              id: value.id,
+              category: value.category,
+              name: value.name,
+              description: value.description,
+              features: value.features,
+              slogan: value.slogan,
+              default_price: value.default_price,
+            });
+          }
+        });
+        // push styles info
+        finalResult.forEach((product) => {
+          result.forEach((style) => {
+            if (product.id === Number(style.product_id)) {
+              product.styles = style.results;
+            }
+            if (product.id === Number(style.review_id)) {
+              product.ratings = style.ratings;
+            }
+          });
+        });
+        this.setState({
+          relatedProducts: finalResult,
+        });
+      });
   }
 
   render() {
+    const {
+      show, startIndex, endIndex, relatedProducts, cardProduct,
+    } = this.state;
+
+    const { currProduct, handleProductCardClick } = this.props;
+
     return (
-      <>
-        <CompareModal show={this.state.show} handleModalButtonClick={this.handleModalButtonClick} />
+      <div>
         <h4>RELATED PRODUCTS</h4>
         <div className="duke-product-carousel-container">
           {
-            this.state.startIndex > 0
+            startIndex > 0
             && (
-            <IconContext.Provider value={{ className: "duke-arrow-button" }}>
-              <MdArrowBackIos onClick={this.handleBackArrowClick} />
-            </IconContext.Provider>
+            <div className="duke-arrow-container">
+              <IconContext.Provider value={{ className: "duke-arrow-button" }}>
+                <MdArrowBackIos onClick={this.handleBackArrowClick} />
+              </IconContext.Provider>
+            </div>
             )
           }
+          <CompareModal
+            show={show}
+            handleModalButtonClick={this.handleModalButtonClick}
+            cardProduct={cardProduct}
+            currProduct={currProduct}
+          />
           {
-            dummyData.map((product, index) => {
-              if (index >= this.state.startIndex && index <= this.state.endIndex) {
-                return <ProductCard product={product} key={index} />;
+            relatedProducts.map((product, index) => {
+              if (index >= startIndex && index <= endIndex) {
+                return (
+                  <ProductCard
+                    product={product}
+                    key={product.name}
+                    handleModalButtonClick={this.handleModalButtonClick}
+                    handleProductCardClick={handleProductCardClick}
+                  />
+                );
               }
             })
           }
           {
-            this.state.endIndex !== (dummyData.length - 1)
+            endIndex !== (relatedProducts.length - 1)
             && (
-            <IconContext.Provider value={{ className: "duke-arrow-button" }}>
-              <MdArrowForwardIos onClick={this.handleForwardArrowClick} />
-            </IconContext.Provider>
+            <div className="duke-arrow-container">
+              <IconContext.Provider value={{ className: "duke-arrow-button" }}>
+                <MdArrowForwardIos onClick={this.handleForwardArrowClick} />
+              </IconContext.Provider>
+            </div>
             )
           }
         </div>
-      </>
+      </div>
     );
   }
 }
