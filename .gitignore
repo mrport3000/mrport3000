@@ -1,7 +1,7 @@
 node_modules
 
-./client/dist/bundle.js
-./client/src/config.js
+*/bundle.js
+/client/src/config.js
 
 .env
 .DS_Store
