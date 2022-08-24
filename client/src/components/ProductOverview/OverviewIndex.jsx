@@ -10,54 +10,37 @@ import AddToCart from './AddToCart.jsx';
 class ProductOverview extends React.Component {
   constructor(props) {
     super(props);
-    const { productStyles } = this.props;
-    const firstStyle = productStyles[0];
-    for (let i = 0; i < productStyles.length; i += 1) {
-      if (productStyles[i]['default?']) {
-        productStyles[0] = productStyles[i];
-        productStyles[i] = firstStyle;
-        break;
-      }
-    }
     this.state = {
       expandedView: false,
-      galleryPhotos: productStyles[0].photos,
-      originalPrice: productStyles[0].original_price,
-      salePrice: productStyles[0].sale_price,
-      styleName: productStyles[0].name,
-      skus: productStyles[0].skus,
-      productStyles: productStyles,
     };
-    this.handleStyleChange = this.handleStyleChange.bind(this);
-  }
-
-  handleStyleChange(e) {
-    const index = e.target.getAttribute('index');
-    const { productStyles } = this.state;
-    this.setState({
-      galleryPhotos: productStyles[index].photos,
-      originalPrice: productStyles[index].original_price,
-      salePrice: productStyles[index].sale_price,
-      styleName: productStyles[index].name,
-      skus: productStyles[index].skus,
-    });
   }
 
   render() {
     const {
       expandedView,
-      galleryPhotos,
-      originalPrice,
-      salePrice,
-      styleName,
-      skus,
-      productStyles,
     } = this.state;
     const {
       productInfo,
       rating,
       reviewCount,
+      productStyles,
+      index,
+      handleStyleChange,
     } = this.props;
+    const originalPrice = productStyles[index].original_price;
+    const salePrice = productStyles[index].sale_price;
+    const styleName = productStyles[index].name;
+    const { skus } = productStyles[index];
+    const reorderedStyles = productStyles;
+    const firstStyle = reorderedStyles[0];
+    for (let i = 0; i < productStyles.length; i += 1) {
+      if (productStyles[i]['default?']) {
+        reorderedStyles[0] = productStyles[i];
+        reorderedStyles[i] = firstStyle;
+        break;
+      }
+    }
+    const galleryPhotos = reorderedStyles[index].photos;
     if (expandedView) {
       return (
         <div>
@@ -82,8 +65,8 @@ class ProductOverview extends React.Component {
               styleName={styleName}
             />
             <StyleSelector
-              productStyles={productStyles}
-              handleStyleChange={this.handleStyleChange}
+              productStyles={reorderedStyles}
+              handleStyleChange={handleStyleChange}
             />
             <AddToCart skus={skus} />
           </div>

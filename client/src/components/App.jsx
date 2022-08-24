@@ -6,10 +6,9 @@ import ProductOverview from './ProductOverview/OverviewIndex.jsx';
 import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
 import OutfitList from './OutfitList/OutfitList.jsx';
 import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
+import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
 
 const defaultId = 71704;
-
-import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,11 +21,13 @@ class App extends React.Component {
       rating: null,
       reviewCount: null,
       outfits: [],
+      index: 0,
     };
     this.handleProductIdChange = this.handleProductIdChange.bind(this);
     this.handleAddOutfitClick = this.handleAddOutfitClick.bind(this);
     this.handleRemoveOutfitClick = this.handleRemoveOutfitClick.bind(this);
     this.handleProductCardClick = this.handleProductCardClick.bind(this);
+    this.handleStyleChange = this.handleStyleChange.bind(this);
   }
 
   componentDidMount() {
@@ -37,7 +38,13 @@ class App extends React.Component {
     // this.getInitialData(id);
     this.setState({
       productId: newId,
+      index: 0,
     });
+  }
+
+  handleStyleChange(e) {
+    const index = e.target.getAttribute('index');
+    this.setState({ index });
   }
 
   handleProductCardClick(id) {
@@ -112,6 +119,7 @@ class App extends React.Component {
                   rating: averageRating(ratings),
                   reviewCount: totalReviews(ratings),
                   outfits: localStorage.get('outfitList') || [],
+                  index: 0,
                 });
               });
           });
@@ -126,6 +134,7 @@ class App extends React.Component {
       rating,
       reviewCount,
       outfits,
+      index,
     } = this.state;
 
     if (!productInfo || !productStyles) {
@@ -140,6 +149,9 @@ class App extends React.Component {
             productStyles={productStyles}
             rating={rating}
             reviewCount={reviewCount}
+            handleAddOutfitClick={this.handleAddOutfitClick}
+            handleStyleChange={this.handleStyleChange}
+            index={index}
           />
         </div>
         <div className="additional-content">
