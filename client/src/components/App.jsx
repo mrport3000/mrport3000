@@ -7,7 +7,7 @@ import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
 import OutfitList from './OutfitList/OutfitList.jsx';
 import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 
-const defaultId = 71700;
+const defaultId = 71704;
 
 import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
 

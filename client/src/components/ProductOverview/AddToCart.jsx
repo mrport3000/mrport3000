@@ -42,7 +42,12 @@ class AddToCart extends React.Component {
   }
 
   render() {
-    const { skus, quantityAvailable, sizeSelected, saveToOutfit } = this.state;
+    const {
+      skus,
+      quantityAvailable,
+      sizeSelected,
+      saveToOutfit,
+    } = this.state;
     const sizeOptions = availableSizes(skus).map((size) => ({ value: size, label: size }));
     let quantityOptions, placeholder;
     if (sizeSelected) {
@@ -73,7 +78,7 @@ class AddToCart extends React.Component {
       );
     }
     return (
-      <div>
+      <div className="keith-cart-div">
         <div className="keith-size-quantity-div">
           <div style={{ width: '250px', float: 'left' }}>
             <Select options={sizeOptions} onChange={this.changeSize} placeholder="Select Size" />
