@@ -90,9 +90,10 @@
 }
 
 .duke-card-container {
+  position: relative;
   border: 1px solid black;
   height: 400px;
-  width: 300px;
+  width: 275px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -100,13 +101,34 @@
   align-items: flex-start;
 }
 
-.duke-productcard-inner {
+.duke-card-header {
+  height: 60%;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.duke-action-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  height: 1.75em;
+  width: 1.75em;
+}
+
+.duke-productcard-body p {
+  margin: 0px;
+}
+
+.duke-productcard-body {
   padding: 5px;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: flex-start;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 10px;
 }
 
 .duke-card-image {
@@ -123,14 +145,14 @@
 .duke-outfit-carousel-container {
   display: flex;
   flex-wrap: nowrap;
-  align-items: flex-start;
+  align-items: center;
   gap: 10px;
 }
 
 .duke-addoutfit-container {
   border: 1px solid black;
   height: 400px;
-  width: 300px;
+  width: 275px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -145,9 +167,16 @@
   width: 100px;
 }
 
+.duke-arrow-container {
+  display: flex;
+  align-items: center;
+  height: 400px;
+}
+
 .duke-arrow-button {
-  vertical-align: middle;
-  size: 2em;
+  height: 3.5em;
+  width: 3.5em;
+  color:rgba(0, 0, 0, 0.2)
 }
 
 .duke-modal {
@@ -163,22 +192,71 @@
 }
 
 .duke-modal-content {
-  width: 500px;
+  width: 700px;
   background-color: #fff;
+  padding: 30px 30px 20px 30px;
 }
 
 .duke-modal-footer {
-  padding: 10px;
-}
-
-.duke-modal-body {
-  padding: 10px;
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
-}
-
-.duke-button {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 20px;
+}
+
+.duke-modal-body {
+  overflow: auto;
+  max-height: 300px;
+}
+
+.duke-modal-body table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.duke-modal-body table, th, td {
+  border: 1px solid;
+}
+
+.duke-modal-body thead {
+  background-color: #B8C4BB;
+  position: sticky;
+  top: 0;
+  border: 1px solid;
+}
+
+.duke-modal-body th, td {
+  padding: 10px;
+}
+
+.duke-modal-body td {
+  text-align: center;
+}
+
+.duke-checkmark {
+  height: 50px;
+}
+
+.duke-sale-price {
+  color: red;
+}
+
+.duke-cross-through {
+  text-decoration: line-through;
+  margin-left: 10px;
+}
+
+.all-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.additional-content {
+  padding-left: 85px;
+}
+
+.rating-star {
+  height: 20px;
 }
