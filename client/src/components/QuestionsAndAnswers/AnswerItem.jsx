@@ -31,7 +31,7 @@ function AnswerItem(props) {
             return null;
           }
           return (
-            <>
+            <div className="kris-Answer">
               <p className="kris-AnswerBody">
                 {`A:${answer.body.padStart(answer.body.length + 1, ' ')}\n`}
               </p>
@@ -43,7 +43,7 @@ function AnswerItem(props) {
               </p>
               <a className="kris-answerHelpful" href="www.google.com">Helpful?</a>
               <a className="kris-answerReported" href="www.google.com">Report</a>
-            </>
+            </div>
           );
         })
       }

@@ -6,7 +6,7 @@ function QandASearch(props) {
 
   return (
     <div className="kris-QandASearch">
-      <input value={search} onChange={change} />
+      <input className="kris-SearchBar" value={search} onChange={change} />
     </div>
   );
 }

@@ -4,6 +4,8 @@ import QandASearch from './QandASearch.jsx';
 import QuestionItem from './QuestionItem.jsx';
 import AnswerItem from './AnswerItem.jsx';
 
+import './QandAStyles.css';
+
 const fillerQandA = {
   product_id: '71697',
   results: [
@@ -277,8 +279,8 @@ class QandA extends React.Component {
             </>
           ))
         }
-        <button type="button" onClick={this.handleExpand}>{(isExpanded ? 'show less answers' : 'show more answers')}</button>
-        <button type="button">Add A Question</button>
+        <button className="navButton" type="button" onClick={this.handleExpand}>{(isExpanded ? 'show less' : 'show more')}</button>
+        <button className="navButton" type="button">ask a question</button>
       </div>
     );
   }
