@@ -23,11 +23,15 @@ class App extends React.Component {
       outfits: [],
       index: 0,
     };
+
+    this.scrollTarget = React.createRef();
+
     this.handleProductIdChange = this.handleProductIdChange.bind(this);
     this.handleAddOutfitClick = this.handleAddOutfitClick.bind(this);
     this.handleRemoveOutfitClick = this.handleRemoveOutfitClick.bind(this);
     this.handleProductCardClick = this.handleProductCardClick.bind(this);
     this.handleStyleChange = this.handleStyleChange.bind(this);
+    this.executeScroll = this.executeScroll.bind(this);
   }
 
   componentDidMount() {
@@ -126,6 +130,10 @@ class App extends React.Component {
       });
   }
 
+  executeScroll() {
+    this.scrollTarget.current.scrollIntoView({ behavior: 'smooth' });
+  }
+
   render() {
     const {
       productId,
@@ -150,8 +158,10 @@ class App extends React.Component {
             rating={rating}
             reviewCount={reviewCount}
             handleAddOutfitClick={this.handleAddOutfitClick}
+            handleRemoveOutfitClick={this.handleRemoveOutfitClick}
             handleStyleChange={this.handleStyleChange}
             index={index}
+            executeScroll={this.executeScroll}
           />
         </div>
         <div className="additional-content">
@@ -169,7 +179,9 @@ class App extends React.Component {
             rating={rating}
           />
           <QandA />
-          <RatingAndReview />
+          <div ref={this.scrollTarget}>
+            <RatingAndReview />
+          </div>
         </div>
       </div>
     );

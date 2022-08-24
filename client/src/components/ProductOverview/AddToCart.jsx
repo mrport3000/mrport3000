@@ -6,23 +6,22 @@ import { availableSizes } from '../../utilities';
 class AddToCart extends React.Component {
   constructor(props) {
     super(props);
-    const { skus } = this.props;
     this.state = {
-      skus: skus,
       selectedSize: 'test',
       sizeSelected: false,
       selectedQuantity: '',
       quantitySelected: false,
       quantityAvailable: '-',
       inStock: true,
-      saveToOutfit: false,
+      savedToOutfit: false,
     };
     this.changeSize = this.changeSize.bind(this);
     this.changeQuantity = this.changeQuantity.bind(this);
+    this.toggleOutfit = this.toggleOutfit.bind(this);
   }
 
   changeSize(e) {
-    const { skus } = this.state;
+    const { skus } = this.props;
     let { quantity } = Object.values(skus).find((item) => item.size === e.value);
     if (quantity > 15) {
       quantity = 15;
@@ -41,13 +40,19 @@ class AddToCart extends React.Component {
     });
   }
 
+  toggleOutfit() {
+    this.setState((prevState) => ({
+      savedToOutFit: !prevState.savedToOutFit,
+    }));
+  }
+
   render() {
     const {
-      skus,
       quantityAvailable,
       sizeSelected,
-      saveToOutfit,
+      savedToOutfit,
     } = this.state;
+    const { skus, handleAddOutfitClick, handleRemoveOutfitClick } = this.props;
     const sizeOptions = availableSizes(skus).map((size) => ({ value: size, label: size }));
     let quantityOptions, placeholder;
     if (sizeSelected) {
@@ -58,7 +63,29 @@ class AddToCart extends React.Component {
       placeholder = '-';
     }
     quantityOptions = quantityOptions.map((quantity) => ({ value: quantity, label: quantity }));
-    const starButton = saveToOutfit ? <button type="button">★</button> : <button type="button">☆</button>;
+    const starButton = savedToOutfit
+      ? (
+        <button
+          type="button"
+          onClick={() => {
+            this.toggleOutfit();
+            handleRemoveOutfitClick();
+          }}
+        >
+          ★
+        </button>
+      )
+      : (
+        <button
+          type="button"
+          onClick={() => {
+            this.toggleOutfit();
+            handleAddOutfitClick();
+          }}
+        >
+          ☆
+        </button>
+      );
     if (sizeOptions === []) {
       return (
         <div style={{ width: '400px' }}>

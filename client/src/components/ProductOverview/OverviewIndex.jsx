@@ -26,6 +26,9 @@ class ProductOverview extends React.Component {
       productStyles,
       index,
       handleStyleChange,
+      executeScroll,
+      handleAddOutfitClick,
+      handleRemoveOutfitClick,
     } = this.props;
     const originalPrice = productStyles[index].original_price;
     const salePrice = productStyles[index].sale_price;
@@ -63,12 +66,17 @@ class ProductOverview extends React.Component {
               originalPrice={originalPrice}
               salePrice={salePrice}
               styleName={styleName}
+              executeScroll={executeScroll}
             />
             <StyleSelector
               productStyles={reorderedStyles}
               handleStyleChange={handleStyleChange}
             />
-            <AddToCart skus={skus} />
+            <AddToCart
+              skus={skus}
+              handleAddOutfitClick={handleAddOutfitClick}
+              handleRemoveOutfitClick={handleRemoveOutfitClick}
+            />
           </div>
         </div>
         <ProductDescription productInfo={productInfo} />
