@@ -7,43 +7,51 @@ class SortReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      totalReviews: [...this.props.reviews],
       sortTerm: '',
       sortedReviews: [],
     };
     this.flowControl = this.flowControl.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
+  //Still debugging second part of sort bug
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log('Previous State: ', prevState);
+  //   if (prevState.sortedReviews !== this.props.reviews) {
+  //     this.setState({sortedReviews: [], sortTerm: ''});
+  //   }
+  // }
 
   handleChange(e) {
+    const { sortTerm } = this.state;
     this.setState({ sortTerm: e.target.value }, () => {
-      this.flowControl(this.state.sortTerm);
+      this.flowControl(sortTerm);
     });
   }
 
   flowControl(term) {
-    const { totalReviews } = this.state;
-    const currentReviews = totalReviews;
+    const currentReviews = this.props.reviews;
     let sorted;
     if (term === 'relevent') {
       // Still working on relvency sort
     } else if (term === 'newest') {
-      sorted = currentReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+      sorted = currentReviews.sort((a, b) => new Date(a.date) - new Date(b.date));
     } else if (term === 'helpful') {
-      sorted = currentReviews.sort((a, b) => b.helpfulness - a.helpfulness);
+      sorted = currentReviews.sort((a, b) => a.helpfulness - b.helpfulness);
     }
 
-    this.setState({ sortedReviews: sorted });
+    this.setState({ sortedReviews: sorted }, () => {
+      //  console.log('sortedState: ', this.state);
+    });
   }
 
   render() {
+    const { sortedReviews } = this.state;
     let dynamicProps;
-    if (this.state.sortedReviews.length === 0) {
+    if (sortedReviews.length === 0) {
       dynamicProps = this.props.reviews;
     } else {
-      dynamicProps = this.state.sortedReviews;
+      dynamicProps = sortedReviews;
     }
-
     return (
       <div className="eric-RR-sortContainer">
         <div className="eric-RR-sortReviews">

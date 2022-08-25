@@ -37,6 +37,12 @@ app.get('/reviews/:id', (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.get('/reviews/meta/:id', (req, res) => {
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.id}`, headers)
+    .then((result) => res.send(result.data))
+    .catch((err) => console.log(err));
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port: ${PORT}`);
 });
