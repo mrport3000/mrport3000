@@ -54,7 +54,6 @@ class RelatedProducts extends React.Component {
   }
 
   handleModalButtonClick(e) {
-    console.log('MODAL BUTTON CLICK');
     const { relatedProducts } = this.state;
 
     // retrieves productId from product card to pass to modal
@@ -202,6 +201,7 @@ class RelatedProducts extends React.Component {
           }
           {
             endIndex !== (relatedProducts.length - 1)
+            && endIndex < relatedProducts.length
             && (
             <div className="duke-arrow-container">
               <IconContext.Provider value={{ className: "duke-arrow-button" }}>
