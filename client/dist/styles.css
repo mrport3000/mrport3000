@@ -83,6 +83,10 @@
   margin: 0;
 }
 
+.keith-style-icon {
+  border: none;
+}
+
 .keith-options-div {
   width: 100px;
 }

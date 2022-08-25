@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import Select from 'react-select';
+import StarButton from './StarButton.jsx';
 import { availableSizes } from '../../utilities';
 import axios from 'axios';
 
@@ -12,7 +13,6 @@ class AddToCart extends React.Component {
       sizeIsSelected: false,
       selectedQuantity: null,
       quantityAvailable: null,
-      inStock: true,
       savedToOutfit: false,
       selectedSku: null,
       specialMessage: null,
@@ -29,7 +29,7 @@ class AddToCart extends React.Component {
 
   changeSize(e) {
     const { skus } = this.props;
-    var selectedSku;
+    let selectedSku;
     let { quantity } = Object.values(skus).find((item) => item.size === e.value);
     if (quantity > 15) {
       quantity = 15;
@@ -56,10 +56,21 @@ class AddToCart extends React.Component {
     });
   }
 
-  toggleOutfit() {
-    this.setState((prevState) => ({
-      savedToOutFit: !prevState.savedToOutFit,
-    }));
+  toggleOutfit(e) {
+    const { savedToOutfit } = this.state;
+    const { handleAddOutfitClick, handleRemoveOutfitClick } = this.props;
+    if (!savedToOutfit) {
+      this.setState({
+        savedToOutfit: true,
+      });
+      handleAddOutfitClick(e);
+    }
+    if (savedToOutfit) {
+      this.setState({
+        savedToOutfit: false,
+      });
+      handleRemoveOutfitClick(e);
+    }
   }
 
   addToCart() {
@@ -101,8 +112,6 @@ class AddToCart extends React.Component {
     } = this.state;
     const {
       skus,
-      handleAddOutfitClick,
-      handleRemoveOutfitClick,
     } = this.props;
     // Makes an array of size options for react-select component
     const sizeOptions = availableSizes(skus).map((size) => ({ value: size, label: size }));
@@ -116,29 +125,6 @@ class AddToCart extends React.Component {
       placeholder = '-';
     }
     quantityOptions = quantityOptions.map((quantity) => ({ value: quantity, label: quantity }));
-    const starButton = savedToOutfit
-      ? (
-        <button
-          type="button"
-          onClick={() => {
-            this.toggleOutfit();
-            // handleRemoveOutfitClick();
-          }}
-        >
-          ★
-        </button>
-      )
-      : (
-        <button
-          type="button"
-          onClick={() => {
-            this.toggleOutfit();
-            // handleAddOutfitClick();
-          }}
-        >
-          ☆
-        </button>
-      );
     if (sizeOptions === []) {
       return (
         <div style={{ width: '400px' }}>
@@ -146,7 +132,7 @@ class AddToCart extends React.Component {
           <div style={{ width: '250px', float: 'left' }}>
             <Select options={sizeOptions} onChange={this.changeSize} isDisabled placeholder="Select Size" />
           </div>
-          <div style={{ width: '100px' }}>
+          <div style={{ width: '100px', float: 'center' }}>
             <Select
               options={quantityOptions}
               onChange={this.changeQuantity}
@@ -162,7 +148,13 @@ class AddToCart extends React.Component {
         {specialMessage && <p><b>{specialMessage}</b></p>}
         <div className="keith-size-quantity-div">
           <div style={{ width: '250px', float: 'left' }}>
-            <Select openMenuOnFocus ref={this.sizeRef} options={sizeOptions} onChange={this.changeSize} placeholder="Select Size" />
+            <Select
+              openMenuOnFocus
+              ref={this.sizeRef}
+              options={sizeOptions}
+              onChange={this.changeSize}
+              placeholder="Select Size"
+            />
           </div>
           <div style={{ width: '100px', float: 'right' }}>
             <Select
@@ -178,7 +170,7 @@ class AddToCart extends React.Component {
         </div>
         <div className="keith-cart-star-div">
           <button className="keith-add-cart" type="button" onClick={this.addToCart}>Add to Cart</button>
-          {starButton}
+          <StarButton toggleOutfit={this.toggleOutfit} savedToOutfit={savedToOutfit} />
         </div>
       </div>
     );

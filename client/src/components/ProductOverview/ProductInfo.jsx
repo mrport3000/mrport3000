@@ -2,11 +2,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import halfStar from '../../../dist/lib/star-half.png';
-import fullStar from '../../../dist/lib/star-full.png';
-import quarterStar from '../../../dist/lib/star-one-quarter.png';
-import threeQuarterStar from '../../../dist/lib/star-three-quarter.png';
-import emptyStar from '../../../dist/lib/star-outline.png';
 import StarRating from '../RelatedItems/StarRating.jsx';
 
 function ProductInfo({
