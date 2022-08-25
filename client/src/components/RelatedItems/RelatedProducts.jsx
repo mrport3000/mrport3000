@@ -201,6 +201,7 @@ class RelatedProducts extends React.Component {
           }
           {
             endIndex !== (relatedProducts.length - 1)
+            && endIndex < relatedProducts.length
             && (
             <div className="duke-arrow-container">
               <IconContext.Provider value={{ className: "duke-arrow-button" }}>
