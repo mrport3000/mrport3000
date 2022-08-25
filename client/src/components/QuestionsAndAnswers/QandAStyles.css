@@ -1,0 +1,32 @@
+.kris-qanda{
+  font-family: Helvetica, sans-serif;
+  margin: 15px 0px 15px 30px;
+}
+
+.kris-SearchBar{
+  width: 50%;
+  font-size: 16;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.kris-Answer{
+  margin-left: 25px;
+}
+
+.navButton {
+  background-color: black;
+  border: none;
+  color: white;
+  height: 40px;
+  width: 150px;
+  margin: 5px 10px 5px 0px;
+  text-align: center;
+  display: inline-block;
+  font-size: 15px;
+  cursor: pointer;
+}
