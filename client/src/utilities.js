@@ -1,4 +1,3 @@
-/* eslint-disable no-var */
 module.exports = {
   averageRating(ratings) {
     const total = Object.keys(ratings).reduce(

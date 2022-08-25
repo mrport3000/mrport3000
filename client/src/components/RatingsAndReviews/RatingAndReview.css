@@ -39,6 +39,12 @@
   width: 200px;
 }
 
+.eric-RR-sortedby select {
+  border: 0px;
+  outline: 0px;
+  text-decoration: underline;
+}
+
 .eric-RR-sortContainer {
   display: flex;
   flex-direction: column;
@@ -64,6 +70,7 @@
 .eric-RR-tileRatingAndUsername {
   display: flex;
   flex-direction: row;
+  height: 20%;
 
 }
 
@@ -79,11 +86,19 @@
   width: 40%;
 }
 
+.eric-RR-tileMainBody {
+  height: 40%
+}
+
 .eric-RR-tileSummary {
   margin-top: 2px;
   margin-bottom: 2px;
   font-size: 18.5px;
   font-weight: bold;
+}
+
+.eric-RR-tileResponseAndHelpful {
+  height: 40%;
 }
 
 .eric-RR-tileResponse {

@@ -4,7 +4,9 @@ import React from 'react';
 import './RatingAndReview.css';
 
 function RatingBreakdown(props) {
-  console.log('RB props: ', props);
+
+  //console.log('props: ', props);
+
   return (
     <div className="eric-RR-productRatingContainer">
       {/* RatingBreakdown Placeholder! */}
