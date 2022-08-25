@@ -54,6 +54,7 @@ class RelatedProducts extends React.Component {
   }
 
   handleModalButtonClick(e) {
+    console.log('MODAL BUTTON CLICK');
     const { relatedProducts } = this.state;
 
     // retrieves productId from product card to pass to modal

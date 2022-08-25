@@ -41,6 +41,7 @@ class App extends React.Component {
   }
 
   handleProductCardClick(id) {
+    console.log('Product Card Click');
     this.getInitialData(id);
   }
 

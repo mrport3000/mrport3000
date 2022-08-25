@@ -27,13 +27,15 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
   }
 
   return (
-    <div className="duke-card-container" onClick={(() => handleProductCardClick(product.id))} value={product.id}>
-      <div
+    <div className="duke-card-container">
+      <button
+        type="submit"
+        onClick={(() => handleProductCardClick(product.id))}
+        value={product.id}
         className="duke-card-header"
         style={{ backgroundImage: `url(${defaultPhotoURL})` }}
-      >
-        <img src="https://static.vecteezy.com/system/resources/previews/001/189/167/non_2x/star-png.png" className="duke-action-icon" onClick={handleModalButtonClick} value={product.id} alt="star-icon" />
-      </div>
+      />
+      <img src="https://static.vecteezy.com/system/resources/previews/001/189/167/non_2x/star-png.png" className="duke-action-icon" onClick={handleModalButtonClick} value={product.id} alt="star-icon" />
       <div className="duke-productcard-body">
         <p>{product.category}</p>
         <div>
