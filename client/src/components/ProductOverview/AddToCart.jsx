@@ -29,6 +29,7 @@ class AddToCart extends React.Component {
     this.setState({
       sizeSelected: true,
       selectedSize: e.value,
+      quantitySelected: false,
       quantityAvailable: quantity,
     });
   }
@@ -51,8 +52,13 @@ class AddToCart extends React.Component {
       quantityAvailable,
       sizeSelected,
       savedToOutfit,
+      selectedSize,
     } = this.state;
-    const { skus, handleAddOutfitClick, handleRemoveOutfitClick } = this.props;
+    const {
+      skus,
+      handleAddOutfitClick,
+      handleRemoveOutfitClick,
+    } = this.props;
     const sizeOptions = availableSizes(skus).map((size) => ({ value: size, label: size }));
     let quantityOptions, placeholder;
     if (sizeSelected) {
@@ -112,6 +118,7 @@ class AddToCart extends React.Component {
           </div>
           <div style={{ width: '100px', float: 'right' }}>
             <Select
+              key={selectedSize}
               options={quantityOptions}
               onChange={this.changeQuantity}
               isDisabled={!sizeSelected}

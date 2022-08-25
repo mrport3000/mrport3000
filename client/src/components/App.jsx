@@ -21,7 +21,7 @@ class App extends React.Component {
       rating: null,
       reviewCount: null,
       outfits: [],
-      index: 0,
+      styleIndex: 0,
     };
 
     this.scrollTarget = React.createRef();
@@ -42,13 +42,13 @@ class App extends React.Component {
     // this.getInitialData(id);
     this.setState({
       productId: newId,
-      index: 0,
+      styleIndex: 0,
     });
   }
 
   handleStyleChange(e) {
-    const index = e.target.getAttribute('index');
-    this.setState({ index });
+    const styleIndex = e.target.getAttribute('index');
+    this.setState({ styleIndex });
   }
 
   handleProductCardClick(id) {
@@ -123,7 +123,7 @@ class App extends React.Component {
                   rating: averageRating(ratings),
                   reviewCount: totalReviews(ratings),
                   outfits: localStorage.get('outfitList') || [],
-                  index: 0,
+                  styleIndex: 0,
                 });
               });
           });
@@ -142,7 +142,7 @@ class App extends React.Component {
       rating,
       reviewCount,
       outfits,
-      index,
+      styleIndex,
     } = this.state;
 
     if (!productInfo || !productStyles) {
@@ -160,7 +160,7 @@ class App extends React.Component {
             handleAddOutfitClick={this.handleAddOutfitClick}
             handleRemoveOutfitClick={this.handleRemoveOutfitClick}
             handleStyleChange={this.handleStyleChange}
-            index={index}
+            styleIndex={styleIndex}
             executeScroll={this.executeScroll}
           />
         </div>

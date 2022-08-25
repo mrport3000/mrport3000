@@ -30,7 +30,8 @@
 }
 
 .keith-review {
-  margin-bottom: 0px
+  margin-bottom: 0px;
+  text-decoration: underline;
 }
 
 .keith-category {

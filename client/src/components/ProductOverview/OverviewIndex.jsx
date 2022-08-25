@@ -24,16 +24,16 @@ class ProductOverview extends React.Component {
       rating,
       reviewCount,
       productStyles,
-      index,
+      styleIndex,
       handleStyleChange,
       executeScroll,
       handleAddOutfitClick,
       handleRemoveOutfitClick,
     } = this.props;
-    const originalPrice = productStyles[index].original_price;
-    const salePrice = productStyles[index].sale_price;
-    const styleName = productStyles[index].name;
-    const { skus } = productStyles[index];
+    const originalPrice = productStyles[styleIndex].original_price;
+    const salePrice = productStyles[styleIndex].sale_price;
+    const styleName = productStyles[styleIndex].name;
+    const { skus } = productStyles[styleIndex];
     const reorderedStyles = productStyles;
     const firstStyle = reorderedStyles[0];
     for (let i = 0; i < productStyles.length; i += 1) {
@@ -43,7 +43,7 @@ class ProductOverview extends React.Component {
         break;
       }
     }
-    const galleryPhotos = reorderedStyles[index].photos;
+    const galleryPhotos = reorderedStyles[styleIndex].photos;
     if (expandedView) {
       return (
         <div>
@@ -73,6 +73,7 @@ class ProductOverview extends React.Component {
               handleStyleChange={handleStyleChange}
             />
             <AddToCart
+              key={JSON.stringify(skus)}
               skus={skus}
               handleAddOutfitClick={handleAddOutfitClick}
               handleRemoveOutfitClick={handleRemoveOutfitClick}
