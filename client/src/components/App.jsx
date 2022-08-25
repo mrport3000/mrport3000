@@ -78,7 +78,6 @@ class App extends React.Component {
 
   handleRemoveOutfitClick(e) {
     e.preventDefault();
-    console.log('REMOVE OUTFIT CLICK');
     const { outfits } = this.state;
 
     const currOutfits = outfits.slice();
