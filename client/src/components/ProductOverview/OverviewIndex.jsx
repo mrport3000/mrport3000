@@ -12,12 +12,28 @@ class ProductOverview extends React.Component {
     super(props);
     this.state = {
       expandedView: false,
+      hover: false,
     };
+    this.onMouseEnter = this.onMouseEnter.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
+  }
+
+  onMouseEnter() {
+    this.setState({
+      hover: true,
+    });
+  }
+
+  onMouseLeave() {
+    this.setState({
+      hover: false,
+    });
   }
 
   render() {
     const {
       expandedView,
+      hover,
     } = this.state;
     const {
       productInfo,
@@ -56,7 +72,12 @@ class ProductOverview extends React.Component {
       <div className="keith-overview-div">
         <div className="keith-top-div">
           <div className="keith-unexpanded-gallery-div">
-            <UnexpandedGallery photos={galleryPhotos} />
+            <UnexpandedGallery
+              photos={galleryPhotos}
+              onMouseEnter={this.onMouseEnter}
+              onMouseLeave={this.onMouseLeave}
+              hover={hover}
+            />
           </div>
           <div className="keith-product-info-div">
             <ProductInfo

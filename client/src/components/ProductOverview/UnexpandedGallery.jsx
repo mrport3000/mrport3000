@@ -20,9 +20,12 @@ class UnexpandedGallery extends React.Component {
   }
 
   render() {
-    const { photos } = this.props;
+    const { photos, hover, onMouseEnter, onMouseLeave } = this.props;
     return (
       <img
+        style={{ cursor: hover ? 'zoom-in' : 'default' }}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
         src={photos[0].url}
         width="600"
         height="400"
