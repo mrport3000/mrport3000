@@ -73,7 +73,7 @@ class ProductOverview extends React.Component {
               handleStyleChange={handleStyleChange}
             />
             <AddToCart
-              key={JSON.stringify(skus)}
+              key={Object.keys(skus)[styleIndex]}
               skus={skus}
               handleAddOutfitClick={handleAddOutfitClick}
               handleRemoveOutfitClick={handleRemoveOutfitClick}
