@@ -20,7 +20,7 @@ function RatingBreakdown(props) {
       </div>
       <div className="eric-RR-ratingBreakdown">
         <div className="eric-RR-breakdownText">
-        {props.ratings.recPercent}
+        {/* {props.ratings.recPercent} */}
         % of reviews recommend this product
         </div>
         <div className="eric-RR-breakdown">
