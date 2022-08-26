@@ -104,7 +104,6 @@ class App extends React.Component {
   }
 
   getInitialData(productId) {
-
     let productInfo; let productStyles; let
       qandaInfo;
 
@@ -134,16 +133,17 @@ class App extends React.Component {
                       rating: averageRating(ratings),
                       reviewCount: totalReviews(ratings),
                       outfits: localStorage.get('outfitList') || [],
-                });
-              })
-              .then(() => {
-                // both /review endpoints will be swapped at a later date
-                axios.get(`/reviews/meta/${productId}`)
-                  .then((result) => {
-                    this.setState({
-                      reviewPage: result.data.page,
-                      reviews: result.data.results,
                     });
+                  })
+                  .then(() => {
+                    // both /review endpoints will be swapped at a later date
+                    axios.get(`/reviews/meta/${productId}`)
+                      .then((result) => {
+                        this.setState({
+                          reviewPage: result.data.page,
+                          reviews: result.data.results,
+                        });
+                      });
                   });
               });
           });
@@ -223,7 +223,7 @@ class App extends React.Component {
           />
 
           <QandA info={qandaInfo} />
-           <div ref={this.scrollTarget}>
+          <div ref={this.scrollTarget}>
             <RatingAndReview reviews={reviews} page={reviewPage} />
           </div>
         </div>
