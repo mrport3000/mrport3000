@@ -266,18 +266,25 @@ class QandA extends React.Component {
 
   render() {
     const { isExpanded, query } = this.state;
+    const { info } = this.props;
 
     return (
       <div className="kris-qanda">
         <h4>QUESTIONS AND ANSWERS</h4>
         <QandASearch search={query} change={this.handleChange} />
         {
-          fillerQandA.results.map((qanda) => (
-            <>
-              <QuestionItem question={qanda.question_body} />
-              <AnswerItem answers={qanda.answers} expanded={isExpanded} />
-            </>
-          ))
+          info.results.map((qanda, key) => {
+            if (!isExpanded && key >= 2) {
+              return (<div />);
+            }
+
+            return (
+              <>
+                <QuestionItem question={qanda.question_body} />
+                <AnswerItem answers={qanda.answers} expanded={isExpanded} />
+              </>
+            );
+          })
         }
         <button className="navButton" type="button" onClick={this.handleExpand}>{(isExpanded ? 'show less' : 'show more')}</button>
         <button className="navButton" type="button">ask a question</button>

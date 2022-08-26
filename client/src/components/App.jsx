@@ -6,10 +6,9 @@ import ProductOverview from './ProductOverview/OverviewIndex.jsx';
 import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
 import OutfitList from './OutfitList/OutfitList.jsx';
 import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
+import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
 
 const defaultId = 71704;
-
-import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,6 +18,7 @@ class App extends React.Component {
       productId: defaultId,
       productInfo: null,
       productStyles: null,
+      qandaInfo: null,
       rating: null,
       reviewCount: null,
       outfits: [],
@@ -90,7 +90,9 @@ class App extends React.Component {
   }
 
   getInitialData(productId) {
-    let productInfo, productStyles;
+    let productInfo; let productStyles; let
+      qandaInfo;
+
     axios.get(`/productinfo/${productId}`)
       .then((results) => {
         productInfo = results.data;
@@ -101,27 +103,55 @@ class App extends React.Component {
             productStyles = results.data.results;
           })
           .then(() => {
-            axios.get(`/reviews/${productId}`)
+            axios.get(`/qanda/${productId}`)
               .then((results) => {
-                const { ratings } = results.data;
-                this.setState({
-                  productId: productId,
-                  productInfo: productInfo,
-                  productStyles: productStyles,
-                  rating: averageRating(ratings),
-                  reviewCount: totalReviews(ratings),
-                  outfits: localStorage.get('outfitList') || [],
-                });
+                qandaInfo = results.data;
+              })
+              .then(() => {
+                axios.get(`/reviews/${productId}`)
+                  .then((results) => {
+                    const { ratings } = results.data;
+                    this.setState({
+                      productId,
+                      productInfo,
+                      productStyles,
+                      qandaInfo,
+                      rating: averageRating(ratings),
+                      reviewCount: totalReviews(ratings),
+                      outfits: localStorage.get('outfitList') || [],
+                    });
+                  });
               });
           });
       });
   }
+
+  // getInitialData(productId) {
+  //   const req1 = axios.get(`/productinfo/${productId}`);
+  //   const req2 = axios.get(`/styles/${productId}`);
+  //   const req3 = axios.get(`/qanda/${productId}`);
+  //   const req4 = axios.get(`/reviews/${productId}`);
+
+  //   const requests = [req1, req2, req3, req4];
+
+  //   axios.all(requests).then(axios.spread((res1, res2, res3, res4) => {
+  //     this.setState({
+  //       productInfo: res1.data,
+  //       productStyles: res2.data.results,
+  //       qandaInfo: res3.data,
+  //       rating: averageRating(res4.data),
+  //       reviewCount: totalReviews(res4.data),
+  //       outfits: localStorage.get('outfitList') || [],
+  //     });
+  //   }));
+  // }
 
   render() {
     const {
       productId,
       productInfo,
       productStyles,
+      qandaInfo,
       rating,
       reviewCount,
       outfits,
@@ -155,7 +185,7 @@ class App extends React.Component {
             handleRemoveOutfitClick={this.handleRemoveOutfitClick}
             rating={rating}
           />
-          <QandA />
+          <QandA info={qandaInfo} />
           <RatingAndReview />
         </div>
       </div>
