@@ -20,6 +20,8 @@ class App extends React.Component {
       productStyles: null,
       rating: null,
       reviewCount: null,
+      reviewPage: null,
+      reviews: [],
       outfits: [],
       styleIndex: 0,
     };
@@ -101,7 +103,8 @@ class App extends React.Component {
   }
 
   getInitialData(productId) {
-    let productInfo, productStyles;
+    let productInfo; let
+      productStyles;
     axios.get(`/productinfo/${productId}`)
       .then((results) => {
         productInfo = results.data;
@@ -116,14 +119,24 @@ class App extends React.Component {
               .then((results) => {
                 const { ratings } = results.data;
                 this.setState({
-                  productId: productId,
-                  productInfo: productInfo,
-                  productStyles: productStyles,
+                  productId,
+                  productInfo,
+                  productStyles,
                   rating: averageRating(ratings),
                   reviewCount: totalReviews(ratings),
                   outfits: localStorage.get('outfitList') || [],
                   styleIndex: 0,
                 });
+              })
+              .then(() => {
+                // both /review endpoints will be swapped at a later date
+                axios.get(`/reviews/meta/${productId}`)
+                  .then((result) => {
+                    this.setState({
+                      reviewPage: result.data.page,
+                      reviews: result.data.results,
+                    });
+                  });
               });
           });
       });
@@ -140,6 +153,8 @@ class App extends React.Component {
       productStyles,
       rating,
       reviewCount,
+      reviewPage,
+      reviews,
       outfits,
       styleIndex,
     } = this.state;
@@ -179,7 +194,7 @@ class App extends React.Component {
           />
           <QandA />
           <div ref={this.scrollTarget}>
-            <RatingAndReview />
+            <RatingAndReview reviews={reviews} page={reviewPage} />
           </div>
         </div>
       </div>

@@ -38,6 +38,12 @@ app.get('/reviews/:id', (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.get('/reviews/meta/:id', (req, res) => {
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.id}`, headers)
+    .then((result) => res.send(result.data))
+    .catch((err) => console.log(err));
+});
+
 app.post('/cart', (req, res) => {
   axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/cart', {
     sku_id: req.body.sku_id,
