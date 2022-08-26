@@ -271,6 +271,7 @@
 }
 
 .additional-content {
+  min-width: 1000px;
   padding-left: 85px;
 }
 
