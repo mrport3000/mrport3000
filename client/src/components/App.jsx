@@ -6,7 +6,6 @@ import ProductOverview from './ProductOverview/OverviewIndex.jsx';
 import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
 import OutfitList from './OutfitList/OutfitList.jsx';
 import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
-
 import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
 
 const defaultId = 71704;
@@ -24,11 +23,17 @@ class App extends React.Component {
       reviewPage: null,
       reviews: [],
       outfits: [],
+      styleIndex: 0,
     };
+
+    this.scrollTarget = React.createRef();
+
     this.handleProductIdChange = this.handleProductIdChange.bind(this);
     this.handleAddOutfitClick = this.handleAddOutfitClick.bind(this);
     this.handleRemoveOutfitClick = this.handleRemoveOutfitClick.bind(this);
     this.handleProductCardClick = this.handleProductCardClick.bind(this);
+    this.handleStyleChange = this.handleStyleChange.bind(this);
+    this.executeScroll = this.executeScroll.bind(this);
   }
 
   componentDidMount() {
@@ -39,7 +44,13 @@ class App extends React.Component {
     // this.getInitialData(id);
     this.setState({
       productId: newId,
+      styleIndex: 0,
     });
+  }
+
+  handleStyleChange(e) {
+    const styleIndex = e.target.getAttribute('index');
+    this.setState({ styleIndex });
   }
 
   handleProductCardClick(id) {
@@ -114,6 +125,7 @@ class App extends React.Component {
                   rating: averageRating(ratings),
                   reviewCount: totalReviews(ratings),
                   outfits: localStorage.get('outfitList') || [],
+                  styleIndex: 0,
                 });
               })
               .then(() => {
@@ -130,6 +142,10 @@ class App extends React.Component {
       });
   }
 
+  executeScroll() {
+    this.scrollTarget.current.scrollIntoView({ behavior: 'smooth' });
+  }
+
   render() {
     const {
       productId,
@@ -140,6 +156,7 @@ class App extends React.Component {
       reviewPage,
       reviews,
       outfits,
+      styleIndex,
     } = this.state;
 
     if (!productInfo || !productStyles) {
@@ -154,6 +171,11 @@ class App extends React.Component {
             productStyles={productStyles}
             rating={rating}
             reviewCount={reviewCount}
+            handleAddOutfitClick={this.handleAddOutfitClick}
+            handleRemoveOutfitClick={this.handleRemoveOutfitClick}
+            handleStyleChange={this.handleStyleChange}
+            styleIndex={styleIndex}
+            executeScroll={this.executeScroll}
           />
         </div>
         <div className="additional-content">
@@ -171,7 +193,9 @@ class App extends React.Component {
             rating={rating}
           />
           <QandA />
-          <RatingAndReview reviews={reviews} page={reviewPage} />
+          <div ref={this.scrollTarget}>
+            <RatingAndReview reviews={reviews} page={reviewPage} />
+          </div>
         </div>
       </div>
     );
