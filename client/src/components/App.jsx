@@ -21,12 +21,20 @@ class App extends React.Component {
       qandaInfo: null,
       rating: null,
       reviewCount: null,
+      reviewPage: null,
+      reviews: [],
       outfits: [],
+      styleIndex: 0,
     };
+
+    this.scrollTarget = React.createRef();
+
     this.handleProductIdChange = this.handleProductIdChange.bind(this);
     this.handleAddOutfitClick = this.handleAddOutfitClick.bind(this);
     this.handleRemoveOutfitClick = this.handleRemoveOutfitClick.bind(this);
     this.handleProductCardClick = this.handleProductCardClick.bind(this);
+    this.handleStyleChange = this.handleStyleChange.bind(this);
+    this.executeScroll = this.executeScroll.bind(this);
   }
 
   componentDidMount() {
@@ -37,7 +45,13 @@ class App extends React.Component {
     // this.getInitialData(id);
     this.setState({
       productId: newId,
+      styleIndex: 0,
     });
+  }
+
+  handleStyleChange(e) {
+    const styleIndex = e.target.getAttribute('index');
+    this.setState({ styleIndex });
   }
 
   handleProductCardClick(id) {
@@ -90,6 +104,7 @@ class App extends React.Component {
   }
 
   getInitialData(productId) {
+
     let productInfo; let productStyles; let
       qandaInfo;
 
@@ -119,6 +134,15 @@ class App extends React.Component {
                       rating: averageRating(ratings),
                       reviewCount: totalReviews(ratings),
                       outfits: localStorage.get('outfitList') || [],
+                });
+              })
+              .then(() => {
+                // both /review endpoints will be swapped at a later date
+                axios.get(`/reviews/meta/${productId}`)
+                  .then((result) => {
+                    this.setState({
+                      reviewPage: result.data.page,
+                      reviews: result.data.results,
                     });
                   });
               });
@@ -146,6 +170,10 @@ class App extends React.Component {
   //   }));
   // }
 
+  executeScroll() {
+    this.scrollTarget.current.scrollIntoView({ behavior: 'smooth' });
+  }
+
   render() {
     const {
       productId,
@@ -154,7 +182,10 @@ class App extends React.Component {
       qandaInfo,
       rating,
       reviewCount,
+      reviewPage,
+      reviews,
       outfits,
+      styleIndex,
     } = this.state;
 
     if (!productInfo || !productStyles) {
@@ -169,6 +200,11 @@ class App extends React.Component {
             productStyles={productStyles}
             rating={rating}
             reviewCount={reviewCount}
+            handleAddOutfitClick={this.handleAddOutfitClick}
+            handleRemoveOutfitClick={this.handleRemoveOutfitClick}
+            handleStyleChange={this.handleStyleChange}
+            styleIndex={styleIndex}
+            executeScroll={this.executeScroll}
           />
         </div>
         <div className="additional-content">
@@ -185,8 +221,11 @@ class App extends React.Component {
             handleRemoveOutfitClick={this.handleRemoveOutfitClick}
             rating={rating}
           />
+
           <QandA info={qandaInfo} />
-          <RatingAndReview />
+           <div ref={this.scrollTarget}>
+            <RatingAndReview reviews={reviews} page={reviewPage} />
+          </div>
         </div>
       </div>
     );
