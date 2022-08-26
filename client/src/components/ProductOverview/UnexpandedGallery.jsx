@@ -6,31 +6,28 @@ class UnexpandedGallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      photos: [],
-      mainPhotoUrl: '',
+      thumbnailIndex: 0,
     };
   }
 
-  componentDidMount() {
-    const { photos } = this.props;
-    this.setState({
-      photos: photos,
-      mainPhotoUrl: photos[0].url,
-    });
-  }
-
   render() {
-    const { photos, hover, onMouseEnter, onMouseLeave } = this.props;
+    const {
+      photos,
+      hover,
+      onMouseEnter,
+      onMouseLeave,
+    } = this.props;
+    const { thumbnailIndex } = this.state;
+    const { mainImage } = photos[thumbnailIndex].url;
     return (
       <img
         style={{ cursor: hover ? 'zoom-in' : 'default' }}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        src={photos[0].url}
-        width="600"
-        height="400"
+        src={photos[thumbnailIndex].url}
+        width="600px"
+        height="400px"
         object-fit="contain"
-        margin="20px"
         alt="main image"
       />
     );
