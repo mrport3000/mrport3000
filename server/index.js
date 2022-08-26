@@ -32,6 +32,12 @@ app.get('/related/:id', (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.get('/qanda/:id', (req, res) => {
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/?product_id=${req.params.id}`, headers)
+    .then((result) => res.send(result.data))
+    .catch((err) => console.log(err));
+});
+
 app.get('/reviews/:id', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta/?product_id=${req.params.id}`, headers)
     .then((result) => res.send(result.data))
