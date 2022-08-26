@@ -19,9 +19,10 @@ function RatingBreakdown(props) {
         </div>
       </div>
       <div className="eric-RR-ratingBreakdown">
-        {/* <img src={ratingBreakdownPlaceholder} alt="rating placeholder" /> */}
+        <div className="eric-RR-breakdownText">
         {props.ratings.recPercent}
         % of reviews recommend this product
+        </div>
         <div className="eric-RR-breakdown">
           <div className="eric-RR-5starContainer">
             <div className="eric-RR-5left">
