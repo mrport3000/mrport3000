@@ -8,10 +8,8 @@ function QuestionItem(props) {
     <div className="kris-QuestionItem">
       <h3>
         Q:
-        {question}
+        {question.padStart(question.length + 1, ' ')}
       </h3>
-      <h4>helpful?</h4>
-      <h4>Add Answer</h4>
     </div>
   );
 }

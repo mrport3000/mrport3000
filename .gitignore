@@ -1,7 +1,8 @@
 node_modules
 
-./client/dist/bundle.js
-./client/src/config.js
+/client/dist/bundle.js
+/client/dist/bundle.js.LICENSE.txt
+/client/src/config.js
 
 .env
 
