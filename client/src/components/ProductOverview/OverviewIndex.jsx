@@ -10,54 +10,56 @@ import AddToCart from './AddToCart.jsx';
 class ProductOverview extends React.Component {
   constructor(props) {
     super(props);
-    const { productStyles } = this.props;
-    const firstStyle = productStyles[0];
-    for (let i = 0; i < productStyles.length; i += 1) {
-      if (productStyles[i]['default?']) {
-        productStyles[0] = productStyles[i];
-        productStyles[i] = firstStyle;
-        break;
-      }
-    }
     this.state = {
       expandedView: false,
-      galleryPhotos: productStyles[0].photos,
-      originalPrice: productStyles[0].original_price,
-      salePrice: productStyles[0].sale_price,
-      styleName: productStyles[0].name,
-      skus: productStyles[0].skus,
-      productStyles: productStyles,
+      hover: false,
     };
-    this.handleStyleChange = this.handleStyleChange.bind(this);
+    this.onMouseEnter = this.onMouseEnter.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
   }
 
-  handleStyleChange(e) {
-    const index = e.target.getAttribute('index');
-    const { productStyles } = this.state;
+  onMouseEnter() {
     this.setState({
-      galleryPhotos: productStyles[index].photos,
-      originalPrice: productStyles[index].original_price,
-      salePrice: productStyles[index].sale_price,
-      styleName: productStyles[index].name,
-      skus: productStyles[index].skus,
+      hover: true,
+    });
+  }
+
+  onMouseLeave() {
+    this.setState({
+      hover: false,
     });
   }
 
   render() {
     const {
       expandedView,
-      galleryPhotos,
-      originalPrice,
-      salePrice,
-      styleName,
-      skus,
-      productStyles,
+      hover,
     } = this.state;
     const {
       productInfo,
       rating,
       reviewCount,
+      productStyles,
+      styleIndex,
+      handleStyleChange,
+      executeScroll,
+      handleAddOutfitClick,
+      handleRemoveOutfitClick,
     } = this.props;
+    const originalPrice = productStyles[styleIndex].original_price;
+    const salePrice = productStyles[styleIndex].sale_price;
+    const styleName = productStyles[styleIndex].name;
+    const { skus } = productStyles[styleIndex];
+    const reorderedStyles = productStyles;
+    const firstStyle = reorderedStyles[0];
+    for (let i = 0; i < productStyles.length; i += 1) {
+      if (productStyles[i]['default?']) {
+        reorderedStyles[0] = productStyles[i];
+        reorderedStyles[i] = firstStyle;
+        break;
+      }
+    }
+    const galleryPhotos = reorderedStyles[styleIndex].photos;
     if (expandedView) {
       return (
         <div>
@@ -67,24 +69,40 @@ class ProductOverview extends React.Component {
       );
     }
     return (
-      <>
-        <div className="keith-unexpanded-gallery-div">
-          <UnexpandedGallery className="keith-unexpanded-gallery-div" photos={galleryPhotos} />
-        </div>
-        <div className="keith-product-info-div">
-          <ProductInfo
-            productInfo={productInfo}
-            rating={rating}
-            reviewCount={reviewCount}
-            originalPrice={originalPrice}
-            salePrice={salePrice}
-            styleName={styleName}
-          />
-          <StyleSelector productStyles={productStyles} handleStyleChange={this.handleStyleChange} />
-          <AddToCart skus={skus} />
+      <div className="keith-overview-div">
+        <div className="keith-top-div">
+          <div className="keith-unexpanded-gallery-div">
+            <UnexpandedGallery
+              photos={galleryPhotos}
+              onMouseEnter={this.onMouseEnter}
+              onMouseLeave={this.onMouseLeave}
+              hover={hover}
+            />
+          </div>
+          <div className="keith-product-info-div">
+            <ProductInfo
+              productInfo={productInfo}
+              rating={rating}
+              reviewCount={reviewCount}
+              originalPrice={originalPrice}
+              salePrice={salePrice}
+              styleName={styleName}
+              executeScroll={executeScroll}
+            />
+            <StyleSelector
+              productStyles={reorderedStyles}
+              handleStyleChange={handleStyleChange}
+            />
+            <AddToCart
+              key={Object.keys(skus)[styleIndex]}
+              skus={skus}
+              handleAddOutfitClick={handleAddOutfitClick}
+              handleRemoveOutfitClick={handleRemoveOutfitClick}
+            />
+          </div>
         </div>
         <ProductDescription productInfo={productInfo} />
-      </>
+      </div>
     );
   }
 }
