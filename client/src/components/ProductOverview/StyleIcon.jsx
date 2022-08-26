@@ -12,7 +12,8 @@ function StyleIcon({ url, index, handleStyleChange }) {
         width="90"
         height="90"
         object-fit="cover"
-        margin="15"
+        margin="8"
+        border="none"
         index={index}
         alt={url}
       />

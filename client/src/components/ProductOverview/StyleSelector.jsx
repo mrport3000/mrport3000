@@ -14,6 +14,9 @@ function StyleSelector({ productStyles, handleStyleChange }) {
       thumbnailTable.push(thumbnailRow);
       thumbnailRow = [];
     }
+    if (i === productStyles.length - 1 && thumbnailRow.length < 4) {
+      thumbnailTable.push(thumbnailRow);
+    }
   }
   return (
     <table className="keith-style-selector-div">
