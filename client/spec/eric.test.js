@@ -6,10 +6,9 @@ import { data } from '../../__mocks__/mockProps.js';
 import RatingAndReview from '../src/components/RatingsAndReviews/RatingAndReview.jsx';
 import SortReviews from '../src/components/RatingsAndReviews/SortReviews.jsx';
 import RatingBreakdown from '../src/components/RatingsAndReviews/RatingBreakdown.jsx';
-import ReviewsList from '../src/components/RatingsAndReviews/ReviewsList.jsx'
+import ReviewsList from '../src/components/RatingsAndReviews/ReviewsList.jsx';
 import ReviewTile from '../src/components/RatingsAndReviews/ReviewTile.jsx';
 import ProductBreakdown from '../src/components/RatingsAndReviews/ProductBreakdown.jsx';
-
 
 test('SortReviews is rendered to the page', () => {
   render(<SortReviews reviews={data} />);
@@ -34,18 +33,18 @@ test('ReviewsList is rendered to the page', () => {
 });
 
 // test('ReviewTile is rendered to the page', () => {
-  //   const { container } = render(<ReviewTile review={data} />);
-  //   expect(container.getElementsByClassName('eric-RR-tileEntryContainer').length).toBe(3);
-  // });
+//   const { container } = render(<ReviewTile review={data} />);
+//   expect(container.getElementsByClassName('eric-RR-tileEntryContainer').length).toBe(3);
+// });
 
-  // eslint-disable-next-line import/extensions
-  const sum = require('./sum.js');
+// eslint-disable-next-line import/extensions
+const sum = require('./sum.js');
 
+// eslint-disable-next-line no-undef
+describe('Testing Jest', () => {
   // eslint-disable-next-line no-undef
-  describe('Testing Jest', () => {
+  it('Should successfully add 1 + 2', () => {
     // eslint-disable-next-line no-undef
-    it('Should successfully add 1 + 2', () => {
-      // eslint-disable-next-line no-undef
-      expect(sum(1, 2)).toBe(3);
-    });
+    expect(sum(1, 2)).toBe(3);
   });
+});
