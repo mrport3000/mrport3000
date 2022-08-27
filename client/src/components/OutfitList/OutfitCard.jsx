@@ -2,6 +2,7 @@ import React from 'react';
 import StarRating from '../RelatedItems/StarRating.jsx';
 
 function OutfitCard({ product, handleRemoveOutfitClick, }) {
+  // console.log(product);
   const defaultStyle = product.styles.filter((value) => (value['default?']));
 
   const defaultPhotoURL = defaultStyle.length > 0
