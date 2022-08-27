@@ -168,7 +168,7 @@ class RelatedProducts extends React.Component {
     return (
       <div>
         <h4>RELATED PRODUCTS</h4>
-        <div className="duke-product-carousel-container">
+        <div className="duke-product-carousel-container" data-testid="product-carousel">
           {
             startIndex > 0
             && (

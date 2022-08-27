@@ -27,7 +27,7 @@ function StarRating({ rating }) {
 
   return (
     <div>
-      {Boolean(rating) && starStorage.map((starFill) => <img className="rating-star" src={starFill} alt="star-rating" />)}
+      {Boolean(rating) && starStorage.map((starFill, index) => <img key={index} className="rating-star" src={starFill} alt="star-rating" />)}
     </div>
   );
 }

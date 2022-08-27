@@ -22,7 +22,7 @@ function OutfitCard({ product, handleRemoveOutfitClick, }) {
   }
 
   return (
-    <div className="duke-card-container">
+    <div className="duke-card-container" data-testid="outfit-card">
       <div
         className="duke-card-header"
         style={{ backgroundImage: `url(${defaultPhotoURL})` }}
