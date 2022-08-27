@@ -1,5 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
+import StarRating from '../RelatedItems/StarRating.jsx';
 
 import './RatingAndReview.css';
 
@@ -22,7 +23,7 @@ class ReviewTile extends React.Component {
       <div className="eric-RR-tileEntryContainer">
         <div className="eric-RR-tileRatingAndUsername">
           <div className="eric-RR-tileRating">
-            {this.props.review.rating} stars
+            <StarRating rating={this.props.review.rating} />
           </div>
           <div className="eric-RR-tileUsername">
             {this.props.review.reviewer_name}, {format ( new Date(this.props.review.date), 'MM/dd/yyyy')}
