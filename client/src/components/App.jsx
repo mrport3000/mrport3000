@@ -8,7 +8,7 @@ import OutfitList from './OutfitList/OutfitList.jsx';
 import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
 
-const defaultId = 71704;
+const defaultId = 71701;
 
 class App extends React.Component {
   constructor(props) {
