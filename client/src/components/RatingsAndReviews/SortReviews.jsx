@@ -55,10 +55,11 @@ class SortReviews extends React.Component {
     return (
       <div className="eric-RR-sortContainer">
         <div className="eric-RR-sortReviews">
-
+          <div className="eric-RR-reviewLength">
           {this.props.reviews.length}
           {' '}
           reviews, sorted by
+          </div>
           <div className="eric-RR-sortedby" onChange={this.handleChange}>
             <label>
               <select>
