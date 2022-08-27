@@ -6,8 +6,37 @@ import ThumbnailCarousel from './ThumbnailCarousel.jsx';
 class UnexpandedGallery extends React.Component {
   constructor(props) {
     super(props);
+    const { photos } = this.props;
+    const endIndex = photos.length > 7 ? 6 : photos.length;
     this.state = {
+      startIndex: 0,
+      endIndex,
+      thumbIndex: 0,
     };
+    this.handleThumbChange = this.handleThumbChange.bind(this);
+    this.handleUpArrowClick = this.handleUpArrowClick.bind(this);
+    this.handleDownArrowClick = this.handleDownArrowClick.bind(this);
+  }
+
+  handleThumbChange(e) {
+    const thumbIndex = e.target.getAttribute('thumbIndex');
+    this.setState({
+      thumbIndex,
+    });
+  }
+
+  handleUpArrowClick() {
+    this.setState((prevState) => ({
+      startIndex: prevState.startIndex - 1,
+      endIndex: prevState.endIndex - 1,
+    }));
+  }
+
+  handleDownArrowClick() {
+    this.setState((prevState) => ({
+      startIndex: prevState.startIndex + 1,
+      endIndex: prevState.endIndex + 1,
+    }));
   }
 
   render() {
@@ -16,9 +45,12 @@ class UnexpandedGallery extends React.Component {
       hover,
       onMouseEnter,
       onMouseLeave,
-      thumbIndex,
-      handleThumbChange,
     } = this.props;
+    const {
+      startIndex,
+      endIndex,
+      thumbIndex,
+    } = this.state;
     const mainImage = photos[thumbIndex].url;
     return (
       <button
@@ -38,11 +70,15 @@ class UnexpandedGallery extends React.Component {
         alt="main image"
       >
         <ThumbnailCarousel
+          startIndex={startIndex}
+          endIndex={endIndex}
           photos={photos}
           thumbIndex={thumbIndex}
           onMouseLeave={onMouseEnter}
           onMouseEnter={onMouseLeave}
-          handleThumbChange={handleThumbChange}
+          handleThumbChange={this.handleThumbChange}
+          handleUpArrowClick={this.handleUpArrowClick}
+          handleDownArrowClick={this.handleDownArrowClick}
         />
       </button>
     );

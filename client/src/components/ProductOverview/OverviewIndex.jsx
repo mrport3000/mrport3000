@@ -13,18 +13,16 @@ class ProductOverview extends React.Component {
     this.state = {
       expandedView: false,
       hover: false,
-      thumbIndex: 0,
+      styleIndex: 0,
     };
+    this.handleStyleChange = this.handleStyleChange.bind(this);
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
-    this.handleThumbChange = this.handleThumbChange.bind(this);
   }
 
-  handleThumbChange(e) {
-    const thumbIndex = e.target.getAttribute('thumbIndex');
-    this.setState({
-      thumbIndex,
-    });
+  handleStyleChange(e) {
+    const styleIndex = e.target.getAttribute('index');
+    this.setState({ styleIndex });
   }
 
   onMouseEnter() {
@@ -43,15 +41,13 @@ class ProductOverview extends React.Component {
     const {
       expandedView,
       hover,
-      thumbIndex,
+      styleIndex,
     } = this.state;
     const {
       productInfo,
       rating,
       reviewCount,
       productStyles,
-      styleIndex,
-      handleStyleChange,
       executeScroll,
       handleAddOutfitClick,
       handleRemoveOutfitClick,
@@ -72,6 +68,7 @@ class ProductOverview extends React.Component {
     const galleryPhotos = reorderedStyles[styleIndex].photos;
     if (expandedView) {
       return (
+        // TO DO
         <div>
           <ExpandedGallery photos={galleryPhotos} />
           <ProductDescription productInfo={productInfo} rating={rating} reviewCount={reviewCount} />
@@ -87,8 +84,6 @@ class ProductOverview extends React.Component {
               onMouseEnter={this.onMouseEnter}
               onMouseLeave={this.onMouseLeave}
               hover={hover}
-              thumbIndex={thumbIndex}
-              handleThumbChange={this.handleThumbChange}
             />
           </div>
           <div className="keith-product-info-div">
@@ -103,7 +98,7 @@ class ProductOverview extends React.Component {
             />
             <StyleSelector
               productStyles={reorderedStyles}
-              handleStyleChange={handleStyleChange}
+              handleStyleChange={this.handleStyleChange}
               styleIndex={styleIndex}
             />
             <AddToCart
