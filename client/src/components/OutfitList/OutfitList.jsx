@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import OutfitCard from './OutfitCard.jsx';
 import AddOutfit from './AddOutfit.jsx';

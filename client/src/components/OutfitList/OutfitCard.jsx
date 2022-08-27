@@ -2,6 +2,7 @@ import React from 'react';
 import StarRating from '../RelatedItems/StarRating.jsx';
 
 function OutfitCard({ product, handleRemoveOutfitClick, }) {
+  // console.log(product);
   const defaultStyle = product.styles.filter((value) => (value['default?']));
 
   const defaultPhotoURL = defaultStyle.length > 0
@@ -22,7 +23,7 @@ function OutfitCard({ product, handleRemoveOutfitClick, }) {
   }
 
   return (
-    <div className="duke-card-container">
+    <div className="duke-card-container" data-testid="outfit-card">
       <div
         className="duke-card-header"
         style={{ backgroundImage: `url(${defaultPhotoURL})` }}

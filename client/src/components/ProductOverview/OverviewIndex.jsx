@@ -100,6 +100,7 @@ class ProductOverview extends React.Component {
               styleIndex={styleIndex}
             />
             <AddToCart
+              productInfo={productInfo}
               key={Object.keys(skus)[styleIndex]}
               skus={skus}
               handleAddOutfitClick={handleAddOutfitClick}

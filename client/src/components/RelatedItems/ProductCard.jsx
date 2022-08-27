@@ -3,7 +3,6 @@ import StarRating from './StarRating.jsx';
 
 // Individual card in related product carousel
 function ProductCard({ product, handleModalButtonClick, handleProductCardClick }) {
-  // console.log('PRODUCT CARD PRODUCT: ', product);
   const defaultStyle = product.styles.filter((value) => (value['default?']));
 
   const defaultPhotoURL = defaultStyle.length > 0
@@ -27,7 +26,7 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
   }
 
   return (
-    <div className="duke-card-container">
+    <div className="duke-card-container" data-testid='product-card'>
       <button
         type="submit"
         onClick={(() => handleProductCardClick(product.id))}

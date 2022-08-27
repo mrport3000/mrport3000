@@ -112,6 +112,7 @@ class AddToCart extends React.Component {
     } = this.state;
     const {
       skus,
+      productInfo,
     } = this.props;
     // Makes an array of size options for react-select component
     const sizeOptions = availableSizes(skus).map((size) => ({ value: size, label: size }));
@@ -170,7 +171,7 @@ class AddToCart extends React.Component {
         </div>
         <div className="keith-cart-star-div">
           <button className="keith-add-cart" type="button" onClick={this.addToCart}>Add to Cart</button>
-          <StarButton toggleOutfit={this.toggleOutfit} savedToOutfit={savedToOutfit} />
+          <StarButton toggleOutfit={this.toggleOutfit} savedToOutfit={savedToOutfit} productInfo={productInfo}/>
         </div>
       </div>
     );
