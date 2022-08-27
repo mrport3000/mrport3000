@@ -26,17 +26,41 @@ class UnexpandedGallery extends React.Component {
   }
 
   handleUpArrowClick() {
-    this.setState((prevState) => ({
-      startIndex: prevState.startIndex - 1,
-      endIndex: prevState.endIndex - 1,
-    }));
+    const {
+      startIndex,
+      endIndex,
+      thumbIndex,
+    } = this.state;
+    if (thumbIndex > startIndex) {
+      this.setState({
+        thumbIndex: thumbIndex - 1,
+      });
+    } else {
+      this.setState({
+        startIndex: startIndex - 1,
+        endIndex: endIndex - 1,
+        thumbIndex: thumbIndex - 1,
+      });
+    }
   }
 
   handleDownArrowClick() {
-    this.setState((prevState) => ({
-      startIndex: prevState.startIndex + 1,
-      endIndex: prevState.endIndex + 1,
-    }));
+    const {
+      startIndex,
+      endIndex,
+      thumbIndex,
+    } = this.state;
+    if (thumbIndex < endIndex) {
+      this.setState({
+        thumbIndex: thumbIndex + 1,
+      });
+    } else {
+      this.setState({
+        startIndex: startIndex + 1,
+        endIndex: endIndex + 1,
+        thumbIndex: thumbIndex + 1,
+      });
+    }
   }
 
   render() {
@@ -70,6 +94,7 @@ class UnexpandedGallery extends React.Component {
         alt="main image"
       >
         <ThumbnailCarousel
+          key={startIndex}
           startIndex={startIndex}
           endIndex={endIndex}
           photos={photos}

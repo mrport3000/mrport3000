@@ -48,9 +48,11 @@ export default function ThumbnailCarousel({
             />
           </tr>
         ))}
-        <tr className="keith-arrow-container" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-          <MdKeyboardArrowDown className="keith-arrow-button" onClick={handleDownArrowClick} />
-        </tr>
+        {thumbIndex < photos.length - 1 && (
+          <tr className="keith-arrow-container" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            <MdKeyboardArrowDown className="keith-arrow-button" onClick={handleDownArrowClick} />
+          </tr>
+        )}
       </tbody>
     </table>
   );
