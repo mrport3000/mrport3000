@@ -78,14 +78,12 @@ class ProductOverview extends React.Component {
     return (
       <div className="keith-overview-div">
         <div className="keith-top-div">
-          <div className="keith-unexpanded-gallery-div">
-            <UnexpandedGallery
-              photos={galleryPhotos}
-              onMouseEnter={this.onMouseEnter}
-              onMouseLeave={this.onMouseLeave}
-              hover={hover}
-            />
-          </div>
+          <UnexpandedGallery
+            photos={galleryPhotos}
+            onMouseEnter={this.onMouseEnter}
+            onMouseLeave={this.onMouseLeave}
+            hover={hover}
+          />
           <div className="keith-product-info-div">
             <ProductInfo
               productInfo={productInfo}

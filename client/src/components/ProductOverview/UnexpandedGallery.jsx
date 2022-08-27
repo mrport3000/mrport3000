@@ -77,35 +77,37 @@ class UnexpandedGallery extends React.Component {
     } = this.state;
     const mainImage = photos[thumbIndex].url;
     return (
-      <button
-        type="button"
-        className="keith-unexpanded-main-photo"
-        style={
-          {
-            cursor: hover ? 'zoom-in' : 'default',
-            backgroundImage: `url(${mainImage})`,
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPositionX: 'center',
+      <div className="keith-unexpanded-gallery-div">
+        <button
+          type="button"
+          className="keith-unexpanded-main-photo"
+          style={
+            {
+              cursor: hover ? 'zoom-in' : 'default',
+              backgroundImage: `url(${mainImage})`,
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat',
+              backgroundPositionX: 'center',
+            }
           }
-        }
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        alt="main image"
-      >
-        <ThumbnailCarousel
-          key={startIndex}
-          startIndex={startIndex}
-          endIndex={endIndex}
-          photos={photos}
-          thumbIndex={thumbIndex}
-          onMouseLeave={onMouseEnter}
-          onMouseEnter={onMouseLeave}
-          handleThumbChange={this.handleThumbChange}
-          handleUpArrowClick={this.handleUpArrowClick}
-          handleDownArrowClick={this.handleDownArrowClick}
-        />
-      </button>
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          alt="main image"
+        >
+          <ThumbnailCarousel
+            key={startIndex}
+            startIndex={startIndex}
+            endIndex={endIndex}
+            photos={photos}
+            thumbIndex={thumbIndex}
+            onMouseLeave={onMouseEnter}
+            onMouseEnter={onMouseLeave}
+            handleThumbChange={this.handleThumbChange}
+            handleUpArrowClick={this.handleUpArrowClick}
+            handleDownArrowClick={this.handleDownArrowClick}
+          />
+        </button>
+      </div>
     );
   }
 }
