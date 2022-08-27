@@ -24,7 +24,6 @@ class App extends React.Component {
       reviewPage: null,
       reviews: [],
       outfits: [],
-      styleIndex: 0,
     };
 
     this.scrollTarget = React.createRef();
@@ -33,7 +32,6 @@ class App extends React.Component {
     this.handleAddOutfitClick = this.handleAddOutfitClick.bind(this);
     this.handleRemoveOutfitClick = this.handleRemoveOutfitClick.bind(this);
     this.handleProductCardClick = this.handleProductCardClick.bind(this);
-    this.handleStyleChange = this.handleStyleChange.bind(this);
     this.executeScroll = this.executeScroll.bind(this);
   }
 
@@ -45,13 +43,7 @@ class App extends React.Component {
     // this.getInitialData(id);
     this.setState({
       productId: newId,
-      styleIndex: 0,
     });
-  }
-
-  handleStyleChange(e) {
-    const styleIndex = e.target.getAttribute('index');
-    this.setState({ styleIndex });
   }
 
   handleProductCardClick(id) {
@@ -185,7 +177,6 @@ class App extends React.Component {
       reviewPage,
       reviews,
       outfits,
-      styleIndex,
     } = this.state;
 
     if (!productInfo || !productStyles) {
@@ -196,14 +187,13 @@ class App extends React.Component {
       <div className="all-content">
         <div>
           <ProductOverview
+            key={productInfo.id}
             productInfo={productInfo}
             productStyles={productStyles}
             rating={rating}
             reviewCount={reviewCount}
             handleAddOutfitClick={this.handleAddOutfitClick}
             handleRemoveOutfitClick={this.handleRemoveOutfitClick}
-            handleStyleChange={this.handleStyleChange}
-            styleIndex={styleIndex}
             executeScroll={this.executeScroll}
           />
         </div>

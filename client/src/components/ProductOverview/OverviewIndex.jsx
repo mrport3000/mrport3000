@@ -13,9 +13,16 @@ class ProductOverview extends React.Component {
     this.state = {
       expandedView: false,
       hover: false,
+      styleIndex: 0,
     };
+    this.handleStyleChange = this.handleStyleChange.bind(this);
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
+  }
+
+  handleStyleChange(e) {
+    const styleIndex = e.target.getAttribute('index');
+    this.setState({ styleIndex });
   }
 
   onMouseEnter() {
@@ -34,14 +41,13 @@ class ProductOverview extends React.Component {
     const {
       expandedView,
       hover,
+      styleIndex,
     } = this.state;
     const {
       productInfo,
       rating,
       reviewCount,
       productStyles,
-      styleIndex,
-      handleStyleChange,
       executeScroll,
       handleAddOutfitClick,
       handleRemoveOutfitClick,
@@ -62,6 +68,7 @@ class ProductOverview extends React.Component {
     const galleryPhotos = reorderedStyles[styleIndex].photos;
     if (expandedView) {
       return (
+        // TO DO
         <div>
           <ExpandedGallery photos={galleryPhotos} />
           <ProductDescription productInfo={productInfo} rating={rating} reviewCount={reviewCount} />
@@ -71,14 +78,12 @@ class ProductOverview extends React.Component {
     return (
       <div className="keith-overview-div">
         <div className="keith-top-div">
-          <div className="keith-unexpanded-gallery-div">
-            <UnexpandedGallery
-              photos={galleryPhotos}
-              onMouseEnter={this.onMouseEnter}
-              onMouseLeave={this.onMouseLeave}
-              hover={hover}
-            />
-          </div>
+          <UnexpandedGallery
+            photos={galleryPhotos}
+            onMouseEnter={this.onMouseEnter}
+            onMouseLeave={this.onMouseLeave}
+            hover={hover}
+          />
           <div className="keith-product-info-div">
             <ProductInfo
               productInfo={productInfo}
@@ -91,7 +96,8 @@ class ProductOverview extends React.Component {
             />
             <StyleSelector
               productStyles={reorderedStyles}
-              handleStyleChange={handleStyleChange}
+              handleStyleChange={this.handleStyleChange}
+              styleIndex={styleIndex}
             />
             <AddToCart
               productInfo={productInfo}

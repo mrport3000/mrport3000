@@ -3,17 +3,29 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 
-function StyleIcon({ url, index, handleStyleChange }) {
+function StyleIcon({ url, index, handleStyleChange, styleIndex }) {
   return (
-    <td>
-      <img
+    <td style={
+      {
+        border: 'none',
+        margin: '0px',
+      }
+    }
+    >
+      <button
+        type="button"
+        className="keith-style-icon"
         onClick={handleStyleChange}
-        src={url}
-        width="90"
-        height="90"
-        object-fit="cover"
-        margin="8"
-        border="none"
+        style={
+          {
+            backgroundImage: `url(${url})`,
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundPositionX: 'center',
+            backgroundPositionY: 'center',
+            border: styleIndex === index ? '2px solid darkgoldenrod' : 'none',
+          }
+        }
         index={index}
         alt={url}
       />
