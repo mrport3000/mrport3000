@@ -9,16 +9,27 @@
   gap: 30px;
 }
 
+.eric-RR-sortReviews {
+  margin-left: 10px;
+}
+
 .eric-RR-productRatingContainer {
-  border: .5px solid black;
+  display: flex;
+  flex-direction: column;
+  /* border: .5px solid black; */
   height: 350px;
   width: 350px;
 }
 
 .eric-RR-productAverageText {
-  font-size: 45px;
+  width: 50%;
+  font-size: 65px;
   font-weight: bold;
-  margin-right: 10px;
+  text-align: center;
+}
+
+.eric-RR-productStarRating {
+  width: 50%;
 }
 
 .eric-RR-productRatingAverage {
@@ -29,17 +40,29 @@
 
 .eric-RR-productBreakdown {
   border: .5px solid black;
-  border-top: 0px solid;
+  /* border-top: 0px solid; */
   height: 250px;
   width: 350px;
 }
 
+.eric-RR-breakdownText {
+  text-align: center;
+}
+
 .eric-RR-sortReviews {
+  display: flex;
   height: 50px;
-  width: 200px;
+  width: 500px;
+}
+
+.eric-RR-reviewLength {
+  font-weight: bold;
+  font-size: 20px;
 }
 
 .eric-RR-sortedby select {
+  font-size: 20px;
+  font-family: Helvetica, sans-serif;
   border: 0px;
   outline: 0px;
   text-decoration: underline;
@@ -48,6 +71,8 @@
 .eric-RR-sortContainer {
   display: flex;
   flex-direction: column;
+  font-family: Helvetica, sans-serif;
+  width: 500px;
 }
 
 .eric-RR-sortBottomNavBar {
@@ -108,4 +133,51 @@
 
 .eric-RR-tileHelpful a{
   text-decoration: underline;
+}
+
+.eric-RR-productRatingContainer {
+  display: flex;
+  font-family: Helvetica, sans-serif;
+
+}
+
+.eric-RR-productRatingAverage {
+  height: 25%;
+}
+
+.eric-RR-ratingBreakdown {
+  /* height: 75%; */
+  margin-left: 10px;
+}
+
+.eric-RR-breakdown {
+  justify-content: center;
+  align-items: center;
+}
+
+.eric-RR-breakdownText {
+  margin-bottom: 5px;
+}
+
+.eric-RR-5starContainer, .eric-RR-4starContainer,
+.eric-RR-3starContainer, .eric-RR-2starContainer,
+.eric-RR-1starContainer {
+  display: flex;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.eric-RR-5left, .eric-RR-4left,
+.eric-RR-3left, .eric-RR-2left,
+.eric-RR-1left {
+  width: 15%;
+  text-decoration: underline;
+}
+
+.eric-RR-5center, .eric-RR-4center,
+.eric-RR-3center, .eric-RR-2center,
+.eric-RR-1center {
+  height: 25px;
+  width: 75%;
+  background-color: lightgray;
 }
