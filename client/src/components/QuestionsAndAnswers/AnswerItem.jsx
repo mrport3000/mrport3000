@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import { format } from 'date-fns';
 
 const example = {
   5986889: {
@@ -22,6 +24,15 @@ const example = {
 
 function AnswerItem(props) {
   const { answers, expanded } = props;
+
+  // const answerHelpful = (id) => {
+  //   axios.get(`/qanda/answer/helpful/${id}`).then((result)=>{
+  //     console.log(result);
+  //   }).catch((err) => {
+  //     console.log(err);
+  //   });
+  // };
+
   return (
     <div className="kris-AnswerItem">
       {
@@ -39,9 +50,12 @@ function AnswerItem(props) {
                 {`\nby: ${answer.answerer_name}`}
               </p>
               <p className="kris-AnswerDate">
-                {`\n ${answer.date.slice(0, 10)}`}
+                {`\n ${format(new Date(answer.date), 'MM/dd/yyyy')}`}
               </p>
-              <a className="kris-answerHelpful" href="www.google.com">Helpful?</a>
+              {
+                console.log('ANSWER ID: ', answer.id)
+              }
+              <a className="kris-answerHelpful" href={`/qanda/answer/helpful/${answer.id}`}>Helpful</a>
               <a className="kris-answerReported" href="www.google.com">Report</a>
             </div>
           );
