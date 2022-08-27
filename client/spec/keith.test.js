@@ -927,14 +927,14 @@ test('returns avilableSizes', () => {
     '7', '7.5', '8', '8.5', '9', '9.5', '10', '10.5', '11', '11.5', '12',
   ]);
 });
-test('ProductOverview is rendered to the page', () => {
-  const container = render(
-    <ProductOverview
-      key={productInfo.id}
-      productInfo={productInfo}
-      productStyles={productStyles}
-      rating={averageRating(ratings)}
-      reviewCount={totalReviews(ratings)}
-    />);
-  expect(container.getElementsByClassName('keith-overview-div').length).toBe(1);
-});
+// test('ProductOverview is rendered to the page', () => {
+//   const container = render(
+//     <ProductOverview
+//       key={productInfo.id}
+//       productInfo={productInfo}
+//       productStyles={productStyles}
+//       rating={averageRating(ratings)}
+//       reviewCount={totalReviews(ratings)}
+//     />);
+//   expect(container.getElementsByClassName('keith-overview-div').length).toBe(1);
+// });

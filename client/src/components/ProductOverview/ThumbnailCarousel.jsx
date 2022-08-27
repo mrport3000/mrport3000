@@ -20,8 +20,8 @@ export default function ThumbnailCarousel({
     <table>
       <tbody className="keith-thumbnail-column">
         {thumbIndex > 0 && (
-          <tr className="keith-arrow-container" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <MdKeyboardArrowUp className="keith-arrow-button" onClick={handleUpArrowClick} />
+          <tr className="keith-ud-arrow-container" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            <MdKeyboardArrowUp className="keith-ud-arrow-button" onClick={handleUpArrowClick} />
           </tr>
         )}
         {thumbPhotos.map((photo, index) => (
@@ -49,8 +49,8 @@ export default function ThumbnailCarousel({
           </tr>
         ))}
         {thumbIndex < photos.length - 1 && (
-          <tr className="keith-arrow-container" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <MdKeyboardArrowDown className="keith-arrow-button" onClick={handleDownArrowClick} />
+          <tr className="keith-ud-arrow-container" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+            <MdKeyboardArrowDown className="keith-ud-arrow-button" onClick={handleDownArrowClick} />
           </tr>
         )}
       </tbody>
