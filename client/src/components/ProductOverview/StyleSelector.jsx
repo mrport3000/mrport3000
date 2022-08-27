@@ -3,7 +3,7 @@
 import React from 'react';
 import StyleIcon from './StyleIcon.jsx';
 
-function StyleSelector({ productStyles, handleStyleChange }) {
+export default function StyleSelector({ productStyles, handleStyleChange, styleIndex }) {
   const thumbnailTable = [];
   let thumbnailRow = [];
   for (let i = 0; i < productStyles.length; i += 1) {
@@ -28,6 +28,7 @@ function StyleSelector({ productStyles, handleStyleChange }) {
                 url={Object.values(cell)[0]}
                 key={Object.keys(cell)[0]}
                 index={Object.keys(cell)[0]}
+                styleIndex={styleIndex}
                 handleStyleChange={handleStyleChange}
               />
             ))}
@@ -37,5 +38,3 @@ function StyleSelector({ productStyles, handleStyleChange }) {
     </table>
   );
 }
-
-export default StyleSelector;
