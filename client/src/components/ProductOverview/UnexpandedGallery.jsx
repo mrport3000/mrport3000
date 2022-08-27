@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable react/prop-types */
 import React from 'react';
+import ThumbnailCarousel from './ThumbnailCarousel.jsx';
 
 class UnexpandedGallery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      thumbnailIndex: 0,
     };
   }
 
@@ -16,20 +16,35 @@ class UnexpandedGallery extends React.Component {
       hover,
       onMouseEnter,
       onMouseLeave,
+      thumbIndex,
+      handleThumbChange,
     } = this.props;
-    const { thumbnailIndex } = this.state;
-    const { mainImage } = photos[thumbnailIndex].url;
+    const mainImage = photos[thumbIndex].url;
     return (
-      <img
-        style={{ cursor: hover ? 'zoom-in' : 'default' }}
+      <button
+        type="button"
+        className="keith-unexpanded-main-photo"
+        style={
+          {
+            cursor: hover ? 'zoom-in' : 'default',
+            backgroundImage: `url(${mainImage})`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPositionX: 'center',
+          }
+        }
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        src={photos[thumbnailIndex].url}
-        width="600px"
-        height="400px"
-        object-fit="contain"
         alt="main image"
-      />
+      >
+        <ThumbnailCarousel
+          photos={photos}
+          thumbIndex={thumbIndex}
+          onMouseLeave={onMouseEnter}
+          onMouseEnter={onMouseLeave}
+          handleThumbChange={handleThumbChange}
+        />
+      </button>
     );
   }
 }

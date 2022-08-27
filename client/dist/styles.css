@@ -21,6 +21,42 @@
   margin: 40px;
 }
 
+.keith-thumbnail-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.keith-unexpanded-main-photo {
+  width: 680px;
+  height: 450px;
+  border: none;
+}
+
+.keith-arrow-container {
+  display: flex;
+  align-items: center;
+  height: 25px;
+}
+
+.keith-arrow-button {
+  height: 20px;
+  width: 20px;
+  color: darkgoldenrod;
+}
+
+.keith-thumbnail {
+  width: 30px;
+  height: 30px;
+}
+
+.keith-style-icon {
+  width: 90px;
+  height: 90px;
+  border: none;
+}
+
 .keith-product-info-div {
   display: flex;
   flex-direction: column;

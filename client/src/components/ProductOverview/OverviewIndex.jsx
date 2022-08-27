@@ -13,9 +13,18 @@ class ProductOverview extends React.Component {
     this.state = {
       expandedView: false,
       hover: false,
+      thumbIndex: 0,
     };
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
+    this.handleThumbChange = this.handleThumbChange.bind(this);
+  }
+
+  handleThumbChange(e) {
+    const thumbIndex = e.target.getAttribute('thumbIndex');
+    this.setState({
+      thumbIndex,
+    });
   }
 
   onMouseEnter() {
@@ -34,6 +43,7 @@ class ProductOverview extends React.Component {
     const {
       expandedView,
       hover,
+      thumbIndex,
     } = this.state;
     const {
       productInfo,
@@ -77,6 +87,8 @@ class ProductOverview extends React.Component {
               onMouseEnter={this.onMouseEnter}
               onMouseLeave={this.onMouseLeave}
               hover={hover}
+              thumbIndex={thumbIndex}
+              handleThumbChange={this.handleThumbChange}
             />
           </div>
           <div className="keith-product-info-div">
@@ -92,6 +104,7 @@ class ProductOverview extends React.Component {
             <StyleSelector
               productStyles={reorderedStyles}
               handleStyleChange={handleStyleChange}
+              styleIndex={styleIndex}
             />
             <AddToCart
               key={Object.keys(skus)[styleIndex]}
