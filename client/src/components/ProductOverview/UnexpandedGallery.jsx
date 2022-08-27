@@ -108,12 +108,12 @@ class UnexpandedGallery extends React.Component {
         />
         <div className="keith-lr-arrows-row">
           {thumbIndex > 0 && (
-            <tr className="keith-lr-arrow-container">
+            <tr className="keith-lr-arrow-container" onMouseEnter={onMouseLeave} onMouseLeave={onMouseEnter}>
               <MdKeyboardArrowLeft className="keith-lr-arrow-button" onClick={this.handleUpArrowClick} />
             </tr>
           )}
           {thumbIndex < photos.length - 1 && (
-            <tr className="keith-lr-arrow-container">
+            <tr className="keith-lr-arrow-container" onMouseEnter={onMouseLeave} onMouseLeave={onMouseEnter}>
               <MdKeyboardArrowRight className="keith-lr-arrow-button" onClick={this.handleDownArrowClick} />
             </tr>
           )}
