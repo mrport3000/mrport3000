@@ -31,7 +31,7 @@ class SortReviews extends React.Component {
   flowControl(term) {
     const currentReviews = this.props.reviews;
     let sorted;
-    if (term === 'relevent') {
+    if (term === 'relevant') {
       // Still working on relvency sort
     } else if (term === 'newest') {
       sorted = currentReviews.sort((a, b) => new Date(a.date) - new Date(b.date));

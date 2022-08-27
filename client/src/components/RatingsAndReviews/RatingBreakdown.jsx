@@ -1,26 +1,25 @@
 import React from 'react';
 
 // import ratingBreakdownPlaceholder from './assets/Rating-breakdown-placeholder.png';
+import StarRating from '../RelatedItems/StarRating.jsx';
 import './RatingAndReview.css';
 
 function RatingBreakdown(props) {
-
-  //console.log('props: ', props);
+  console.log('RBreakdown props: ', props)
 
   return (
     <div className="eric-RR-productRatingContainer">
-      {/* RatingBreakdown Placeholder! */}
       <div className="eric-RR-productRatingAverage">
         <div className="eric-RR-productAverageText">
-          4.5
+          {props.ratings.average}
         </div>
         <div className="eric-RR-productStarRating">
-          Insert Star Rating Here!
+          <StarRating rating={Number(props.ratings.average)} />
         </div>
       </div>
       <div className="eric-RR-ratingBreakdown">
         <div className="eric-RR-breakdownText">
-        {/* {props.ratings.recPercent} */}
+        {props.ratings.recPercent}
         % of reviews recommend this product
         </div>
         <div className="eric-RR-breakdown">
