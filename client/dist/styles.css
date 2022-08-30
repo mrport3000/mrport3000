@@ -150,11 +150,16 @@
   margin: 0 0 0 5px;
 }
 
+
+.duke-products-container {
+  padding: 50px;
+}
+
 .duke-product-carousel-container {
   display: flex;
   flex-wrap: nowrap;
   align-items: flex-start;
-  gap: 30px;
+  gap: 50px;
 }
 
 .duke-card-container {
@@ -214,11 +219,32 @@
   width: 30%;
 }
 
+.duke-thumb-carousel-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  bottom: 41%;
+}
+
+.duke-thumb-carousel-image {
+  height: 50px;
+  width: 50px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+.duke-outfit-container {
+  padding: 50px;
+}
+
 .duke-outfit-carousel-container {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  gap: 30px;
+  gap: 50px;
 }
 
 .duke-outfit-carousel-container button {
@@ -322,18 +348,14 @@
   margin-left: 10px;
 }
 
-.all-content {
+#root {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-.additional-content {
-  min-width: 1000px;
-  padding-left: 85px;
-}
-
 .rating-star {
   height: 20px;
 }
+

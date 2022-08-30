@@ -166,7 +166,7 @@ class RelatedProducts extends React.Component {
     const { currProduct, handleProductCardClick } = this.props;
 
     return (
-      <div>
+      <div className="duke-products-container">
         <h4>RELATED PRODUCTS</h4>
         <div className="duke-product-carousel-container" data-testid="product-carousel">
           {

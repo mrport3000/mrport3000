@@ -35,7 +35,7 @@ class OutfitList extends React.Component {
       outfits, handleAddOutfitClick, handleRemoveOutfitClick,
     } = this.props;
     return (
-      <div>
+      <div className="duke-outfit-container">
         <h4>YOUR OUTFIT</h4>
         <div className="duke-outfit-carousel-container">
           {startIndex > 0 && (

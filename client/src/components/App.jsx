@@ -184,40 +184,36 @@ class App extends React.Component {
     }
 
     return (
-      <div className="all-content">
-        <div>
-          <ProductOverview
-            key={productInfo.id}
-            productInfo={productInfo}
-            productStyles={productStyles}
-            rating={rating}
-            reviewCount={reviewCount}
-            handleAddOutfitClick={this.handleAddOutfitClick}
-            handleRemoveOutfitClick={this.handleRemoveOutfitClick}
-            executeScroll={this.executeScroll}
-          />
-        </div>
-        <div className="additional-content">
-          <RelatedProducts
-            productId={productId}
-            currProduct={productInfo}
-            handleProductCardClick={this.handleProductCardClick}
-          />
-          <OutfitList
-            productInfo={productInfo}
-            productStyles={productStyles}
-            outfits={outfits}
-            handleAddOutfitClick={this.handleAddOutfitClick}
-            handleRemoveOutfitClick={this.handleRemoveOutfitClick}
-            rating={rating}
-          />
+      <>
+        <ProductOverview
+          key={productInfo.id}
+          productInfo={productInfo}
+          productStyles={productStyles}
+          rating={rating}
+          reviewCount={reviewCount}
+          handleAddOutfitClick={this.handleAddOutfitClick}
+          handleRemoveOutfitClick={this.handleRemoveOutfitClick}
+          executeScroll={this.executeScroll}
+        />
+        <RelatedProducts
+          productId={productId}
+          currProduct={productInfo}
+          handleProductCardClick={this.handleProductCardClick}
+        />
+        <OutfitList
+          productInfo={productInfo}
+          productStyles={productStyles}
+          outfits={outfits}
+          handleAddOutfitClick={this.handleAddOutfitClick}
+          handleRemoveOutfitClick={this.handleRemoveOutfitClick}
+          rating={rating}
+        />
 
-          <QandA info={qandaInfo} />
-          <div ref={this.scrollTarget}>
-            <RatingAndReview reviews={reviews} page={reviewPage} />
-          </div>
+        <QandA info={qandaInfo} />
+        <div ref={this.scrollTarget}>
+          <RatingAndReview reviews={reviews} page={reviewPage} />
         </div>
-      </div>
+      </>
     );
   }
 }
