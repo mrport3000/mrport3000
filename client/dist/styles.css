@@ -154,12 +154,11 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: flex-start;
-  gap: 10px;
+  gap: 30px;
 }
 
 .duke-card-container {
   position: relative;
-  border: 1px solid black;
   height: 400px;
   width: 275px;
   background-color: white;
@@ -167,6 +166,7 @@
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: flex-start;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
 }
 
 .duke-card-header {
@@ -218,11 +218,14 @@
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  gap: 10px;
+  gap: 30px;
+}
+
+.duke-outfit-carousel-container button {
+  border: none;
 }
 
 .duke-addoutfit-container {
-  border: 1px solid black;
   height: 400px;
   width: 275px;
   background-color: white;
@@ -232,6 +235,7 @@
   align-items: center;
   justify-content: center;
   gap: 50px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
 }
 
 .duke-addoutfit-image {
