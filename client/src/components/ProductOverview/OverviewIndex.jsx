@@ -1,10 +1,12 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 /* eslint-disable import/extensions */
 import React from 'react';
 import ProductDescription from './ProductDescription.jsx';
 import ProductInfo from './ProductInfo.jsx';
 import StyleSelector from './StyleSelector.jsx';
-import UnexpandedGallery from './UnexpandedGallery.jsx';
+import Gallery from './Gallery.jsx';
 import AddToCart from './AddToCart.jsx';
 
 class ProductOverview extends React.Component {
@@ -12,17 +14,43 @@ class ProductOverview extends React.Component {
     super(props);
     this.state = {
       expandedView: false,
+      zoomed: false,
       hover: false,
       styleIndex: 0,
     };
     this.handleStyleChange = this.handleStyleChange.bind(this);
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
+    this.handleExpandClick = this.handleExpandClick.bind(this);
+    this.handleUnexpandClick = this.handleUnexpandClick.bind(this);
   }
 
   handleStyleChange(e) {
-    const styleIndex = e.target.getAttribute('index');
+    const styleIndex = Number(e.target.getAttribute('index'));
     this.setState({ styleIndex });
+  }
+
+  handleExpandClick(e) {
+    e.stopPropagation();
+    console.log(e.clientX - e.target.offsetLeft, e.clientY - e.target.offsetTop);
+    const { expandedView } = this.state;
+    if (!expandedView) {
+      this.setState({
+        expandedView: true,
+      });
+    }
+    if (expandedView) {
+      this.setState((prevState) => ({
+        zoomed: !prevState.zoomed,
+      }));
+    }
+  }
+
+  handleUnexpandClick() {
+    this.setState({
+      expandedView: false,
+      zoomed: false,
+    });
   }
 
   onMouseEnter() {
@@ -42,6 +70,7 @@ class ProductOverview extends React.Component {
       expandedView,
       hover,
       styleIndex,
+      zoomed,
     } = this.state;
     const {
       productInfo,
@@ -66,49 +95,48 @@ class ProductOverview extends React.Component {
       }
     }
     const galleryPhotos = reorderedStyles[styleIndex].photos;
-    if (expandedView) {
-      return (
-        // TO DO
-        <div>
-          <ExpandedGallery photos={galleryPhotos} />
-          <ProductDescription productInfo={productInfo} rating={rating} reviewCount={reviewCount} />
-        </div>
-      );
-    }
     return (
-      <div className="keith-overview-div">
+      <div className="keith-overview-div" onClick={this.handleUnexpandClick}>
         <div className="keith-top-div">
-          <UnexpandedGallery
+          <Gallery
             photos={galleryPhotos}
+            expandedView={expandedView}
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
             hover={hover}
+            zoomed={zoomed}
+            handleExpandClick={this.handleExpandClick}
           />
-          <div className="keith-product-info-div">
-            <ProductInfo
-              productInfo={productInfo}
-              rating={rating}
-              reviewCount={reviewCount}
-              originalPrice={originalPrice}
-              salePrice={salePrice}
-              styleName={styleName}
-              executeScroll={executeScroll}
-            />
-            <StyleSelector
-              productStyles={reorderedStyles}
-              handleStyleChange={this.handleStyleChange}
-              styleIndex={styleIndex}
-            />
-            <AddToCart
-              productInfo={productInfo}
-              key={Object.keys(skus)[styleIndex]}
-              skus={skus}
-              handleAddOutfitClick={handleAddOutfitClick}
-              handleRemoveOutfitClick={handleRemoveOutfitClick}
-            />
-          </div>
+          {!expandedView && (
+            <div className="keith-product-info-div">
+              <ProductInfo
+                productInfo={productInfo}
+                rating={rating}
+                reviewCount={reviewCount}
+                originalPrice={originalPrice}
+                salePrice={salePrice}
+                styleName={styleName}
+                executeScroll={executeScroll}
+              />
+              <StyleSelector
+                productStyles={reorderedStyles}
+                handleStyleChange={this.handleStyleChange}
+                styleIndex={styleIndex}
+              />
+              <AddToCart
+                productInfo={productInfo}
+                key={Object.keys(skus)[styleIndex]}
+                skus={skus}
+                handleAddOutfitClick={handleAddOutfitClick}
+                handleRemoveOutfitClick={handleRemoveOutfitClick}
+              />
+            </div>
+          )}
         </div>
-        <ProductDescription productInfo={productInfo} />
+        <ProductDescription
+          productInfo={productInfo}
+          handleUnexpandClick={this.handleUnexpandClick}
+        />
       </div>
     );
   }
