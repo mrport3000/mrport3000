@@ -5,6 +5,7 @@ import React from 'react';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import SortReviews from './SortReviews.jsx';
+import ReviewModal from './ReviewModal.jsx';
 import './RatingAndReview.css';
 
 class RatingAndReview extends React.Component {
@@ -59,7 +60,13 @@ class RatingAndReview extends React.Component {
           </div>
         </div>
         <div className="eric-RR-sortReviews">
-          <SortReviews reviews={totalReviews} />
+          <div className="eric-RR-modalContainer">
+            <button> Show Modal</button>
+            <ReviewModal />
+          </div>
+          <div className="eric-RR-sort">
+            {/* <SortReviews reviews={totalReviews} /> */}
+          </div>
         </div>
       </div>
     );
