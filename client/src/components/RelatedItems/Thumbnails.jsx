@@ -36,10 +36,11 @@ function Thumbnails({ product, handleThumbnailClick }) {
         <MdArrowBackIos onClick={decrement} />
       </div>
       )}
-      {thumbnailURLs.map((url) => (
+      {thumbnailURLs.map((url, index) => (
         <button
+          key={index}
           className="duke-thumb-carousel-image"
-          type="submit"
+          type="button"
           aria-label="Mute volume"
           value={url}
           style={{ backgroundImage: `url(${url})` }}

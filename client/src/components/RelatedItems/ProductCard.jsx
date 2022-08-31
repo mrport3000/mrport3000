@@ -10,7 +10,7 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
   let defaultPhotoURL = defaultStyle.length > 0
     ? defaultStyle[0].photos[0].url : product.styles[0].photos[0].url;
 
-  let [previewPhoto, setPreviewPhoto] = useState(defaultPhotoURL);
+  let [previewPhoto, setPreviewPhoto] = useState(product.newDefaultPhoto || defaultPhotoURL);
   let [isShown, setIsShown] = useState(false);
 
   // dummy test data for sales price
@@ -34,9 +34,8 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
     e.preventDefault();
     e.stopPropagation();
     setPreviewPhoto(e.target.value);
+    product.newDefaultPhoto = e.target.value;
   };
-
-  // If add components to button to solve for mouse enter then clicks will fire simultaneously. But if I don't add them then, unable to maintain mouse enter property
 
   return (
     <div className="duke-card-container" data-testid="product-card">
