@@ -38,11 +38,10 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
   };
 
   return (
-    <div className="duke-card-container" data-testid="product-card">
+    <div className="duke-card-container" data-testid="product-card" onClick={(() => handleProductCardClick(product.id))}>
       <button
         aria-label="Mute volume"
         type="submit"
-        onClick={(() => handleProductCardClick(product.id))}
         value={product.id}
         className="duke-card-header"
         style={{ backgroundImage: `url(${previewPhoto})` }}
