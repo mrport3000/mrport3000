@@ -32,6 +32,7 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
 
   const handleThumbnailClick = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     setPreviewPhoto(e.target.value);
   };
 
@@ -48,14 +49,15 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
         style={{ backgroundImage: `url(${previewPhoto})` }}
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}
-      />
+      >
+        {isShown && (
+        <Thumbnails
+          product={product}
+          handleThumbnailClick={handleThumbnailClick}
+        />
+        )}
+      </button>
       <img src="https://static.vecteezy.com/system/resources/previews/001/189/167/non_2x/star-png.png" className="duke-action-icon" onClick={handleModalButtonClick} value={product.id} alt="star-icon" />
-      {isShown && (
-      <Thumbnails
-        product={product}
-        handleThumbnailClick={handleThumbnailClick}
-      />
-      )}
       <div className="duke-productcard-body">
         <p>{product.category}</p>
         <div>

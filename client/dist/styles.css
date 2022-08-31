@@ -226,6 +226,7 @@
   width: 100%;
   position: absolute;
   bottom: 41%;
+  z-index: +1;
 }
 
 .duke-thumb-carousel-image {

@@ -7,12 +7,14 @@ function Thumbnails({ product, handleThumbnailClick }) {
   const [thumbStart, setThumbStart] = useState(0);
   const [thumbEnd, setThumbEnd] = useState(4);
 
-  const increment = () => {
+  const increment = (e) => {
+    e.stopPropagation();
     setThumbStart(thumbStart + 1);
     setThumbEnd(thumbEnd + 1);
   };
 
-  const decrement = () => {
+  const decrement = (e) => {
+    e.stopPropagation();
     setThumbStart(thumbStart - 1);
     setThumbEnd(thumbEnd - 1);
   };
