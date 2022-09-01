@@ -27,7 +27,7 @@ function Thumbnails({ product, handleThumbnailClick }) {
     });
   });
 
-  let thumbnailURLs = thumbnailStorage.slice(thumbStart, thumbEnd);
+  const thumbnailURLs = thumbnailStorage.slice(thumbStart, thumbEnd);
 
   return (
     <div className="duke-thumb-carousel-container">
