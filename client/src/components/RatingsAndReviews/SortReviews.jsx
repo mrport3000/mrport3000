@@ -81,7 +81,7 @@ class SortReviews extends React.Component {
             </button>
           </div>
           <div className="eric-RR-addReviewContainer">
-            <button type="submit" className="eric-RR-sortAddReview">
+            <button type="submit" className="eric-RR-sortAddReview" onClick={() => { this.props.renderModal(true) }}>
               Add a Review +
             </button>
           </div>

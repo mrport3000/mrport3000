@@ -214,7 +214,7 @@ class App extends React.Component {
 
           <QandA info={qandaInfo} />
           <div ref={this.scrollTarget}>
-            <RatingAndReview reviews={reviews} page={reviewPage} />
+            <RatingAndReview reviews={reviews} page={reviewPage} product={productInfo.name} />
           </div>
         </div>
       </div>

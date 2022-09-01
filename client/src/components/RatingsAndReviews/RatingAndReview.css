@@ -212,11 +212,40 @@
   /* position: absolute; */
 }
 
+.eric-RR-modalContainer {
+  /* position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+  /* width: 50%; */
+  background-color: #f0f1f0;
+  border-radius: 0.5em;
+  box-shadow: 0 15px 15px black;
+}
+
+.eric-RR-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Helvetica, sans-serif;
+}
+
 
 
 .eric-RR-characteristics {
   display: flex;
   flex-direction: column;
+}
+
+.eric-RR-modalHeader h2, .eric-RR-modalHeader h4 {
+  text-align: center;
+  margin: 5px 0px 5px 0px;
 }
 
 .eric-RR-cRating {
@@ -266,3 +295,15 @@
   /* margin-right: 15px; */
   text-align: center;
 }
+/* .eric-RR-modalSubmit {
+  background-color: black;
+  border: none;
+  color: white;
+  height: 20px;
+  width: 150px;
+  margin: 5px 10px 5px 0px;
+  text-align: center;
+  display: inline-block;
+  font-size: 15px;
+  cursor: pointer;
+} */
