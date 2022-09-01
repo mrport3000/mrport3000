@@ -31,10 +31,21 @@
   border: none;
 }
 
+.keith-expanded-main-photo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin: 50px;
+  width: 1200px;
+  height: 700px;
+  border: none;
+}
+
 .keith-ud-arrow-container {
   display: flex;
   align-items: center;
-  height: 25px;
+  height: 30px;
 }
 
 .keith-ud-arrow-button {
@@ -68,12 +79,6 @@
 .keith-thumbnail {
   width: 30px;
   height: 30px;
-}
-
-.keith-style-icon {
-  width: 90px;
-  height: 90px;
-  border: none;
 }
 
 .keith-product-info-div {
@@ -139,7 +144,20 @@
 }
 
 .keith-style-icon {
+  width: 80px;
+  height: 80px;
   border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.keith-style-check {
+  width: 20px;
+  height: 20px;
+  color: darkgoldenrod;
+
 }
 
 .keith-options-div {
