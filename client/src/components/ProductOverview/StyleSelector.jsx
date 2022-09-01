@@ -27,7 +27,7 @@ export default function StyleSelector({ productStyles, handleStyleChange, styleI
               <StyleIcon
                 url={Object.values(cell)[0]}
                 key={Object.keys(cell)[0]}
-                index={Object.keys(cell)[0]}
+                index={Number(Object.keys(cell)[0])}
                 styleIndex={styleIndex}
                 handleStyleChange={handleStyleChange}
               />

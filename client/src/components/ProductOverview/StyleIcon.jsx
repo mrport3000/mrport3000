@@ -2,16 +2,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
+import { MdCheckCircle } from 'react-icons/md';
 
-function StyleIcon({ url, index, handleStyleChange, styleIndex }) {
+export default function StyleIcon({ url, index, handleStyleChange, styleIndex }) {
   return (
-    <td style={
-      {
-        border: 'none',
-        margin: '0px',
-      }
-    }
-    >
+    <td style={{ border: 'none', margin: 'none' }}>
       <button
         type="button"
         className="keith-style-icon"
@@ -23,13 +18,15 @@ function StyleIcon({ url, index, handleStyleChange, styleIndex }) {
             backgroundRepeat: 'no-repeat',
             backgroundPositionX: 'center',
             backgroundPositionY: 'center',
-            border: styleIndex === index ? '2px solid darkgoldenrod' : 'none',
+            border: styleIndex === index ? '3px solid darkgoldenrod' : 'none',
+            opacity: styleIndex === index ? '80%' : '100%',
           }
         }
         index={index}
         alt={url}
-      />
+      >
+        {styleIndex === index && (<MdCheckCircle className="keith-style-check" />)}
+      </button>
     </td>
   );
 }
-export default StyleIcon;

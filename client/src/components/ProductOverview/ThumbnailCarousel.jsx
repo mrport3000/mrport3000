@@ -19,11 +19,9 @@ export default function ThumbnailCarousel({
   return (
     <table>
       <tbody className="keith-thumbnail-column">
-        {thumbIndex > 0 && (
-          <tr className="keith-ud-arrow-container" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <MdKeyboardArrowUp className="keith-ud-arrow-button" onClick={handleUpArrowClick} />
-          </tr>
-        )}
+        <tr className="keith-ud-arrow-container" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+          {thumbIndex > 0 && (<MdKeyboardArrowUp className="keith-ud-arrow-button" onClick={handleUpArrowClick} />)}
+        </tr>
         {thumbPhotos.map((photo, index) => (
           <tr>
             <td
@@ -37,9 +35,10 @@ export default function ThumbnailCarousel({
                 backgroundPositionX: 'center',
                 backgroundPositionY: 'center',
                 border: thumbIndex - startIndex === index ? '2px solid darkgoldenrod' : 'none',
+                opacity: thumbIndex - startIndex === index ? '80%' : '100%',
               }
             }
-              thumbIndex={index + startIndex}
+              thumbindex={index + startIndex}
               key={photo.thumbnail_url}
               alt={photo.thumbnail_url}
               onMouseEnter={onMouseEnter}
@@ -48,11 +47,9 @@ export default function ThumbnailCarousel({
             />
           </tr>
         ))}
-        {thumbIndex < photos.length - 1 && (
-          <tr className="keith-ud-arrow-container" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-            <MdKeyboardArrowDown className="keith-ud-arrow-button" onClick={handleDownArrowClick} />
-          </tr>
-        )}
+        <tr className="keith-ud-arrow-container" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+          {thumbIndex < photos.length - 1 && (<MdKeyboardArrowDown className="keith-ud-arrow-button" onClick={handleDownArrowClick} />)}
+        </tr>
       </tbody>
     </table>
   );
