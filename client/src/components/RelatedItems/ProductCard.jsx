@@ -5,6 +5,7 @@ import Thumbnails from './Thumbnails.jsx';
 
 // Individual card in related product carousel
 function ProductCard({ product, handleModalButtonClick, handleProductCardClick }) {
+  console.log('PRODUCT', product);
   const defaultStyle = product.styles.filter((value) => (value['default?']));
 
   let defaultPhotoURL = defaultStyle.length > 0
@@ -36,25 +37,35 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
     setPreviewPhoto(e.target.value);
     product.newDefaultPhoto = e.target.value;
   };
+  console.log('PREVIEW PHOTO', previewPhoto);
 
   return (
-    <div className="duke-card-container" data-testid="product-card" onClick={(() => handleProductCardClick(product.id))}>
-      <button
-        aria-label="Mute volume"
-        type="submit"
-        value={product.id}
-        className="duke-card-header"
-        style={{ backgroundImage: `url(${previewPhoto})` }}
+    <div
+      role="button"
+      tabIndex="-1"
+      className="duke-card-container"
+      data-testid="product-card"
+      onClick={(() => handleProductCardClick(product.id))}
+      onKeyPress="INSERT ACCESSIBILITY"
+    >
+      <div
         onMouseEnter={() => setIsShown(true)}
         onMouseLeave={() => setIsShown(false)}
+        className="duke-card-header"
       >
+        <img
+          className="duke-card-preview-image"
+          alt={product.name}
+          value={product.id}
+          src={previewPhoto}
+        />
         {isShown && (
         <Thumbnails
           product={product}
           handleThumbnailClick={handleThumbnailClick}
         />
         )}
-      </button>
+      </div>
       <img src="https://static.vecteezy.com/system/resources/previews/001/189/167/non_2x/star-png.png" className="duke-action-icon" onClick={handleModalButtonClick} value={product.id} alt="star-icon" />
       <div className="duke-productcard-body">
         <p>{product.category}</p>
