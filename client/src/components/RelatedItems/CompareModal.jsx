@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 function CompareModal({
-  show, handleModalButtonClick, cardProduct, currProduct
+  show, handleModalButtonClick, cardProduct, currProduct,
 }) {
   if (!show) {
     return null;
@@ -64,5 +65,12 @@ function CompareModal({
     ), document.getElementById('root'),
   );
 }
+
+CompareModal.propTypes = {
+  show: PropTypes.bool.isRequired,
+  handleModalButtonClick: PropTypes.func.isRequired,
+  cardProduct: PropTypes.shape({}).isRequired,
+  currProduct: PropTypes.shape({}).isRequired,
+};
 
 export default CompareModal;

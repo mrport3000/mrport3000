@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { IconContext } from 'react-icons';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 
@@ -55,5 +56,10 @@ function Thumbnails({ product, handleThumbnailClick }) {
     </div>
   );
 }
+
+Thumbnails.propTypes = {
+  product: PropTypes.shape({}).isRequired,
+  handleThumbnailClick: PropTypes.func.isRequired,
+};
 
 export default Thumbnails;

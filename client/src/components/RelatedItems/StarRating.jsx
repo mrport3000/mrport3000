@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import halfStar from '../../../dist/lib/star-half.png';
 import fullStar from '../../../dist/lib/star-full.png';
 import quarterStar from '../../../dist/lib/star-one-quarter.png';
@@ -31,5 +32,9 @@ function StarRating({ rating }) {
     </div>
   );
 }
+
+StarRating.propTypes = {
+  rating: PropTypes.number.isRequired,
+};
 
 export default StarRating;

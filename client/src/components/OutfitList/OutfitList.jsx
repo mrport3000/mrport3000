@@ -70,4 +70,10 @@ class OutfitList extends React.Component {
   }
 }
 
+OutfitList.propTypes = {
+  outfits: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  handleAddOutfitClick: PropTypes.func.isRequired,
+  handleRemoveOutfitClick: PropTypes.func.isRequired,
+};
+
 export default OutfitList;
