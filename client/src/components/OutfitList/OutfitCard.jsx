@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import StarRating from '../RelatedItems/StarRating.jsx';
+import circleX from '../../../dist/lib/circle-x.png';
 
 function OutfitCard({ product, handleRemoveOutfitClick }) {
   // console.log(product);
@@ -29,7 +30,7 @@ function OutfitCard({ product, handleRemoveOutfitClick }) {
         className="duke-outfit-header"
         style={{ backgroundImage: `url(${defaultPhotoURL})` }}
       >
-        <img src="https://cdn.iconscout.com/icon/free/png-256/x-circle-3604634-3005570.png" className="duke-action-icon" onClick={handleRemoveOutfitClick} value={product.id} alt="star-icon" />
+        <img src={circleX} className="duke-action-icon" onClick={handleRemoveOutfitClick} value={product.id} alt="star-icon" />
       </div>
       <div className="duke-productcard-body">
         <p>{product.category}</p>

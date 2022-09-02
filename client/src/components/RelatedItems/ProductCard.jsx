@@ -3,6 +3,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import StarRating from './StarRating.jsx';
 import Thumbnails from './Thumbnails.jsx';
+import modalStar from '../../../dist/lib/modal-star.png';
 
 // Individual card in related product carousel
 function ProductCard({ product, handleModalButtonClick, handleProductCardClick }) {
@@ -66,7 +67,7 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
       </div>
       <div>
         <img
-          src="https://static.vecteezy.com/system/resources/previews/001/189/167/non_2x/star-png.png"
+          src={modalStar}
           className="duke-action-icon"
           onClick={handleModalButtonClick}
           value={product.id}
