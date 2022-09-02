@@ -21,8 +21,8 @@ export default function StyleSelector({ productStyles, handleStyleChange, styleI
   return (
     <table className="keith-style-selector-div">
       <tbody>
-        {thumbnailTable.map((row) => (
-          <tr>
+        {thumbnailTable.map((row, i) => (
+          <tr key={i}>
             {row.map((cell) => (
               <StyleIcon
                 url={Object.values(cell)[0]}
