@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function AddOutfit({ handleAddOutfitClick }) {
   return (
@@ -8,5 +9,9 @@ function AddOutfit({ handleAddOutfitClick }) {
     </button>
   );
 }
+
+AddOutfit.propTypes = {
+  handleAddOutfitClick: PropTypes.func.isRequired,
+};
 
 export default AddOutfit;

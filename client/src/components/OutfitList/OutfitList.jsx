@@ -35,7 +35,7 @@ class OutfitList extends React.Component {
       outfits, handleAddOutfitClick, handleRemoveOutfitClick,
     } = this.props;
     return (
-      <div>
+      <div className="duke-outfit-container">
         <h4>YOUR OUTFIT</h4>
         <div className="duke-outfit-carousel-container">
           {startIndex > 0 && (
@@ -69,5 +69,11 @@ class OutfitList extends React.Component {
     );
   }
 }
+
+OutfitList.propTypes = {
+  outfits: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  handleAddOutfitClick: PropTypes.func.isRequired,
+  handleRemoveOutfitClick: PropTypes.func.isRequired,
+};
 
 export default OutfitList;

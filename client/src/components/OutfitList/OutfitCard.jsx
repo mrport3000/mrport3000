@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import StarRating from '../RelatedItems/StarRating.jsx';
+import circleX from '../../../dist/lib/circle-x.png';
 
-function OutfitCard({ product, handleRemoveOutfitClick, }) {
+function OutfitCard({ product, handleRemoveOutfitClick }) {
   // console.log(product);
   const defaultStyle = product.styles.filter((value) => (value['default?']));
 
@@ -25,10 +27,10 @@ function OutfitCard({ product, handleRemoveOutfitClick, }) {
   return (
     <div className="duke-card-container" data-testid="outfit-card">
       <div
-        className="duke-card-header"
+        className="duke-outfit-header"
         style={{ backgroundImage: `url(${defaultPhotoURL})` }}
       >
-        <img src="https://cdn.iconscout.com/icon/free/png-256/x-circle-3604634-3005570.png" className="duke-action-icon" onClick={handleRemoveOutfitClick} value={product.id} alt="star-icon" />
+        <img src={circleX} className="duke-action-icon" onClick={handleRemoveOutfitClick} value={product.id} alt="star-icon" />
       </div>
       <div className="duke-productcard-body">
         <p>{product.category}</p>
@@ -42,5 +44,10 @@ function OutfitCard({ product, handleRemoveOutfitClick, }) {
     </div>
   );
 }
+
+OutfitCard.propTypes = {
+  product: PropTypes.shape({}).isRequired,
+  handleRemoveOutfitClick: PropTypes.func.isRequired,
+};
 
 export default OutfitCard;

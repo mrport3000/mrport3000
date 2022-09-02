@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { IconContext } from 'react-icons';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import { Promise } from 'bluebird';
@@ -54,6 +55,8 @@ class RelatedProducts extends React.Component {
   }
 
   handleModalButtonClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
     const { relatedProducts } = this.state;
 
     // retrieves productId from product card to pass to modal
@@ -103,13 +106,13 @@ class RelatedProducts extends React.Component {
       // [71702, 71702, 71704, 71705, 71697, 71699]
       .then((results) => {
         // remove original product Id
-        let newProdsArr = results.data.filter((value) => value !== productId);
+        const newProdsArr = results.data.filter((value) => value !== productId);
         // remove duplicate product Ids
-        let uniqueArr = [...new Set(newProdsArr)];
+        const uniqueArr = [...new Set(newProdsArr)];
         return Promise.resolve(uniqueArr);
       })
       .then((arr) => {
-        let promiseArr = [];
+        const promiseArr = [];
         // push promises for productID call
         arr.forEach((value) => {
           promiseArr.push(new Promise((resolve) => resolve(this.getProductInfo(value))));
@@ -166,7 +169,7 @@ class RelatedProducts extends React.Component {
     const { currProduct, handleProductCardClick } = this.props;
 
     return (
-      <div>
+      <div className="duke-products-container">
         <h4>RELATED PRODUCTS</h4>
         <div className="duke-product-carousel-container" data-testid="product-carousel">
           {
@@ -215,5 +218,11 @@ class RelatedProducts extends React.Component {
     );
   }
 }
+
+RelatedProducts.propTypes = {
+  productId: PropTypes.number.isRequired,
+  currProduct: PropTypes.shape({}).isRequired,
+  handleProductCardClick: PropTypes.func.isRequired,
+};
 
 export default RelatedProducts;
