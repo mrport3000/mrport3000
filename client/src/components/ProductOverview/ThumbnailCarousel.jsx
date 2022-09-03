@@ -23,7 +23,7 @@ export default function ThumbnailCarousel({
           {thumbIndex > 0 && (<MdKeyboardArrowUp className="keith-ud-arrow-button" onClick={handleUpArrowClick} />)}
         </tr>
         {thumbPhotos.map((photo, index) => (
-          <tr>
+          <tr key={index}>
             <td
               className="keith-thumbnail"
               style={

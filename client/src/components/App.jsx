@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import localStorage from 'local-storage';
+import url from 'url';
+import querystring from 'querystring';
 import { averageRating, totalReviews } from '../utilities.js';
 import ProductOverview from './ProductOverview/OverviewIndex.jsx';
 import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
@@ -15,7 +17,9 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      productId: defaultId,
+      productId: null,
+      styleId: null,
+      styleIndex: null,
       productInfo: null,
       productStyles: null,
       qandaInfo: null,
@@ -29,6 +33,7 @@ class App extends React.Component {
     this.scrollTarget = React.createRef();
 
     this.handleProductIdChange = this.handleProductIdChange.bind(this);
+    this.handleStyleChange = this.handleStyleChange.bind(this);
     this.handleAddOutfitClick = this.handleAddOutfitClick.bind(this);
     this.handleRemoveOutfitClick = this.handleRemoveOutfitClick.bind(this);
     this.handleProductCardClick = this.handleProductCardClick.bind(this);
@@ -36,7 +41,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getInitialData(defaultId);
+    const parsedUrl = url.parse(window.location.href);
+    const { productId } = querystring.parse(parsedUrl.query);
+    const searchId = productId || defaultId;
+    this.getInitialData(searchId);
   }
 
   handleProductIdChange(newId) {
@@ -44,6 +52,14 @@ class App extends React.Component {
     this.setState({
       productId: newId,
     });
+  }
+
+  handleStyleChange(e) {
+    const { productStyles, productId } = this.state;
+    const styleIndex = Number(e.target.getAttribute('index'));
+    const styleId = productStyles[styleIndex].style_id;
+    this.setState({ styleIndex, styleId });
+    window.history.pushState({ productId }, '', `http://127.0.0.1:3000/?productId=${productId}&styleId=${styleId}`);
   }
 
   handleProductCardClick(id) {
@@ -97,8 +113,8 @@ class App extends React.Component {
 
   getInitialData(productId) {
     let productInfo; let productStyles; let
-      qandaInfo;
-
+      qandaInfo; let styleId;
+    let styleIndex = 0;
     axios.get(`/productinfo/${productId}`)
       .then((results) => {
         productInfo = results.data;
@@ -107,6 +123,34 @@ class App extends React.Component {
         axios.get(`/styles/${productId}`)
           .then((results) => {
             productStyles = results.data.results;
+            const parsedUrl = url.parse(window.location.href);
+            const parsedQs = querystring.parse(parsedUrl.query);
+            const firstStyle = productStyles[0];
+            if (parsedQs.styleId) {
+              styleId = parsedQs.styleId;
+              console.log(styleId);
+              for (var i = 0; i < productStyles.length; i += 1) {
+                if (productStyles[i]['default?']) {
+                  productStyles[0] = productStyles[i];
+                  productStyles[i] = firstStyle;
+                  if (productStyles[0].style_id === Number(styleId)) {
+                    styleIndex = 0;
+                  }
+                }
+                if (productStyles[i].style_id === Number(styleId)) {
+                  styleIndex = i;
+                }
+              }
+            } else {
+              for (let i = 0; i < productStyles.length; i += 1) {
+                if (productStyles[i]['default?']) {
+                  productStyles[0] = productStyles[i];
+                  styleId = productStyles[i].style_id;
+                  productStyles[i] = firstStyle;
+                  break;
+                }
+              }
+            }
           })
           .then(() => {
             axios.get(`/qanda/${productId}`)
@@ -121,11 +165,14 @@ class App extends React.Component {
                       productId,
                       productInfo,
                       productStyles,
+                      styleId,
+                      styleIndex,
                       qandaInfo,
                       rating: averageRating(ratings),
                       reviewCount: totalReviews(ratings),
                       outfits: localStorage.get('outfitList') || [],
                     });
+                    window.history.pushState({ productId }, '', `http://127.0.0.1:3000/?productId=${productId}&styleId=${styleId}`);
                   })
                   .then(() => {
                     // both /review endpoints will be swapped at a later date
@@ -170,6 +217,7 @@ class App extends React.Component {
     const {
       productId,
       productInfo,
+      styleIndex,
       productStyles,
       qandaInfo,
       rating,
@@ -189,8 +237,10 @@ class App extends React.Component {
           key={productInfo.id}
           productInfo={productInfo}
           productStyles={productStyles}
+          styleIndex={styleIndex}
           rating={rating}
           reviewCount={reviewCount}
+          handleStyleChange={this.handleStyleChange}
           handleAddOutfitClick={this.handleAddOutfitClick}
           handleRemoveOutfitClick={this.handleRemoveOutfitClick}
           executeScroll={this.executeScroll}

@@ -16,18 +16,11 @@ class ProductOverview extends React.Component {
       expandedView: false,
       zoomed: false,
       hover: false,
-      styleIndex: 0,
     };
-    this.handleStyleChange = this.handleStyleChange.bind(this);
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
     this.handleExpandClick = this.handleExpandClick.bind(this);
     this.handleUnexpandClick = this.handleUnexpandClick.bind(this);
-  }
-
-  handleStyleChange(e) {
-    const styleIndex = Number(e.target.getAttribute('index'));
-    this.setState({ styleIndex });
   }
 
   handleExpandClick(e) {
@@ -69,15 +62,16 @@ class ProductOverview extends React.Component {
     const {
       expandedView,
       hover,
-      styleIndex,
       zoomed,
     } = this.state;
     const {
       productInfo,
+      styleIndex,
       rating,
       reviewCount,
       productStyles,
       executeScroll,
+      handleStyleChange,
       handleAddOutfitClick,
       handleRemoveOutfitClick,
     } = this.props;
@@ -85,16 +79,7 @@ class ProductOverview extends React.Component {
     const salePrice = productStyles[styleIndex].sale_price;
     const styleName = productStyles[styleIndex].name;
     const { skus } = productStyles[styleIndex];
-    const reorderedStyles = productStyles;
-    const firstStyle = reorderedStyles[0];
-    for (let i = 0; i < productStyles.length; i += 1) {
-      if (productStyles[i]['default?']) {
-        reorderedStyles[0] = productStyles[i];
-        reorderedStyles[i] = firstStyle;
-        break;
-      }
-    }
-    const galleryPhotos = reorderedStyles[styleIndex].photos;
+    const galleryPhotos = productStyles[styleIndex].photos;
     return (
       <div className="keith-overview-div" onClick={this.handleUnexpandClick}>
         <div className="keith-top-div">
@@ -119,8 +104,8 @@ class ProductOverview extends React.Component {
                 executeScroll={executeScroll}
               />
               <StyleSelector
-                productStyles={reorderedStyles}
-                handleStyleChange={this.handleStyleChange}
+                productStyles={productStyles}
+                handleStyleChange={handleStyleChange}
                 styleIndex={styleIndex}
               />
               <AddToCart
