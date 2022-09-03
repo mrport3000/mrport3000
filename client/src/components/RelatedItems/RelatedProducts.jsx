@@ -171,6 +171,7 @@ class RelatedProducts extends React.Component {
   }
 
   adjustForScreenSize() {
+    const { startIndex } = this.state;
     console.log('SCREEN SIZE: ', window.innerWidth);
     console.log('Enter ADJUST SCREEN');
     let screenSize = 800;
@@ -180,20 +181,20 @@ class RelatedProducts extends React.Component {
       console.log('HIT 800');
       this.setState({
         defaultEndIndex: 1,
-        endIndex: 1,
+        endIndex: startIndex + 1,
       });
     } else if (window.matchMedia('(max-width: 1100px)').matches) {
       console.log('HIT 1100');
       this.setState({
         defaultEndIndex: 2,
-        endIndex: 2,
+        endIndex: startIndex + 2,
       });
       screenSize = 1100;
     } else {
       console.log('HIT MAX');
       this.setState({
         defaultEndIndex: 3,
-        endIndex: 3,
+        endIndex: startIndex + 3,
       });
     }
     console.log('HIT EVENT LISTENER');
