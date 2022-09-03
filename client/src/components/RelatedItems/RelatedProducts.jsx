@@ -12,6 +12,8 @@ class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // mediaQuery: window.matchMedia('(max-width: 1100px)'),
+      defaultEndIndex: 3,
       startIndex: 0,
       endIndex: 3,
       show: false,
@@ -27,15 +29,22 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidMount() {
+    this.adjustForScreenSize();
+    // this.state.mediaQuery.addEventListener('change', () => {
+    //   console.log('SCREEN SIZE: ', window.innerWidth);
+    //   this.adjustForScreenSize();
+    // });
+    // setTimeout(() => this.getRelatedProductsInfo(this.props.productId), 2000);
     this.getRelatedProductsInfo(this.props.productId);
   }
 
   componentDidUpdate(prevProps) {
+    const { defaultEndIndex } = this.state;
     if (prevProps.productId !== this.props.productId) {
       this.getRelatedProductsInfo(this.props.productId);
       this.setState({
         startIndex: 0,
-        endIndex: 3,
+        endIndex: defaultEndIndex,
       });
     }
   }
@@ -161,6 +170,39 @@ class RelatedProducts extends React.Component {
       });
   }
 
+  adjustForScreenSize() {
+    console.log('SCREEN SIZE: ', window.innerWidth);
+    console.log('Enter ADJUST SCREEN');
+    let screenSize = 800;
+    const media = window.matchMedia(`(max-width: ${screenSize}px)`);
+
+    if (window.matchMedia('(max-width: 800px)').matches) {
+      console.log('HIT 800');
+      this.setState({
+        defaultEndIndex: 1,
+        endIndex: 1,
+      });
+    } else if (window.matchMedia('(max-width: 1100px)').matches) {
+      console.log('HIT 1100');
+      this.setState({
+        defaultEndIndex: 2,
+        endIndex: 2,
+      });
+      screenSize = 1100;
+    } else {
+      console.log('HIT MAX');
+      this.setState({
+        defaultEndIndex: 3,
+        endIndex: 3,
+      });
+    }
+    console.log('HIT EVENT LISTENER');
+    media.addEventListener('change', () => {
+      this.adjustForScreenSize();
+    });
+    console.log('----------');
+  }
+
   render() {
     const {
       show, startIndex, endIndex, relatedProducts, cardProduct,
@@ -170,49 +212,51 @@ class RelatedProducts extends React.Component {
 
     return (
       <div className="duke-products-container">
-        <h4>RELATED PRODUCTS</h4>
-        <div className="duke-product-carousel-container" data-testid="product-carousel">
-          {
-            startIndex > 0
-            && (
-            <div className="duke-arrow-container">
-              <IconContext.Provider value={{ className: "duke-arrow-button" }}>
-                <MdArrowBackIos onClick={this.handleBackArrowClick} />
-              </IconContext.Provider>
-            </div>
-            )
-          }
-          <CompareModal
-            show={show}
-            handleModalButtonClick={this.handleModalButtonClick}
-            cardProduct={cardProduct}
-            currProduct={currProduct}
-          />
-          {
-            relatedProducts.map((product, index) => {
-              if (index >= startIndex && index <= endIndex) {
-                return (
-                  <ProductCard
-                    product={product}
-                    key={product.name}
-                    handleModalButtonClick={this.handleModalButtonClick}
-                    handleProductCardClick={handleProductCardClick}
-                  />
-                );
-              }
-            })
-          }
-          {
-            endIndex !== (relatedProducts.length - 1)
-            && endIndex < relatedProducts.length
-            && (
-            <div className="duke-arrow-container">
-              <IconContext.Provider value={{ className: "duke-arrow-button" }}>
-                <MdArrowForwardIos onClick={this.handleForwardArrowClick} />
-              </IconContext.Provider>
-            </div>
-            )
-          }
+        <div className="duke-products-inner">
+          <h4>RELATED PRODUCTS</h4>
+          <div className="duke-product-carousel-container" data-testid="product-carousel">
+            {
+              startIndex > 0
+              && (
+              <div className="duke-arrow-container">
+                <IconContext.Provider value={{ className: "duke-arrow-button" }}>
+                  <MdArrowBackIos onClick={this.handleBackArrowClick} />
+                </IconContext.Provider>
+              </div>
+              )
+            }
+            <CompareModal
+              show={show}
+              handleModalButtonClick={this.handleModalButtonClick}
+              cardProduct={cardProduct}
+              currProduct={currProduct}
+            />
+            {
+              relatedProducts.map((product, index) => {
+                if (index >= startIndex && index <= endIndex) {
+                  return (
+                    <ProductCard
+                      product={product}
+                      key={product.name}
+                      handleModalButtonClick={this.handleModalButtonClick}
+                      handleProductCardClick={handleProductCardClick}
+                    />
+                  );
+                }
+              })
+            }
+            {
+              endIndex !== (relatedProducts.length - 1)
+              && endIndex < relatedProducts.length
+              && (
+              <div className="duke-arrow-container">
+                <IconContext.Provider value={{ className: "duke-arrow-button" }}>
+                  <MdArrowForwardIos onClick={this.handleForwardArrowClick} />
+                </IconContext.Provider>
+              </div>
+              )
+            }
+          </div>
         </div>
       </div>
     );
