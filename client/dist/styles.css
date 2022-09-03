@@ -65,6 +65,8 @@
 
 .keith-lr-arrow-container {
   align-self: flex-end;
+  background:rgba(255,255,255,0.05);
+  border-radius: 25%;
   display: flex;
   align-items: center;
   height: 60px;
@@ -166,6 +168,33 @@
 
 .keith-style-selector-div {
   margin: 0 0 0 5px;
+}
+
+.keith-add-cart {
+  margin: 10px;
+  background-color: #284B63;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.keith-star-button {
+  margin: 10px;
+  background-color: #D9D9D9;
+  border: none;
+  border-radius: 10px;
+  color: #284B63;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12.5px;
+  font-weight: bold;
 }
 
 
