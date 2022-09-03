@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import RatingAndReview from './RatingAndReview.jsx';
-// const rootElement = document.getElementById('root');
+import ModalStarRating from './ModalStarRating.jsx';
 
 export default class ReviewModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      starRating: null,
+      recommended: null,
       size: null,
       width: null,
       comfort: null,
@@ -21,6 +23,7 @@ export default class ReviewModal extends React.Component {
     };
     this.onChangeValue = this.onChangeValue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.liftStarRating = this.liftStarRating.bind(this);
   }
 
   handleSubmit(e) {
@@ -29,7 +32,12 @@ export default class ReviewModal extends React.Component {
   }
 
   onChangeValue(e) {
-    this.setState({ [e.target.name]: e.target.value }, () => { });
+    this.setState({ [e.target.name]: e.target.value }, () => { console.log(this.state)});
+  }
+
+  liftStarRating(rating) {
+    console.log('inner rating: ', rating);
+    this.setState({starRating: rating});
   }
 
   render() {
@@ -49,7 +57,7 @@ export default class ReviewModal extends React.Component {
             </h4>
           </div>
           <div className="eric-RR-modalRating">
-            Overall Rating: ☆☆☆☆☆
+            <ModalStarRating liftRating={this.liftStarRating} />
           </div>
           <div className="eric-RR-recommendProduct">
             <fieldset>
@@ -57,10 +65,10 @@ export default class ReviewModal extends React.Component {
                 Do you recommend this product?
               </legend>
               <div>
-                <input type="radio" value="yes" name="yes" />
+                <input type="radio" value="true" name="recommended" onChange={this.onChangeValue} />
                 {' '}
                 Yes
-                <input type="radio" value="no" name="no" />
+                <input type="radio" value="false" name="recommended" onChange={this.onChangeValue} />
                 {' '}
                 No
               </div>
@@ -201,27 +209,33 @@ export default class ReviewModal extends React.Component {
               </div>
             </fieldset>
           </div>
-          <div className="eric-RR-reviewSummary">
+          <div className="eric-RR-reviewContainer">
+            <div className="eric-RR-reviewSummary">
             <form>
               <label>
-                Add a review title:
+                <p>Add a review title:</p>
                 <input type="text" name="reviewSummary" maxLength="60" placeholder="Example: Best purchase ever!" value={this.state.value} onChange={this.onChangeValue} />
               </label>
             </form>
+            </div>
+            <div className="eric-RR-reviewBody">
+              <form>
+                <label>
+                  <p>Add a written review:</p>
+                  <input type="text" name="reviewBody" maxLength="1000" placeholder="Why did you like the product or not?" value={this.state.value} onChange={this.onChangeValue} />
+                </label>
+              </form>
+            </div>
           </div>
-          <div className="eric-RR-reviewBody">
-            <form>
-              <label>
-                Add a written review:
-                <input type="text" name="reviewBody" maxLength="1000" value={this.state.value} onChange={this.onChangeValue} />
-              </label>
-            </form>
+          <div className="eric-RR-uploadPhoto">
+            Upload photos:
+            <input type="file" />
           </div>
           <div className="eric-RR-nickname">
             <form>
               <label>
                 Add a nickname:
-                <input type="text" name="nickname" maxLength="60" value={this.state.value} onChange={this.onChangeValue} />
+                <input type="text" name="nickname" maxLength="60" placeholder="Example: jackson11!" value={this.state.value} onChange={this.onChangeValue} />
               </label>
             </form>
           </div>
@@ -229,14 +243,14 @@ export default class ReviewModal extends React.Component {
             <form>
               <label>
                 Add an email address:
-                <input type="text" name="email" maxLength="60" value={this.state.value} onChange={this.onChangeValue} />
+                <input type="text" name="email" maxLength="60" placeholder="Example: jackson11@email.com" value={this.state.value} onChange={this.onChangeValue} />
               </label>
             </form>
           </div>
           <div className="eric-RR-modalSubmit">
             <form onSubmit={this.handleSubmit}>
               <label>
-                <input type="submit" value="Submit" onClick={() => { this.props.closeModal(false); }} />
+                <input type="submit" value="submit" onClick={() => { this.props.closeModal(false); }} />
               </label>
             </form>
           </div>
@@ -245,5 +259,3 @@ export default class ReviewModal extends React.Component {
     );
   }
 }
-
-// ReactDOM.render(<RatingAndReview />, rootElement);

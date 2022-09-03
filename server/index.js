@@ -73,9 +73,16 @@ app.get('/reviews/:id', (req, res) => {
 });
 
 app.get('/reviews/meta/:id', (req, res) => {
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.id}`, headers)
-    .then((result) => res.send(result.data))
-    .catch((err) => console.log(err));
+  const { sortTerm } = req.query;
+  if (sortTerm) {
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.id}&sort=${sortTerm}`, headers)
+      .then((result) => res.send(result.data))
+      .catch((err) => console.log(err));
+  } else {
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.id}`, headers)
+      .then((result) => res.send(result.data))
+      .catch((err) => console.log(err));
+  }
 });
 
 app.post('/cart', (req, res) => {

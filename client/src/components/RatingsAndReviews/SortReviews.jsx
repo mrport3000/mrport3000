@@ -1,5 +1,6 @@
 import React from 'react';
 
+import axios from 'axios';
 import ReviewsList from './ReviewsList.jsx';
 import './RatingAndReview.css';
 
@@ -7,58 +8,62 @@ class SortReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      sortTerm: '',
-      sortedReviews: [],
+      sortedReviews: null,
     };
-    this.flowControl = this.flowControl.bind(this);
+    this.sortReviews = this.sortReviews.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-  //Still debugging second part of sort bug
-  // componentDidUpdate(prevProps, prevState) {
-  //   console.log('Previous State: ', prevState);
-  //   if (prevState.sortedReviews !== this.props.reviews) {
-  //     this.setState({sortedReviews: [], sortTerm: ''});
-  //   }
-  // }
 
-  handleChange(e) {
-    const { sortTerm } = this.state;
-    this.setState({ sortTerm: e.target.value }, () => {
-      this.flowControl(sortTerm);
-    });
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.productId !== prevProps.productId) {
+      this.setState({ sortedReviews: null });
+    }
   }
 
-  flowControl(term) {
-    const currentReviews = this.props.reviews;
+  handleChange(e) {
+    this.sortReviews(e.target.value);
+  }
+
+  sortReviews(term) {
     let sorted;
+
     if (term === 'relevant') {
-      // Still working on relvency sort
+      axios.get(`/reviews/meta/${this.props.productId}`, { params: { sortTerm: 'relevant' } })
+        .then((result) => {
+          this.setState({ sortedReviews: result.data.results });
+        });
     } else if (term === 'newest') {
-      sorted = currentReviews.sort((a, b) => new Date(a.date) - new Date(b.date));
+      axios.get(`/reviews/meta/${this.props.productId}`, { params: { sortTerm: 'newest' } })
+        .then((result) => {
+          this.setState({ sortedReviews: result.data.results });
+        });
     } else if (term === 'helpful') {
-      sorted = currentReviews.sort((a, b) => a.helpfulness - b.helpfulness);
+      axios.get(`/reviews/meta/${this.props.productId}`, { params: { sortTerm: 'helpful' } })
+        .then((result) => {
+          this.setState({ sortedReviews: result.data.results });
+        });
     }
 
-    this.setState({ sortedReviews: sorted }, () => {
-      //  console.log('sortedState: ', this.state);
-    });
+    this.setState({ sortedReviews: sorted });
   }
 
   render() {
     const { sortedReviews } = this.state;
+
     let dynamicProps;
-    if (sortedReviews.length === 0) {
+    if (!sortedReviews) {
       dynamicProps = this.props.reviews;
     } else {
       dynamicProps = sortedReviews;
     }
+
     return (
       <div className="eric-RR-sortContainer">
         <div className="eric-RR-sortReviews">
           <div className="eric-RR-reviewLength">
-          {this.props.reviews.length}
-          {' '}
-          reviews, sorted by
+            {this.props.reviews.length}
+            {' '}
+            reviews, sorted by
           </div>
           <div className="eric-RR-sortedby" onChange={this.handleChange}>
             <label>
@@ -81,7 +86,7 @@ class SortReviews extends React.Component {
             </button>
           </div>
           <div className="eric-RR-addReviewContainer">
-            <button type="submit" className="eric-RR-sortAddReview" onClick={() => { this.props.renderModal(true) }}>
+            <button type="submit" className="eric-RR-sortAddReview" onClick={() => { this.props.renderModal(true); }}>
               Add a Review +
             </button>
           </div>
