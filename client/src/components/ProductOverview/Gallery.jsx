@@ -115,8 +115,8 @@ class Gallery extends React.Component {
           backgroundImage: `url(${mainImage})`,
           backgroundSize: zoomed ? '250%' : 'contain',
           backgroundRepeat: 'no-repeat',
-          backgroundPositionX: zoomed ? -2.2 * relX + 500 : 'center',
-          backgroundPositionY: zoomed ? -2.2 * relY : 'center',
+          backgroundPositionX: zoomed ? -1.5 * relX : 'center',
+          backgroundPositionY: zoomed ? -1.75 * relY : 'center',
         }}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}

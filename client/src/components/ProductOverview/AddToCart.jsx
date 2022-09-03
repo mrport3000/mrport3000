@@ -151,6 +151,7 @@ class AddToCart extends React.Component {
           <div style={{ width: '250px', float: 'left' }}>
             <Select
               openMenuOnFocus
+              style={{ margin: '10px' }}
               ref={this.sizeRef}
               options={sizeOptions}
               onChange={this.changeSize}
@@ -160,6 +161,7 @@ class AddToCart extends React.Component {
           <div style={{ width: '100px', float: 'right' }}>
             <Select
               openMenuOnFocus
+              style={{ margin: '10px' }}
               ref={this.quantityRef}
               key={selectedSize}
               options={quantityOptions}
