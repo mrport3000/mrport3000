@@ -89,10 +89,10 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
   );
 }
 
-ProductCard.propTypes = {
-  product: PropTypes.shape({}).isRequired,
-  handleModalButtonClick: PropTypes.func.isRequired,
-  handleProductCardClick: PropTypes.func.isRequired,
-};
+// ProductCard.propTypes = {
+//   product: PropTypes.shape({}).isRequired,
+//   handleModalButtonClick: PropTypes.func.isRequired,
+//   handleProductCardClick: PropTypes.func.isRequired,
+// };
 
 export default ProductCard;

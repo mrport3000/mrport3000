@@ -36,44 +36,46 @@ class OutfitList extends React.Component {
     } = this.props;
     return (
       <div className="duke-outfit-container">
-        <h4>YOUR OUTFIT</h4>
-        <div className="duke-outfit-carousel-container">
-          {startIndex > 0 && (
-          <div className="duke-arrow-container">
-            <MdArrowBackIos className="duke-arrow-button" onClick={this.handleBackArrowClick} />
+        <div className="duke-outfit-inner">
+          <h4>YOUR OUTFIT</h4>
+          <div className="duke-outfit-carousel-container">
+            {startIndex > 0 && (
+            <div className="duke-arrow-container">
+              <MdArrowBackIos className="duke-arrow-button" onClick={this.handleBackArrowClick} />
+            </div>
+            )}
+            <AddOutfit
+              handleAddOutfitClick={handleAddOutfitClick}
+            />
+            {
+              outfits.map((product, index) => {
+                if (index >= startIndex && index <= endIndex) {
+                  return (
+                    <OutfitCard
+                      product={product}
+                      key={index}
+                      handleRemoveOutfitClick={handleRemoveOutfitClick}
+                    />
+                  );
+                }
+              })
+            }
+            {endIndex < (outfits.length - 1) && (
+            <div className="duke-arrow-container">
+              <MdArrowForwardIos className="duke-arrow-button" onClick={this.handleForwardArrowClick} />
+            </div>
+            )}
           </div>
-          )}
-          <AddOutfit
-            handleAddOutfitClick={handleAddOutfitClick}
-          />
-          {
-            outfits.map((product, index) => {
-              if (index >= startIndex && index <= endIndex) {
-                return (
-                  <OutfitCard
-                    product={product}
-                    key={index}
-                    handleRemoveOutfitClick={handleRemoveOutfitClick}
-                  />
-                );
-              }
-            })
-          }
-          {endIndex < (outfits.length - 1) && (
-          <div className="duke-arrow-container">
-            <MdArrowForwardIos className="duke-arrow-button" onClick={this.handleForwardArrowClick} />
-          </div>
-          )}
         </div>
       </div>
     );
   }
 }
 
-OutfitList.propTypes = {
-  outfits: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  handleAddOutfitClick: PropTypes.func.isRequired,
-  handleRemoveOutfitClick: PropTypes.func.isRequired,
-};
+// OutfitList.propTypes = {
+//   outfits: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+//   handleAddOutfitClick: PropTypes.func.isRequired,
+//   handleRemoveOutfitClick: PropTypes.func.isRequired,
+// };
 
 export default OutfitList;

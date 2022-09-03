@@ -10,8 +10,8 @@ function AddOutfit({ handleAddOutfitClick }) {
   );
 }
 
-AddOutfit.propTypes = {
-  handleAddOutfitClick: PropTypes.func.isRequired,
-};
+// AddOutfit.propTypes = {
+//   handleAddOutfitClick: PropTypes.func.isRequired,
+// };
 
 export default AddOutfit;
