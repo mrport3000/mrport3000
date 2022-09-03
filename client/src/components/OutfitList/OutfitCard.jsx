@@ -45,9 +45,9 @@ function OutfitCard({ product, handleRemoveOutfitClick }) {
   );
 }
 
-OutfitCard.propTypes = {
-  product: PropTypes.shape({}).isRequired,
-  handleRemoveOutfitClick: PropTypes.func.isRequired,
-};
+// OutfitCard.propTypes = {
+//   product: PropTypes.shape({}).isRequired,
+//   handleRemoveOutfitClick: PropTypes.func.isRequired,
+// };
 
 export default OutfitCard;

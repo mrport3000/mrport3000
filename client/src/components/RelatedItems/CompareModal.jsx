@@ -66,11 +66,11 @@ function CompareModal({
   );
 }
 
-CompareModal.propTypes = {
-  show: PropTypes.bool.isRequired,
-  handleModalButtonClick: PropTypes.func.isRequired,
-  cardProduct: PropTypes.shape({}),
-  currProduct: PropTypes.shape({}),
-};
+// CompareModal.propTypes = {
+//   show: PropTypes.bool.isRequired,
+//   handleModalButtonClick: PropTypes.func.isRequired,
+//   cardProduct: PropTypes.shape({}),
+//   currProduct: PropTypes.shape({}),
+// };
 
 export default CompareModal;

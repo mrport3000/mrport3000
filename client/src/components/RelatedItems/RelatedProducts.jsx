@@ -12,7 +12,6 @@ class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // mediaQuery: window.matchMedia('(max-width: 1100px)'),
       defaultEndIndex: 3,
       startIndex: 0,
       endIndex: 3,
@@ -30,11 +29,6 @@ class RelatedProducts extends React.Component {
 
   componentDidMount() {
     this.adjustForScreenSize();
-    // this.state.mediaQuery.addEventListener('change', () => {
-    //   console.log('SCREEN SIZE: ', window.innerWidth);
-    //   this.adjustForScreenSize();
-    // });
-    // setTimeout(() => this.getRelatedProductsInfo(this.props.productId), 2000);
     this.getRelatedProductsInfo(this.props.productId);
   }
 
@@ -94,9 +88,7 @@ class RelatedProducts extends React.Component {
   // need to change id key to make identifiable second
   getAverageReviews(id) {
     return axios.get(`/reviews/${id}`)
-      .then((result) => {
-        return result.data;
-      })
+      .then((result) => result.data)
       .then((product) => {
         // replace product_id key to prevent overwriting properties when merging object
         product.review_id = product.product_id;
@@ -174,33 +166,33 @@ class RelatedProducts extends React.Component {
     const { startIndex } = this.state;
     console.log('SCREEN SIZE: ', window.innerWidth);
     console.log('Enter ADJUST SCREEN');
-    let screenSize = 800;
-    const media = window.matchMedia(`(max-width: ${screenSize}px)`);
+    let query = '(max-width: 900px)';
 
-    if (window.matchMedia('(max-width: 800px)').matches) {
-      console.log('HIT 800');
+    if (window.matchMedia('(max-width: 900px)').matches) {
+      console.log('HIT 900');
       this.setState({
         defaultEndIndex: 1,
         endIndex: startIndex + 1,
       });
-    } else if (window.matchMedia('(max-width: 1100px)').matches) {
-      console.log('HIT 1100');
+    } else if (window.matchMedia('(max-width: 1200px)').matches) {
+      console.log('HIT 1200');
       this.setState({
         defaultEndIndex: 2,
         endIndex: startIndex + 2,
       });
-      screenSize = 1100;
+      query = '(max-width: 1200px)';
     } else {
       console.log('HIT MAX');
       this.setState({
         defaultEndIndex: 3,
         endIndex: startIndex + 3,
       });
+      // query = '(min-width: 1201px)';
     }
     console.log('HIT EVENT LISTENER');
-    media.addEventListener('change', () => {
-      this.adjustForScreenSize();
-    });
+    const media = window.matchMedia(query);
+    console.log('media', media);
+    media.addEventListener('change', () => this.adjustForScreenSize());
     console.log('----------');
   }
 
@@ -264,10 +256,10 @@ class RelatedProducts extends React.Component {
   }
 }
 
-RelatedProducts.propTypes = {
-  productId: PropTypes.number.isRequired,
-  currProduct: PropTypes.shape({}).isRequired,
-  handleProductCardClick: PropTypes.func.isRequired,
-};
+// RelatedProducts.propTypes = {
+//   productId: PropTypes.number.isRequired,
+//   currProduct: PropTypes.shape({}).isRequired,
+//   handleProductCardClick: PropTypes.func.isRequired,
+// };
 
 export default RelatedProducts;

@@ -274,6 +274,14 @@
 
 .duke-outfit-container {
   padding: 50px;
+  width: 100%;
+}
+
+.duke-outfit-inner {
+  padding: 20px;
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .duke-outfit-carousel-container {

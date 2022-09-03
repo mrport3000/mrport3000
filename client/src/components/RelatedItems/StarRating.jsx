@@ -36,8 +36,8 @@ function StarRating({ rating }) {
   );
 }
 
-StarRating.propTypes = {
-  rating: PropTypes.number.isRequired,
-};
+// StarRating.propTypes = {
+//   rating: PropTypes.number.isRequired,
+// };
 
 export default StarRating;

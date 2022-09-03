@@ -57,9 +57,9 @@ function Thumbnails({ product, handleThumbnailClick }) {
   );
 }
 
-Thumbnails.propTypes = {
-  product: PropTypes.shape({}).isRequired,
-  handleThumbnailClick: PropTypes.func.isRequired,
-};
+// Thumbnails.propTypes = {
+//   product: PropTypes.shape({}).isRequired,
+//   handleThumbnailClick: PropTypes.func.isRequired,
+// };
 
 export default Thumbnails;
