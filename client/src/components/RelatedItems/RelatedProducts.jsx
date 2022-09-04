@@ -164,36 +164,28 @@ class RelatedProducts extends React.Component {
 
   adjustForScreenSize() {
     const { startIndex } = this.state;
-    console.log('SCREEN SIZE: ', window.innerWidth);
-    console.log('Enter ADJUST SCREEN');
-    let query = '(max-width: 900px)';
+    let query = `(max-width: 900px)`;
 
     if (window.matchMedia('(max-width: 900px)').matches) {
-      console.log('HIT 900');
       this.setState({
         defaultEndIndex: 1,
         endIndex: startIndex + 1,
       });
-    } else if (window.matchMedia('(max-width: 1200px)').matches) {
-      console.log('HIT 1200');
+    } else if (window.matchMedia('(min-width: 901px) and (max-width: 1200px)').matches) {
       this.setState({
         defaultEndIndex: 2,
         endIndex: startIndex + 2,
       });
-      query = '(max-width: 1200px)';
+      query = '(min-width: 901px) and (max-width: 1200px)';
     } else {
-      console.log('HIT MAX');
       this.setState({
         defaultEndIndex: 3,
         endIndex: startIndex + 3,
       });
-      // query = '(min-width: 1201px)';
+      query = '(min-width: 1201px)';
     }
-    console.log('HIT EVENT LISTENER');
     const media = window.matchMedia(query);
-    console.log('media', media);
     media.addEventListener('change', () => this.adjustForScreenSize());
-    console.log('----------');
   }
 
   render() {
