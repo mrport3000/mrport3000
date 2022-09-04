@@ -47,9 +47,9 @@ function CompareModal({
             <table>
               <thead>
                 <tr>
-                  <th>Current Product Name</th>
+                  <th>{currProduct.name}</th>
                   <th>&nbsp;</th>
-                  <th>Compared Product Name</th>
+                  <th>{cardProduct.name}</th>
                 </tr>
               </thead>
               <tbody>
