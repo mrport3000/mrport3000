@@ -47,15 +47,9 @@ function CompareModal({
             <table>
               <thead>
                 <tr>
-<<<<<<< HEAD
-                  <th>{currProduct.name}</th>
-                  <th>&nbsp;</th>
-                  <th>{cardProduct.name}</th>
-=======
                   <th className="duke-table-sides">{currProduct.name}</th>
                   <th className="duke-table-middle">&nbsp;</th>
                   <th className="duke-table-sides">{cardProduct.name}</th>
->>>>>>> f8a25acbc574a37c31099ea0c901343301a5598e
                 </tr>
               </thead>
               <tbody>
