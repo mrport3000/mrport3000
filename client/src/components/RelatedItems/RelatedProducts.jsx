@@ -210,6 +210,16 @@ class RelatedProducts extends React.Component {
               </div>
               )
             }
+            {
+              startIndex === 0
+              && (
+              <div className="duke-arrow-container">
+                <IconContext.Provider value={{ className: "duke-arrow-hide" }}>
+                  <MdArrowBackIos />
+                </IconContext.Provider>
+              </div>
+              )
+            }
             <CompareModal
               show={show}
               handleModalButtonClick={this.handleModalButtonClick}
@@ -237,6 +247,16 @@ class RelatedProducts extends React.Component {
               <div className="duke-arrow-container">
                 <IconContext.Provider value={{ className: "duke-arrow-button" }}>
                   <MdArrowForwardIos onClick={this.handleForwardArrowClick} />
+                </IconContext.Provider>
+              </div>
+              )
+            }
+            {
+              endIndex === (relatedProducts.length - 1)
+              && (
+              <div className="duke-arrow-container">
+                <IconContext.Provider value={{ className: "duke-arrow-hide" }}>
+                  <MdArrowForwardIos />
                 </IconContext.Provider>
               </div>
               )
