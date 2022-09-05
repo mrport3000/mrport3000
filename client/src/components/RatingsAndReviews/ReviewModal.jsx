@@ -1,7 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import RatingAndReview from './RatingAndReview.jsx';
+// import RatingAndReview from './RatingAndReview.jsx';
 import ModalStarRating from './ModalStarRating.jsx';
+import ImageUpload from './ImageUpload.jsx';
+import axios from 'axios';
 
 export default class ReviewModal extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ export default class ReviewModal extends React.Component {
       fit: null,
       reviewSummary: '',
       reviewBody: '',
+      imgFiles: [],
       nickname: '',
       email: '',
 
@@ -24,20 +26,25 @@ export default class ReviewModal extends React.Component {
     this.onChangeValue = this.onChangeValue.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.liftStarRating = this.liftStarRating.bind(this);
+    this.uploadPhotoHandler = this.uploadPhotoHandler.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
     console.log('Submit was clicked', this.state);
+    this.props.closeModal(false);
   }
 
   onChangeValue(e) {
-    this.setState({ [e.target.name]: e.target.value }, () => { console.log(this.state)});
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   liftStarRating(rating) {
-    console.log('inner rating: ', rating);
-    this.setState({starRating: rating});
+    this.setState({ starRating: rating });
+  }
+
+  fileUploadHandler(e) {
+    console.log('event: ', e.target.files[0]);
   }
 
   render() {
@@ -53,7 +60,9 @@ export default class ReviewModal extends React.Component {
               Add a Review
             </h2>
             <h4>
-              About the {this.props.productName}
+              About the
+              {' '}
+              {this.props.productName}
             </h4>
           </div>
           <div className="eric-RR-modalRating">
@@ -211,12 +220,12 @@ export default class ReviewModal extends React.Component {
           </div>
           <div className="eric-RR-reviewContainer">
             <div className="eric-RR-reviewSummary">
-            <form>
-              <label>
-                <p>Add a review title:</p>
-                <input type="text" name="reviewSummary" maxLength="60" placeholder="Example: Best purchase ever!" value={this.state.value} onChange={this.onChangeValue} />
-              </label>
-            </form>
+              <form>
+                <label>
+                  <p>Add a review title:</p>
+                  <input type="text" name="reviewSummary" maxLength="60" placeholder="Example: Best purchase ever!" value={this.state.value} onChange={this.onChangeValue} />
+                </label>
+              </form>
             </div>
             <div className="eric-RR-reviewBody">
               <form>
@@ -229,7 +238,7 @@ export default class ReviewModal extends React.Component {
           </div>
           <div className="eric-RR-uploadPhoto">
             Upload photos:
-            <input type="file" />
+            <input type="file" onChange={this.fileUploadHandler} />
           </div>
           <div className="eric-RR-nickname">
             <form>
@@ -249,10 +258,12 @@ export default class ReviewModal extends React.Component {
           </div>
           <div className="eric-RR-modalSubmit">
             <form onSubmit={this.handleSubmit}>
-              <label>
+              {/* <label>
                 <input type="submit" value="submit" onClick={() => { this.props.closeModal(false); }} />
-              </label>
+              </label> */}
+              <button type="submit">Submit</button>
             </form>
+
           </div>
         </div>
       </div>
