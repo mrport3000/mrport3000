@@ -252,7 +252,7 @@ class RelatedProducts extends React.Component {
               )
             }
             {
-              endIndex === (relatedProducts.length - 1)
+              (relatedProducts.length <= endIndex || endIndex === (relatedProducts.length - 1))
               && (
               <div className="duke-arrow-container">
                 <IconContext.Provider value={{ className: "duke-arrow-hide" }}>
