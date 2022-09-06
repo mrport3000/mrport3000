@@ -260,10 +260,10 @@ header h4 {
 
 .duke-products-container {
   width: 100%;
+  padding: 40px 20px 50px 20px;
 }
 
 .duke-products-inner {
-  padding: 20px;
   max-width: 1500px;
   margin-left: auto;
   margin-right: auto;
@@ -272,7 +272,7 @@ header h4 {
 .duke-products-inner h2 {
   font-size: 2rem;
   color: #284B63;
-  margin: 20px 0px 30px 5%;
+  margin: 0px 0px 30px 5%;
 }
 
 .duke-product-carousel-container {
@@ -290,6 +290,7 @@ header h4 {
   flex-wrap: nowrap;
   align-items: flex-start;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.03);
+  border-radius: 5px;
 }
 
 .duke-card-container button {
@@ -313,6 +314,7 @@ header h4 {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  border-radius: 5px;
 }
 
 .duke-action-icon {
@@ -374,10 +376,11 @@ header h4 {
 
 .duke-outfit-container {
   width: 100%;
+  background-color: #F76C5E;
+  padding: 40px 20px 50px 20px;
 }
 
 .duke-outfit-inner {
-  padding: 20px;
   max-width: 1500px;
   margin-left: auto;
   margin-right: auto;
@@ -385,8 +388,8 @@ header h4 {
 
 .duke-outfit-inner h2 {
   font-size: 2rem;
-  color: #284B63;
-  margin: 20px 0px 30px 5%;
+  color: #FFF;
+  margin: 0px 0px 30px 5%;
 }
 
 .duke-outfit-carousel-container {
@@ -401,16 +404,14 @@ header h4 {
 }
 
 .duke-addoutfit-container {
-  height: 400px;
-  width: 275px;
   background-color: white;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  gap: 50px;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 
 .duke-addoutfit-image {
@@ -538,6 +539,10 @@ header h4 {
     width: 35%;
     aspect-ratio: 5 / 8;
   }
+  .duke-addoutfit-container {
+    width: 35%;
+    aspect-ratio: 5 / 8;
+  }
   .duke-arrow-container, .duke-arrow-hide {
     width: 7.5%;
   }
@@ -548,6 +553,10 @@ header h4 {
     width: 25%;
     aspect-ratio: 5 / 8;
   }
+  .duke-addoutfit-container {
+    width: 25%;
+    aspect-ratio: 5 / 8;
+  }
   .duke-arrow-container, .duke-arrow-hide {
     width: 6%;
   }
@@ -555,6 +564,10 @@ header h4 {
 
 @media screen and (min-width: 1251px) {
   .duke-card-container {
+    width: 20%;
+    aspect-ratio: 5 / 8;
+  }
+  .duke-addoutfit-container {
     width: 20%;
     aspect-ratio: 5 / 8;
   }

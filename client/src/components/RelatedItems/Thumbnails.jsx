@@ -24,7 +24,9 @@ function Thumbnails({ product, handleThumbnailClick }) {
 
   product.styles.forEach((style) => {
     style.photos.forEach((thumbnail) => {
-      thumbnailStorage.push(thumbnail.thumbnail_url);
+      if (typeof thumbnail.thumbnail_url === 'string') {
+        thumbnailStorage.push(thumbnail.thumbnail_url);
+      }
     });
   });
 
