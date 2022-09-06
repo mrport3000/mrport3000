@@ -1,3 +1,33 @@
+h1 {
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: 700;
+}
+
+h2 {
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: 600;
+}
+
+h3 {
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: 500;
+}
+
+h4 {
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: 400;
+}
+
+h5 {
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: 300;
+}
+
+p {
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: 100;
+}
+
 body {
   margin: 0px;
 }
@@ -8,16 +38,14 @@ header {
 
 header h1 {
   margin: 0px 0px 10px 0px;
-  font-family: 'Roboto Mono', monospace;
-  font-weight: 700;
-  font-size: 3rem;
+  font-size: 2.5rem;
   text-align: center;
 }
 
-header h2 {
+header h4 {
   margin: 0px 0px 10px 0px;
-  font-family: 'Roboto Mono', monospace;
-  font-weight: 500;
+  font-size: 1.5rem;
+  font-style: italic;
   text-align: center;
 }
 
@@ -241,28 +269,27 @@ header h2 {
   margin-right: auto;
 }
 
+.duke-products-inner h2 {
+  font-size: 2rem;
+  color: #284B63;
+  margin: 20px 0px 30px 5%;
+}
+
 .duke-product-carousel-container {
+  width: 100%;
   display: flex;
   flex-wrap: nowrap;
-  align-items: flex-start;
-  gap: 50px;
+  justify-content: space-between;
 }
 
 .duke-card-container {
   position: relative;
-  height: 400px;
-  width: 275px;
   background-color: white;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: flex-start;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
-  border-left: 1px dashed #F76C5E;
-}
-
-.duke-card-container:nth-child(2) {
-  border: none;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.03);
 }
 
 .duke-card-container button {
@@ -277,6 +304,7 @@ header h2 {
 .duke-card-preview-image {
   height: 100%;
   width: 100%;
+  border-radius: 5px;
 }
 
 .duke-outfit-header {
@@ -295,8 +323,9 @@ header h2 {
   width: 1.75em;
 }
 
-.duke-productcard-body p {
+.duke-productcard-body h1, h2, h3, h4, h5, p {
   margin: 0px;
+  padding: 0px;
 }
 
 .duke-productcard-body {
@@ -305,13 +334,18 @@ header h2 {
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: flex-start;
-  justify-content: space-around;
+  justify-content: space-evenly;
   height: 40%;
+  width: 100%;
+}
+
+.duke-productcard-body h1, h2, h3, h4, h5, p {
+  font-size: 1rem;
 }
 
 .duke-card-image {
   border-bottom: 1px solid black;
-  height: 60%;
+  height: 100%;
   width: 100%;
 }
 
@@ -339,7 +373,6 @@ header h2 {
 
 
 .duke-outfit-container {
-  padding: 50px;
   width: 100%;
 }
 
@@ -350,11 +383,17 @@ header h2 {
   margin-right: auto;
 }
 
+.duke-outfit-inner h2 {
+  font-size: 2rem;
+  color: #284B63;
+  margin: 20px 0px 30px 5%;
+}
+
 .duke-outfit-carousel-container {
+  width: 100%;
   display: flex;
   flex-wrap: nowrap;
-  align-items: center;
-  gap: 50px;
+  justify-content: space-between;
 }
 
 .duke-outfit-carousel-container button {
@@ -382,19 +421,17 @@ header h2 {
 .duke-arrow-container {
   display: flex;
   align-items: center;
-  height: 400px;
 }
 
 .duke-arrow-button {
-  height: 3.5em;
-  width: 3.5em;
-  /* color:rgba(0, 0, 0, 0.2) */
-  color: #F76C5E;
+  height: 10em;
+  width: 10em;
+  color: rgb(40, 75, 99, 0.2);
 }
 
 .duke-arrow-hide {
-  height: 3.5em;
-  width: 3.5em;
+  height: 10em;
+  width: 10em;
   color:rgba(0, 0, 0, 0)
 }
 
@@ -496,3 +533,32 @@ header h2 {
   height: 20px;
 }
 
+@media screen and (max-width: 950px) {
+  .duke-card-container {
+    width: 35%;
+    aspect-ratio: 5 / 8;
+  }
+  .duke-arrow-container, .duke-arrow-hide {
+    width: 7.5%;
+  }
+}
+
+@media screen and (min-width: 951px) and (max-width: 1250px) {
+  .duke-card-container {
+    width: 25%;
+    aspect-ratio: 5 / 8;
+  }
+  .duke-arrow-container, .duke-arrow-hide {
+    width: 6%;
+  }
+}
+
+@media screen and (min-width: 1251px) {
+  .duke-card-container {
+    width: 20%;
+    aspect-ratio: 5 / 8;
+  }
+  .duke-arrow-container, .duke-arrow-hide {
+    width: 4.5%;
+  }
+}

@@ -75,9 +75,9 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
         />
       </div>
       <div className="duke-productcard-body">
-        <p>{product.category}</p>
+        <h5>{product.category}</h5>
         <div>
-          <p><strong>{product.name}</strong></p>
+          <h4>{product.name}</h4>
           <p><i>{product.slogan}</i></p>
         </div>
         {priceBlock}

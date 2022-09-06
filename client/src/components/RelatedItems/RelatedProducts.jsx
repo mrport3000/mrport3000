@@ -164,25 +164,25 @@ class RelatedProducts extends React.Component {
 
   adjustForScreenSize() {
     const { startIndex } = this.state;
-    let query = `(max-width: 900px)`;
+    let query = `(max-width: 950px)`;
 
-    if (window.matchMedia('(max-width: 900px)').matches) {
+    if (window.matchMedia('(max-width: 950px)').matches) {
       this.setState({
         defaultEndIndex: 1,
         endIndex: startIndex + 1,
       });
-    } else if (window.matchMedia('(min-width: 901px) and (max-width: 1200px)').matches) {
+    } else if (window.matchMedia('(min-width: 951px) and (max-width: 1250px)').matches) {
       this.setState({
         defaultEndIndex: 2,
         endIndex: startIndex + 2,
       });
-      query = '(min-width: 901px) and (max-width: 1200px)';
+      query = '(min-width: 951px) and (max-width: 1250px)';
     } else {
       this.setState({
         defaultEndIndex: 3,
         endIndex: startIndex + 3,
       });
-      query = '(min-width: 1201px)';
+      query = '(min-width: 1251px)';
     }
     const media = window.matchMedia(query);
     media.addEventListener('change', () => this.adjustForScreenSize());
@@ -198,7 +198,7 @@ class RelatedProducts extends React.Component {
     return (
       <div className="duke-products-container">
         <div className="duke-products-inner">
-          <h4>RELATED PRODUCTS</h4>
+          <h2>RELATED PRODUCTS</h2>
           <div className="duke-product-carousel-container" data-testid="product-carousel">
             {
               startIndex > 0
