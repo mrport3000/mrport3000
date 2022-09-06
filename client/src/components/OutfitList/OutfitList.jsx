@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import OutfitCard from './OutfitCard.jsx';
 import AddOutfit from './AddOutfit.jsx';
+import Placeholder from './Placeholder.jsx';
 
 class OutfitList extends React.Component {
   constructor(props) {
@@ -63,6 +64,22 @@ class OutfitList extends React.Component {
     media.addEventListener('change', () => this.adjustForScreenSize());
   }
 
+  // Adds hidden cards to OutfitList to maintain spacing
+  outfitFiller() {
+    const { outfits } = this.props;
+    const { defaultEndIndex } = this.state;
+    console.log('defaultEndIndex', defaultEndIndex);
+    console.log('outfits length', outfits.length);
+    let cardToAdd = (defaultEndIndex + 1) - outfits.length;
+    const placeholders = [];
+    while (cardToAdd > 0) {
+      placeholders.push(<Placeholder />);
+      cardToAdd--;
+    }
+    console.log('PLACEHOLDERS: ', placeholders);
+    return placeholders;
+  }
+
   render() {
     const { startIndex, endIndex } = this.state;
     const {
@@ -99,6 +116,7 @@ class OutfitList extends React.Component {
                 }
               })
             }
+            {this.outfitFiller().map((fillerProduct) => fillerProduct)}
             {endIndex < (outfits.length - 1) && (
             <div className="duke-arrow-container">
               <MdArrowForwardIos className="duke-arrow-button" onClick={this.handleForwardArrowClick} />
