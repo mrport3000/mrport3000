@@ -19,12 +19,6 @@ class RatingAndReview extends React.Component {
     this.filtered = this.filtered.bind(this);
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.reviews !== prevProps.reviews) {
-  //     this.setState({ totalReviews: this.props.reviews });
-  //   }
-  // }
-
   handleModal(bool) {
     this.setState({ show: bool});
   }
@@ -48,12 +42,12 @@ class RatingAndReview extends React.Component {
   }
 
   render() {
+    // console.log('R&R props: ', this.props)
     const { show } = this.state;
     if (this.props.reviews.length === 0) {
       return <div />;
     }
     const ratingBreakdown = this.filtered(this.props.reviews);
-    //console.log('props', this.props);
 
     return (
       <div className="eric-RR-container">
@@ -67,11 +61,19 @@ class RatingAndReview extends React.Component {
         </div>
         <div className="eric-RR-sortReviews">
           <div className="eric-RR-modalContainer">
-            {/* <button> Show Modal</button> */}
-            <ReviewModal show={show} closeModal={this.handleModal} productName={this.props.product} />
+            <ReviewModal
+              show={show}
+              closeModal={this.handleModal}
+              productName={this.props.product}
+              characteristics={this.props.characteristics}
+            />
           </div>
           <div className="eric-RR-sort">
-            <SortReviews reviews={this.props.reviews} renderModal={this.handleModal} productId={this.props.productId} />
+            <SortReviews
+              reviews={this.props.reviews}
+              renderModal={this.handleModal}
+              productId={this.props.productId}
+            />
           </div>
         </div>
       </div>

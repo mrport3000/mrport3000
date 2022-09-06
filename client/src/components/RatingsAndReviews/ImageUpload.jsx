@@ -10,7 +10,7 @@ class ImageUpload extends React.Component {
 
   render() {
     return (
-      <div>Testing</div>
+      <div className="eric-imageUpdloadContainer"></div>
     );
   }
 }

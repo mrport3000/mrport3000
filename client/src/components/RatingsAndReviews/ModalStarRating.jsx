@@ -44,6 +44,7 @@ class ModalStarRating extends React.Component {
                     name="rating"
                     value={ratingVal}
                     onClick={(ratingVal) => this.starClick(ratingVal.target.value)}
+                    required
                   />
                   <FaStar
                     className="eric-RR-star"

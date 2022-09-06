@@ -1,8 +1,9 @@
 import React from 'react';
 // import RatingAndReview from './RatingAndReview.jsx';
+import axios from 'axios';
+import { Image } from 'cloudinary-react';
 import ModalStarRating from './ModalStarRating.jsx';
 import ImageUpload from './ImageUpload.jsx';
-import axios from 'axios';
 
 export default class ReviewModal extends React.Component {
   constructor(props) {
@@ -43,14 +44,30 @@ export default class ReviewModal extends React.Component {
     this.setState({ starRating: rating });
   }
 
-  fileUploadHandler(e) {
-    console.log('event: ', e.target.files[0]);
+  uploadPhotoHandler(e) {
+    const { imgFiles } = this.state;
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'i7xdugiz');
+
+    axios.post('https://api.cloudinary.com/v1_1/deitkdfiq/image/upload', formData)
+      .then((response) => {
+        // console.log('uploadImage response: ', response.data.secure_url);
+        const fileObj = response.data;
+        const url = response.data.secure_url;
+        this.setState({ imgFiles: imgFiles.concat([fileObj]) });
+      });
   }
 
   render() {
+    // console.log('Modal Props: ', this.props.characteristics);
+    const { characteristics } = this.props;
+    const { imgFiles } = this.state;
     if (!this.props.show) {
       return null;
     }
+
     return (
       <div className="eric-RR-modal">
 
@@ -69,26 +86,30 @@ export default class ReviewModal extends React.Component {
             <ModalStarRating liftRating={this.liftStarRating} />
           </div>
           <div className="eric-RR-recommendProduct">
-            <fieldset>
-              <legend>
-                Do you recommend this product?
-              </legend>
-              <div>
-                <input type="radio" value="true" name="recommended" onChange={this.onChangeValue} />
-                {' '}
-                Yes
-                <input type="radio" value="false" name="recommended" onChange={this.onChangeValue} />
-                {' '}
-                No
-              </div>
-            </fieldset>
+            <form>
+
+              <fieldset>
+                <legend>
+                  Do you recommend this product?
+                </legend>
+                <div>
+                  <input type="radio" value="true" name="recommended" onChange={this.onChangeValue} required="required" />
+                  {' '}
+                  Yes
+                  <input type="radio" value="false" name="recommended" onChange={this.onChangeValue} />
+                  {' '}
+                  No
+                </div>
+              </fieldset>
+
+            </form>
           </div>
           <div className="eric-RR-characteristics">
             <fieldset>
               <legend>
                 Product Characteristics
               </legend>
-              <div className="eric-RR-cRating">
+              {/* <div className="eric-RR-cRating">
                 <div className="eric-RR-r0" />
                 <div className="eric-RR-r1">1</div>
                 <div className="eric-RR-r2">2</div>
@@ -215,7 +236,155 @@ export default class ReviewModal extends React.Component {
                   {' '}
                   Runs Long
                 </div>
+              </div> */}
+              <div>
+                {
+               Object.keys(characteristics).map((char) => {
+                 if (char === 'Size') {
+                   return (
+                     <div className="eric-RR-cSize">
+                       <div className="eric-RR-cTitle"> Size: </div>
+                       <div onChange={this.onChangeValue}>
+                         <input type="radio" value="1" name="size" />
+                         {' '}
+                         A Size Too Small
+                         <input type="radio" value="2" name="size" />
+                         {' '}
+                         1/2 Size Too Small
+                         <input type="radio" value="3" name="size" />
+                         {' '}
+                         Perfect
+                         <input type="radio" value="4" name="size" />
+                         {' '}
+                         1/2 Size Too Big
+                         <input type="radio" value="5" name="size" />
+                         {' '}
+                         A Size Too Big
+                       </div>
+                     </div>
+                   );
+                 } if (char === 'Width') {
+                   return (
+                     <div className="eric-RR-cWidth">
+                       <div className="eric-RR-cTitle"> Width: </div>
+                       <div onChange={this.onChangeValue}>
+                         <input type="radio" value="1" name="width" />
+                         {' '}
+                         Too Narrow
+                         <input type="radio" value="2" name="width" />
+                         {' '}
+                         Slightly Narrow
+                         <input type="radio" value="3" name="width" />
+                         {' '}
+                         Perfect
+                         <input type="radio" value="4" name="width" />
+                         {' '}
+                         Slightly Wide
+                         <input type="radio" value="5" name="width" />
+                         {' '}
+                         Too Wide
+                       </div>
+                     </div>
+                   );
+                 } if (char === 'Comfort') {
+                   return (
+                     <div className="eric-RR-cComfort">
+                       <div className="eric-RR-cTitle"> Comfort: </div>
+                       <div onChange={this.onChangeValue}>
+                         <input type="radio" value="1" name="comfort" />
+                         {' '}
+                         Uncomfortable
+                         <input type="radio" value="2" name="comfort" />
+                         {' '}
+                         Slightly Uncomfortable
+                         <input type="radio" value="3" name="comfort" />
+                         {' '}
+                         Ok
+                         <input type="radio" value="4" name="comfort" />
+                         {' '}
+                         Comfortable
+                         <input type="radio" value="5" name="comfort" />
+                         {' '}
+                         Perfect
+                       </div>
+                     </div>
+                   );
+                 } if (char === 'Quality') {
+                   return (
+                     <div className="eric-RR-cQuality">
+                       <div className="eric-RR-cTitle"> Quality: </div>
+                       <div onChange={this.onChangeValue}>
+                         <input type="radio" value="1" name="quality" />
+                         {' '}
+                         Poor
+                         <input type="radio" value="2" name="quality" />
+                         {' '}
+                         Below Average
+                         <input type="radio" value="3" name="quality" />
+                         {' '}
+                         What I Expected
+                         <input type="radio" value="4" name="quality" />
+                         {' '}
+                         Pretty Great
+                         <input type="radio" value="5" name="quality" />
+                         {' '}
+                         Perfect
+                       </div>
+                     </div>
+                   );
+                 } if (char === 'Length') {
+                   return (
+                     <div className="eric-RR-cLength">
+                       <div className="eric-RR-cTitle">Length:</div>
+                       <div onChange={this.onChangeValue}>
+                         <input type="radio" value="1" name="length" />
+                         {' '}
+                         Runs Short
+                         <input type="radio" value="2" name="length" />
+                         {' '}
+                         Runs Slightly Short
+                         <input type="radio" value="3" name="length" />
+                         {' '}
+                         Perfect
+                         <input type="radio" value="4" name="length" />
+                         {' '}
+                         Runs Slightly Long
+                         <input type="radio" value="5" name="length" />
+                         {' '}
+                         Runs Long
+                       </div>
+                     </div>
+                   );
+                 } if (char === 'Fit') {
+                   return (
+                     <div className="eric-RR-cFit">
+                       <div className="eric-RR-cTitle"> Fit: </div>
+                       <div onChange={this.onChangeValue}>
+                         <input type="radio" value="1" name="fit" />
+                         {' '}
+                         Runs Tight
+                         <input type="radio" value="2" name="fit" />
+                         {' '}
+                         Runs Slightly Tight
+                         <input type="radio" value="3" name="fit" />
+                         {' '}
+                         Perfect
+                         <input type="radio" value="4" name="fit" />
+                         {' '}
+                         Runs Slightly Long
+                         <input type="radio" value="5" name="fit" />
+                         {' '}
+                         Runs Long
+                       </div>
+                     </div>
+                   );
+                 }
+
+                 // end of map//
+               })
+              }
               </div>
+
             </fieldset>
           </div>
           <div className="eric-RR-reviewContainer">
@@ -238,7 +407,13 @@ export default class ReviewModal extends React.Component {
           </div>
           <div className="eric-RR-uploadPhoto">
             Upload photos:
-            <input type="file" onChange={this.fileUploadHandler} />
+            <input type="file" onChange={this.uploadPhotoHandler} disabled={imgFiles.length >= 5} />
+            <div className="eric-RR-upMap">
+              {
+                imgFiles.map((file) => <Image cloudName="deitkdfiq" publicId={file.secure_url} />)
+                }
+            </div>
+
           </div>
           <div className="eric-RR-nickname">
             <form>
@@ -258,9 +433,6 @@ export default class ReviewModal extends React.Component {
           </div>
           <div className="eric-RR-modalSubmit">
             <form onSubmit={this.handleSubmit}>
-              {/* <label>
-                <input type="submit" value="submit" onClick={() => { this.props.closeModal(false); }} />
-              </label> */}
               <button type="submit">Submit</button>
             </form>
 

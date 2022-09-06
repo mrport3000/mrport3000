@@ -22,6 +22,8 @@ class App extends React.Component {
       rating: null,
       reviewCount: null,
       reviewPage: null,
+      characteristics: null,
+      recommended: null,
       reviews: [],
       outfits: [],
     };
@@ -116,6 +118,7 @@ class App extends React.Component {
               .then(() => {
                 axios.get(`/reviews/${productId}`)
                   .then((results) => {
+                   //console.log('meta results: ', results.data.recommended)
                     const { ratings } = results.data;
                     this.setState({
                       productId,
@@ -124,6 +127,8 @@ class App extends React.Component {
                       qandaInfo,
                       rating: averageRating(ratings),
                       reviewCount: totalReviews(ratings),
+                      characteristics: results.data.characteristics,
+                      recommended: results.data.recommended,
                       outfits: localStorage.get('outfitList') || [],
                     });
                   })
@@ -176,6 +181,8 @@ class App extends React.Component {
       reviewCount,
       reviewPage,
       reviews,
+      characteristics,
+      recommended,
       outfits,
     } = this.state;
 
@@ -219,6 +226,8 @@ class App extends React.Component {
               page={reviewPage}
               product={productInfo.name}
               productId={productId}
+              characteristics={characteristics}
+              recommended={recommended}
             />
           </div>
         </div>

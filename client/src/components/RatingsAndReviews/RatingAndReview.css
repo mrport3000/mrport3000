@@ -334,6 +334,11 @@
   border-radius: 15px;
 }
 
+.eric-RR-uploadPhoto img {
+  height: 100px;
+  width: 100px;
+}
+
 .eric-RR-modalSubmit {
   display: flex;
   justify-content: center;
