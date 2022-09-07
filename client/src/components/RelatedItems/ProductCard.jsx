@@ -13,6 +13,9 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
     ? defaultStyle[0].photos[0].url : product.styles[0].photos[0].url;
 
   const [previewPhoto, setPreviewPhoto] = useState(product.newDefaultPhoto || defaultPhotoURL);
+
+  const placeHolderPhoto = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd02zeVLQ2fKKrq6VtQ5fSEvkIGaefaaJTcA&usqp=CAU";
+
   const [isShown, setIsShown] = useState(false);
 
   // dummy test data for sales price
@@ -56,7 +59,7 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
           className="duke-card-preview-image"
           alt={product.name}
           value={product.id}
-          src={previewPhoto}
+          src={previewPhoto || placeHolderPhoto}
         />
         {isShown && (
         <Thumbnails
@@ -75,9 +78,9 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
         />
       </div>
       <div className="duke-productcard-body">
-        <p>{product.category}</p>
+        <h5>{product.category}</h5>
         <div>
-          <p><strong>{product.name}</strong></p>
+          <h4>{product.name}</h4>
           <p><i>{product.slogan}</i></p>
         </div>
         {priceBlock}

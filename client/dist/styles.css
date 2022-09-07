@@ -2,8 +2,69 @@ body {
   background-color: #D9D9D9;
 }
 
+h1 {
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: 700;
+}
+
+h2 {
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: 600;
+}
+
+h3 {
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: 500;
+}
+
+h4 {
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: 400;
+}
+
+h5 {
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: 300;
+}
+
+p {
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: 100;
+}
+
+body {
+  margin: 0px;
+}
+
+header {
+  padding: 10px;
+  border-bottom: 2px solid #353535;
+}
+
+header h1 {
+  margin: 0px 0px 10px 0px;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+header h4 {
+  margin: 0px 0px 10px 0px;
+  font-size: 1.5rem;
+  font-style: italic;
+  text-align: center;
+}
+
+.pre-header {
+  background-color: #284B63;
+  width: 100%;
+  height: 25px;
+  padding: 0px;
+  margin: 0px;
+}
+
 .keith-overview-div {
   margin: 40px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -230,32 +291,41 @@ body {
 
 .duke-products-container {
   width: 100%;
+  padding: 40px 20px 50px 20px;
 }
 
 .duke-products-inner {
-  padding: 20px;
   max-width: 1500px;
   margin-left: auto;
   margin-right: auto;
 }
 
+.duke-products-inner h2 {
+  font-size: 2rem;
+  color: #284B63;
+  margin: 0px 0px 30px 5%;
+}
+
 .duke-product-carousel-container {
+  width: 100%;
   display: flex;
   flex-wrap: nowrap;
-  align-items: flex-start;
-  gap: 50px;
+  justify-content: space-between;
 }
 
 .duke-card-container {
   position: relative;
-  height: 400px;
-  width: 275px;
   background-color: white;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: flex-start;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.03);
+  border-radius: 5px;
+}
+
+.duke-card-container button {
+  border: none;
 }
 
 .duke-card-header {
@@ -266,6 +336,7 @@ body {
 .duke-card-preview-image {
   height: 100%;
   width: 100%;
+  border-radius: 5px;
 }
 
 .duke-outfit-header {
@@ -274,10 +345,7 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
-}
-
-.duke-card-container button {
-  border: none;
+  border-radius: 5px;
 }
 
 .duke-action-icon {
@@ -288,8 +356,10 @@ body {
   width: 1.75em;
 }
 
-.duke-productcard-body p {
+.duke-productcard-body h1, h2, h3, h4, h5, p {
   margin: 0px;
+  padding: 0px;
+  font-size: 1rem;
 }
 
 .duke-productcard-body {
@@ -298,13 +368,14 @@ body {
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: flex-start;
-  justify-content: center;
-  gap: 10px;
+  justify-content: space-evenly;
+  height: 40%;
+  width: 100%;
 }
 
 .duke-card-image {
   border-bottom: 1px solid black;
-  height: 60%;
+  height: 100%;
   width: 100%;
 }
 
@@ -332,39 +403,47 @@ body {
 
 
 .duke-outfit-container {
-  padding: 50px;
   width: 100%;
+  background-color: #F76C5E;
+  padding: 40px 20px 50px 20px;
 }
 
 .duke-outfit-inner {
-  padding: 20px;
   max-width: 1500px;
   margin-left: auto;
   margin-right: auto;
 }
 
+.duke-outfit-inner h2 {
+  font-size: 2rem;
+  color: #FFF;
+  margin: 0px 0px 30px 5%;
+}
+
 .duke-outfit-carousel-container {
+  width: 100%;
   display: flex;
   flex-wrap: nowrap;
-  align-items: center;
-  gap: 50px;
+  justify-content: space-between;
 }
 
 .duke-outfit-carousel-container button {
   border: none;
 }
 
+.duke-outfit-carousel-container .duke-arrow-button {
+  color: rgb(255, 255, 255, 0.5);
+}
+
 .duke-addoutfit-container {
-  height: 400px;
-  width: 275px;
   background-color: white;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  gap: 50px;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 
 .duke-addoutfit-image {
@@ -375,13 +454,18 @@ body {
 .duke-arrow-container {
   display: flex;
   align-items: center;
-  height: 400px;
 }
 
 .duke-arrow-button {
-  height: 3.5em;
-  width: 3.5em;
-  color:rgba(0, 0, 0, 0.2)
+  height: 10em;
+  width: 10em;
+  color: rgb(40, 75, 99, 0.2);
+}
+
+.duke-arrow-hide {
+  height: 10em;
+  width: 10em;
+  color:rgba(0, 0, 0, 0)
 }
 
 .duke-modal {
@@ -398,8 +482,9 @@ body {
 
 .duke-modal-content {
   width: 700px;
-  background-color: #fff;
+  background-color: #FFF;
   padding: 30px 30px 20px 30px;
+  border-radius: 5px;
 }
 
 .duke-modal-footer {
@@ -407,6 +492,16 @@ body {
   justify-content: center;
   align-items: center;
   padding-top: 20px;
+}
+
+.duke-button {
+  background-color: #F76C5E;
+  border-color: 5px;
+  font-size: 1rem;
+  padding: 10px 30px 10px 30px;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .duke-modal-body {
@@ -423,15 +518,24 @@ body {
   border: 1px solid;
 }
 
+.duke-table-middle {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 20%;
+}
+
+.duke-table-sides {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 40%;
+}
+
 .duke-modal-body thead {
-  background-color: #B8C4BB;
+  background-color: #284B63;
   position: sticky;
   top: 0;
   border: 1px solid;
-}
-
-.duke-modal-body th, td {
-  padding: 10px;
+  color: white;
 }
 
 .duke-modal-body td {
@@ -462,3 +566,48 @@ body {
   height: 20px;
 }
 
+.duke-placeholder {
+  visibility: hidden;
+}
+
+@media screen and (max-width: 950px) {
+  .duke-card-container {
+    width: 35%;
+    aspect-ratio: 5 / 8;
+  }
+  .duke-addoutfit-container {
+    width: 35%;
+    aspect-ratio: 5 / 8;
+  }
+  .duke-arrow-container, .duke-arrow-hide {
+    width: 7.5%;
+  }
+}
+
+@media screen and (min-width: 951px) and (max-width: 1250px) {
+  .duke-card-container {
+    width: 25%;
+    aspect-ratio: 5 / 8;
+  }
+  .duke-addoutfit-container {
+    width: 25%;
+    aspect-ratio: 5 / 8;
+  }
+  .duke-arrow-container, .duke-arrow-hide {
+    width: 6%;
+  }
+}
+
+@media screen and (min-width: 1251px) {
+  .duke-card-container {
+    width: 20%;
+    aspect-ratio: 5 / 8;
+  }
+  .duke-addoutfit-container {
+    width: 20%;
+    aspect-ratio: 5 / 8;
+  }
+  .duke-arrow-container, .duke-arrow-hide {
+    width: 4.5%;
+  }
+}
