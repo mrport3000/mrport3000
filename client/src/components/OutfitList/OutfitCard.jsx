@@ -27,10 +27,13 @@ function OutfitCard({ product, handleRemoveOutfitClick }) {
 
   return (
     <div className="duke-card-container" data-testid="outfit-card">
-      <div
-        className="duke-outfit-header"
-        style={{ backgroundImage: `url(${defaultPhotoURL || placeHolderPhoto})` }}
-      >
+      <div className="duke-outfit-header">
+        <img
+          className="duke-outfit-preview-image"
+          alt={product.name}
+          value={product.id}
+          src={defaultPhotoURL || placeHolderPhoto}
+        />
         <img src={circleX} className="duke-action-icon" onClick={handleRemoveOutfitClick} value={product.id} alt="star-icon" />
       </div>
       <div className="duke-productcard-body">
