@@ -63,7 +63,6 @@ header h4 {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  background-color: #D9D9D9;
 }
 
 .keith-top-div {
@@ -328,6 +327,7 @@ header h4 {
 .duke-productcard-body h1, h2, h3, h4, h5, p {
   margin: 0px;
   padding: 0px;
+  font-size: 1rem;
 }
 
 .duke-productcard-body {
@@ -339,10 +339,6 @@ header h4 {
   justify-content: space-evenly;
   height: 40%;
   width: 100%;
-}
-
-.duke-productcard-body h1, h2, h3, h4, h5, p {
-  font-size: 1rem;
 }
 
 .duke-card-image {
