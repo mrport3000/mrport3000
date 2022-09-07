@@ -34,7 +34,8 @@ export default function ThumbnailCarousel({
                 backgroundRepeat: 'no-repeat',
                 backgroundPositionX: 'center',
                 backgroundPositionY: 'center',
-                border: thumbIndex - startIndex === index ? '2px solid darkgoldenrod' : 'none',
+                border: thumbIndex - startIndex === index ? '4px solid #3C6E71' : 'none',
+                borderRadius: '10px',
                 opacity: thumbIndex - startIndex === index ? '80%' : '100%',
               }
             }

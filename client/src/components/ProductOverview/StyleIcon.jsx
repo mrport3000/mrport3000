@@ -18,7 +18,8 @@ export default function StyleIcon({ url, index, handleStyleChange, styleIndex })
             backgroundRepeat: 'no-repeat',
             backgroundPositionX: 'center',
             backgroundPositionY: 'center',
-            border: styleIndex === index ? '3px solid darkgoldenrod' : 'none',
+            border: styleIndex === index ? '3px solid #3C6E71' : 'white',
+            borderRadius: '50%',
             opacity: styleIndex === index ? '80%' : '100%',
           }
         }

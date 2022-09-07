@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const compression = require('compression');
 const axios = require('axios');
 
 const app = express();
@@ -11,6 +12,7 @@ const headers = {
   },
 };
 
+app.use(compression());
 app.use(express.static('client/dist'));
 app.use(express.json());
 

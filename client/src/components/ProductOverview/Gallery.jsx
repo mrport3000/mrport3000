@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 // import { motion } from 'framer-motion';
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight, MdFullscreenExit } from 'react-icons/md';
 import ThumbnailCarousel from './ThumbnailCarousel.jsx';
 
 class Gallery extends React.Component {
@@ -107,10 +107,12 @@ class Gallery extends React.Component {
     return (
       <button
         type="button"
-        className={expandedView ? "keith-expanded-main-photo": "keith-unexpanded-main-photo"}
+        className="keith-main-photo"
         onClick={handleExpandClick}
         onMouseMove={zoomed ? this.handleZoomMouseMove : () => {}}
         style={{
+          width: expandedView ? '1200px' : '650px',
+          height: expandedView ? '700px' : '450px',
           cursor: hover ? hoverStyle : 'default',
           backgroundImage: `url(${mainImage})`,
           backgroundSize: zoomed ? '250%' : 'contain',
@@ -150,6 +152,7 @@ class Gallery extends React.Component {
             )}
           </div>
         )}
+        {expandedView && <MdFullscreenExit className="keith-fullscreen-exit" />}
       </button>
     );
   }

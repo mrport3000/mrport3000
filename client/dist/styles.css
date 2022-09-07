@@ -1,5 +1,9 @@
+body {
+  background-color: #D9D9D9;
+}
 
 .keith-overview-div {
+  margin: 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -20,26 +24,15 @@
   align-items: center;
 }
 
-.keith-unexpanded-main-photo {
+.keith-main-photo {
   display: flex;
+  border-radius: 10px;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-end;
   margin: 50px;
-  width: 680px;
-  height: 450px;
   border: none;
-}
-
-.keith-expanded-main-photo {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-end;
-  margin: 50px;
-  width: 1200px;
-  height: 700px;
-  border: none;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
 }
 
 .keith-ud-arrow-container {
@@ -51,7 +44,7 @@
 .keith-ud-arrow-button {
   height: 20px;
   width: 20px;
-  color: darkgoldenrod;
+  color: #3C6E71;
 }
 
 .keith-lr-arrows-row {
@@ -75,7 +68,7 @@
 .keith-lr-arrow-button {
   height: 50px;
   width: 50px;
-  color: darkgoldenrod;
+  color: #3C6E71;
 }
 
 .keith-thumbnail {
@@ -83,45 +76,58 @@
   height: 30px;
 }
 
+.keith-fullscreen-exit {
+  color: #3C6E71;
+  align-self: flex-start;
+  height: 40px;
+  width: 40px;
+}
+
 .keith-product-info-div {
+  color: #284B63;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 20px 40px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   font-family: Helvetica, sans-serif;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
 }
 
-.keith-review {
-  margin-bottom: 0px;
+.keith-review:hover {
   text-decoration: underline;
+  text-decoration-color: #284B63;
 }
 
 .keith-category {
+  color: #284B63;
   text-transform: uppercase;
   margin-bottom: 0px
 }
 
 .keith-product-name {
-  margin-top: 1px;
-  margin-bottom: 2px;
-}
-
-.keith-price {
+  font-family: 'Roboto Slab', serif;
+  color: #284B63;
+  margin-top: 5px;
   margin-bottom: 10px;
 }
 
 .keith-desc-div {
+  width: 80%;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: stretch;
+  align-items: center;
   margin: 20px;
 }
 
 .keith-summary-div {
   font-family: Helvetica, sans-serif;
-  flex-shrink: 2;
   padding: 20px;
+  color: #284B63;
 }
 
 .keith-feature-div {
@@ -129,10 +135,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  border-left: 1px solid black;
+  padding: 20px;
+  border-left: 2px solid #284B63;
+  color: #284B63;
 }
 
 .keith-feature {
+  display: flex;
+  white-space: pre;
+  flex-direction: row;
   font-family: Helvetica, sans-serif;
   margin: 7px;
 }
@@ -141,13 +152,19 @@
   color: red
 }
 
+.keith-price {
+  color: #284B63;
+  margin: 10px 0;
+}
+
 .keith-style {
-  margin: 0;
+  color: #284B63;
+  margin: 10px 0px 0px 0px;
 }
 
 .keith-style-icon {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border: none;
   display: flex;
   flex-direction: row;
@@ -158,16 +175,18 @@
 .keith-style-check {
   width: 20px;
   height: 20px;
-  color: darkgoldenrod;
-
+  color: #3C6E71;
 }
 
 .keith-options-div {
   width: 100px;
 }
 
-.keith-style-selector-div {
-  margin: 0 0 0 5px;
+.keith-cart-div {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .keith-add-cart {
@@ -181,6 +200,17 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+
+.keith-size-quantity-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.keith-special-message {
+  height: 18px;
+  margin: 16px;
 }
 
 .keith-star-button {
