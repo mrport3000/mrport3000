@@ -164,36 +164,28 @@ class RelatedProducts extends React.Component {
 
   adjustForScreenSize() {
     const { startIndex } = this.state;
-    console.log('SCREEN SIZE: ', window.innerWidth);
-    console.log('Enter ADJUST SCREEN');
-    let query = '(max-width: 900px)';
+    let query = `(max-width: 950px)`;
 
-    if (window.matchMedia('(max-width: 900px)').matches) {
-      console.log('HIT 900');
+    if (window.matchMedia('(max-width: 950px)').matches) {
       this.setState({
         defaultEndIndex: 1,
         endIndex: startIndex + 1,
       });
-    } else if (window.matchMedia('(max-width: 1200px)').matches) {
-      console.log('HIT 1200');
+    } else if (window.matchMedia('(min-width: 951px) and (max-width: 1250px)').matches) {
       this.setState({
         defaultEndIndex: 2,
         endIndex: startIndex + 2,
       });
-      query = '(max-width: 1200px)';
+      query = '(min-width: 951px) and (max-width: 1250px)';
     } else {
-      console.log('HIT MAX');
       this.setState({
         defaultEndIndex: 3,
         endIndex: startIndex + 3,
       });
-      // query = '(min-width: 1201px)';
+      query = '(min-width: 1251px)';
     }
-    console.log('HIT EVENT LISTENER');
     const media = window.matchMedia(query);
-    console.log('media', media);
     media.addEventListener('change', () => this.adjustForScreenSize());
-    console.log('----------');
   }
 
   render() {
@@ -206,7 +198,7 @@ class RelatedProducts extends React.Component {
     return (
       <div className="duke-products-container">
         <div className="duke-products-inner">
-          <h4>RELATED PRODUCTS</h4>
+          <h2>RELATED PRODUCTS</h2>
           <div className="duke-product-carousel-container" data-testid="product-carousel">
             {
               startIndex > 0
@@ -214,6 +206,16 @@ class RelatedProducts extends React.Component {
               <div className="duke-arrow-container">
                 <IconContext.Provider value={{ className: "duke-arrow-button" }}>
                   <MdArrowBackIos onClick={this.handleBackArrowClick} />
+                </IconContext.Provider>
+              </div>
+              )
+            }
+            {
+              startIndex === 0
+              && (
+              <div className="duke-arrow-container">
+                <IconContext.Provider value={{ className: "duke-arrow-hide" }}>
+                  <MdArrowBackIos />
                 </IconContext.Provider>
               </div>
               )
@@ -245,6 +247,16 @@ class RelatedProducts extends React.Component {
               <div className="duke-arrow-container">
                 <IconContext.Provider value={{ className: "duke-arrow-button" }}>
                   <MdArrowForwardIos onClick={this.handleForwardArrowClick} />
+                </IconContext.Provider>
+              </div>
+              )
+            }
+            {
+              (relatedProducts.length <= endIndex || endIndex === (relatedProducts.length - 1))
+              && (
+              <div className="duke-arrow-container">
+                <IconContext.Provider value={{ className: "duke-arrow-hide" }}>
+                  <MdArrowForwardIos />
                 </IconContext.Provider>
               </div>
               )

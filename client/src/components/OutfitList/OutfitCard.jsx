@@ -4,11 +4,12 @@ import StarRating from '../RelatedItems/StarRating.jsx';
 import circleX from '../../../dist/lib/circle-x.png';
 
 function OutfitCard({ product, handleRemoveOutfitClick }) {
-  // console.log(product);
   const defaultStyle = product.styles.filter((value) => (value['default?']));
 
   const defaultPhotoURL = defaultStyle.length > 0
     ? defaultStyle[0].photos[0].url : product.styles[0].photos[0].url;
+
+  const placeHolderPhoto = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd02zeVLQ2fKKrq6VtQ5fSEvkIGaefaaJTcA&usqp=CAU";
 
   const salesPrice = defaultStyle.length > 0
     ? defaultStyle.sale_price : product.styles[0].sale_price;
@@ -28,7 +29,7 @@ function OutfitCard({ product, handleRemoveOutfitClick }) {
     <div className="duke-card-container" data-testid="outfit-card">
       <div
         className="duke-outfit-header"
-        style={{ backgroundImage: `url(${defaultPhotoURL})` }}
+        style={{ backgroundImage: `url(${defaultPhotoURL || placeHolderPhoto})` }}
       >
         <img src={circleX} className="duke-action-icon" onClick={handleRemoveOutfitClick} value={product.id} alt="star-icon" />
       </div>

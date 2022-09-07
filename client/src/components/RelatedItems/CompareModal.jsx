@@ -32,9 +32,9 @@ function CompareModal({
     }
     return (
       <tr key={value}>
-        <td>{currFeatures[value] ? currFeatures[value] : ''}</td>
-        <td>{value}</td>
-        <td>{prodFeatures[value] ? prodFeatures[value] : ''}</td>
+        <td className="duke-table-sides">{currFeatures[value] ? currFeatures[value] : ''}</td>
+        <td className="duke-table-middle">{value}</td>
+        <td className="duke-table-sides">{prodFeatures[value] ? prodFeatures[value] : ''}</td>
       </tr>
     );
   });
@@ -47,9 +47,9 @@ function CompareModal({
             <table>
               <thead>
                 <tr>
-                  <th>Current Product Name</th>
-                  <th>&nbsp;</th>
-                  <th>Compared Product Name</th>
+                  <th className="duke-table-sides">{currProduct.name}</th>
+                  <th className="duke-table-middle">&nbsp;</th>
+                  <th className="duke-table-sides">{cardProduct.name}</th>
                 </tr>
               </thead>
               <tbody>
