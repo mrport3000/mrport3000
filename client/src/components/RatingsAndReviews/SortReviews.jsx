@@ -39,17 +39,17 @@ class SortReviews extends React.Component {
     if (term === 'relevant') {
       axios.get(`/reviews/meta/${this.props.productId}`, { params: { sortTerm: 'relevant' } })
         .then((result) => {
-          this.setState({ sortedReviews: result.data.results });
+          this.setState({ sortedReviews: result.data.results, reviewCount: 2 });
         });
     } else if (term === 'newest') {
       axios.get(`/reviews/meta/${this.props.productId}`, { params: { sortTerm: 'newest' } })
         .then((result) => {
-          this.setState({ sortedReviews: result.data.results });
+          this.setState({ sortedReviews: result.data.results, reviewCount: 2 });
         });
     } else if (term === 'helpful') {
       axios.get(`/reviews/meta/${this.props.productId}`, { params: { sortTerm: 'helpful' } })
         .then((result) => {
-          this.setState({ sortedReviews: result.data.results });
+          this.setState({ sortedReviews: result.data.results, reviewCount: 2 });
         });
     }
 
@@ -73,7 +73,7 @@ class SortReviews extends React.Component {
     if (!sortedReviews) {
       dynamicProps = this.reviewListControl(this.props.reviews, reviewCount);
     } else {
-      dynamicProps = sortedReviews;
+      dynamicProps = this.reviewListControl(sortedReviews, reviewCount);
     }
 
     return (

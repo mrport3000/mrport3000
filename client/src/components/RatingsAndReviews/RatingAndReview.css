@@ -323,6 +323,17 @@
   align-items: center;
 }
 
+.eric-RR-reviewListContainer {
+  height: 460px;
+  width: 500px;
+  overflow: auto;
+}
+
+.eric-RR-sortBottomNavBar {
+  display: flex;
+  justify-content: center;
+}
+
 .eric-RR-reviewSummary p, .eric-RR-reviewBody p {
   margin: 3px 0px 3px 0px;
   text-align: center;
