@@ -363,3 +363,38 @@
   font-size: 15px;
   cursor: pointer;
 }
+
+.eric-RR-productBreakdownContainer {
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+  height: 200px;
+  background-color: white;
+}
+
+.eric-RR-pbCharacteristic {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.eric-RR-pbLeft, .eric-RR-pbCenter, .eric-RR-pbRight {
+  display: flex;
+  flex-direction: column;
+  width: 32%;
+}
+
+.eric-RR-pbLeft, .eric-RR-pbCenter, .eric-RR-pbRight div {
+  display: flex;
+  flex-direction: column;
+}
+
+.eric-RR-lVisual, .eric-RR-cVisual, .eric-RR-rVisual {
+  background-color: #D3D3D3;
+  height: 50%;
+}
+
+.eric-RR-lText, .eric-RR-cText, .eric-RR-rText {
+  height: 50%;
+}
+

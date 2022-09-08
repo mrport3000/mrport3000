@@ -56,7 +56,7 @@ class RatingAndReview extends React.Component {
             <RatingBreakdown ratings={ratingBreakdown} />
           </div>
           <div className="eric-RR-productBreakdown">
-            <ProductBreakdown />
+            <ProductBreakdown features={this.props.characteristics}/>
           </div>
         </div>
         <div className="eric-RR-sortReviews">
