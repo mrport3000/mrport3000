@@ -65,6 +65,7 @@ class RatingAndReview extends React.Component {
               show={show}
               closeModal={this.handleModal}
               productName={this.props.product}
+              productId={this.props.productId}
               characteristics={this.props.characteristics}
             />
           </div>

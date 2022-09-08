@@ -41,10 +41,10 @@ class ModalStarRating extends React.Component {
                 <label>
                   <input
                     type="radio"
-                    name="rating"
+                    name="StarRating"
                     value={ratingVal}
                     onClick={(ratingVal) => this.starClick(ratingVal.target.value)}
-                    required
+
                   />
                   <FaStar
                     className="eric-RR-star"

@@ -106,18 +106,14 @@ app.get('/reviews/meta/:id', (req, res) => {
   }
 });
 
-app.post('/uploadImage', (req, res) => {
-  // if (!req.files || Object.keys(req.files).length === 0) {
-  //   return res.status(400).send('No files were uploaded.');
-  // }
-  // const { file } = req.files;
-  // if (file) {
-  //   app.post('https://api.cloudinary.com/v1_1/deitkdfiq/image/upload', file)
-  //     .then((response) => {
-  //       console.log('uploadImage response: ', response);
-  //     });
-  // }
-  // console.log('req.files: ', file);
+app.post('/reviews', (req, res) => {
+  console.log('review: ', req.body);
+  axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`, req.body, headers)
+    .then((result) => {
+      console.log('success: ', result);
+      res.send(result);
+    })
+    .catch((err) => console.log(err));
 });
 
 app.post('/cart', (req, res) => {

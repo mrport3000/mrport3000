@@ -118,7 +118,6 @@ class App extends React.Component {
               .then(() => {
                 axios.get(`/reviews/${productId}`)
                   .then((results) => {
-                   //console.log('meta results: ', results.data.recommended)
                     const { ratings } = results.data;
                     this.setState({
                       productId,

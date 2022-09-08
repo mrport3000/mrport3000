@@ -1,9 +1,8 @@
 import React from 'react';
-// import RatingAndReview from './RatingAndReview.jsx';
+
 import axios from 'axios';
 import { Image } from 'cloudinary-react';
 import ModalStarRating from './ModalStarRating.jsx';
-import ImageUpload from './ImageUpload.jsx';
 
 export default class ReviewModal extends React.Component {
   constructor(props) {
@@ -11,12 +10,7 @@ export default class ReviewModal extends React.Component {
     this.state = {
       starRating: null,
       recommended: null,
-      size: null,
-      width: null,
-      comfort: null,
-      quality: null,
-      length: null,
-      fit: null,
+      characteristics: {},
       reviewSummary: '',
       reviewBody: '',
       imgFiles: [],
@@ -33,7 +27,35 @@ export default class ReviewModal extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('Submit was clicked', this.state);
+    const {
+      starRating,
+      recommended,
+      characteristics,
+      reviewSummary,
+      reviewBody,
+      imgFiles,
+      nickname,
+      email,
+    } = this.state;
+
+    const formattedReview = {
+      product_id: this.props.productId,
+      rating: Number(starRating),
+      recommend: Boolean(recommended),
+      summary: reviewSummary,
+      body: reviewBody,
+      name: nickname,
+      email,
+      photos: imgFiles,
+      characteristics,
+    };
+
+    //console.log('formattedReview: ', formattedReview);
+
+    axios.post(`/reviews`, formattedReview)
+      .then((response) => {
+        console.log('Successfully sent: ', response);
+      });
     this.props.closeModal(false);
   }
 
@@ -44,8 +66,14 @@ export default class ReviewModal extends React.Component {
 
   onCharChange(e) {
     const { name } = e.target;
+    const { value } = e.target;
     const { id } = this.props.characteristics[name];
-    console.log('char id: ', id);
+    this.setState((prevState) => ({
+      characteristics: {
+        ...prevState.characteristics,
+        [`${id}`]: Number(value),
+      },
+    }));
   }
 
   liftStarRating(rating) {
@@ -64,12 +92,12 @@ export default class ReviewModal extends React.Component {
         // console.log('uploadImage response: ', response.data.secure_url);
         const fileObj = response.data;
         const url = response.data.secure_url;
-        this.setState({ imgFiles: imgFiles.concat([fileObj]) });
+        this.setState({ imgFiles: imgFiles.concat([url]) });
       });
   }
 
   render() {
-    console.log('Modal Props: ', this.props.characteristics);
+    // console.log('Modal Props: ', this.props);
     const { characteristics } = this.props;
     const { imgFiles } = this.state;
     if (!this.props.show) {
@@ -130,8 +158,8 @@ export default class ReviewModal extends React.Component {
                    return (
                      <div className="eric-RR-cSize">
                        <div className="eric-RR-cTitle"> Size: </div>
-                       <div onChange={this.onChangeValue}>
-                         <input type="radio" value="1" name="Size" />
+                       <div onChange={this.onCharChange}>
+                         <input type="radio" value="1" name="Size" required />
                          {' '}
                          A Size Too Small
                          <input type="radio" value="2" name="Size" />
@@ -153,20 +181,20 @@ export default class ReviewModal extends React.Component {
                    return (
                      <div className="eric-RR-cWidth">
                        <div className="eric-RR-cTitle"> Width: </div>
-                       <div onChange={this.onChangeValue}>
-                         <input type="radio" value="1" name="width" />
+                       <div onChange={this.onCharChange}>
+                         <input type="radio" value="1" name="Width" required />
                          {' '}
                          Too Narrow
-                         <input type="radio" value="2" name="width" />
+                         <input type="radio" value="2" name="Width" />
                          {' '}
                          Slightly Narrow
-                         <input type="radio" value="3" name="width" />
+                         <input type="radio" value="3" name="Width" />
                          {' '}
                          Perfect
-                         <input type="radio" value="4" name="width" />
+                         <input type="radio" value="4" name="Width" />
                          {' '}
                          Slightly Wide
-                         <input type="radio" value="5" name="width" />
+                         <input type="radio" value="5" name="Width" />
                          {' '}
                          Too Wide
                        </div>
@@ -176,20 +204,20 @@ export default class ReviewModal extends React.Component {
                    return (
                      <div className="eric-RR-cComfort">
                        <div className="eric-RR-cTitle"> Comfort: </div>
-                       <div onChange={this.onChangeValue}>
-                         <input type="radio" value="1" name="comfort" />
+                       <div onChange={this.onCharChange}>
+                         <input type="radio" value="1" name="Comfort" required />
                          {' '}
                          Uncomfortable
-                         <input type="radio" value="2" name="comfort" />
+                         <input type="radio" value="2" name="Comfort" />
                          {' '}
                          Slightly Uncomfortable
-                         <input type="radio" value="3" name="comfort" />
+                         <input type="radio" value="3" name="Comfort" />
                          {' '}
                          Ok
-                         <input type="radio" value="4" name="comfort" />
+                         <input type="radio" value="4" name="Comfort" />
                          {' '}
                          Comfortable
-                         <input type="radio" value="5" name="comfort" />
+                         <input type="radio" value="5" name="Comfort" />
                          {' '}
                          Perfect
                        </div>
@@ -199,20 +227,20 @@ export default class ReviewModal extends React.Component {
                    return (
                      <div className="eric-RR-cQuality">
                        <div className="eric-RR-cTitle"> Quality: </div>
-                       <div onChange={this.onChangeValue}>
-                         <input type="radio" value="1" name="quality" />
+                       <div onChange={this.onCharChange}>
+                         <input type="radio" value="1" name="Quality" required />
                          {' '}
                          Poor
-                         <input type="radio" value="2" name="quality" />
+                         <input type="radio" value="2" name="Quality" />
                          {' '}
                          Below Average
-                         <input type="radio" value="3" name="quality" />
+                         <input type="radio" value="3" name="Quality" />
                          {' '}
                          What I Expected
-                         <input type="radio" value="4" name="quality" />
+                         <input type="radio" value="4" name="Quality" />
                          {' '}
                          Pretty Great
-                         <input type="radio" value="5" name="quality" />
+                         <input type="radio" value="5" name="Quality" />
                          {' '}
                          Perfect
                        </div>
@@ -222,20 +250,20 @@ export default class ReviewModal extends React.Component {
                    return (
                      <div className="eric-RR-cLength">
                        <div className="eric-RR-cTitle">Length:</div>
-                       <div onChange={this.onChangeValue}>
-                         <input type="radio" value="1" name="length" />
+                       <div onChange={this.onCharChange}>
+                         <input type="radio" value="1" name="Length" required />
                          {' '}
                          Runs Short
-                         <input type="radio" value="2" name="length" />
+                         <input type="radio" value="2" name="Length" />
                          {' '}
                          Runs Slightly Short
-                         <input type="radio" value="3" name="length" />
+                         <input type="radio" value="3" name="Length" />
                          {' '}
                          Perfect
-                         <input type="radio" value="4" name="length" />
+                         <input type="radio" value="4" name="Length" />
                          {' '}
                          Runs Slightly Long
-                         <input type="radio" value="5" name="length" />
+                         <input type="radio" value="5" name="Length" />
                          {' '}
                          Runs Long
                        </div>
@@ -245,20 +273,20 @@ export default class ReviewModal extends React.Component {
                    return (
                      <div className="eric-RR-cFit">
                        <div className="eric-RR-cTitle"> Fit: </div>
-                       <div onChange={this.onChangeValue}>
-                         <input type="radio" value="1" name="fit" />
+                       <div onChange={this.onCharChange}>
+                         <input type="radio" value="1" name="Fit" required />
                          {' '}
                          Runs Tight
-                         <input type="radio" value="2" name="fit" />
+                         <input type="radio" value="2" name="Fit" />
                          {' '}
                          Runs Slightly Tight
-                         <input type="radio" value="3" name="fit" />
+                         <input type="radio" value="3" name="Fit" />
                          {' '}
                          Perfect
-                         <input type="radio" value="4" name="fit" />
+                         <input type="radio" value="4" name="Fit" />
                          {' '}
                          Runs Slightly Long
-                         <input type="radio" value="5" name="fit" />
+                         <input type="radio" value="5" name="Fit" />
                          {' '}
                          Runs Long
                        </div>
@@ -282,7 +310,7 @@ export default class ReviewModal extends React.Component {
               <div className="eric-RR-reviewBody">
                 <label>
                   <p>Add a written review:</p>
-                  <input type="text" name="reviewBody" maxLength="1000" placeholder="Why did you like the product or not?" value={this.state.value} onChange={this.onChangeValue} />
+                  <input type="text" name="reviewBody" maxLength="1000" placeholder="Why did you like the product or not?" value={this.state.value} onChange={this.onChangeValue} required />
                 </label>
               </div>
             </div>
@@ -291,7 +319,7 @@ export default class ReviewModal extends React.Component {
               <input type="file" onChange={this.uploadPhotoHandler} disabled={imgFiles.length >= 5} />
               <div className="eric-RR-upMap">
                 {
-                imgFiles.map((file) => <Image cloudName="deitkdfiq" publicId={file.secure_url} />)
+                imgFiles.map((file) => <Image cloudName="deitkdfiq" publicId={file} />)
                 }
               </div>
 
@@ -299,18 +327,19 @@ export default class ReviewModal extends React.Component {
             <div className="eric-RR-nickname">
               <label>
                 Add a nickname:
-                <input type="text" name="nickname" maxLength="60" placeholder="Example: jackson11!" value={this.state.value} onChange={this.onChangeValue} />
+                <input type="text" name="nickname" maxLength="60" placeholder="Example: jackson11!" value={this.state.value} onChange={this.onChangeValue} required />
               </label>
             </div>
             <div className="eric-RR-email">
               <label>
                 Add an email address:
-                <input type="text" name="email" maxLength="60" placeholder="Example: jackson11@email.com" value={this.state.value} onChange={this.onChangeValue} />
+                <input type="text" name="email" maxLength="60" placeholder="Example: jackson11@email.com" value={this.state.value} onChange={this.onChangeValue} required />
               </label>
             </div>
-            <div className="eric-RR-modalSubmit">
-              <button type="submit">Submit</button>
-            </div>
+            {/* <div className="eric-RR-modalSubmit">
+              <button type="button">Submit</button>
+            </div> */}
+            <button type="submit">Submit</button>
           </form>
         </div>
       </div>
