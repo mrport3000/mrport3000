@@ -322,7 +322,7 @@ header h4 {
   justify-content: center;
   align-items: center;
   background: rgb(255,255,255);
-  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 51%, rgba(247,108,94,1) 100%);
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 51%, rgba(247,108,94,1) 95%);
   height: 60%;
   width: 100%;
   border-radius: 5px;
@@ -397,6 +397,7 @@ header h4 {
   width: 100%;
   background-color: #F76C5E;
   padding: 40px 20px 50px 20px;
+  position: relative;
 }
 
 .duke-outfit-inner {
