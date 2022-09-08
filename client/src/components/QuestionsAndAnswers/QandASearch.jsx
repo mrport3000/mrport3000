@@ -6,7 +6,7 @@ function QandASearch(props) {
 
   return (
     <div className="kris-QandASearch">
-      <input className="kris-SearchBar" value={search} onChange={change} />
+      <input className="kris-SearchBar" placeholder="Have a question? Search for answers..." value={search} onChange={change} />
     </div>
   );
 }

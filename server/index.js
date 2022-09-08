@@ -39,29 +39,37 @@ app.get('/qanda/:id', (req, res) => {
 });
 
 app.get('/qanda/question/helpful/:id', (req, res) => {
-  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/?question_id=${req.params.id}/helpful`, headers)
-    .then((result) => res.send(result.data))
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${req.params.id}/helpful`, {}, headers)
+    .then(() => {
+      console.log(`Question ${req.params.id} marked helpful`);
+      res.sendStatus(204);
+    })
     .catch((err) => console.log(err));
 });
 
 app.get('/qanda/question/reported/:id', (req, res) => {
-  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/?question_id=${req.params.id}/reported`, headers)
-    .then((result) => res.send(result.data))
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${req.params.id}/reported`, {}, headers)
+    .then(() => {
+      console.log(`Question ${req.params.id} marked reported`);
+      res.sendStatus(204);
+    })
     .catch((err) => console.log(err));
 });
 
 app.get('/qanda/answer/helpful/:id', (req, res) => {
   axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/${req.params.id}/helpful`, {}, headers)
     .then(() => {
-      res.redirect('/');
+      console.log(`Answer ${req.params.id} marked helpful`);
+      res.sendStatus(204);
     })
     .catch((err) => console.log(err));
 });
 
 app.get('/qanda/answer/reported/:id', (req, res) => {
-  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/?answer_id=${req.params.id}/reported`, {}, headers)
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/answers/${req.params.id}/report`, {}, headers)
     .then(() => {
-      res.redirect('/');
+      console.log(`Answer ${req.params.id} marked reported`);
+      res.sendStatus(204);
     })
     .catch((err) => console.log(err));
 });
