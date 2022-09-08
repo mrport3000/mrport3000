@@ -1,9 +1,6 @@
-body {
-  background-color: #D9D9D9;
-}
 
 h1 {
-  font-family: 'Roboto Flex', sans-serif;
+  font-family: 'Roboto Slab', serif;
   font-weight: 700;
 }
 
@@ -34,6 +31,7 @@ p {
 
 body {
   margin: 0px;
+  background-color: #D9D9D9;
 }
 
 header {
@@ -63,8 +61,8 @@ header h4 {
 }
 
 .keith-overview-div {
-  margin: 40px;
-  padding: 20px;
+  margin: 0px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -76,6 +74,7 @@ header h4 {
   flex-direction: row;
   justify-content: center;
   align-items: stretch;
+  width: 100%;
 }
 
 .keith-thumbnail-column {
@@ -99,13 +98,13 @@ header h4 {
 .keith-ud-arrow-container {
   display: flex;
   align-items: center;
-  height: 30px;
+  height: 40px;
 }
 
 .keith-ud-arrow-button {
-  height: 20px;
-  width: 20px;
-  color: #3C6E71;
+  height: 30px;
+  width: 30px;
+  color: #F76C5E;
 }
 
 .keith-lr-arrows-row {
@@ -114,12 +113,11 @@ header h4 {
   justify-content: space-evenly;
   align-items: center;
   height: 70px;
-  width: 180px;
+  width: 110px;
 }
 
 .keith-lr-arrow-container {
   align-self: flex-end;
-  background:rgba(255,255,255,0.05);
   border-radius: 25%;
   display: flex;
   align-items: center;
@@ -129,17 +127,23 @@ header h4 {
 .keith-lr-arrow-button {
   height: 50px;
   width: 50px;
-  color: #3C6E71;
+  color: #F76C5E;
 }
 
 .keith-thumbnail {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
+}
+
+.keith-fullscreen-exit-container {
+  margin: 20px;
+  align-self: flex-start;
+  height: 40px;
+  width: 40px;
 }
 
 .keith-fullscreen-exit {
-  color: #3C6E71;
-  align-self: flex-start;
+  color: #F76C5E;
   height: 40px;
   width: 40px;
 }
@@ -152,7 +156,7 @@ header h4 {
   padding: 20px 40px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
   font-family: Helvetica, sans-serif;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
@@ -166,18 +170,18 @@ header h4 {
 .keith-category {
   color: #284B63;
   text-transform: uppercase;
-  margin-bottom: 0px
+  margin: 15px 0px 0px 0px;
 }
 
 .keith-product-name {
   font-family: 'Roboto Slab', serif;
   color: #284B63;
-  margin-top: 5px;
-  margin-bottom: 10px;
+  margin-top: 0px;
+  margin-bottom: 5px;
 }
 
 .keith-desc-div {
-  width: 80%;
+  width: 70%;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -218,14 +222,22 @@ header h4 {
   margin: 10px 0;
 }
 
+.keith-style-selector-div {
+  width: 100;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .keith-style {
   color: #284B63;
-  margin: 10px 0px 0px 0px;
+  margin: 10px 0px 2px 0px;
 }
 
 .keith-style-icon {
   width: 60px;
   height: 60px;
+  margin: 5px;
   border: none;
   display: flex;
   flex-direction: row;
@@ -236,7 +248,7 @@ header h4 {
 .keith-style-check {
   width: 20px;
   height: 20px;
-  color: #3C6E71;
+  color: #F76C5E;
 }
 
 .keith-options-div {
@@ -266,7 +278,7 @@ header h4 {
 .keith-size-quantity-div {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .keith-special-message {

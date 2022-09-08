@@ -25,7 +25,6 @@ class ProductOverview extends React.Component {
 
   handleExpandClick(e) {
     e.stopPropagation();
-    console.log(e.clientX - e.target.offsetLeft, e.clientY - e.target.offsetTop);
     const { expandedView } = this.state;
     if (!expandedView) {
       this.setState({
@@ -39,7 +38,8 @@ class ProductOverview extends React.Component {
     }
   }
 
-  handleUnexpandClick() {
+  handleUnexpandClick(e) {
+    e.stopPropagation();
     this.setState({
       expandedView: false,
       zoomed: false,
@@ -91,6 +91,7 @@ class ProductOverview extends React.Component {
             hover={hover}
             zoomed={zoomed}
             handleExpandClick={this.handleExpandClick}
+            handleUnexpandClick={this.handleUnexpandClick}
           />
           {!expandedView && (
             <div className="keith-product-info-div">

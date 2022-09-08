@@ -5,6 +5,7 @@ import React from 'react';
 import { MdCheckCircle } from 'react-icons/md';
 
 export default function StyleIcon({ url, index, handleStyleChange, styleIndex }) {
+  const backupPhoto = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd02zeVLQ2fKKrq6VtQ5fSEvkIGaefaaJTcA&usqp=CAU";
   return (
     <td style={{ border: 'none', margin: 'none' }}>
       <button
@@ -13,18 +14,18 @@ export default function StyleIcon({ url, index, handleStyleChange, styleIndex })
         onClick={handleStyleChange}
         style={
           {
-            backgroundImage: `url(${url})`,
+            backgroundImage: `url(${url || backupPhoto})`,
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundPositionX: 'center',
             backgroundPositionY: 'center',
-            border: styleIndex === index ? '3px solid #3C6E71' : 'white',
+            border: styleIndex === index ? '3px solid #F76C5E' : 'white',
             borderRadius: '50%',
             opacity: styleIndex === index ? '80%' : '100%',
           }
         }
         index={index}
-        alt={url}
+        alt={url || backupPhoto}
       >
         {styleIndex === index && (<MdCheckCircle className="keith-style-check" />)}
       </button>

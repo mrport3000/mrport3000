@@ -24,8 +24,9 @@ class Gallery extends React.Component {
   }
 
   handleZoomMouseMove(e) {
-    const relX = e.clientX - e.target.offsetLeft;
-    const relY = e.clientY - e.target.offsetTop;
+    const relX = e.pageX - e.target.offsetLeft;
+    const relY = e.pageY - e.target.offsetTop;
+    console.log(relX, relY);
     this.setState({
       relX,
       relY,
@@ -88,6 +89,7 @@ class Gallery extends React.Component {
       onMouseEnter,
       onMouseLeave,
       handleExpandClick,
+      handleUnexpandClick,
       zoomed,
     } = this.props;
     const {
@@ -97,7 +99,12 @@ class Gallery extends React.Component {
       relX,
       relY,
     } = this.state;
-    const mainImage = photos[thumbIndex].url;
+    const mainImage = photos[thumbIndex].url || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd02zeVLQ2fKKrq6VtQ5fSEvkIGaefaaJTcA&usqp=CAU";
+    const img = new Image();
+    img.src = mainImage;
+    const mainImageWidth = img.naturalWidth;
+    const mainImageHeight = img.naturalHeight;
+    console.log('width', img.naturalWidth, 'height', img.naturalHeight);
     let hoverStyle = 'zoom-in';
     if (expandedView) {
       if (zoomed) {
@@ -111,14 +118,16 @@ class Gallery extends React.Component {
         onClick={handleExpandClick}
         onMouseMove={zoomed ? this.handleZoomMouseMove : () => {}}
         style={{
-          width: expandedView ? '1200px' : '650px',
+          width: expandedView ? '1200px' : '675px',
           height: expandedView ? '700px' : '450px',
+          transition: 'width .5s, height .5s',
           cursor: hover ? hoverStyle : 'default',
           backgroundImage: `url(${mainImage})`,
           backgroundSize: zoomed ? '250%' : 'contain',
           backgroundRepeat: 'no-repeat',
-          backgroundPositionX: zoomed ? -1.5 * relX : 'center',
-          backgroundPositionY: zoomed ? -1.75 * relY : 'center',
+          backgroundOrigin: 'padding-box',
+          backgroundPositionX: zoomed ? ((-1.1 * mainImageWidth) / 1200) * relX : 'center',
+          backgroundPositionY: zoomed ? ((-1.1 * mainImageHeight) / 700) * relY : 'center',
         }}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
@@ -138,21 +147,21 @@ class Gallery extends React.Component {
             handleDownArrowClick={this.handleDownArrowClick}
           />
         )}
-        {!zoomed && (
-          <div className="keith-lr-arrows-row" onMouseEnter={onMouseLeave} onMouseLeave={onMouseEnter}>
-            {thumbIndex > 0 && (
-              <tr className="keith-lr-arrow-container">
-                <MdKeyboardArrowLeft className="keith-lr-arrow-button" onClick={this.handleUpArrowClick} />
-              </tr>
-            )}
-            {thumbIndex < photos.length - 1 && (
-              <tr className="keith-lr-arrow-container">
-                <MdKeyboardArrowRight className="keith-lr-arrow-button" onClick={this.handleDownArrowClick} />
-              </tr>
-            )}
-          </div>
-        )}
-        {expandedView && <MdFullscreenExit className="keith-fullscreen-exit" />}
+        <div className="keith-lr-arrows-row" onMouseEnter={onMouseLeave} onMouseLeave={onMouseEnter}>
+          {(!zoomed && thumbIndex > 0) && (
+            <tr className="keith-lr-arrow-container">
+              <MdKeyboardArrowLeft className="keith-lr-arrow-button" onClick={this.handleUpArrowClick} />
+            </tr>
+          )}
+          {(!zoomed && thumbIndex < photos.length - 1) && (
+            <tr className="keith-lr-arrow-container">
+              <MdKeyboardArrowRight className="keith-lr-arrow-button" onClick={this.handleDownArrowClick} />
+            </tr>
+          )}
+        </div>
+        <div className="keith-fullscreen-exit-container">
+          {expandedView && <MdFullscreenExit className="keith-fullscreen-exit" onMouseLeave={onMouseEnter} onMouseEnter={onMouseLeave} onClick={handleUnexpandClick} />}
+        </div>
       </button>
     );
   }
