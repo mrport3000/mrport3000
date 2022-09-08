@@ -9,9 +9,13 @@ class SortReviews extends React.Component {
     super(props);
     this.state = {
       sortedReviews: null,
+      reviewCount: 2,
+      isVisable: true,
     };
     this.sortReviews = this.sortReviews.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.reviewListControl = this.reviewListControl.bind(this);
+    this.moreReviews = this.moreReviews.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -22,6 +26,11 @@ class SortReviews extends React.Component {
 
   handleChange(e) {
     this.sortReviews(e.target.value);
+  }
+
+  moreReviews() {
+    // let { reviewCount } = this.state;
+    this.setState({ reviewCount: this.state.reviewCount += 2 }, console.log('state after: ', this.state.reviewCount));
   }
 
   sortReviews(term) {
@@ -47,12 +56,22 @@ class SortReviews extends React.Component {
     this.setState({ sortedReviews: sorted });
   }
 
-  render() {
-    const { sortedReviews } = this.state;
+  reviewListControl(arr, increment) {
+    const reviewControl = arr.filter((review, index) => {
+      if (index < increment) {
+        return review;
+      }
+    });
+    //console.log('reviewControl: ', reviewControl);
+    return reviewControl;
+  }
 
+  render() {
+    const { sortedReviews, reviewCount, isVisable } = this.state;
+    //console.log('testing: ', this.props.reviews);
     let dynamicProps;
     if (!sortedReviews) {
-      dynamicProps = this.props.reviews;
+      dynamicProps = this.reviewListControl(this.props.reviews, reviewCount);
     } else {
       dynamicProps = sortedReviews;
     }
@@ -81,7 +100,7 @@ class SortReviews extends React.Component {
         </div>
         <div className="eric-RR-sortBottomNavBar">
           <div className="eric-RR-moreReviewsContainer">
-            <button type="submit" className="eric-RR-sortMoreReviews">
+            <button type="submit" className="eric-RR-sortMoreReviews" onClick={this.moreReviews} style={{visibility: this.props.reviews.length >= reviewCount ? 'visible' : 'hidden' }}>
               More Reviews
             </button>
           </div>
