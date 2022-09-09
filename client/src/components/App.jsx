@@ -172,6 +172,8 @@ class App extends React.Component {
                       qandaInfo,
                       rating: averageRating(ratings),
                       reviewCount: totalReviews(ratings),
+                      characteristics: results.data.characteristics,
+                      recommended: results.data.recommended,
                       outfits: localStorage.get('outfitList') || [],
                     });
                     window.history.pushState({ productId }, '', `?productId=${productId}&styleId=${styleId}`);
@@ -226,6 +228,8 @@ class App extends React.Component {
       reviewCount,
       reviewPage,
       reviews,
+      characteristics,
+      recommended,
       outfits,
     } = this.state;
 
@@ -265,11 +269,21 @@ class App extends React.Component {
           />
         </ErrorBoundary>
         <ErrorBoundary>
-          <QandA info={qandaInfo} />
+          <QandA
+            info={qandaInfo}
+            product={productInfo.name}
+          />
         </ErrorBoundary>
         <div ref={this.scrollTarget}>
           <ErrorBoundary>
-            <RatingAndReview reviews={reviews} page={reviewPage} />
+            <RatingAndReview
+              reviews={reviews}
+              page={reviewPage}
+              product={productInfo.name}
+              produuctId={productId}
+              characteristics={characteristics}
+              recommended={recommended}
+            />
           </ErrorBoundary>
         </div>
       </>
