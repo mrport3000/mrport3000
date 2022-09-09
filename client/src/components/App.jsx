@@ -9,6 +9,7 @@ import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
 import OutfitList from './OutfitList/OutfitList.jsx';
 import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
+import ErrorBoundary from './RelatedItems/ErrorBoundary.jsx';
 
 const defaultId = 71701;
 
@@ -245,19 +246,21 @@ class App extends React.Component {
           handleRemoveOutfitClick={this.handleRemoveOutfitClick}
           executeScroll={this.executeScroll}
         />
-        <RelatedProducts
-          productId={productId}
-          currProduct={productInfo}
-          handleProductCardClick={this.handleProductCardClick}
-        />
-        <OutfitList
-          productInfo={productInfo}
-          productStyles={productStyles}
-          outfits={outfits}
-          handleAddOutfitClick={this.handleAddOutfitClick}
-          handleRemoveOutfitClick={this.handleRemoveOutfitClick}
-          rating={rating}
-        />
+        <ErrorBoundary>
+          <RelatedProducts
+            productId={productId}
+            currProduct={productInfo}
+            handleProductCardClick={this.handleProductCardClick}
+          />
+          <OutfitList
+            productInfo={productInfo}
+            productStyles={productStyles}
+            outfits={outfits}
+            handleAddOutfitClick={this.handleAddOutfitClick}
+            handleRemoveOutfitClick={this.handleRemoveOutfitClick}
+            rating={rating}
+          />
+        </ErrorBoundary>
 
         <QandA info={qandaInfo} />
         <div ref={this.scrollTarget}>

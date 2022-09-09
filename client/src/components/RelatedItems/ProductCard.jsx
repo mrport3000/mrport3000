@@ -13,6 +13,9 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
     ? defaultStyle[0].photos[0].url : product.styles[0].photos[0].url;
 
   const [previewPhoto, setPreviewPhoto] = useState(product.newDefaultPhoto || defaultPhotoURL);
+
+  const placeHolderPhoto = "https://media.istockphoto.com/photos/coming-soon-neon-sign-the-banner-shining-light-signboard-collection-picture-id1332167985?b=1&k=20&m=1332167985&s=170667a&w=0&h=O-084eNJBhGZGJbJvNvUC1P6d4aSo6XkV4Kom7ZZcIQ=";
+
   const [isShown, setIsShown] = useState(false);
 
   // dummy test data for sales price
@@ -56,7 +59,7 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
           className="duke-card-preview-image"
           alt={product.name}
           value={product.id}
-          src={previewPhoto}
+          src={previewPhoto || placeHolderPhoto}
         />
         {isShown && (
         <Thumbnails
@@ -75,9 +78,9 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
         />
       </div>
       <div className="duke-productcard-body">
-        <p>{product.category}</p>
+        <h5>{product.category}</h5>
         <div>
-          <p><strong>{product.name}</strong></p>
+          <h4>{product.name}</h4>
           <p><i>{product.slogan}</i></p>
         </div>
         {priceBlock}
