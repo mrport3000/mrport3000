@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const compression = require('compression');
 const formData = require('express-form-data');
 const axios = require('axios');
 const fileUpload = require('express-fileupload');
@@ -30,6 +31,7 @@ const headers = {
   },
 };
 
+app.use(compression());
 app.use(express.static('client/dist'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

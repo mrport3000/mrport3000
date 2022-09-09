@@ -9,7 +9,7 @@ import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
 import OutfitList from './OutfitList/OutfitList.jsx';
 import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
-import ErrorBoundary from './RelatedItems/ErrorBoundary.jsx';
+import ErrorBoundary from './ErrorBoundary.jsx';
 
 const defaultId = 71701;
 
@@ -46,7 +46,7 @@ class App extends React.Component {
   componentDidMount() {
     const parsedUrl = url.parse(window.location.href);
     const { productId } = querystring.parse(parsedUrl.query);
-    const searchId = productId || defaultId;
+    const searchId = Number(productId) || defaultId;
     this.getInitialData(searchId);
   }
 
@@ -131,8 +131,7 @@ class App extends React.Component {
             const firstStyle = productStyles[0];
             if (parsedQs.styleId) {
               styleId = parsedQs.styleId;
-              console.log(styleId);
-              for (let i = 0; i < productStyles.length; i += 1) {
+              for (var i = 0; i < productStyles.length; i += 1) {
                 if (productStyles[i]['default?']) {
                   productStyles[0] = productStyles[i];
                   productStyles[i] = firstStyle;
@@ -240,18 +239,20 @@ class App extends React.Component {
 
     return (
       <>
-        <ProductOverview
-          key={productInfo.id}
-          productInfo={productInfo}
-          productStyles={productStyles}
-          styleIndex={styleIndex}
-          rating={rating}
-          reviewCount={reviewCount}
-          handleStyleChange={this.handleStyleChange}
-          handleAddOutfitClick={this.handleAddOutfitClick}
-          handleRemoveOutfitClick={this.handleRemoveOutfitClick}
-          executeScroll={this.executeScroll}
-        />
+        <ErrorBoundary>
+          <ProductOverview
+            key={productInfo.id}
+            productInfo={productInfo}
+            productStyles={productStyles}
+            styleIndex={styleIndex}
+            rating={rating}
+            reviewCount={reviewCount}
+            handleStyleChange={this.handleStyleChange}
+            handleAddOutfitClick={this.handleAddOutfitClick}
+            handleRemoveOutfitClick={this.handleRemoveOutfitClick}
+            executeScroll={this.executeScroll}
+          />
+        </ErrorBoundary>
         <ErrorBoundary>
           <RelatedProducts
             productId={productId}
@@ -267,20 +268,23 @@ class App extends React.Component {
             rating={rating}
           />
         </ErrorBoundary>
-
-        <QandA
-          info={qandaInfo}
-          product={productInfo.name}
-        />
-        <div ref={this.scrollTarget}>
-          <RatingAndReview
-            reviews={reviews}
-            page={reviewPage}
+        <ErrorBoundary>
+          <QandA
+            info={qandaInfo}
             product={productInfo.name}
-            productId={productId}
-            characteristics={characteristics}
-            recommended={recommended}
           />
+        </ErrorBoundary>
+        <div ref={this.scrollTarget}>
+          <ErrorBoundary>
+            <RatingAndReview
+              reviews={reviews}
+              page={reviewPage}
+              product={productInfo.name}
+              produuctId={productId}
+              characteristics={characteristics}
+              recommended={recommended}
+            />
+          </ErrorBoundary>
         </div>
       </>
     );
