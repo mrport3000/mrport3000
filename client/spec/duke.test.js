@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom/extend-expect';
+import '../../__mocks__/matchMedia.mock';
 import ProductCard from "../src/components/RelatedItems/ProductCard.jsx";
 import RelatedProducts from "../src/components/RelatedItems/RelatedProducts.jsx";
 import OutFitList from "../src/components/OutFitList/OutFitList.jsx";
