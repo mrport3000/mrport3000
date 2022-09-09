@@ -1,5 +1,9 @@
 import React from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import StarRating from './StarRating.jsx';
+import Thumbnails from './Thumbnails.jsx';
+import modalStar from '../../../dist/lib/modal-star.png';
 
 // Individual card in related product carousel
 function ProductCard({ product, handleModalButtonClick, handleProductCardClick }) {
@@ -7,6 +11,12 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
 
   const defaultPhotoURL = defaultStyle.length > 0
     ? defaultStyle[0].photos[0].url : product.styles[0].photos[0].url;
+
+  const [previewPhoto, setPreviewPhoto] = useState(product.newDefaultPhoto || defaultPhotoURL);
+
+  const placeHolderPhoto = "https://media.istockphoto.com/photos/coming-soon-neon-sign-the-banner-shining-light-signboard-collection-picture-id1332167985?b=1&k=20&m=1332167985&s=170667a&w=0&h=O-084eNJBhGZGJbJvNvUC1P6d4aSo6XkV4Kom7ZZcIQ=";
+
+  const [isShown, setIsShown] = useState(false);
 
   // dummy test data for sales price
   // defaultStyle.sale_price = "25.00";
@@ -25,20 +35,52 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
     );
   }
 
+  const handleThumbnailClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setPreviewPhoto(e.target.value);
+    product.newDefaultPhoto = e.target.value;
+  };
+
   return (
-    <div className="duke-card-container" data-testid='product-card'>
-      <button
-        type="submit"
-        onClick={(() => handleProductCardClick(product.id))}
-        value={product.id}
+    <div
+      role="button"
+      tabIndex="-1"
+      className="duke-card-container"
+      data-testid="product-card"
+      onClick={(() => handleProductCardClick(product.id))}
+    >
+      <div
+        onMouseEnter={() => setIsShown(true)}
+        onMouseLeave={() => setIsShown(false)}
         className="duke-card-header"
-        style={{ backgroundImage: `url(${defaultPhotoURL})` }}
-      />
-      <img src="https://static.vecteezy.com/system/resources/previews/001/189/167/non_2x/star-png.png" className="duke-action-icon" onClick={handleModalButtonClick} value={product.id} alt="star-icon" />
+      >
+        <img
+          className="duke-card-preview-image"
+          alt={product.name}
+          value={product.id}
+          src={previewPhoto || placeHolderPhoto}
+        />
+        {isShown && (
+        <Thumbnails
+          product={product}
+          handleThumbnailClick={handleThumbnailClick}
+        />
+        )}
+      </div>
+      <div>
+        <img
+          src={modalStar}
+          className="duke-action-icon"
+          onClick={handleModalButtonClick}
+          value={product.id}
+          alt="star-icon"
+        />
+      </div>
       <div className="duke-productcard-body">
-        <p>{product.category}</p>
+        <h5>{product.category}</h5>
         <div>
-          <p><strong>{product.name}</strong></p>
+          <h4>{product.name}</h4>
           <p><i>{product.slogan}</i></p>
         </div>
         {priceBlock}
@@ -49,5 +91,11 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
     </div>
   );
 }
+
+// ProductCard.propTypes = {
+//   product: PropTypes.shape({}).isRequired,
+//   handleModalButtonClick: PropTypes.func.isRequired,
+//   handleProductCardClick: PropTypes.func.isRequired,
+// };
 
 export default ProductCard;

@@ -1,5 +1,6 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import { IconContext } from 'react-icons';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import { Promise } from 'bluebird';
@@ -11,6 +12,7 @@ class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      defaultEndIndex: 3,
       startIndex: 0,
       endIndex: 3,
       show: false,
@@ -26,15 +28,17 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidMount() {
+    this.adjustForScreenSize();
     this.getRelatedProductsInfo(this.props.productId);
   }
 
   componentDidUpdate(prevProps) {
+    const { defaultEndIndex } = this.state;
     if (prevProps.productId !== this.props.productId) {
       this.getRelatedProductsInfo(this.props.productId);
       this.setState({
         startIndex: 0,
-        endIndex: 3,
+        endIndex: defaultEndIndex,
       });
     }
   }
@@ -54,6 +58,8 @@ class RelatedProducts extends React.Component {
   }
 
   handleModalButtonClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
     const { relatedProducts } = this.state;
 
     // retrieves productId from product card to pass to modal
@@ -82,9 +88,7 @@ class RelatedProducts extends React.Component {
   // need to change id key to make identifiable second
   getAverageReviews(id) {
     return axios.get(`/reviews/${id}`)
-      .then((result) => {
-        return result.data;
-      })
+      .then((result) => result.data)
       .then((product) => {
         // replace product_id key to prevent overwriting properties when merging object
         product.review_id = product.product_id;
@@ -103,13 +107,13 @@ class RelatedProducts extends React.Component {
       // [71702, 71702, 71704, 71705, 71697, 71699]
       .then((results) => {
         // remove original product Id
-        let newProdsArr = results.data.filter((value) => value !== productId);
+        const newProdsArr = results.data.filter((value) => value !== productId);
         // remove duplicate product Ids
-        let uniqueArr = [...new Set(newProdsArr)];
+        const uniqueArr = [...new Set(newProdsArr)];
         return Promise.resolve(uniqueArr);
       })
       .then((arr) => {
-        let promiseArr = [];
+        const promiseArr = [];
         // push promises for productID call
         arr.forEach((value) => {
           promiseArr.push(new Promise((resolve) => resolve(this.getProductInfo(value))));
@@ -158,6 +162,32 @@ class RelatedProducts extends React.Component {
       });
   }
 
+  adjustForScreenSize() {
+    const { startIndex } = this.state;
+    let query = `(max-width: 950px)`;
+
+    if (window.matchMedia('(max-width: 950px)').matches) {
+      this.setState({
+        defaultEndIndex: 1,
+        endIndex: startIndex + 1,
+      });
+    } else if (window.matchMedia('(min-width: 951px) and (max-width: 1250px)').matches) {
+      this.setState({
+        defaultEndIndex: 2,
+        endIndex: startIndex + 2,
+      });
+      query = '(min-width: 951px) and (max-width: 1250px)';
+    } else {
+      this.setState({
+        defaultEndIndex: 3,
+        endIndex: startIndex + 3,
+      });
+      query = '(min-width: 1251px)';
+    }
+    const media = window.matchMedia(query);
+    media.addEventListener('change', () => this.adjustForScreenSize());
+  }
+
   render() {
     const {
       show, startIndex, endIndex, relatedProducts, cardProduct,
@@ -166,54 +196,82 @@ class RelatedProducts extends React.Component {
     const { currProduct, handleProductCardClick } = this.props;
 
     return (
-      <div>
-        <h4>RELATED PRODUCTS</h4>
-        <div className="duke-product-carousel-container" data-testid="product-carousel">
-          {
-            startIndex > 0
-            && (
-            <div className="duke-arrow-container">
-              <IconContext.Provider value={{ className: "duke-arrow-button" }}>
-                <MdArrowBackIos onClick={this.handleBackArrowClick} />
-              </IconContext.Provider>
-            </div>
-            )
-          }
-          <CompareModal
-            show={show}
-            handleModalButtonClick={this.handleModalButtonClick}
-            cardProduct={cardProduct}
-            currProduct={currProduct}
-          />
-          {
-            relatedProducts.map((product, index) => {
-              if (index >= startIndex && index <= endIndex) {
-                return (
-                  <ProductCard
-                    product={product}
-                    key={product.name}
-                    handleModalButtonClick={this.handleModalButtonClick}
-                    handleProductCardClick={handleProductCardClick}
-                  />
-                );
-              }
-            })
-          }
-          {
-            endIndex !== (relatedProducts.length - 1)
-            && endIndex < relatedProducts.length
-            && (
-            <div className="duke-arrow-container">
-              <IconContext.Provider value={{ className: "duke-arrow-button" }}>
-                <MdArrowForwardIos onClick={this.handleForwardArrowClick} />
-              </IconContext.Provider>
-            </div>
-            )
-          }
+      <div className="duke-products-container">
+        <div className="duke-products-inner">
+          <h2>RELATED PRODUCTS</h2>
+          <div className="duke-product-carousel-container" data-testid="product-carousel">
+            {
+              startIndex > 0
+              && (
+              <div className="duke-arrow-container">
+                <IconContext.Provider value={{ className: "duke-arrow-button" }}>
+                  <MdArrowBackIos onClick={this.handleBackArrowClick} />
+                </IconContext.Provider>
+              </div>
+              )
+            }
+            {
+              startIndex === 0
+              && (
+              <div className="duke-arrow-container">
+                <IconContext.Provider value={{ className: "duke-arrow-hide" }}>
+                  <MdArrowBackIos />
+                </IconContext.Provider>
+              </div>
+              )
+            }
+            <CompareModal
+              show={show}
+              handleModalButtonClick={this.handleModalButtonClick}
+              cardProduct={cardProduct}
+              currProduct={currProduct}
+            />
+            {
+              relatedProducts.map((product, index) => {
+                if (index >= startIndex && index <= endIndex) {
+                  return (
+                    <ProductCard
+                      product={product}
+                      key={product.name}
+                      handleModalButtonClick={this.handleModalButtonClick}
+                      handleProductCardClick={handleProductCardClick}
+                    />
+                  );
+                }
+              })
+            }
+            {
+              endIndex !== (relatedProducts.length - 1)
+              && endIndex < relatedProducts.length
+              && (
+              <div className="duke-arrow-container">
+                <IconContext.Provider value={{ className: "duke-arrow-button" }}>
+                  <MdArrowForwardIos onClick={this.handleForwardArrowClick} />
+                </IconContext.Provider>
+              </div>
+              )
+            }
+            {
+              (relatedProducts.length <= endIndex || endIndex === (relatedProducts.length - 1))
+              && (
+              <div className="duke-arrow-container">
+                <IconContext.Provider value={{ className: "duke-arrow-hide" }}>
+                  <MdArrowForwardIos />
+                </IconContext.Provider>
+              </div>
+              )
+            }
+          </div>
         </div>
       </div>
     );
   }
 }
+
+// RelatedProducts.propTypes = {
+//   productId: PropTypes.number.isRequired,
+//   currProduct: PropTypes.shape({}).isRequired,
+//   handleProductCardClick: PropTypes.func.isRequired,
+// };
 
 export default RelatedProducts;
