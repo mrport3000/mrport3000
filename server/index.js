@@ -1,9 +1,28 @@
 require('dotenv').config();
 
 const express = require('express');
+const formData = require('express-form-data');
 const axios = require('axios');
+const fileUpload = require('express-fileupload');
+// const os = require('os');
 
 const app = express();
+
+// const options = {
+//   uploadDir: os.tmpdir(),
+//   autoClean: true,
+// };
+
+// app.use(express.urlencoded({ extended: true }));
+// // parse data with connect-multiparty.
+// app.use(formData.parse(options));
+// // delete from the request all empty files (size == 0)
+// app.use(formData.format());
+// // change the file objects to fs.ReadStream
+// app.use(formData.stream());
+// // union the body and the files
+// app.use(formData.union());
+
 const { PORT } = process.env;
 const headers = {
   headers: {
@@ -13,6 +32,8 @@ const headers = {
 
 app.use(express.static('client/dist'));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(fileUpload());
 
 app.get('/productinfo/:id', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.id}`, headers)
@@ -73,8 +94,25 @@ app.get('/reviews/:id', (req, res) => {
 });
 
 app.get('/reviews/meta/:id', (req, res) => {
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.id}`, headers)
-    .then((result) => res.send(result.data))
+  const { sortTerm } = req.query;
+  if (sortTerm) {
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.id}&sort=${sortTerm}`, headers)
+      .then((result) => res.send(result.data))
+      .catch((err) => console.log(err));
+  } else {
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.id}`, headers)
+      .then((result) => res.send(result.data))
+      .catch((err) => console.log(err));
+  }
+});
+
+app.post('/reviews', (req, res) => {
+  console.log('review: ', req.body);
+  axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`, req.body, headers)
+    .then((result) => {
+      console.log('success: ', result);
+      res.send(result);
+    })
     .catch((err) => console.log(err));
 });
 

@@ -27,6 +27,8 @@ class App extends React.Component {
       rating: null,
       reviewCount: null,
       reviewPage: null,
+      characteristics: null,
+      recommended: null,
       reviews: [],
       outfits: [],
     };
@@ -60,7 +62,7 @@ class App extends React.Component {
     const styleIndex = Number(e.target.getAttribute('index'));
     const styleId = productStyles[styleIndex].style_id;
     this.setState({ styleIndex, styleId });
-    window.history.pushState({ productId }, '', `http://127.0.0.1:3000/?productId=${productId}&styleId=${styleId}`);
+    window.history.pushState({ productId }, '', `?productId=${productId}&styleId=${styleId}`);
   }
 
   handleProductCardClick(id) {
@@ -130,7 +132,7 @@ class App extends React.Component {
             if (parsedQs.styleId) {
               styleId = parsedQs.styleId;
               console.log(styleId);
-              for (var i = 0; i < productStyles.length; i += 1) {
+              for (let i = 0; i < productStyles.length; i += 1) {
                 if (productStyles[i]['default?']) {
                   productStyles[0] = productStyles[i];
                   productStyles[i] = firstStyle;
@@ -171,9 +173,11 @@ class App extends React.Component {
                       qandaInfo,
                       rating: averageRating(ratings),
                       reviewCount: totalReviews(ratings),
+                      characteristics: results.data.characteristics,
+                      recommended: results.data.recommended,
                       outfits: localStorage.get('outfitList') || [],
                     });
-                    window.history.pushState({ productId }, '', `http://127.0.0.1:3000/?productId=${productId}&styleId=${styleId}`);
+                    window.history.pushState({ productId }, '', `?productId=${productId}&styleId=${styleId}`);
                   })
                   .then(() => {
                     // both /review endpoints will be swapped at a later date
@@ -225,6 +229,8 @@ class App extends React.Component {
       reviewCount,
       reviewPage,
       reviews,
+      characteristics,
+      recommended,
       outfits,
     } = this.state;
 
@@ -264,7 +270,14 @@ class App extends React.Component {
 
         <QandA info={qandaInfo} />
         <div ref={this.scrollTarget}>
-          <RatingAndReview reviews={reviews} page={reviewPage} />
+          <RatingAndReview
+            reviews={reviews}
+            page={reviewPage}
+            product={productInfo.name}
+            productId={productId}
+            characteristics={characteristics}
+            recommended={recommended}
+          />
         </div>
       </>
     );

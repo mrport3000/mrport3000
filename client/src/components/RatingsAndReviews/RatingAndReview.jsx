@@ -5,6 +5,7 @@ import React from 'react';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import SortReviews from './SortReviews.jsx';
+import ReviewModal from './ReviewModal.jsx';
 import './RatingAndReview.css';
 
 class RatingAndReview extends React.Component {
@@ -12,14 +13,16 @@ class RatingAndReview extends React.Component {
     super(props);
     this.state = {
       totalReviews: [],
+      rbfilteredReviews: [],
+      show: false,
     };
+    this.handleModal = this.handleModal.bind(this);
     this.filtered = this.filtered.bind(this);
+    this.liftRBFilteredReviews = this.liftRBFilteredReviews.bind(this);
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.reviews !== prevProps.reviews) {
-      this.setState({ totalReviews: this.props.reviews });
-    }
+  handleModal(bool) {
+    this.setState({ show: bool});
   }
 
   filtered(arr) {
@@ -40,13 +43,17 @@ class RatingAndReview extends React.Component {
     };
   }
 
+  liftRBFilteredReviews() {
+    console.log('testing')
+  }
+
   render() {
-    const { totalReviews } = this.state;
-    if (this.props.reviews.length === 0 || totalReviews.length === 0) {
+    // console.log('R&R props: ', this.props)
+    const { show } = this.state;
+    if (this.props.reviews.length === 0) {
       return <div />;
     }
     const ratingBreakdown = this.filtered(this.props.reviews);
-    //console.log('ratingBreakdown: ', ratingBreakdown);
 
     return (
       <div className="eric-RR-container">
@@ -55,11 +62,26 @@ class RatingAndReview extends React.Component {
             <RatingBreakdown ratings={ratingBreakdown} />
           </div>
           <div className="eric-RR-productBreakdown">
-            <ProductBreakdown />
+            <ProductBreakdown features={this.props.characteristics}/>
           </div>
         </div>
         <div className="eric-RR-sortReviews">
-          <SortReviews reviews={totalReviews} />
+          <div className="eric-RR-modalContainer">
+            <ReviewModal
+              show={show}
+              closeModal={this.handleModal}
+              productName={this.props.product}
+              productId={this.props.productId}
+              characteristics={this.props.characteristics}
+            />
+          </div>
+          <div className="eric-RR-sort">
+            <SortReviews
+              reviews={this.props.reviews}
+              renderModal={this.handleModal}
+              productId={this.props.productId}
+            />
+          </div>
         </div>
       </div>
     );
