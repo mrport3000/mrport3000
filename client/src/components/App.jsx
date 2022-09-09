@@ -10,6 +10,7 @@ import OutfitList from './OutfitList/OutfitList.jsx';
 import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
 import ErrorBoundary from './RelatedItems/ErrorBoundary.jsx';
+import withClickData from './withClickData.jsx';
 
 const defaultId = 71701;
 
@@ -232,9 +233,15 @@ class App extends React.Component {
       return <div />;
     }
 
+    const ProductOverviewWithClickData = withClickData(ProductOverview);
+    const RelatedProductsWithClickData = withClickData(RelatedProducts);
+    const OutfitListWithClickData = withClickData(OutfitList);
+    const QandAWithClickData = withClickData(QandA);
+    const RatingAndReviewWithClickData = withClickData(RatingAndReview);
+
     return (
       <>
-        <ProductOverview
+        <ProductOverviewWithClickData
           key={productInfo.id}
           productInfo={productInfo}
           productStyles={productStyles}
@@ -247,12 +254,12 @@ class App extends React.Component {
           executeScroll={this.executeScroll}
         />
         <ErrorBoundary>
-          <RelatedProducts
+          <RelatedProductsWithClickData
             productId={productId}
             currProduct={productInfo}
             handleProductCardClick={this.handleProductCardClick}
           />
-          <OutfitList
+          <OutfitListWithClickData
             productInfo={productInfo}
             productStyles={productStyles}
             outfits={outfits}
@@ -262,10 +269,10 @@ class App extends React.Component {
           />
         </ErrorBoundary>
 
-        <QandA info={qandaInfo} />
-        <div ref={this.scrollTarget}>
-          <RatingAndReview reviews={reviews} page={reviewPage} />
-        </div>
+        <QandAWithClickData info={qandaInfo} />
+        {/* <div ref={this.scrollTarget}> */}
+        <RatingAndReview reviews={reviews} page={reviewPage} />
+        {/* </div> */}
       </>
     );
   }
