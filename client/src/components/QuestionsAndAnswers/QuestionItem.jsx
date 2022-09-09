@@ -5,7 +5,7 @@ import axios from 'axios';
 import AnswerModal from './AnswerModal.jsx';
 
 function QuestionItem(props) {
-  const { question, qid, helpful } = props;
+  const { question, qid, helpful, item } = props;
   console.log(`QUESTION: ${question}`);
   return (
     <div className="kris-QuestionItem">
@@ -15,7 +15,7 @@ function QuestionItem(props) {
       </h3>
       <button className="kris-questionHelpful" type="button" onClick={() => (axios.get(`/qanda/question/helpful/${qid}`))}>{`Helpful?(${helpful})`}</button>
       <button className="kris-questionReported" type="button" onClick={() => (axios.get(`/qanda/question/reported/${qid}`))}>Report</button>
-      <button className="kris-answerSubmitted" type="button" onClick={console.log('answer clicked!')}>add an answer</button>
+      <button className="kris-answerSubmitted" type="button" onClick={console.log('clicked submit your answer')}>add an answer</button>
     </div>
 
   );

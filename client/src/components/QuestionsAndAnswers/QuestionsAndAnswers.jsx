@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 
 import QandASearch from './QandASearch.jsx';
 import QuestionItem from './QuestionItem.jsx';
@@ -15,12 +14,17 @@ class QandA extends React.Component {
       query: '',
       isExpanded: false,
       isQuestioning: false,
-      list: { ...this.props.info },
+      list: JSON.parse(JSON.stringify(this.props.info)),
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleExpand = this.handleExpand.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log('PREV STATE: ', prevState);
+  //   console.log('PREV PROPS: ', prevProps);
+  // }
 
   handleClick(key, value) {
     this.setState({ [key]: value });
@@ -33,7 +37,6 @@ class QandA extends React.Component {
 
   handleChange(event) {
     const { query, list } = this.state;
-    const originalQuestions = list.results;
     this.setState({ query: event.target.value });
     if (query.length > 2) {
       const queriedQuestions = [];
@@ -48,9 +51,9 @@ class QandA extends React.Component {
       this.setState({ list });
     } else {
       // console.log('ELSE HIT');
-      // const { info } = this.props;
-      // console.log('Original Info: ', info);
-      // this.setState({ list: originalQuestions });
+      // const { olist } = this.state;
+      // console.log('Original Info: ', olist);
+      // this.setState(prevState);
     }
   }
 
@@ -75,6 +78,7 @@ class QandA extends React.Component {
                     question={qanda.question_body}
                     qid={qanda.question_id}
                     helpful={qanda.question_helpfulness}
+                    item={product}
                     id={key}
                   />
                   <AnswerItem answers={qanda.answers} expanded={isExpanded} id={key} />

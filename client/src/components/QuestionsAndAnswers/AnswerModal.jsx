@@ -13,20 +13,20 @@ function AnswerModal(props) {
           <h5 className="kris-modal-subtitle">{`About the ${props.product}`}</h5>
         </div>
         <div className="kris-modal-body">
-          <div className="kris-modal-qQuestion">
-            Question:
+          <div className="kris-modal-aAnswer">
+            Answer:
             <br />
-            <input type="text" maxLength="1000" value="question" />
+            <input type="text" maxLength="1000" placeholder="...add answer here." />
           </div>
-          <div className="kris-modal-qNickname">
+          <div className="kris-modal-aNickname">
             Nickname:
             <br />
-            <input type="text" maxLength="60" value="nickname" />
+            <input type="text" maxLength="60" placeholder="nickname" />
           </div>
-          <div className="kris-modal-qEmail">
+          <div className="kris-modal-aEmail">
             Email:
             <br />
-            <input type="text" maxLength="60" value="email" />
+            <input type="text" maxLength="60" placeholder="email" />
           </div>
         </div>
         <div className="kris-modal-footer">
