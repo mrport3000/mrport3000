@@ -68,15 +68,12 @@ class OutfitList extends React.Component {
   outfitFiller() {
     const { outfits } = this.props;
     const { defaultEndIndex } = this.state;
-    console.log('defaultEndIndex', defaultEndIndex);
-    console.log('outfits length', outfits.length);
     let cardToAdd = (defaultEndIndex + 1) - outfits.length;
     const placeholders = [];
     while (cardToAdd > 0) {
-      placeholders.push(<Placeholder />);
+      placeholders.push('placeholder');
       cardToAdd--;
     }
-    console.log('PLACEHOLDERS: ', placeholders);
     return placeholders;
   }
 
@@ -116,7 +113,7 @@ class OutfitList extends React.Component {
                 }
               })
             }
-            {this.outfitFiller().map((fillerProduct) => fillerProduct)}
+            {this.outfitFiller().map((fillerProduct, index) => <Placeholder key={index} />)}
             {endIndex < (outfits.length - 1) && (
             <div className="duke-arrow-container">
               <MdArrowForwardIos className="duke-arrow-button" onClick={this.handleForwardArrowClick} />

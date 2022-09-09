@@ -9,6 +9,7 @@ import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
 import OutfitList from './OutfitList/OutfitList.jsx';
 import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
+import ErrorBoundary from './RelatedItems/ErrorBoundary.jsx';
 
 const defaultId = 71701;
 
@@ -26,6 +27,8 @@ class App extends React.Component {
       rating: null,
       reviewCount: null,
       reviewPage: null,
+      characteristics: null,
+      recommended: null,
       reviews: [],
       outfits: [],
     };
@@ -129,7 +132,7 @@ class App extends React.Component {
             if (parsedQs.styleId) {
               styleId = parsedQs.styleId;
               console.log(styleId);
-              for (var i = 0; i < productStyles.length; i += 1) {
+              for (let i = 0; i < productStyles.length; i += 1) {
                 if (productStyles[i]['default?']) {
                   productStyles[0] = productStyles[i];
                   productStyles[i] = firstStyle;
@@ -170,6 +173,8 @@ class App extends React.Component {
                       qandaInfo,
                       rating: averageRating(ratings),
                       reviewCount: totalReviews(ratings),
+                      characteristics: results.data.characteristics,
+                      recommended: results.data.recommended,
                       outfits: localStorage.get('outfitList') || [],
                     });
                     window.history.pushState({ productId }, '', `?productId=${productId}&styleId=${styleId}`);
@@ -224,6 +229,8 @@ class App extends React.Component {
       reviewCount,
       reviewPage,
       reviews,
+      characteristics,
+      recommended,
       outfits,
     } = this.state;
 
@@ -245,26 +252,35 @@ class App extends React.Component {
           handleRemoveOutfitClick={this.handleRemoveOutfitClick}
           executeScroll={this.executeScroll}
         />
-        <RelatedProducts
-          productId={productId}
-          currProduct={productInfo}
-          handleProductCardClick={this.handleProductCardClick}
-        />
-        <OutfitList
-          productInfo={productInfo}
-          productStyles={productStyles}
-          outfits={outfits}
-          handleAddOutfitClick={this.handleAddOutfitClick}
-          handleRemoveOutfitClick={this.handleRemoveOutfitClick}
-          rating={rating}
-        />
+        <ErrorBoundary>
+          <RelatedProducts
+            productId={productId}
+            currProduct={productInfo}
+            handleProductCardClick={this.handleProductCardClick}
+          />
+          <OutfitList
+            productInfo={productInfo}
+            productStyles={productStyles}
+            outfits={outfits}
+            handleAddOutfitClick={this.handleAddOutfitClick}
+            handleRemoveOutfitClick={this.handleRemoveOutfitClick}
+            rating={rating}
+          />
+        </ErrorBoundary>
 
         <QandA
           info={qandaInfo}
           product={productInfo.name}
         />
         <div ref={this.scrollTarget}>
-          <RatingAndReview reviews={reviews} page={reviewPage} />
+          <RatingAndReview
+            reviews={reviews}
+            page={reviewPage}
+            product={productInfo.name}
+            productId={productId}
+            characteristics={characteristics}
+            recommended={recommended}
+          />
         </div>
       </>
     );

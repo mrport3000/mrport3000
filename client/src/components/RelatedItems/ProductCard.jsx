@@ -14,7 +14,7 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
 
   const [previewPhoto, setPreviewPhoto] = useState(product.newDefaultPhoto || defaultPhotoURL);
 
-  const placeHolderPhoto = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd02zeVLQ2fKKrq6VtQ5fSEvkIGaefaaJTcA&usqp=CAU";
+  const placeHolderPhoto = "https://media.istockphoto.com/photos/coming-soon-neon-sign-the-banner-shining-light-signboard-collection-picture-id1332167985?b=1&k=20&m=1332167985&s=170667a&w=0&h=O-084eNJBhGZGJbJvNvUC1P6d4aSo6XkV4Kom7ZZcIQ=";
 
   const [isShown, setIsShown] = useState(false);
 
