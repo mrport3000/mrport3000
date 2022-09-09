@@ -129,7 +129,6 @@ class App extends React.Component {
             const firstStyle = productStyles[0];
             if (parsedQs.styleId) {
               styleId = parsedQs.styleId;
-              console.log(styleId);
               for (var i = 0; i < productStyles.length; i += 1) {
                 if (productStyles[i]['default?']) {
                   productStyles[0] = productStyles[i];
