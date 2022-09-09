@@ -16,10 +16,8 @@ function withClickData(WrappedComponent) {
     }
 
     render() {
-      console.log('WRAPPED COMPONENT', WrappedComponent);
       return (
         <div onClick={this.handleSiteClick} className="HOC-div">
-          <h1>hello world</h1>
           <WrappedComponent {...this.props} />
         </div>
       );

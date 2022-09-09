@@ -15,7 +15,7 @@ class AddToCart extends React.Component {
       quantityAvailable: null,
       savedToOutfit: false,
       selectedSku: null,
-      specialMessage: null,
+      specialMessage: ' ',
     };
 
     this.sizeRef = React.createRef();
@@ -45,14 +45,14 @@ class AddToCart extends React.Component {
       selectedQuantity: null,
       quantityAvailable: quantity,
       selectedSku: selectedSku,
-      specialMessage: null,
+      specialMessage: ' ',
     });
   }
 
   changeQuantity(e) {
     this.setState({
       selectedQuantity: e.value,
-      specialMessage: null,
+      specialMessage: ' ',
     });
   }
 
@@ -146,22 +146,22 @@ class AddToCart extends React.Component {
     }
     return (
       <div className="keith-cart-div">
-        {specialMessage && <p><b>{specialMessage}</b></p>}
+        <p className="keith-special-message"><b>{specialMessage}</b></p>
         <div className="keith-size-quantity-div">
-          <div style={{ width: '250px', float: 'left' }}>
+          <div style={{ width: '200px' }}>
             <Select
               openMenuOnFocus
-              style={{ margin: '10px' }}
+              style={{ margin: '20px' }}
               ref={this.sizeRef}
               options={sizeOptions}
               onChange={this.changeSize}
               placeholder="Select Size"
             />
           </div>
-          <div style={{ width: '100px', float: 'right' }}>
+          <div style={{ width: '100px' }}>
             <Select
               openMenuOnFocus
-              style={{ margin: '10px' }}
+              style={{ margin: '20px' }}
               ref={this.quantityRef}
               key={selectedSize}
               options={quantityOptions}

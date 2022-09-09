@@ -11,6 +11,8 @@
 
 .eric-RR-sortReviews {
   margin-left: 10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .eric-RR-productRatingContainer {
@@ -39,7 +41,7 @@
 }
 
 .eric-RR-productBreakdown {
-  border: .5px solid black;
+  /* border: .5px solid black; */
   /* border-top: 0px solid; */
   height: 250px;
   width: 350px;
@@ -209,3 +211,213 @@
   background-color: lightgray;
   /* position: absolute; */
 }
+
+.eric-RR-modalContainer {
+  background-color: #D9D9D9;
+  border-radius: 0.5em;
+  box-shadow: 0 15px 15px black;
+}
+
+.eric-RR-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Helvetica, sans-serif;
+}
+
+.eric-RR-modalStarContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+/* this hides radio buttons for star rating within the modal  */
+.eric-RR-modalStarRating input[type=radio] {
+  display: none;
+}
+
+.eric-RR-modalStarText {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  font-size: 25px;
+  width: 350px;
+}
+
+.eric-RR-recommendProduct {
+  text-align: center;
+  align-items: center;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.eric-RR-characteristics {
+  display: flex;
+  flex-direction: column;
+}
+
+.eric-RR-cMainTitle {
+  text-align: center;
+}
+
+.eric-RR-modalHeader h2, .eric-RR-modalHeader h4 {
+  text-align: center;
+  margin: 5px 0px 5px 0px;
+}
+
+.eric-RR-cRating {
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+  text-align: center;
+}
+
+.eric-RR-r0 {
+  width: 4.5em;
+  align-items: center;
+  margin-top: 2px;
+  margin-left: 5.5px;
+  margin-right: 5.5px;
+}
+
+.eric-RR-r1, .eric-RR-r2,
+.eric-RR-r3, .eric-RR-r4,
+.eric-RR-r5 {
+  width: 8.5em;
+  align-items: center;
+  margin-top: 2px;
+  margin-left: 5.5px;
+  margin-right: 5.5px;
+}
+
+.eric-RR-characteristics fieldset{
+  width: 10em;
+  height: 12em;
+}
+
+.eric-RR-cSize, .eric-RR-cWidth,
+.eric-RR-cComfort, .eric-RR-cQuality,
+.eric-RR-cLength, .eric-RR-cFit {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+}
+
+.eric-RR-cTitle {
+  font-weight: bold;
+  font-size: 18px;
+  width: 7em;
+  /* margin-right: 15px; */
+  text-align: center;
+}
+
+.eric-RR-reviewContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.eric-RR-reviewListContainer {
+  height: 460px;
+  width: 500px;
+  overflow: auto;
+}
+
+.eric-RR-sortBottomNavBar {
+  display: flex;
+  justify-content: center;
+}
+
+.eric-RR-reviewSummary p, .eric-RR-reviewBody p {
+  margin: 3px 0px 3px 0px;
+  text-align: center;
+}
+
+.eric-RR-reviewSummary input {
+  height: 20px;
+  width: 240px;
+  border-radius: 2.5px;
+}
+
+.eric-RR-reviewBody input {
+  width: 300px;
+  height: 100px;
+  border-radius: 15px;
+}
+
+.eric-RR-uploadPhoto img {
+  height: 100px;
+  width: 100px;
+}
+
+.eric-RR-modalSubmit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.eric-RR-modalSubmit input{
+  background-color: black;
+  border: none;
+  color: white;
+  height: 30px;
+  width: 150px;
+  margin: 5px 10px 5px 0px;
+  text-align: center;
+  display: inline-block;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.eric-RR-productBreakdownContainer {
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+  height: 200px;
+  background-color: white;
+}
+
+.eric-RR-pbCharacteristic {
+  display: flex;
+  flex-direction: column;
+}
+
+.eric-RR-pbTitleBreakdown {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.eric-RR-pbScale {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.eric-RR-pbLeft, .eric-RR-pbCenter, .eric-RR-pbRight {
+  display: flex;
+  flex-direction: column;
+  width: 32.9%;
+  height: 40px;
+}
+
+.eric-RR-pbLeft, .eric-RR-pbCenter, .eric-RR-pbRight div {
+  display: flex;
+  flex-direction: column;
+}
+
+.eric-RR-lVisual, .eric-RR-cVisual, .eric-RR-rVisual {
+  background-color: #D3D3D3;
+  height: 33%;
+}
+
+.eric-RR-lText, .eric-RR-cText, .eric-RR-rText {
+  height: 33%;
+  text-align: center;
+}
+

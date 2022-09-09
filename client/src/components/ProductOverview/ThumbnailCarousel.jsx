@@ -16,6 +16,7 @@ export default function ThumbnailCarousel({
   handleDownArrowClick,
 }) {
   const thumbPhotos = photos.slice(startIndex, endIndex + 1);
+  const backupPhoto = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd02zeVLQ2fKKrq6VtQ5fSEvkIGaefaaJTcA&usqp=CAU";
   return (
     <table>
       <tbody className="keith-thumbnail-column">
@@ -29,18 +30,19 @@ export default function ThumbnailCarousel({
               style={
               {
                 margin: '0px',
-                backgroundImage: `url(${photo.thumbnail_url})`,
+                backgroundImage: `url(${photo.thumbnail_url || backupPhoto})`,
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 backgroundPositionX: 'center',
                 backgroundPositionY: 'center',
-                border: thumbIndex - startIndex === index ? '2px solid darkgoldenrod' : 'none',
+                border: thumbIndex - startIndex === index ? '4px solid #F76C5E' : 'none',
+                borderRadius: '10px',
                 opacity: thumbIndex - startIndex === index ? '80%' : '100%',
               }
             }
               thumbindex={index + startIndex}
-              key={photo.thumbnail_url}
-              alt={photo.thumbnail_url}
+              key={photo.thumbnail_url || backupPhoto}
+              alt={photo.thumbnail_url || backupPhoto}
               onMouseEnter={onMouseEnter}
               onMouseLeave={onMouseLeave}
               onClick={handleThumbChange}

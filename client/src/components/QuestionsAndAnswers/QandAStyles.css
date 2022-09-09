@@ -1,5 +1,7 @@
 .kris-qanda{
   font-family: Helvetica, sans-serif;
+  justify-content: left;
+  width: 100%;
   margin: 15px 0px 15px 30px;
 }
 
@@ -8,7 +10,7 @@
   font-size: 16;
   padding: 12px 20px;
   margin: 8px 0;
-  display: inline-block;
+  display: inline;
   border: 2px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
@@ -16,6 +18,70 @@
 
 .kris-Answer{
   margin-left: 25px;
+  border: 1px solid black;
+  padding: 25px;
+  margin:10px;
+}
+
+.kris-AnswerBody{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.kris-answerHelpful{
+  margin: 10px 10px 10px 0px;
+}
+
+.kris-answerReported{
+  margin: 10px 10px 10px 0px;
+}
+
+.kris-questionHelpful{
+  margin: 10px 10px 10px 0px;
+}
+
+.kris-questionReported{
+  margin: 10px 10px 10px 0px;
+}
+
+
+
+
+.kris-modal{
+  position: fixed;
+  padding: 30px;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kris-modal-content{
+  width:500px;
+  background-color: #fff;
+}
+
+.kris-modal-header, .kris-modal-footer{
+  padding: 10px;
+}
+
+.kris-modal-title{
+  margin: 0;
+}
+
+.kris-modal-body{
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+}
+
+.kris.modal-input-question{
+  width: 300px;
+  height: 150px;
 }
 
 .navButton {
@@ -26,7 +92,7 @@
   width: 150px;
   margin: 5px 10px 5px 0px;
   text-align: center;
-  display: inline-block;
+  display: inline;
   font-size: 15px;
   cursor: pointer;
 }

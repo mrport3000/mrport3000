@@ -9,7 +9,7 @@ import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
 import OutfitList from './OutfitList/OutfitList.jsx';
 import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
-import ErrorBoundary from './RelatedItems/ErrorBoundary.jsx';
+import ErrorBoundary from './ErrorBoundary.jsx';
 import withClickData from './withClickData.jsx';
 
 const defaultId = 71701;
@@ -28,6 +28,8 @@ class App extends React.Component {
       rating: null,
       reviewCount: null,
       reviewPage: null,
+      characteristics: null,
+      recommended: null,
       reviews: [],
       outfits: [],
     };
@@ -45,7 +47,7 @@ class App extends React.Component {
   componentDidMount() {
     const parsedUrl = url.parse(window.location.href);
     const { productId } = querystring.parse(parsedUrl.query);
-    const searchId = productId || defaultId;
+    const searchId = Number(productId) || defaultId;
     this.getInitialData(searchId);
   }
 
@@ -61,7 +63,7 @@ class App extends React.Component {
     const styleIndex = Number(e.target.getAttribute('index'));
     const styleId = productStyles[styleIndex].style_id;
     this.setState({ styleIndex, styleId });
-    window.history.pushState({ productId }, '', `http://127.0.0.1:3000/?productId=${productId}&styleId=${styleId}`);
+    window.history.pushState({ productId }, '', `?productId=${productId}&styleId=${styleId}`);
   }
 
   handleProductCardClick(id) {
@@ -130,7 +132,6 @@ class App extends React.Component {
             const firstStyle = productStyles[0];
             if (parsedQs.styleId) {
               styleId = parsedQs.styleId;
-              console.log(styleId);
               for (var i = 0; i < productStyles.length; i += 1) {
                 if (productStyles[i]['default?']) {
                   productStyles[0] = productStyles[i];
@@ -172,9 +173,11 @@ class App extends React.Component {
                       qandaInfo,
                       rating: averageRating(ratings),
                       reviewCount: totalReviews(ratings),
+                      characteristics: results.data.characteristics,
+                      recommended: results.data.recommended,
                       outfits: localStorage.get('outfitList') || [],
                     });
-                    window.history.pushState({ productId }, '', `http://127.0.0.1:3000/?productId=${productId}&styleId=${styleId}`);
+                    window.history.pushState({ productId }, '', `?productId=${productId}&styleId=${styleId}`);
                   })
                   .then(() => {
                     // both /review endpoints will be swapped at a later date
@@ -216,6 +219,12 @@ class App extends React.Component {
   }
 
   render() {
+    const ProductOverviewWithClickData = withClickData(ProductOverview);
+    const RelatedProductsWithClickData = withClickData(RelatedProducts);
+    const OutfitListWithClickData = withClickData(OutfitList);
+    const QandAWithClickData = withClickData(QandA);
+    const RatingAndReviewWithClickData = withClickData(RatingAndReview);
+
     const {
       productId,
       productInfo,
@@ -226,6 +235,8 @@ class App extends React.Component {
       reviewCount,
       reviewPage,
       reviews,
+      characteristics,
+      recommended,
       outfits,
     } = this.state;
 
@@ -233,26 +244,22 @@ class App extends React.Component {
       return <div />;
     }
 
-    const ProductOverviewWithClickData = withClickData(ProductOverview);
-    const RelatedProductsWithClickData = withClickData(RelatedProducts);
-    const OutfitListWithClickData = withClickData(OutfitList);
-    const QandAWithClickData = withClickData(QandA);
-    const RatingAndReviewWithClickData = withClickData(RatingAndReview);
-
     return (
       <>
-        <ProductOverviewWithClickData
-          key={productInfo.id}
-          productInfo={productInfo}
-          productStyles={productStyles}
-          styleIndex={styleIndex}
-          rating={rating}
-          reviewCount={reviewCount}
-          handleStyleChange={this.handleStyleChange}
-          handleAddOutfitClick={this.handleAddOutfitClick}
-          handleRemoveOutfitClick={this.handleRemoveOutfitClick}
-          executeScroll={this.executeScroll}
-        />
+        <ErrorBoundary>
+          <ProductOverviewWithClickData
+            key={productInfo.id}
+            productInfo={productInfo}
+            productStyles={productStyles}
+            styleIndex={styleIndex}
+            rating={rating}
+            reviewCount={reviewCount}
+            handleStyleChange={this.handleStyleChange}
+            handleAddOutfitClick={this.handleAddOutfitClick}
+            handleRemoveOutfitClick={this.handleRemoveOutfitClick}
+            executeScroll={this.executeScroll}
+          />
+        </ErrorBoundary>
         <ErrorBoundary>
           <RelatedProductsWithClickData
             productId={productId}
@@ -268,11 +275,24 @@ class App extends React.Component {
             rating={rating}
           />
         </ErrorBoundary>
-
-        <QandAWithClickData info={qandaInfo} />
-        {/* <div ref={this.scrollTarget}> */}
-        <RatingAndReview reviews={reviews} page={reviewPage} />
-        {/* </div> */}
+        <ErrorBoundary>
+          <QandAWithClickData
+            info={qandaInfo}
+            product={productInfo.name}
+          />
+        </ErrorBoundary>
+        <div ref={this.scrollTarget} className="scroll-target-div">
+          <ErrorBoundary>
+            <RatingAndReviewWithClickData
+              reviews={reviews}
+              page={reviewPage}
+              product={productInfo.name}
+              productId={productId}
+              characteristics={characteristics}
+              recommended={recommended}
+            />
+          </ErrorBoundary>
+        </div>
       </>
     );
   }
