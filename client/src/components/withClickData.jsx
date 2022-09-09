@@ -17,7 +17,7 @@ function withClickData(WrappedComponent) {
 
     render() {
       return (
-        <div onClick={this.handleSiteClick} className="HOC-div">
+        <div onClickCapture={this.handleSiteClick} className="HOC-div">
           <WrappedComponent {...this.props} />
         </div>
       );
