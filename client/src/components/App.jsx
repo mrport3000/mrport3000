@@ -268,7 +268,10 @@ class App extends React.Component {
           />
         </ErrorBoundary>
 
-        <QandA info={qandaInfo} />
+        <QandA
+          info={qandaInfo}
+          product={productInfo.name}
+        />
         <div ref={this.scrollTarget}>
           <RatingAndReview
             reviews={reviews}

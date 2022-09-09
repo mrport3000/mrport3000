@@ -42,21 +42,18 @@ function AnswerItem(props) {
             return null;
           }
           return (
-            <div className="kris-Answer">
-              <p className="kris-AnswerBody">
+            <div className="kris-Answer" id={key}>
+              <h4 className="kris-AnswerBody">
                 {`A:${answer.body.padStart(answer.body.length + 1, ' ')}\n`}
-              </p>
+              </h4>
               <p className="kris-AnswerAuth">
-                {`\nby: ${answer.answerer_name}`}
+                {`\nby: ${answer.answerer_name}, ${format(new Date(answer.date), 'MM/dd/yyyy')}`}
               </p>
-              <p className="kris-AnswerDate">
-                {`\n ${format(new Date(answer.date), 'MM/dd/yyyy')}`}
-              </p>
-              {
-                console.log('ANSWER ID: ', answer.id)
-              }
-              <a className="kris-answerHelpful" href={`/qanda/answer/helpful/${answer.id}`}>Helpful</a>
-              <a className="kris-answerReported" href="www.google.com">Report</a>
+              {/* <p className="kris-AnswerDate">
+                {`, ${format(new Date(answer.date), 'MM/dd/yyyy')}`}
+              </p> */}
+              <button className="kris-answerHelpful" type="button" onClick={() => (axios.get(`/qanda/answer/helpful/${answer.id}`))}>{`Helpful?(${answer.helpfulness})`}</button>
+              <button className="kris-answerReported" type="button" onClick={() => (axios.get(`/qanda/answer/reported/${answer.id}`))}>Report</button>
             </div>
           );
         })
