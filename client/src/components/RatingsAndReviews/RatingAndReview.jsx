@@ -13,10 +13,12 @@ class RatingAndReview extends React.Component {
     super(props);
     this.state = {
       totalReviews: [],
+      rbfilteredReviews: [],
       show: false,
     };
     this.handleModal = this.handleModal.bind(this);
     this.filtered = this.filtered.bind(this);
+    this.liftRBFilteredReviews = this.liftRBFilteredReviews.bind(this);
   }
 
   handleModal(bool) {
@@ -39,6 +41,10 @@ class RatingAndReview extends React.Component {
       average: ((average.reduce((pv, cv) => pv + cv, initialValue)) / rating.length).toString().slice(0, 3),
       recPercent: ((recPercent.length / rating.length) * 100).toString().slice(0, 4),
     };
+  }
+
+  liftRBFilteredReviews() {
+    console.log('testing')
   }
 
   render() {

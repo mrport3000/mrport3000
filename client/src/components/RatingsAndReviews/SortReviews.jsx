@@ -62,13 +62,12 @@ class SortReviews extends React.Component {
         return review;
       }
     });
-    //console.log('reviewControl: ', reviewControl);
     return reviewControl;
   }
 
   render() {
-    const { sortedReviews, reviewCount, isVisable } = this.state;
-    //console.log('testing: ', this.props.reviews);
+    const { sortedReviews, reviewCount } = this.state;
+
     let dynamicProps;
     if (!sortedReviews) {
       dynamicProps = this.reviewListControl(this.props.reviews, reviewCount);
@@ -100,7 +99,7 @@ class SortReviews extends React.Component {
         </div>
         <div className="eric-RR-sortBottomNavBar">
           <div className="eric-RR-moreReviewsContainer">
-            <button type="submit" className="eric-RR-sortMoreReviews" onClick={this.moreReviews} style={{visibility: this.props.reviews.length >= reviewCount ? 'visible' : 'hidden' }}>
+            <button type="submit" className="eric-RR-sortMoreReviews" onClick={this.moreReviews} style={{ visibility: this.props.reviews.length >= reviewCount ? 'visible' : 'hidden' }}>
               More Reviews
             </button>
           </div>
