@@ -27,6 +27,8 @@ class App extends React.Component {
       rating: null,
       reviewCount: null,
       reviewPage: null,
+      characteristics: null,
+      recommended: null,
       reviews: [],
       outfits: [],
     };
