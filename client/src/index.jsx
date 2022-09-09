@@ -5,9 +5,11 @@ import React from 'react';
 import App from './components/App.jsx';
 
 const listener = function (e) {
-  console.log(e);
+  //One could add interactions API here...
+  console.log(e.path);
 };
 
 // eslint-disable-next-line no-undef
 ReactDOM.render(<App />, document.getElementById('root'));
-document.body.addEventListener('click', listener, true);
+//...Just uncomment this to append to DOM
+// document.body.addEventListener('click', listener, true);

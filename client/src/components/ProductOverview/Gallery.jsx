@@ -9,7 +9,7 @@ class Gallery extends React.Component {
   constructor(props) {
     super(props);
     const { photos } = this.props;
-    const endIndex = photos.length > 7 ? 6 : photos.length;
+    const endIndex = photos.length > 7 ? 6 : photos.length - 1;
     this.state = {
       startIndex: 0,
       endIndex,
@@ -26,7 +26,6 @@ class Gallery extends React.Component {
   handleZoomMouseMove(e) {
     const relX = e.pageX - e.target.offsetLeft;
     const relY = e.pageY - e.target.offsetTop;
-    console.log(relX, relY);
     this.setState({
       relX,
       relY,
@@ -104,7 +103,6 @@ class Gallery extends React.Component {
     img.src = mainImage;
     const mainImageWidth = img.naturalWidth;
     const mainImageHeight = img.naturalHeight;
-    console.log('width', img.naturalWidth, 'height', img.naturalHeight);
     let hoverStyle = 'zoom-in';
     if (expandedView) {
       if (zoomed) {

@@ -9,7 +9,7 @@ import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
 import OutfitList from './OutfitList/OutfitList.jsx';
 import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
-import ErrorBoundary from './RelatedItems/ErrorBoundary.jsx';
+import ErrorBoundary from './ErrorBoundary.jsx';
 
 const defaultId = 71701;
 
@@ -234,18 +234,20 @@ class App extends React.Component {
 
     return (
       <>
-        <ProductOverview
-          key={productInfo.id}
-          productInfo={productInfo}
-          productStyles={productStyles}
-          styleIndex={styleIndex}
-          rating={rating}
-          reviewCount={reviewCount}
-          handleStyleChange={this.handleStyleChange}
-          handleAddOutfitClick={this.handleAddOutfitClick}
-          handleRemoveOutfitClick={this.handleRemoveOutfitClick}
-          executeScroll={this.executeScroll}
-        />
+        <ErrorBoundary>
+          <ProductOverview
+            key={productInfo.id}
+            productInfo={productInfo}
+            productStyles={productStyles}
+            styleIndex={styleIndex}
+            rating={rating}
+            reviewCount={reviewCount}
+            handleStyleChange={this.handleStyleChange}
+            handleAddOutfitClick={this.handleAddOutfitClick}
+            handleRemoveOutfitClick={this.handleRemoveOutfitClick}
+            executeScroll={this.executeScroll}
+          />
+        </ErrorBoundary>
         <ErrorBoundary>
           <RelatedProducts
             productId={productId}
@@ -261,10 +263,13 @@ class App extends React.Component {
             rating={rating}
           />
         </ErrorBoundary>
-
-        <QandA info={qandaInfo} />
+        <ErrorBoundary>
+          <QandA info={qandaInfo} />
+        </ErrorBoundary>
         <div ref={this.scrollTarget}>
-          <RatingAndReview reviews={reviews} page={reviewPage} />
+          <ErrorBoundary>
+            <RatingAndReview reviews={reviews} page={reviewPage} />
+          </ErrorBoundary>
         </div>
       </>
     );
