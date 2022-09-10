@@ -134,6 +134,12 @@ app.post('/cart', (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.post('/interactions', (req, res) => {
+  axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/interactions', req.body, headers)
+    .then((result) => res.send(result.data))
+    .catch((err) => console.log(err));
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port: ${PORT}`);
 });

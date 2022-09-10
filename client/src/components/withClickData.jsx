@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 function withClickData(WrappedComponent) {
   return class extends React.Component {
@@ -9,10 +10,13 @@ function withClickData(WrappedComponent) {
 
     handleSiteClick(e) {
       const currentDate = new Date();
-      console.log('TIME', currentDate.toString().split(' ')[4]);
-      console.log('Element', e.target);
-      console.log('Module', getDisplayName(WrappedComponent));
-      console.log('------');
+      axios.post('/interactions', {
+        element: e.target.tagName,
+        widget: getDisplayName(WrappedComponent),
+        time: currentDate.toString().split(' ')[4],
+      })
+        .then((result) => console.log('Posted Click: ', result))
+        .catch((err) => console.log(err));
     }
 
     render() {
