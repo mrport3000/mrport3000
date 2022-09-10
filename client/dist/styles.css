@@ -60,6 +60,14 @@ header h4 {
   margin: 0px;
 }
 
+.HOC-div {
+  width: 100%;
+}
+
+.scroll-target-div {
+  width: 100%;
+}
+
 .keith-overview-div {
   margin: 0px;
   padding: 40px;
