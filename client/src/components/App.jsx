@@ -11,6 +11,7 @@ import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
 import ErrorBoundary from './ErrorBoundary.jsx';
 import withClickData from './withClickData.jsx';
+import Title from './Title.jsx';
 
 const defaultId = 71701;
 
@@ -224,6 +225,7 @@ class App extends React.Component {
     const OutfitListWithClickData = withClickData(OutfitList);
     const QandAWithClickData = withClickData(QandA);
     const RatingAndReviewWithClickData = withClickData(RatingAndReview);
+    const TitleWithClickData = withClickData(Title);
 
     const {
       productId,
@@ -246,6 +248,9 @@ class App extends React.Component {
 
     return (
       <>
+        <ErrorBoundary>
+          <TitleWithClickData />
+        </ErrorBoundary>
         <ErrorBoundary>
           <ProductOverviewWithClickData
             key={productInfo.id}
