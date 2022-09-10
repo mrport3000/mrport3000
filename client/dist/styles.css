@@ -36,7 +36,8 @@ body {
 
 header {
   padding: 10px;
-  border-bottom: 2px solid #353535;
+  border-bottom: 1px solid #d7d6d6;
+  background-color: #FFF;
 }
 
 header h1 {
@@ -312,9 +313,12 @@ header h4 {
 .duke-products-container {
   width: 100%;
   padding: 40px 20px 50px 20px;
+  background-color: #FFF;
+  border-top: 1px solid #d7d6d6;
 }
 
 .duke-products-inner {
+  padding: 5px;
   max-width: 1500px;
   margin-left: auto;
   margin-right: auto;
@@ -340,8 +344,8 @@ header h4 {
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: flex-start;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.03);
-  border-radius: 5px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
 }
 
 .duke-card-container button {
@@ -356,7 +360,6 @@ header h4 {
   background: radial-gradient(circle, rgba(247,108,94,.25) 0%, rgba(40,75,99,.25) 51%, rgba(255,255,255,.25) 100%);
   height: 60%;
   width: 100%;
-  border-radius: 5px;
 }
 
 .duke-card-preview-image {
@@ -365,7 +368,6 @@ header h4 {
   max-width: 100%;
   width: auto;
   height: auto;
-  border-radius: 5px;
 }
 
 .duke-outfit-header {
@@ -376,7 +378,6 @@ header h4 {
   background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 51%, rgba(247,108,94,1) 95%);
   height: 60%;
   width: 100%;
-  border-radius: 5px;
 }
 
 .duke-outfit-preview-image {
@@ -385,7 +386,6 @@ header h4 {
   max-width: 100%;
   width: auto;
   height: auto;
-  border-radius: 5px;
 }
 
 .duke-action-icon {
@@ -441,6 +441,8 @@ header h4 {
   width: 50px;
   background-size: cover;
   background-repeat: no-repeat;
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
 }
 
 
@@ -485,8 +487,8 @@ header h4 {
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
 }
 
 .duke-addoutfit-image {
@@ -502,7 +504,12 @@ header h4 {
 .duke-arrow-button {
   height: 10em;
   width: 10em;
-  color: rgb(40, 75, 99, 0.2);
+  /* color: rgb(40, 75, 99, 0.2); */
+  color: #F76C5E;
+}
+
+.duke-thumbnail-arrow-button {
+  color: #F76C5E;
 }
 
 .duke-arrow-hide {
