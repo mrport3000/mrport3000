@@ -1,21 +1,19 @@
 import React from 'react';
+import plugIcon from '../../dist/lib/Plug-icon.png';
 
 function Title() {
   return (
-    <>
-      <div className="pre-header" />
-      <header>
+    <header>
+      <div className="header-container">
         <div className="header-left">
-          <img className="plug-icon" src="https://cdn-icons-png.flaticon.com/512/159/159049.png" alt="plug" />
-          <div className="header-text">
-            <h1>Mr. PORT:3000</h1>
-          </div>
+          <img className="plug-icon" src={plugIcon} alt="plug" />
+          <h1>Mr. PORT:3000</h1>
         </div>
         <div className="header-right">
-          <h4>Your shortcut to the best deals on the web</h4>
+          <h3>Your shortcut to the best deals on the web</h3>
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   );
 }
 
