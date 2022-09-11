@@ -72,8 +72,14 @@ header {
 }
 
 .header-right h3 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-style: italic;
+  font-weight: 100;
+}
+
+.highlight {
+  color:#F76C5E;
+  font-weight: bold;
 }
 
 .plug-icon {
