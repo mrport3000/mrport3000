@@ -31,19 +31,42 @@ p {
 
 body {
   margin: 0px;
-  background-color: #D9D9D9;
+  /* background-color: #D9D9D9; */
+  background-color: #fff;
 }
 
 header {
+  max-height: 75px;
+  display: flex;
   padding: 10px;
   border-bottom: 1px solid #d7d6d6;
   background-color: #FFF;
+  justify-content: space-between;
 }
 
 header h1 {
-  margin: 0px 0px 10px 0px;
+  margin: 0px 0px 0px 0px;
   font-size: 2.5rem;
   text-align: center;
+}
+
+.header-left {
+  width: 80%;
+  display: flex;
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-right {
+  width: 20%;
+}
+
+.plug-icon {
+  object-fit: cover;
+  max-height: 100%;
 }
 
 header h4 {
@@ -378,6 +401,8 @@ header h4 {
   background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 51%, rgba(247,108,94,1) 95%);
   height: 60%;
   width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .duke-outfit-preview-image {

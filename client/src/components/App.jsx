@@ -271,6 +271,8 @@ class App extends React.Component {
             currProduct={productInfo}
             handleProductCardClick={this.handleProductCardClick}
           />
+        </ErrorBoundary>
+        <ErrorBoundary>
           <OutfitListWithClickData
             productInfo={productInfo}
             productStyles={productStyles}
