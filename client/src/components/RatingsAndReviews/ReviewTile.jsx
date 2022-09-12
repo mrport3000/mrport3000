@@ -1,5 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
+import { GrCheckmark } from 'react-icons/gr';
 import StarRating from '../RelatedItems/StarRating.jsx';
 
 import './RatingAndReview.css';
@@ -18,7 +19,16 @@ class ReviewTile extends React.Component {
   }
 
   render() {
-    //console.log(this.props.review)
+    console.log('reccomended: ', this.props.review.recommend);
+    let recommend;
+    if (this.props.review.recommend) {
+      recommend = (
+        <div>
+          <GrCheckmark />
+          I recommend this product
+        </div>
+      );
+    }
     return (
       <div className="eric-RR-tileEntryContainer">
         <div className="eric-RR-tileRatingAndUsername">
@@ -26,7 +36,10 @@ class ReviewTile extends React.Component {
             <StarRating rating={this.props.review.rating} />
           </div>
           <div className="eric-RR-tileUsername">
-            {this.props.review.reviewer_name}, {format ( new Date(this.props.review.date), 'MM/dd/yyyy')}
+            {this.props.review.reviewer_name}
+            ,
+            {' '}
+            {format(new Date(this.props.review.date), 'MM/dd/yyyy')}
           </div>
         </div>
         <div className="eric-RR-tileMainBody">
@@ -37,16 +50,23 @@ class ReviewTile extends React.Component {
             {this.props.review.body}
           </div>
           <div className="eric-RR-tileRecommend">
-            Recommend: {this.props.review.recommend}
+            {recommend}
           </div>
         </div>
         <div className="eric-RR-tileResponseAndHelpful">
           <div className="eric-RR-tileResponse">
-            <b>Response:</b>
-            {this.props.review.response}
+            { <b>Response:</b> && this.props.review.response}
           </div>
           <div className="eric-RR-tileHelpful">
-            Was this review helpful? <a onClick={this.handleClick}>Yes</a> ({this.props.review.helpfulness}) | <a>Report</a>
+            Was this review helpful?
+            {' '}
+            <a onClick={this.handleClick}>Yes</a>
+            {' '}
+            (
+            {this.props.review.helpfulness}
+            ) |
+            {' '}
+            <a>Report</a>
           </div>
         </div>
       </div>

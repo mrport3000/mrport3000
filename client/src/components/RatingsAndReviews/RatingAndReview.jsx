@@ -22,7 +22,7 @@ class RatingAndReview extends React.Component {
   }
 
   handleModal(bool) {
-    this.setState({ show: bool});
+    this.setState({ show: bool });
   }
 
   filtered(arr) {
@@ -43,13 +43,25 @@ class RatingAndReview extends React.Component {
     };
   }
 
-  liftRBFilteredReviews() {
-    console.log('testing')
+  liftRBFilteredReviews(state) {
+    console.log('liftedState: ', state);
+    for (var key in state) {
+      if (state[key] > 0) {
+        const filtered = this.props.reviews.filter((review) => review.rating === Number(state[key]));
+        let concat = this.state.rbfilteredReviews.concat(filtered);
+        // this.setState(prevState => ({
+        //   rbfilteredReviews: [prevState.rbfilteredReviews, ...filtered]
+        // }), console.log('state after: ', this.state.rbfilteredReviews))
+        // this.setState({ rbfilteredReviews: [...filtered] });
+        this.setState({rbfilteredReviews: concat})
+      }
+      //console.log('state after loop: ', this.state.rbfilteredReviews);
+    }
   }
 
   render() {
     // console.log('R&R props: ', this.props)
-    const { show } = this.state;
+    const { show, rbfilteredReviews } = this.state;
     if (this.props.reviews.length === 0) {
       return <div />;
     }
@@ -59,10 +71,10 @@ class RatingAndReview extends React.Component {
       <div className="eric-RR-container">
         <div className="eric-RR-breakdown">
           <div className="eric-RR-ratingBreakdown">
-            <RatingBreakdown ratings={ratingBreakdown} />
+            <RatingBreakdown ratings={ratingBreakdown} liftRating={this.liftRBFilteredReviews} />
           </div>
           <div className="eric-RR-productBreakdown">
-            <ProductBreakdown features={this.props.characteristics}/>
+            <ProductBreakdown features={this.props.characteristics} />
           </div>
         </div>
         <div className="eric-RR-sortReviews">
@@ -77,7 +89,7 @@ class RatingAndReview extends React.Component {
           </div>
           <div className="eric-RR-sort">
             <SortReviews
-              reviews={this.props.reviews}
+              reviews={rbfilteredReviews.length === 0 ? this.props.reviews : rbfilteredReviews}
               renderModal={this.handleModal}
               productId={this.props.productId}
             />

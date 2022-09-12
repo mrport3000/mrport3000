@@ -133,8 +133,17 @@
   border-radius: 30px;
 }
 
-.eric-RR-tileHelpful a{
+/* .eric-RR-tileHelpful a{
   text-decoration: underline;
+} */
+
+.eric-rr-rbButton {
+  background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .eric-RR-sortMoreReviews {

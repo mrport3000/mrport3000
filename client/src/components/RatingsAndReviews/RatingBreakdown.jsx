@@ -7,13 +7,14 @@ class RatingBreakdown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      fiveStar: false,
-      fourStar: false,
-      threeStar: false,
-      twoStar: false,
-      oneStar: false,
+      fiveStar: 0,
+      fourStar: 0,
+      threeStar: 0,
+      twoStar: 0,
+      oneStar: 0,
     };
     this.ratingFrequency = this.ratingFrequency.bind(this);
+    this.toggleStarRating = this.toggleStarRating.bind(this);
   }
 
   ratingFrequency(target, arr) {
@@ -21,8 +22,14 @@ class RatingBreakdown extends React.Component {
     return `${(soloRating.length / this.props.ratings.ratings.length) * 100}%`;
   }
 
-  handleClick() {
-    console.log('')
+  toggleStarRating(e) {
+    const star = e.target.name;
+
+    if (this.state[e.target.name] === 0) {
+      this.setState({ [`${e.target.name}`]: e.target.value }, this.props.liftRating(this.state));
+    } else if (this.state[e.target.name] > 0) {
+      this.setState({ [`${e.target.name}`]: 0 }, this.props.liftRating(this.state));
+    }
   }
 
   render() {
@@ -47,7 +54,7 @@ class RatingBreakdown extends React.Component {
           <div className="eric-RR-breakdown">
             <div className="eric-RR-5starContainer">
               <div className="eric-RR-5left">
-                <a>5 stars</a>
+                <button type="button" className="eric-rr-rbButton" name="fiveStar" value={5} onClick={this.toggleStarRating}>5 stars</button>
               </div>
               <div className="eric-RR-5center">
                 <div className="eric-RR-5bar" style={{ width: this.ratingFrequency(5, this.props.ratings.ratings), height: '25px', backgroundColor: 'black' }} />
@@ -56,7 +63,7 @@ class RatingBreakdown extends React.Component {
 
             <div className="eric-RR-4starContainer">
               <div className="eric-RR-4left">
-                <a>4 stars</a>
+                <button type="button" className="eric-rr-rbButton" name="fourStar" value={4} onClick={this.toggleStarRating}>4 stars</button>
               </div>
               <div className="eric-RR-4center">
                 <div className="eric-RR-4bar" style={{ width: this.ratingFrequency(4, this.props.ratings.ratings), height: '25px', backgroundColor: 'black' }} />
@@ -65,7 +72,7 @@ class RatingBreakdown extends React.Component {
 
             <div className="eric-RR-3starContainer">
               <div className="eric-RR-3left">
-                <a>3 stars</a>
+                <button type="button" className="eric-rr-rbButton" name="threeStar" value={3} onClick={this.toggleStarRating}>3 stars</button>
               </div>
               <div className="eric-RR-3center">
                 <div className="eric-RR-3bar" style={{ width: this.ratingFrequency(3, this.props.ratings.ratings), height: '25px', backgroundColor: 'black' }} />
@@ -74,7 +81,7 @@ class RatingBreakdown extends React.Component {
 
             <div className="eric-RR-2starContainer">
               <div className="eric-RR-2left">
-                <a>2 stars</a>
+                <button type="button" className="eric-rr-rbButton" name="twoStar" value={2} onClick={this.toggleStarRating}>2 stars</button>
               </div>
               <div className="eric-RR-2center">
                 <div className="eric-RR-2bar" style={{ width: this.ratingFrequency(2, this.props.ratings.ratings), height: '25px', backgroundColor: 'black' }} />
@@ -83,7 +90,7 @@ class RatingBreakdown extends React.Component {
 
             <div className="eric-RR-1starContainer">
               <div className="eric-RR-1left">
-                <a>1 stars</a>
+                <button type="button" className="eric-rr-rbButton" name="oneStar" value={1} onClick={this.toggleStarRating}>1 stars</button>
               </div>
               <div className="eric-RR-1center">
                 <div className="eric-RR-1bar" style={{ width: this.ratingFrequency(1, this.props.ratings.ratings), height: '25px', backgroundColor: 'black' }} />
