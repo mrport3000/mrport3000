@@ -103,61 +103,11 @@ class RelatedProducts extends React.Component {
 
   getRelatedProductsInfo(id) {
     const { productId } = this.props;
+    console.log('GET RELATED', `/related/${id}`);
     return axios.get(`/related/${id}`)
-      // [71702, 71702, 71704, 71705, 71697, 71699]
-      .then((results) => {
-        // remove original product Id
-        const newProdsArr = results.data.filter((value) => value !== productId);
-        // remove duplicate product Ids
-        const uniqueArr = [...new Set(newProdsArr)];
-        return Promise.resolve(uniqueArr);
-      })
-      .then((arr) => {
-        const promiseArr = [];
-        // push promises for productID call
-        arr.forEach((value) => {
-          promiseArr.push(new Promise((resolve) => resolve(this.getProductInfo(value))));
-        });
-        // push promises for product styles call
-        arr.forEach((value) => {
-          promiseArr.push(new Promise((resolve) => resolve(this.getProductStyles(value))));
-        });
-        // push promises for review ratings
-        arr.forEach((value) => {
-          promiseArr.push(new Promise((resolve) => resolve(this.getAverageReviews(value))));
-        });
-        return promiseArr;
-      })
-      .then((promiseArr) => Promise.all(promiseArr))
       .then((result) => {
-        const finalResult = [];
-        // push productInfo
-        result.forEach((value) => {
-          if (value.id) {
-            finalResult.push({
-              id: value.id,
-              category: value.category,
-              name: value.name,
-              description: value.description,
-              features: value.features,
-              slogan: value.slogan,
-              default_price: value.default_price,
-            });
-          }
-        });
-        // push styles info
-        finalResult.forEach((product) => {
-          result.forEach((style) => {
-            if (product.id === Number(style.product_id)) {
-              product.styles = style.results;
-            }
-            if (product.id === Number(style.review_id)) {
-              product.ratings = style.ratings;
-            }
-          });
-        });
         this.setState({
-          relatedProducts: finalResult,
+          relatedProducts: result.data,
         });
       });
   }
