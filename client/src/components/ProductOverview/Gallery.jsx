@@ -8,19 +8,11 @@ import ThumbnailCarousel from './ThumbnailCarousel.jsx';
 class Gallery extends React.Component {
   constructor(props) {
     super(props);
-    const { photos } = this.props;
-    const endIndex = photos.length > 7 ? 6 : photos.length - 1;
     this.state = {
-      startIndex: 0,
-      endIndex,
-      thumbIndex: 0,
       relX: 0,
       relY: 0,
     };
     this.handleZoomMouseMove = this.handleZoomMouseMove.bind(this);
-    this.handleThumbChange = this.handleThumbChange.bind(this);
-    this.handleUpArrowClick = this.handleUpArrowClick.bind(this);
-    this.handleDownArrowClick = this.handleDownArrowClick.bind(this);
   }
 
   handleZoomMouseMove(e) {
@@ -32,72 +24,27 @@ class Gallery extends React.Component {
     });
   }
 
-  handleThumbChange(e) {
-    e.stopPropagation();
-    const thumbIndex = Number(e.target.getAttribute('thumbindex'));
-    this.setState({
-      thumbIndex,
-    });
-  }
-
-  handleUpArrowClick(e) {
-    e.stopPropagation();
-    const {
-      startIndex,
-      endIndex,
-      thumbIndex,
-    } = this.state;
-    if (thumbIndex > startIndex) {
-      this.setState({
-        thumbIndex: thumbIndex - 1,
-      });
-    } else {
-      this.setState({
-        startIndex: startIndex - 1,
-        endIndex: endIndex - 1,
-        thumbIndex: thumbIndex - 1,
-      });
-    }
-  }
-
-  handleDownArrowClick(e) {
-    e.stopPropagation();
-    const {
-      startIndex,
-      endIndex,
-      thumbIndex,
-    } = this.state;
-    if (thumbIndex < endIndex) {
-      this.setState({
-        thumbIndex: thumbIndex + 1,
-      });
-    } else {
-      this.setState({
-        startIndex: startIndex + 1,
-        endIndex: endIndex + 1,
-        thumbIndex: thumbIndex + 1,
-      });
-    }
-  }
-
   render() {
     const {
+      relX,
+      relY,
+    } = this.state;
+    const {
       photos,
+      startIndex,
+      endIndex,
+      thumbIndex,
       expandedView,
       hover,
       onMouseEnter,
       onMouseLeave,
       handleExpandClick,
       handleUnexpandClick,
+      handleThumbChange,
+      handleUpArrowClick,
+      handleDownArrowClick,
       zoomed,
     } = this.props;
-    const {
-      startIndex,
-      endIndex,
-      thumbIndex,
-      relX,
-      relY,
-    } = this.state;
     const mainImage = photos[thumbIndex].url || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd02zeVLQ2fKKrq6VtQ5fSEvkIGaefaaJTcA&usqp=CAU";
     const img = new Image();
     img.src = mainImage;
@@ -143,20 +90,20 @@ class Gallery extends React.Component {
             thumbIndex={thumbIndex}
             onMouseLeave={onMouseEnter}
             onMouseEnter={onMouseLeave}
-            handleThumbChange={this.handleThumbChange}
-            handleUpArrowClick={this.handleUpArrowClick}
-            handleDownArrowClick={this.handleDownArrowClick}
+            handleThumbChange={handleThumbChange}
+            handleUpArrowClick={handleUpArrowClick}
+            handleDownArrowClick={handleDownArrowClick}
           />
         )}
         <div className="keith-lr-arrows-row" onMouseEnter={onMouseLeave} onMouseLeave={onMouseEnter}>
           {(!zoomed && thumbIndex > 0) && (
             <tr className="keith-lr-arrow-container">
-              <MdKeyboardArrowLeft className="keith-lr-arrow-button" onClick={this.handleUpArrowClick} />
+              <MdKeyboardArrowLeft className="keith-lr-arrow-button" onClick={handleUpArrowClick} />
             </tr>
           )}
           {(!zoomed && thumbIndex < photos.length - 1) && (
             <tr className="keith-lr-arrow-container">
-              <MdKeyboardArrowRight className="keith-lr-arrow-button" onClick={this.handleDownArrowClick} />
+              <MdKeyboardArrowRight className="keith-lr-arrow-button" onClick={handleDownArrowClick} />
             </tr>
           )}
         </div>
