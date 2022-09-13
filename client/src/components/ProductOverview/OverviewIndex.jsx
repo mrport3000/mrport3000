@@ -70,10 +70,10 @@ class ProductOverview extends React.Component {
       rating,
       reviewCount,
       productStyles,
+      savedToOutfit,
       executeScroll,
       handleStyleChange,
-      handleAddOutfitClick,
-      handleRemoveOutfitClick,
+      toggleOutfit,
     } = this.props;
     const originalPrice = productStyles[styleIndex].original_price;
     const salePrice = productStyles[styleIndex].sale_price;
@@ -113,8 +113,8 @@ class ProductOverview extends React.Component {
                 productInfo={productInfo}
                 key={Object.keys(skus)[styleIndex]}
                 skus={skus}
-                handleAddOutfitClick={handleAddOutfitClick}
-                handleRemoveOutfitClick={handleRemoveOutfitClick}
+                savedToOutfit={savedToOutfit}
+                toggleOutfit={toggleOutfit}
               />
             </div>
           )}

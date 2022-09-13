@@ -33,6 +33,7 @@ class App extends React.Component {
       recommended: null,
       reviews: [],
       outfits: [],
+      savedToOutfit: false,
     };
 
     this.scrollTarget = React.createRef();
@@ -41,6 +42,7 @@ class App extends React.Component {
     this.handleStyleChange = this.handleStyleChange.bind(this);
     this.handleAddOutfitClick = this.handleAddOutfitClick.bind(this);
     this.handleRemoveOutfitClick = this.handleRemoveOutfitClick.bind(this);
+    this.toggleOutfit = this.toggleOutfit.bind(this);
     this.handleProductCardClick = this.handleProductCardClick.bind(this);
     this.executeScroll = this.executeScroll.bind(this);
   }
@@ -99,21 +101,30 @@ class App extends React.Component {
       localStorage.set('outfitList', updatedOutArr);
       this.setState({
         outfits: updatedOutArr,
+        savedToOutfit: true,
       });
     }
   }
 
   handleRemoveOutfitClick(e) {
     e.preventDefault();
-    const { outfits } = this.state;
+    const { outfits, productId } = this.state;
 
     const currOutfits = outfits.slice();
     const updatedOutArr = currOutfits.filter((value) => value.id !== Number(e.target.getAttribute('value')));
-
+    const savedToOutfit = Number(e.target.getAttribute('value')) === productId;
     localStorage.set('outfitList', updatedOutArr);
-    this.setState({
-      outfits: updatedOutArr,
-    });
+    if (savedToOutfit) {
+      this.setState({
+        outfits: updatedOutArr,
+        savedToOutfit: false,
+      });
+    }
+    if (!savedToOutfit) {
+      this.setState({
+        outfits: updatedOutArr,
+      });
+    }
   }
 
   getInitialData(productId) {
@@ -165,6 +176,11 @@ class App extends React.Component {
                 axios.get(`/reviews/${productId}`)
                   .then((results) => {
                     const { ratings } = results.data;
+                    const outfits = localStorage.get('outfitList') || [];
+                    const savedToOutfit = outfits.reduce((prevValue, outfit) => {
+                      if (outfit.id === productId) { return true; }
+                      return false;
+                    }, false);
                     this.setState({
                       productId,
                       productInfo,
@@ -176,7 +192,8 @@ class App extends React.Component {
                       reviewCount: totalReviews(ratings),
                       characteristics: results.data.characteristics,
                       recommended: results.data.recommended,
-                      outfits: localStorage.get('outfitList') || [],
+                      outfits,
+                      savedToOutfit,
                     });
                     window.history.pushState({ productId }, '', `?productId=${productId}&styleId=${styleId}`);
                   })
@@ -193,6 +210,17 @@ class App extends React.Component {
               });
           });
       });
+  }
+
+  toggleOutfit(e) {
+    e.preventDefault();
+    const { savedToOutfit } = this.state;
+    if (!savedToOutfit) {
+      this.handleAddOutfitClick(e);
+    }
+    if (savedToOutfit) {
+      this.handleRemoveOutfitClick(e);
+    }
   }
 
   // getInitialData(productId) {
@@ -240,6 +268,7 @@ class App extends React.Component {
       characteristics,
       recommended,
       outfits,
+      savedToOutfit,
     } = this.state;
 
     if (!productInfo || !productStyles) {
@@ -259,9 +288,9 @@ class App extends React.Component {
             styleIndex={styleIndex}
             rating={rating}
             reviewCount={reviewCount}
+            savedToOutfit={savedToOutfit}
             handleStyleChange={this.handleStyleChange}
-            handleAddOutfitClick={this.handleAddOutfitClick}
-            handleRemoveOutfitClick={this.handleRemoveOutfitClick}
+            toggleOutfit={this.toggleOutfit}
             executeScroll={this.executeScroll}
           />
         </ErrorBoundary>
