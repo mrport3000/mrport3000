@@ -23,8 +23,8 @@ class RelatedProducts extends React.Component {
     this.handleForwardArrowClick = this.handleForwardArrowClick.bind(this);
     this.handleModalButtonClick = this.handleModalButtonClick.bind(this);
     this.getRelatedProductsInfo = this.getRelatedProductsInfo.bind(this);
-    this.getProductInfo = this.getProductInfo.bind(this);
-    this.getProductStyles = this.getProductStyles.bind(this);
+    // this.getProductInfo = this.getProductInfo.bind(this);
+    // this.getProductStyles = this.getProductStyles.bind(this);
   }
 
   componentDidMount() {
@@ -85,7 +85,7 @@ class RelatedProducts extends React.Component {
   //     });
   // }
 
-  // need to change id key to make identifiable second
+  // // need to change id key to make identifiable second
   // getAverageReviews(id) {
   //   return axios.get(`/reviews/${id}`)
   //     .then((result) => result.data)
@@ -102,7 +102,6 @@ class RelatedProducts extends React.Component {
   // }
 
   getRelatedProductsInfo(id) {
-    const { productId } = this.props;
     return axios.get(`/related/${id}`)
       .then((result) => {
         this.setState({

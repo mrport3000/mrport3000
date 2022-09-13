@@ -39,7 +39,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload());
 
 app.get('/productinfo/:id', (req, res) => {
-  console.log('PRODUCT INFO HIT', req.params.id);
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.id}`, headers)
     .then((result) => {
       res.send(result.data);
