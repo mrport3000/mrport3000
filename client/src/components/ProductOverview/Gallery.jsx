@@ -103,6 +103,9 @@ class Gallery extends React.Component {
     img.src = mainImage;
     const mainImageWidth = img.naturalWidth;
     const mainImageHeight = img.naturalHeight;
+    const aspectRatio = mainImageWidth / mainImageHeight;
+    const expandedWidth = 1200;
+    const expandedHeight = 700;
     let hoverStyle = 'zoom-in';
     if (expandedView) {
       if (zoomed) {
@@ -116,16 +119,16 @@ class Gallery extends React.Component {
         onClick={handleExpandClick}
         onMouseMove={zoomed ? this.handleZoomMouseMove : () => {}}
         style={{
-          width: expandedView ? '1200px' : '675px',
-          height: expandedView ? '700px' : '450px',
+          width: expandedView ? expandedWidth : '675px',
+          height: expandedView ? expandedHeight : '450px',
           transition: 'width .5s, height .5s',
           cursor: hover ? hoverStyle : 'default',
           backgroundImage: `url(${mainImage})`,
-          backgroundSize: zoomed ? '250%' : 'contain',
+          backgroundSize: zoomed ? `auto ${2.5 * expandedHeight}px` : 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundOrigin: 'padding-box',
-          backgroundPositionX: zoomed ? ((-1.1 * mainImageWidth) / 1200) * relX : 'center',
-          backgroundPositionY: zoomed ? ((-1.1 * mainImageHeight) / 700) * relY : 'center',
+          backgroundPositionX: zoomed ? (-2.5 * aspectRatio * expandedHeight + expandedWidth) * (relX / expandedWidth) : 'center',
+          backgroundPositionY: zoomed ? (-2.5 * expandedHeight + expandedHeight) * (relY / expandedHeight) : 'center',
         }}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
