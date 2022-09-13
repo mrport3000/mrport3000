@@ -2,6 +2,7 @@ import React from 'react';
 import { format } from 'date-fns';
 import { GrCheckmark } from 'react-icons/gr';
 import StarRating from '../RelatedItems/StarRating.jsx';
+import ImageModal from './ImageModal.jsx';
 
 import './RatingAndReview.css';
 
@@ -9,18 +10,25 @@ class ReviewTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      clickedImg: null,
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleImgClick = this.handleImgClick.bind(this);
   }
 
   handleClick(e) {
     console.log('Yes was clicked!');
   }
 
+  handleImgClick(imgUrl) {
+    console.log('imgUrl: ', imgUrl)
+    this.setState({ clickedImg: imgUrl });
+  }
+
   render() {
-    //console.log('reccomended: ', this.props.review.recommend);
+    const { clickedImg } = this.state;
     let recommend;
+    let photos;
     if (this.props.review.recommend) {
       recommend = (
         <div>
@@ -29,6 +37,18 @@ class ReviewTile extends React.Component {
         </div>
       );
     }
+    if (this.props.review.photos) {
+      photos = (
+        this.props.review.photos.map((photo) => (
+          <img
+            alt="User review uploaded photo"
+            src={photo.url}
+            onClick={() => this.handleImgClick(photo.url)}
+          />
+        ))
+      );
+    }
+
     return (
       <div className="eric-RR-tileEntryContainer">
         <div className="eric-RR-tileRatingAndUsername">
@@ -52,6 +72,9 @@ class ReviewTile extends React.Component {
           <div className="eric-RR-tileRecommend">
             {recommend}
           </div>
+          <div className="eric-RR-tilePhotos">
+            {photos}
+          </div>
         </div>
         <div className="eric-RR-tileResponseAndHelpful">
           <div className="eric-RR-tileResponse">
@@ -69,6 +92,7 @@ class ReviewTile extends React.Component {
             <a>Report</a>
           </div>
         </div>
+        {clickedImg && (<ImageModal clickedImg={clickedImg} handleClick={this.handleImgClick} />)}
       </div>
     );
   }
