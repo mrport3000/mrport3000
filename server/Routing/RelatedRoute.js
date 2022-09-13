@@ -5,6 +5,7 @@ const app = express();
 const router = express.Router();
 const axios = require('axios');
 const Promise = require('bluebird');
+const { averageRating } = require('../../client/src/utilities');
 
 const headers = {
   headers: {
@@ -13,7 +14,6 @@ const headers = {
 };
 
 router.get('/:id', (req, res) => {
-  console.log('HIT ROUTER');
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.id}/related`, headers)
     // .then((result) => res.send(result.data))
     // [71702, 71702, 71704, 71705, 71697, 71699]
@@ -22,24 +22,23 @@ router.get('/:id', (req, res) => {
       const newProdsArr = results.data.filter((value) => value !== req.params.id);
       // remove duplicate product Ids
       const uniqueArr = [...new Set(newProdsArr)];
-      console.log('UNIQUE ARR', uniqueArr);
       return Promise.resolve(uniqueArr);
     })
     .then((arr) => {
-      console.log('ARR IN ROUTER', arr);
       const promiseArr = [];
       // push promises for productID call
       arr.forEach((value) => {
-        console.log('VALUE IN ROUTER', value);
-        promiseArr.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${value}`, headers));
+        promiseArr.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${value}`, headers)
+          .then((result) => result.data));
       });
       // push promises for product styles call
       arr.forEach((value) => {
-        promiseArr.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${value}/styles`, headers));
+        promiseArr.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${value}/styles`, headers)
+          .then((result) => result.data));
       });
       // push promises for review ratings
       arr.forEach((value) => {
-        promiseArr.push(new Promise((resolve) => resolve(axios.get(`/reviews/${value}`)
+        promiseArr.push(axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta/?product_id=${value}`, headers)
           .then((result) => result.data)
           .then((product) => {
             // replace product_id key to prevent overwriting properties when merging object
@@ -47,8 +46,7 @@ router.get('/:id', (req, res) => {
             product.ratings = averageRating(product.ratings) || 0;
             delete product.product_id;
             return product;
-          }),
-        )));
+          }));
       });
       return promiseArr;
     })
