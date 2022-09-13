@@ -19,7 +19,7 @@ class ReviewTile extends React.Component {
   }
 
   render() {
-    console.log('reccomended: ', this.props.review.recommend);
+    //console.log('reccomended: ', this.props.review.recommend);
     let recommend;
     if (this.props.review.recommend) {
       recommend = (

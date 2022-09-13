@@ -1,3 +1,4 @@
+/* eslint-disable semi */
 /* eslint-disable import/extensions */
 import React from 'react';
 
@@ -14,6 +15,11 @@ class RatingAndReview extends React.Component {
     this.state = {
       totalReviews: [],
       rbfilteredReviews: [],
+      // fiveStar: 0,
+      // fourStar: 0,
+      // threeStar: 0,
+      // twoStar: 0,
+      // oneStar: 0,
       show: false,
     };
     this.handleModal = this.handleModal.bind(this);
@@ -44,23 +50,18 @@ class RatingAndReview extends React.Component {
   }
 
   liftRBFilteredReviews(state) {
-    console.log('liftedState: ', state);
+    const storedReviews = [];
+
     for (var key in state) {
       if (state[key] > 0) {
         const filtered = this.props.reviews.filter((review) => review.rating === Number(state[key]));
-        let concat = this.state.rbfilteredReviews.concat(filtered);
-        // this.setState(prevState => ({
-        //   rbfilteredReviews: [prevState.rbfilteredReviews, ...filtered]
-        // }), console.log('state after: ', this.state.rbfilteredReviews))
-        // this.setState({ rbfilteredReviews: [...filtered] });
-        this.setState({rbfilteredReviews: concat})
+        storedReviews.push(...filtered)
       }
-      //console.log('state after loop: ', this.state.rbfilteredReviews);
     }
+    this.setState({ rbfilteredReviews: storedReviews }, () => { console.log('state: ', this.state.rbfilteredReviews) })
   }
 
   render() {
-    // console.log('R&R props: ', this.props)
     const { show, rbfilteredReviews } = this.state;
     if (this.props.reviews.length === 0) {
       return <div />;
