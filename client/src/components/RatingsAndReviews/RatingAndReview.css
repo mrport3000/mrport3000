@@ -24,13 +24,15 @@
 }
 
 .eric-RR-productAverageText {
-  width: 50%;
+  width: 25%;
   font-size: 65px;
   font-weight: bold;
   text-align: center;
 }
 
 .eric-RR-productStarRating {
+  /* display: flex;
+  align-items: center; */
   width: 50%;
 }
 

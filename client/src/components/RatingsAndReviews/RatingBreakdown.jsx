@@ -15,6 +15,7 @@ class RatingBreakdown extends React.Component {
     };
     this.ratingFrequency = this.ratingFrequency.bind(this);
     this.toggleStarRating = this.toggleStarRating.bind(this);
+    this.resetStarFilter = this.resetStarFilter.bind(this);
   }
 
   ratingFrequency(target, arr) {
@@ -23,7 +24,6 @@ class RatingBreakdown extends React.Component {
   }
 
   toggleStarRating(e) {
-    // this.props.liftRating(sRating, sValue);
     if (this.state[e.target.name] === 0) {
       this.setState({ [`${e.target.name}`]: e.target.value }, () => this.props.liftRating(this.state));
     } else if (this.state[e.target.name] > 0) {
@@ -31,10 +31,30 @@ class RatingBreakdown extends React.Component {
     }
   }
 
+  resetStarFilter(currState) {
+    console.log('currState: ', currState);
+    this.setState({
+      fiveStar: 0,
+      fourStar: 0,
+      threeStar: 0,
+      twoStar: 0,
+      oneStar: 0,
+    }, () => this.props.liftRating(this.state));
+  }
+
   render() {
-    let recommended;
     if (this.props.ratings.ratings.length === 0) {
       return <div />;
+    }
+    const checkState = Object.keys(this.state).filter((key) => this.state[key] >= 1);
+    let resetFilter;
+
+    if (checkState.length >= 2) {
+      resetFilter = (
+        <div className="eric-RR-rsfText">
+          <span onClick={() => this.resetStarFilter(this.state)}>Click here to remove all filters.</span>
+        </div>
+      );
     }
 
     return (
@@ -99,6 +119,9 @@ class RatingBreakdown extends React.Component {
             </div>
 
           </div>
+        </div>
+        <div className="eric-RR-resetStarFilter">
+          {resetFilter}
         </div>
       </div>
     );

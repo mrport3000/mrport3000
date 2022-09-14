@@ -13,13 +13,7 @@ class RatingAndReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      totalReviews: [],
       rbfilteredReviews: [],
-      // fiveStar: 0,
-      // fourStar: 0,
-      // threeStar: 0,
-      // twoStar: 0,
-      // oneStar: 0,
       show: false,
     };
     this.handleModal = this.handleModal.bind(this);
@@ -33,7 +27,6 @@ class RatingAndReview extends React.Component {
 
   filtered(arr, rec) {
     const rating = [];
-    console.log('rec: ', rec)
     let recPercent;
     if (rec.true === undefined) {
       recPercent = 0;
@@ -42,7 +35,6 @@ class RatingAndReview extends React.Component {
     } else {
       recPercent = Math.round((Number(rec.true) / (Number(rec.true) + Number(rec.false))) * 100)
     }
-    // console.log('recPercent: ', recPercent)
 
     arr.forEach((review) => {
       rating.push(review.rating);
@@ -65,11 +57,10 @@ class RatingAndReview extends React.Component {
         storedReviews.push(...filtered)
       }
     }
-    this.setState({ rbfilteredReviews: storedReviews }, () => { console.log('state: ', this.state.rbfilteredReviews) })
+    this.setState({ rbfilteredReviews: storedReviews })
   }
 
   render() {
-    console.log('RR props: ', this.props)
     const { show, rbfilteredReviews } = this.state;
     if (this.props.reviews.length === 0) {
       return <div />;
