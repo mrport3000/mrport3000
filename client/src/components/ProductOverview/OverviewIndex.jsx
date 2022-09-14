@@ -67,13 +67,19 @@ class ProductOverview extends React.Component {
     const {
       productInfo,
       styleIndex,
+      startIndex,
+      endIndex,
+      thumbIndex,
       rating,
       reviewCount,
       productStyles,
+      savedToOutfit,
       executeScroll,
       handleStyleChange,
-      handleAddOutfitClick,
-      handleRemoveOutfitClick,
+      handleThumbChange,
+      handleUpArrowClick,
+      handleDownArrowClick,
+      toggleOutfit,
     } = this.props;
     const originalPrice = productStyles[styleIndex].original_price;
     const salePrice = productStyles[styleIndex].sale_price;
@@ -85,6 +91,9 @@ class ProductOverview extends React.Component {
         <div className="keith-top-div">
           <Gallery
             photos={galleryPhotos}
+            startIndex={startIndex}
+            endIndex={endIndex}
+            thumbIndex={thumbIndex}
             expandedView={expandedView}
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
@@ -92,6 +101,9 @@ class ProductOverview extends React.Component {
             zoomed={zoomed}
             handleExpandClick={this.handleExpandClick}
             handleUnexpandClick={this.handleUnexpandClick}
+            handleThumbChange={handleThumbChange}
+            handleUpArrowClick={handleUpArrowClick}
+            handleDownArrowClick={handleDownArrowClick}
           />
           {!expandedView && (
             <div className="keith-product-info-div">
@@ -113,8 +125,8 @@ class ProductOverview extends React.Component {
                 productInfo={productInfo}
                 key={Object.keys(skus)[styleIndex]}
                 skus={skus}
-                handleAddOutfitClick={handleAddOutfitClick}
-                handleRemoveOutfitClick={handleRemoveOutfitClick}
+                savedToOutfit={savedToOutfit}
+                toggleOutfit={toggleOutfit}
               />
             </div>
           )}
