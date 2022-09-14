@@ -5,6 +5,7 @@ node_modules
 /client/src/config.js
 /package-lock.json
 /Main.pem
+/login.sh
 
 .env
 
