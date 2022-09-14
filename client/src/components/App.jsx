@@ -72,8 +72,9 @@ class App extends React.Component {
     let { endIndex } = this.state;
     const styleIndex = Number(e.target.getAttribute('index'));
     const styleId = productStyles[styleIndex].style_id;
-    endIndex = productStyles[styleIndex].photos.length - 1;
-    if (productStyles[styleIndex].photos.length <= thumbIndex) {
+    const { photos } = productStyles[styleIndex];
+    if (photos.length <= thumbIndex) {
+      endIndex = photos.length > 7 ? 6 : photos.length - 1;
       this.setState({
         styleIndex,
         styleId,
@@ -81,11 +82,17 @@ class App extends React.Component {
         thumbIndex: 0,
         endIndex,
       });
-    } else {
+    } else if ((endIndex <= photos.length - 1) && (endIndex - startIndex < 6)) {
+      endIndex = photos.length > 7 ? 6 + startIndex : photos.length - 1;
       this.setState({
         styleIndex,
         styleId,
         endIndex,
+      });
+    } else {
+      this.setState({
+        styleIndex,
+        styleId,
       });
     }
     window.history.pushState({ productId }, '', `?productId=${productId}&styleId=${styleId}`);
