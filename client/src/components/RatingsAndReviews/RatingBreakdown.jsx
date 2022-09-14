@@ -23,9 +23,6 @@ class RatingBreakdown extends React.Component {
   }
 
   toggleStarRating(e) {
-    const sRating = e.target.name;
-    const sValue = e.target.value;
-
     // this.props.liftRating(sRating, sValue);
     if (this.state[e.target.name] === 0) {
       this.setState({ [`${e.target.name}`]: e.target.value }, () => this.props.liftRating(this.state));
@@ -39,7 +36,6 @@ class RatingBreakdown extends React.Component {
     if (this.props.ratings.ratings.length === 0) {
       return <div />;
     }
-
 
     return (
       <div className="eric-RR-productRatingContainer">

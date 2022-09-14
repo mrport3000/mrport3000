@@ -40,12 +40,9 @@ class RatingAndReview extends React.Component {
     } else if (rec.false === undefined) {
       recPercent = 100;
     } else {
-      // console.log('true: ', rec.true)
-      // console.log('false: ', rec.false)
-      // console.log('added: ', rec.true + rec.false)
       recPercent = Math.round((Number(rec.true) / (Number(rec.true) + Number(rec.false))) * 100)
     }
-    console.log('recPercent: ', recPercent)
+    // console.log('recPercent: ', recPercent)
 
     arr.forEach((review) => {
       rating.push(review.rating);
