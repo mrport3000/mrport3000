@@ -13,7 +13,6 @@ class AddToCart extends React.Component {
       sizeIsSelected: false,
       selectedQuantity: null,
       quantityAvailable: null,
-      savedToOutfit: false,
       selectedSku: null,
       specialMessage: ' ',
     };
@@ -23,7 +22,6 @@ class AddToCart extends React.Component {
 
     this.changeSize = this.changeSize.bind(this);
     this.changeQuantity = this.changeQuantity.bind(this);
-    this.toggleOutfit = this.toggleOutfit.bind(this);
     this.addToCart = this.addToCart.bind(this);
   }
 
@@ -44,7 +42,7 @@ class AddToCart extends React.Component {
       selectedSize: e.value,
       selectedQuantity: null,
       quantityAvailable: quantity,
-      selectedSku: selectedSku,
+      selectedSku,
       specialMessage: ' ',
     });
   }
@@ -54,23 +52,6 @@ class AddToCart extends React.Component {
       selectedQuantity: e.value,
       specialMessage: ' ',
     });
-  }
-
-  toggleOutfit(e) {
-    const { savedToOutfit } = this.state;
-    const { handleAddOutfitClick, handleRemoveOutfitClick } = this.props;
-    if (!savedToOutfit) {
-      this.setState({
-        savedToOutfit: true,
-      });
-      handleAddOutfitClick(e);
-    }
-    if (savedToOutfit) {
-      this.setState({
-        savedToOutfit: false,
-      });
-      handleRemoveOutfitClick(e);
-    }
   }
 
   addToCart() {
@@ -106,13 +87,14 @@ class AddToCart extends React.Component {
     const {
       quantityAvailable,
       sizeIsSelected,
-      savedToOutfit,
       selectedSize,
       specialMessage,
     } = this.state;
     const {
       skus,
       productInfo,
+      savedToOutfit,
+      toggleOutfit,
     } = this.props;
     // Makes an array of size options for react-select component
     const sizeOptions = availableSizes(skus).map((size) => ({ value: size, label: size }));
@@ -173,7 +155,7 @@ class AddToCart extends React.Component {
         </div>
         <div className="keith-cart-star-div">
           <button className="keith-add-cart" type="button" onClick={this.addToCart}>Add to Cart</button>
-          <StarButton toggleOutfit={this.toggleOutfit} savedToOutfit={savedToOutfit} productInfo={productInfo}/>
+          <StarButton toggleOutfit={toggleOutfit} savedToOutfit={savedToOutfit} productInfo={productInfo}/>
         </div>
       </div>
     );
