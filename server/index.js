@@ -5,6 +5,7 @@ const compression = require('compression');
 const formData = require('express-form-data');
 const axios = require('axios');
 const fileUpload = require('express-fileupload');
+const RelatedRoute = require('./Routing/RelatedRoute');
 // const os = require('os');
 
 const app = express();
@@ -39,7 +40,9 @@ app.use(fileUpload());
 
 app.get('/productinfo/:id', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.id}`, headers)
-    .then((result) => res.send(result.data))
+    .then((result) => {
+      res.send(result.data);
+    })
     .catch((err) => console.log(err));
 });
 
@@ -49,11 +52,7 @@ app.get('/styles/:id', (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.get('/related/:id', (req, res) => {
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.id}/related`, headers)
-    .then((result) => res.send(result.data))
-    .catch((err) => console.log(err));
-});
+app.use('/related', RelatedRoute);
 
 app.get('/qanda/:id', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/?product_id=${req.params.id}`, headers)

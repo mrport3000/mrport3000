@@ -384,11 +384,13 @@ class App extends React.Component {
           />
         </ErrorBoundary>
         <ErrorBoundary>
-          <RelatedProductsWithClickData
+          <RelatedProducts
             productId={productId}
             currProduct={productInfo}
             handleProductCardClick={this.handleProductCardClick}
           />
+        </ErrorBoundary>
+        <ErrorBoundary>
           <OutfitListWithClickData
             productInfo={productInfo}
             productStyles={productStyles}

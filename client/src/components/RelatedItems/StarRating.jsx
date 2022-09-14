@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import halfStar from '../../../dist/lib/star-half.png';
-import fullStar from '../../../dist/lib/star-full.png';
-import quarterStar from '../../../dist/lib/star-one-quarter.png';
-import threeQuarterStar from '../../../dist/lib/star-three-quarter.png';
-import emptyStar from '../../../dist/lib/star-outline.png';
+import halfStar from '../../../dist/lib/salmon-star-half.png';
+import fullStar from '../../../dist/lib/salmon-star-full.png';
+import quarterStar from '../../../dist/lib/salmon-star-one-quarter.png';
+import threeQuarterStar from '../../../dist/lib/salmon-star-three-quarter.png';
+import emptyStar from '../../../dist/lib/salmon-star-outline.png';
 import blankStar from '../../../dist/lib/star-blank.png';
 
 // expect rating to equal avg rating number (example: 4.235)
