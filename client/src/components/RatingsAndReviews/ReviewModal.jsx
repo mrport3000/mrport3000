@@ -108,6 +108,7 @@ export default class ReviewModal extends React.Component {
       <div className="eric-RR-modal">
 
         <div className="eric-RR-modalContainer">
+          <span onClick={ () => this.props.closeModal(false) }>X</span>
           <form onSubmit={this.handleSubmit}>
             <div className="eric-RR-modalHeader">
               <h2>

@@ -1,9 +1,7 @@
 import React from 'react';
 
 function ImageModal(props) {
-
   const handleClick = (e) => {
-    console.log('x clicked: ', props)
     if (e.target.classList.contains('dismiss')) {
       props.handleClick(null);
     }

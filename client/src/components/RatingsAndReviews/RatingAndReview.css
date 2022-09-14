@@ -266,6 +266,16 @@
   box-shadow: 0 15px 15px black;
 }
 
+.eric-RR-modalContainer  > span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  color: #ffffff;
+  z-index: 999;
+  cursor: pointer;
+}
+
 .eric-RR-modal {
   position: fixed;
   left: 0;
