@@ -37,6 +37,7 @@ class App extends React.Component {
       startIndex: 0,
       endIndex: null,
       thumbIndex: 0,
+      theme: 'light',
     };
 
     this.scrollTarget = React.createRef();
@@ -51,6 +52,7 @@ class App extends React.Component {
     this.toggleOutfit = this.toggleOutfit.bind(this);
     this.handleProductCardClick = this.handleProductCardClick.bind(this);
     this.executeScroll = this.executeScroll.bind(this);
+    this.toggleTheme = this.toggleTheme.bind(this);
   }
 
   componentDidMount() {
@@ -303,6 +305,15 @@ class App extends React.Component {
     }
   }
 
+  toggleTheme(e) {
+    e.preventDefault();
+    const { theme } = this.state;
+    let toggleValue = theme === 'light' ? 'dark' : 'light';
+    this.setState({
+      theme: toggleValue,
+    });
+  }
+
   // getInitialData(productId) {
   //   const req1 = axios.get(`/productinfo/${productId}`);
   //   const req2 = axios.get(`/styles/${productId}`);
@@ -352,6 +363,7 @@ class App extends React.Component {
       startIndex,
       endIndex,
       thumbIndex,
+      theme,
     } = this.state;
 
     if (!productInfo || !productStyles) {
@@ -359,9 +371,9 @@ class App extends React.Component {
     }
 
     return (
-      <>
+      <div className="app" id={theme}>
         <ErrorBoundary>
-          <TitleWithClickData />
+          <TitleWithClickData toggleTheme={this.toggleTheme} />
         </ErrorBoundary>
         <ErrorBoundary>
           <ProductOverviewWithClickData
@@ -418,7 +430,7 @@ class App extends React.Component {
             />
           </ErrorBoundary>
         </div>
-      </>
+      </div>
     );
   }
 }

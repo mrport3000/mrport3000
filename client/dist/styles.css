@@ -1,3 +1,9 @@
+.app {
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
 h1 {
   font-family: 'Roboto Slab', serif;
   font-weight: 700;
@@ -31,12 +37,24 @@ p {
 body {
   margin: 0px;
   /* background-color: #D9D9D9; */
-  background-color: #fff;
+  background-color: white;
+}
+
+#dark body {
+  background-color: black;
 }
 
 header {
-  border-bottom: 1px solid #d7d6d6;
+  /* border-bottom: 1px solid #d7d6d6; */
+  border-bottom: 1px solid #f4f4f4;
   background-color: #353535;
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.15);
+}
+
+#dark header {
+  background-color: black;
+  border-bottom: none;
+  box-shadow: none;
 }
 
 .header-container {
@@ -47,7 +65,6 @@ header {
   display: flex;
   padding: 10px;
   justify-content: space-between;
-  color: white;
 }
 
 .header-container h1 {
@@ -75,6 +92,7 @@ header {
   font-size: 1.25rem;
   font-style: italic;
   font-weight: 100;
+  color: white;
 }
 
 .highlight {
@@ -85,13 +103,6 @@ header {
 .plug-icon {
   object-fit: cover;
   max-height: 100%;
-}
-
-header h4 {
-  margin: 0px 0px 10px 0px;
-  font-size: 1rem;
-  font-style: italic;
-  text-align: center;
 }
 
 .HOC-div {
@@ -109,6 +120,10 @@ header h4 {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+}
+
+#dark .keith-overview-div {
+  background-color: black;
 }
 
 .keith-top-div {
@@ -135,6 +150,10 @@ header h4 {
   margin: 50px;
   border: none;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+#dark .keith-main-photo {
+  background-color: #0A0A0A;
 }
 
 .keith-ud-arrow-container {
@@ -204,6 +223,20 @@ header h4 {
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
 }
 
+#dark .keith-product-info-div {
+  color: white;
+  background-color: #0A0A0A;
+  border: 1px solid #0A0A0A;
+  border-radius: 10px;
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-family: Helvetica, sans-serif;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
+}
+
 .keith-review:hover {
   text-decoration: underline;
   text-decoration-color: #353535;
@@ -215,11 +248,19 @@ header h4 {
   margin: 15px 0px 0px 0px;
 }
 
+#dark .keith-category {
+  color: white;
+}
+
 .keith-product-name {
   font-family: 'Roboto Slab', serif;
   color: #353535;
   margin-top: 0px;
   margin-bottom: 5px;
+}
+
+#dark .keith-product-name {
+  color: white;
 }
 
 .keith-desc-div {
@@ -237,6 +278,10 @@ header h4 {
   color: #353535;
 }
 
+#dark .keith-summary-div {
+  color: white;
+}
+
 .keith-feature-div {
   display: flex;
   flex-direction: column;
@@ -245,6 +290,11 @@ header h4 {
   padding: 20px;
   border-left: 2px solid #353535;
   color: #353535;
+}
+
+#dark .keith-feature-div {
+  color: white;
+  border-left: 2px solid white;
 }
 
 .keith-feature {
@@ -264,6 +314,10 @@ header h4 {
   margin: 10px 0;
 }
 
+#dark .keith-price {
+  color: white;
+}
+
 .keith-style-selector-div {
   width: 100;
   display: flex;
@@ -274,6 +328,10 @@ header h4 {
 .keith-style {
   color: #353535;
   margin: 10px 0px 2px 0px;
+}
+
+#dark .keith-style {
+  color: white;
 }
 
 .keith-style-icon {

@@ -1,7 +1,7 @@
 import React from 'react';
 import plugIcon from '../../dist/lib/Plug-icon.png';
 
-function Title() {
+function Title({ toggleTheme }) {
   return (
     <header>
       <div className="header-container">
@@ -11,6 +11,7 @@ function Title() {
         </div>
         <div className="header-right">
           <h3>Your shortcut to the <span className="highlight">best deals</span> on the web</h3>
+          <button type="button" onClick={toggleTheme}>Activate</button>
         </div>
       </div>
     </header>
