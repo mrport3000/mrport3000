@@ -9,7 +9,9 @@ import RelatedProducts from './RelatedItems/RelatedProducts.jsx';
 import OutfitList from './OutfitList/OutfitList.jsx';
 import QandA from './QuestionsAndAnswers/QuestionsAndAnswers.jsx';
 import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
-import ErrorBoundary from './RelatedItems/ErrorBoundary.jsx';
+import ErrorBoundary from './ErrorBoundary.jsx';
+import withClickData from './withClickData.jsx';
+import Title from './Title.jsx';
 
 const defaultId = 71701;
 
@@ -31,14 +33,22 @@ class App extends React.Component {
       recommended: null,
       reviews: [],
       outfits: [],
+      savedToOutfit: false,
+      startIndex: 0,
+      endIndex: null,
+      thumbIndex: 0,
     };
 
     this.scrollTarget = React.createRef();
 
     this.handleProductIdChange = this.handleProductIdChange.bind(this);
     this.handleStyleChange = this.handleStyleChange.bind(this);
+    this.handleThumbChange = this.handleThumbChange.bind(this);
+    this.handleUpArrowClick = this.handleUpArrowClick.bind(this);
+    this.handleDownArrowClick = this.handleDownArrowClick.bind(this);
     this.handleAddOutfitClick = this.handleAddOutfitClick.bind(this);
     this.handleRemoveOutfitClick = this.handleRemoveOutfitClick.bind(this);
+    this.toggleOutfit = this.toggleOutfit.bind(this);
     this.handleProductCardClick = this.handleProductCardClick.bind(this);
     this.executeScroll = this.executeScroll.bind(this);
   }
@@ -46,7 +56,7 @@ class App extends React.Component {
   componentDidMount() {
     const parsedUrl = url.parse(window.location.href);
     const { productId } = querystring.parse(parsedUrl.query);
-    const searchId = productId || defaultId;
+    const searchId = Number(productId) || defaultId;
     this.getInitialData(searchId);
   }
 
@@ -58,11 +68,82 @@ class App extends React.Component {
   }
 
   handleStyleChange(e) {
-    const { productStyles, productId } = this.state;
+    const { productStyles, productId, thumbIndex, startIndex } = this.state;
+    let { endIndex } = this.state;
     const styleIndex = Number(e.target.getAttribute('index'));
     const styleId = productStyles[styleIndex].style_id;
-    this.setState({ styleIndex, styleId });
+    const { photos } = productStyles[styleIndex];
+    if (photos.length <= thumbIndex) {
+      endIndex = photos.length > 7 ? 6 : photos.length - 1;
+      this.setState({
+        styleIndex,
+        styleId,
+        startIndex: 0,
+        thumbIndex: 0,
+        endIndex,
+      });
+    } else if ((endIndex <= photos.length - 1) && (endIndex - startIndex < 6)) {
+      endIndex = photos.length > 7 ? 6 + startIndex : photos.length - 1;
+      this.setState({
+        styleIndex,
+        styleId,
+        endIndex,
+      });
+    } else {
+      this.setState({
+        styleIndex,
+        styleId,
+      });
+    }
     window.history.pushState({ productId }, '', `?productId=${productId}&styleId=${styleId}`);
+  }
+
+  handleThumbChange(e) {
+    e.stopPropagation();
+    const thumbIndex = Number(e.target.getAttribute('thumbindex'));
+    this.setState({
+      thumbIndex,
+    });
+  }
+
+  handleUpArrowClick(e) {
+    e.stopPropagation();
+    const {
+      startIndex,
+      endIndex,
+      thumbIndex,
+    } = this.state;
+    if (thumbIndex > startIndex) {
+      this.setState({
+        thumbIndex: thumbIndex - 1,
+      });
+    } else {
+      this.setState({
+        startIndex: startIndex - 1,
+        endIndex: endIndex - 1,
+        thumbIndex: thumbIndex - 1,
+      });
+    }
+  }
+
+  handleDownArrowClick(e) {
+    e.stopPropagation();
+    const {
+      startIndex,
+      endIndex,
+      thumbIndex,
+    } = this.state;
+    if (thumbIndex < endIndex) {
+      this.setState({
+        thumbIndex: thumbIndex + 1,
+      });
+    } else {
+      this.setState({
+        startIndex: startIndex + 1,
+        endIndex: endIndex + 1,
+        thumbIndex: thumbIndex + 1,
+      });
+    }
   }
 
   handleProductCardClick(id) {
@@ -97,26 +178,35 @@ class App extends React.Component {
       localStorage.set('outfitList', updatedOutArr);
       this.setState({
         outfits: updatedOutArr,
+        savedToOutfit: true,
       });
     }
   }
 
   handleRemoveOutfitClick(e) {
     e.preventDefault();
-    const { outfits } = this.state;
+    const { outfits, productId } = this.state;
 
     const currOutfits = outfits.slice();
     const updatedOutArr = currOutfits.filter((value) => value.id !== Number(e.target.getAttribute('value')));
-
+    const savedToOutfit = Number(e.target.getAttribute('value')) === productId;
     localStorage.set('outfitList', updatedOutArr);
-    this.setState({
-      outfits: updatedOutArr,
-    });
+    if (savedToOutfit) {
+      this.setState({
+        outfits: updatedOutArr,
+        savedToOutfit: false,
+      });
+    }
+    if (!savedToOutfit) {
+      this.setState({
+        outfits: updatedOutArr,
+      });
+    }
   }
 
   getInitialData(productId) {
     let productInfo; let productStyles; let
-      qandaInfo; let styleId;
+      qandaInfo; let styleId; let endIndex;
     let styleIndex = 0;
     axios.get(`/productinfo/${productId}`)
       .then((results) => {
@@ -131,8 +221,7 @@ class App extends React.Component {
             const firstStyle = productStyles[0];
             if (parsedQs.styleId) {
               styleId = parsedQs.styleId;
-              console.log(styleId);
-              for (let i = 0; i < productStyles.length; i += 1) {
+              for (var i = 0; i < productStyles.length; i += 1) {
                 if (productStyles[i]['default?']) {
                   productStyles[0] = productStyles[i];
                   productStyles[i] = firstStyle;
@@ -154,6 +243,8 @@ class App extends React.Component {
                 }
               }
             }
+            const { photos } = productStyles[styleIndex];
+            endIndex = photos.length > 7 ? 6 : photos.length - 1;
           })
           .then(() => {
             axios.get(`/qanda/${productId}`)
@@ -164,6 +255,11 @@ class App extends React.Component {
                 axios.get(`/reviews/${productId}`)
                   .then((results) => {
                     const { ratings } = results.data;
+                    const outfits = localStorage.get('outfitList') || [];
+                    const savedToOutfit = outfits.reduce((prevValue, outfit) => {
+                      if (outfit.id === productId) { return true; }
+                      return false;
+                    }, false);
                     this.setState({
                       productId,
                       productInfo,
@@ -175,7 +271,9 @@ class App extends React.Component {
                       reviewCount: totalReviews(ratings),
                       characteristics: results.data.characteristics,
                       recommended: results.data.recommended,
-                      outfits: localStorage.get('outfitList') || [],
+                      outfits,
+                      savedToOutfit,
+                      endIndex,
                     });
                     window.history.pushState({ productId }, '', `?productId=${productId}&styleId=${styleId}`);
                   })
@@ -192,6 +290,17 @@ class App extends React.Component {
               });
           });
       });
+  }
+
+  toggleOutfit(e) {
+    e.preventDefault();
+    const { savedToOutfit } = this.state;
+    if (!savedToOutfit) {
+      this.handleAddOutfitClick(e);
+    }
+    if (savedToOutfit) {
+      this.handleRemoveOutfitClick(e);
+    }
   }
 
   // getInitialData(productId) {
@@ -219,6 +328,13 @@ class App extends React.Component {
   }
 
   render() {
+    const ProductOverviewWithClickData = withClickData(ProductOverview);
+    const RelatedProductsWithClickData = withClickData(RelatedProducts);
+    const OutfitListWithClickData = withClickData(OutfitList);
+    const QandAWithClickData = withClickData(QandA);
+    const RatingAndReviewWithClickData = withClickData(RatingAndReview);
+    const TitleWithClickData = withClickData(Title);
+
     const {
       productId,
       productInfo,
@@ -232,6 +348,10 @@ class App extends React.Component {
       characteristics,
       recommended,
       outfits,
+      savedToOutfit,
+      startIndex,
+      endIndex,
+      thumbIndex,
     } = this.state;
 
     if (!productInfo || !productStyles) {
@@ -240,25 +360,38 @@ class App extends React.Component {
 
     return (
       <>
-        <ProductOverview
-          key={productInfo.id}
-          productInfo={productInfo}
-          productStyles={productStyles}
-          styleIndex={styleIndex}
-          rating={rating}
-          reviewCount={reviewCount}
-          handleStyleChange={this.handleStyleChange}
-          handleAddOutfitClick={this.handleAddOutfitClick}
-          handleRemoveOutfitClick={this.handleRemoveOutfitClick}
-          executeScroll={this.executeScroll}
-        />
+        <ErrorBoundary>
+          <TitleWithClickData />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <ProductOverviewWithClickData
+            key={productInfo.id}
+            productInfo={productInfo}
+            productStyles={productStyles}
+            styleIndex={styleIndex}
+            startIndex={startIndex}
+            endIndex={endIndex}
+            thumbIndex={thumbIndex}
+            rating={rating}
+            reviewCount={reviewCount}
+            savedToOutfit={savedToOutfit}
+            handleStyleChange={this.handleStyleChange}
+            handleThumbChange={this.handleThumbChange}
+            handleUpArrowClick={this.handleUpArrowClick}
+            handleDownArrowClick={this.handleDownArrowClick}
+            toggleOutfit={this.toggleOutfit}
+            executeScroll={this.executeScroll}
+          />
+        </ErrorBoundary>
         <ErrorBoundary>
           <RelatedProducts
             productId={productId}
             currProduct={productInfo}
             handleProductCardClick={this.handleProductCardClick}
           />
-          <OutfitList
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <OutfitListWithClickData
             productInfo={productInfo}
             productStyles={productStyles}
             outfits={outfits}
@@ -267,20 +400,23 @@ class App extends React.Component {
             rating={rating}
           />
         </ErrorBoundary>
-
-        <QandA
-          info={qandaInfo}
-          product={productInfo.name}
-        />
-        <div ref={this.scrollTarget}>
-          <RatingAndReview
-            reviews={reviews}
-            page={reviewPage}
+        <ErrorBoundary>
+          <QandAWithClickData
+            info={qandaInfo}
             product={productInfo.name}
-            productId={productId}
-            characteristics={characteristics}
-            recommended={recommended}
           />
+        </ErrorBoundary>
+        <div ref={this.scrollTarget} className="scroll-target-div">
+          <ErrorBoundary>
+            <RatingAndReviewWithClickData
+              reviews={reviews}
+              page={reviewPage}
+              product={productInfo.name}
+              productId={productId}
+              characteristics={characteristics}
+              recommended={recommended}
+            />
+          </ErrorBoundary>
         </div>
       </>
     );

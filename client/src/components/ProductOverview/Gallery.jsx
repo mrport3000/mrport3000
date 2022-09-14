@@ -2,102 +2,58 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 // import { motion } from 'framer-motion';
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight, MdFullscreenExit } from 'react-icons/md';
 import ThumbnailCarousel from './ThumbnailCarousel.jsx';
 
 class Gallery extends React.Component {
   constructor(props) {
     super(props);
-    const { photos } = this.props;
-    const endIndex = photos.length > 7 ? 6 : photos.length;
     this.state = {
-      startIndex: 0,
-      endIndex,
-      thumbIndex: 0,
       relX: 0,
       relY: 0,
     };
     this.handleZoomMouseMove = this.handleZoomMouseMove.bind(this);
-    this.handleThumbChange = this.handleThumbChange.bind(this);
-    this.handleUpArrowClick = this.handleUpArrowClick.bind(this);
-    this.handleDownArrowClick = this.handleDownArrowClick.bind(this);
   }
 
   handleZoomMouseMove(e) {
-    const relX = e.clientX - e.target.offsetLeft;
-    const relY = e.clientY - e.target.offsetTop;
+    const relX = e.pageX - e.target.offsetLeft;
+    const relY = e.pageY - e.target.offsetTop;
     this.setState({
       relX,
       relY,
     });
   }
 
-  handleThumbChange(e) {
-    e.stopPropagation();
-    const thumbIndex = Number(e.target.getAttribute('thumbindex'));
-    this.setState({
-      thumbIndex,
-    });
-  }
-
-  handleUpArrowClick(e) {
-    e.stopPropagation();
-    const {
-      startIndex,
-      endIndex,
-      thumbIndex,
-    } = this.state;
-    if (thumbIndex > startIndex) {
-      this.setState({
-        thumbIndex: thumbIndex - 1,
-      });
-    } else {
-      this.setState({
-        startIndex: startIndex - 1,
-        endIndex: endIndex - 1,
-        thumbIndex: thumbIndex - 1,
-      });
-    }
-  }
-
-  handleDownArrowClick(e) {
-    e.stopPropagation();
-    const {
-      startIndex,
-      endIndex,
-      thumbIndex,
-    } = this.state;
-    if (thumbIndex < endIndex) {
-      this.setState({
-        thumbIndex: thumbIndex + 1,
-      });
-    } else {
-      this.setState({
-        startIndex: startIndex + 1,
-        endIndex: endIndex + 1,
-        thumbIndex: thumbIndex + 1,
-      });
-    }
-  }
-
   render() {
     const {
+      relX,
+      relY,
+    } = this.state;
+    const {
       photos,
+      startIndex,
+      endIndex,
+      thumbIndex,
       expandedView,
       hover,
       onMouseEnter,
       onMouseLeave,
       handleExpandClick,
+      handleUnexpandClick,
+      handleThumbChange,
+      handleUpArrowClick,
+      handleDownArrowClick,
       zoomed,
     } = this.props;
-    const {
-      startIndex,
-      endIndex,
-      thumbIndex,
-      relX,
-      relY,
-    } = this.state;
-    const mainImage = photos[thumbIndex].url;
+    const backupPhoto = "https://media.istockphoto.com/photos/coming-soon-neon-sign-the-banner-shining-light-signboard-collection-picture-id1332167985?b=1&k=20&m=1332167985&s=170667a&w=0&h=O-084eNJBhGZGJbJvNvUC1P6d4aSo6XkV4Kom7ZZcIQ=";
+    const mainImage = photos[thumbIndex].url || backupPhoto;
+    const img = new Image();
+    img.src = mainImage;
+    const mainImageWidth = img.naturalWidth;
+    const mainImageHeight = img.naturalHeight;
+    const aspectRatio = mainImageWidth / mainImageHeight;
+    const expandedWidth = 1200;
+    const expandedHeight = 700;
     let hoverStyle = 'zoom-in';
     if (expandedView) {
       if (zoomed) {
@@ -107,16 +63,20 @@ class Gallery extends React.Component {
     return (
       <button
         type="button"
-        className={expandedView ? "keith-expanded-main-photo": "keith-unexpanded-main-photo"}
+        className="keith-main-photo"
         onClick={handleExpandClick}
         onMouseMove={zoomed ? this.handleZoomMouseMove : () => {}}
         style={{
+          width: expandedView ? expandedWidth : '675px',
+          height: expandedView ? expandedHeight : '450px',
+          transition: 'width .5s, height .5s',
           cursor: hover ? hoverStyle : 'default',
           backgroundImage: `url(${mainImage})`,
-          backgroundSize: zoomed ? '250%' : 'contain',
+          backgroundSize: zoomed ? `auto ${2.5 * expandedHeight}px` : 'contain',
           backgroundRepeat: 'no-repeat',
-          backgroundPositionX: zoomed ? -1.5 * relX : 'center',
-          backgroundPositionY: zoomed ? -1.75 * relY : 'center',
+          backgroundOrigin: 'padding-box',
+          backgroundPositionX: zoomed ? (-2.5 * aspectRatio * expandedHeight + expandedWidth) * (relX / expandedWidth) : 'center',
+          backgroundPositionY: zoomed ? (-2.5 * expandedHeight + expandedHeight) * (relY / expandedHeight) : 'center',
         }}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
@@ -131,25 +91,26 @@ class Gallery extends React.Component {
             thumbIndex={thumbIndex}
             onMouseLeave={onMouseEnter}
             onMouseEnter={onMouseLeave}
-            handleThumbChange={this.handleThumbChange}
-            handleUpArrowClick={this.handleUpArrowClick}
-            handleDownArrowClick={this.handleDownArrowClick}
+            handleThumbChange={handleThumbChange}
+            handleUpArrowClick={handleUpArrowClick}
+            handleDownArrowClick={handleDownArrowClick}
           />
         )}
-        {!zoomed && (
-          <div className="keith-lr-arrows-row" onMouseEnter={onMouseLeave} onMouseLeave={onMouseEnter}>
-            {thumbIndex > 0 && (
-              <tr className="keith-lr-arrow-container">
-                <MdKeyboardArrowLeft className="keith-lr-arrow-button" onClick={this.handleUpArrowClick} />
-              </tr>
-            )}
-            {thumbIndex < photos.length - 1 && (
-              <tr className="keith-lr-arrow-container">
-                <MdKeyboardArrowRight className="keith-lr-arrow-button" onClick={this.handleDownArrowClick} />
-              </tr>
-            )}
-          </div>
-        )}
+        <div className="keith-lr-arrows-row" onMouseEnter={onMouseLeave} onMouseLeave={onMouseEnter}>
+          {(!zoomed && thumbIndex > 0) && (
+            <tr className="keith-lr-arrow-container">
+              <MdKeyboardArrowLeft className="keith-lr-arrow-button" onClick={handleUpArrowClick} />
+            </tr>
+          )}
+          {(!zoomed && thumbIndex < photos.length - 1) && (
+            <tr className="keith-lr-arrow-container">
+              <MdKeyboardArrowRight className="keith-lr-arrow-button" onClick={handleDownArrowClick} />
+            </tr>
+          )}
+        </div>
+        <div className="keith-fullscreen-exit-container">
+          {expandedView && <MdFullscreenExit className="keith-fullscreen-exit" onMouseLeave={onMouseEnter} onMouseEnter={onMouseLeave} onClick={handleUnexpandClick} />}
+        </div>
       </button>
     );
   }

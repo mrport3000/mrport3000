@@ -10,3 +10,7 @@ node_modules
 .DS_Store
 
 *.pem
+
+/login.sh
+
+

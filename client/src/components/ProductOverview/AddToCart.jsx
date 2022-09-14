@@ -13,9 +13,8 @@ class AddToCart extends React.Component {
       sizeIsSelected: false,
       selectedQuantity: null,
       quantityAvailable: null,
-      savedToOutfit: false,
       selectedSku: null,
-      specialMessage: null,
+      specialMessage: ' ',
     };
 
     this.sizeRef = React.createRef();
@@ -23,7 +22,6 @@ class AddToCart extends React.Component {
 
     this.changeSize = this.changeSize.bind(this);
     this.changeQuantity = this.changeQuantity.bind(this);
-    this.toggleOutfit = this.toggleOutfit.bind(this);
     this.addToCart = this.addToCart.bind(this);
   }
 
@@ -44,33 +42,16 @@ class AddToCart extends React.Component {
       selectedSize: e.value,
       selectedQuantity: null,
       quantityAvailable: quantity,
-      selectedSku: selectedSku,
-      specialMessage: null,
+      selectedSku,
+      specialMessage: ' ',
     });
   }
 
   changeQuantity(e) {
     this.setState({
       selectedQuantity: e.value,
-      specialMessage: null,
+      specialMessage: ' ',
     });
-  }
-
-  toggleOutfit(e) {
-    const { savedToOutfit } = this.state;
-    const { handleAddOutfitClick, handleRemoveOutfitClick } = this.props;
-    if (!savedToOutfit) {
-      this.setState({
-        savedToOutfit: true,
-      });
-      handleAddOutfitClick(e);
-    }
-    if (savedToOutfit) {
-      this.setState({
-        savedToOutfit: false,
-      });
-      handleRemoveOutfitClick(e);
-    }
   }
 
   addToCart() {
@@ -106,13 +87,14 @@ class AddToCart extends React.Component {
     const {
       quantityAvailable,
       sizeIsSelected,
-      savedToOutfit,
       selectedSize,
       specialMessage,
     } = this.state;
     const {
       skus,
       productInfo,
+      savedToOutfit,
+      toggleOutfit,
     } = this.props;
     // Makes an array of size options for react-select component
     const sizeOptions = availableSizes(skus).map((size) => ({ value: size, label: size }));
@@ -146,22 +128,22 @@ class AddToCart extends React.Component {
     }
     return (
       <div className="keith-cart-div">
-        {specialMessage && <p><b>{specialMessage}</b></p>}
+        <p className="keith-special-message"><b>{specialMessage}</b></p>
         <div className="keith-size-quantity-div">
-          <div style={{ width: '250px', float: 'left' }}>
+          <div style={{ width: '200px' }}>
             <Select
               openMenuOnFocus
-              style={{ margin: '10px' }}
+              style={{ margin: '20px' }}
               ref={this.sizeRef}
               options={sizeOptions}
               onChange={this.changeSize}
               placeholder="Select Size"
             />
           </div>
-          <div style={{ width: '100px', float: 'right' }}>
+          <div style={{ width: '100px' }}>
             <Select
               openMenuOnFocus
-              style={{ margin: '10px' }}
+              style={{ margin: '20px' }}
               ref={this.quantityRef}
               key={selectedSize}
               options={quantityOptions}
@@ -173,7 +155,7 @@ class AddToCart extends React.Component {
         </div>
         <div className="keith-cart-star-div">
           <button className="keith-add-cart" type="button" onClick={this.addToCart}>Add to Cart</button>
-          <StarButton toggleOutfit={this.toggleOutfit} savedToOutfit={savedToOutfit} productInfo={productInfo}/>
+          <StarButton toggleOutfit={toggleOutfit} savedToOutfit={savedToOutfit} productInfo={productInfo}/>
         </div>
       </div>
     );

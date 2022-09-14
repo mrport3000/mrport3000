@@ -9,11 +9,11 @@ function ProductInfo({
 }) {
   const { name, category } = productInfo;
   const price = salePrice ? (
-    <p className="keith-style">
+    <p className="keith-price">
       <b className="keith-sale-price">{`$${salePrice} `}</b>
       <strike>{` $${originalPrice}`}</strike>
     </p>
-  ) : <p className="keith-style"><b>{`$${originalPrice}`}</b></p>;
+  ) : <p className="keith-price"><b>{`$${originalPrice}`}</b></p>;
   if (reviewCount > 0) {
     return (
       <>

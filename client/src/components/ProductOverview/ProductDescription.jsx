@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { MdCheck } from 'react-icons/md';
 
 function ProductDescription({ productInfo, handleUnexpandClick }) {
   const { slogan, description, features } = productInfo;
@@ -13,7 +14,11 @@ function ProductDescription({ productInfo, handleUnexpandClick }) {
       </div>
       <div className="keith-feature-div">
         {features.map((feature, index) => (
-          <p key={index} className="keith-feature">{`✔️  ${feature.feature}: ${feature.value}`}</p>
+          <div className="keith-feature" key={index}>
+            <MdCheck />
+            <b>{`  ${feature.feature}: `}</b>
+            <span>{`${feature.value}`}</span>
+          </div>
         ))}
       </div>
     </div>
