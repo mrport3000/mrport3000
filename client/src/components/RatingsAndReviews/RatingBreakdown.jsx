@@ -35,9 +35,12 @@ class RatingBreakdown extends React.Component {
   }
 
   render() {
+    let recommended;
     if (this.props.ratings.ratings.length === 0) {
       return <div />;
     }
+
+
     return (
       <div className="eric-RR-productRatingContainer">
         <div className="eric-RR-productRatingAverage">

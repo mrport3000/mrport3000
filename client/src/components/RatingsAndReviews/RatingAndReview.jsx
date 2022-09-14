@@ -31,21 +31,31 @@ class RatingAndReview extends React.Component {
     this.setState({ show: bool });
   }
 
-  filtered(arr) {
+  filtered(arr, rec) {
     const rating = [];
-    const recPercent = [];
+    console.log('rec: ', rec)
+    let recPercent;
+    if (rec.true === undefined) {
+      recPercent = 0;
+    } else if (rec.false === undefined) {
+      recPercent = 100;
+    } else {
+      // console.log('true: ', rec.true)
+      // console.log('false: ', rec.false)
+      // console.log('added: ', rec.true + rec.false)
+      recPercent = Math.round((Number(rec.true) / (Number(rec.true) + Number(rec.false))) * 100)
+    }
+    console.log('recPercent: ', recPercent)
+
     arr.forEach((review) => {
       rating.push(review.rating);
-      if (review.recommend === true) {
-        recPercent.push(review.rating);
-      }
     });
     const average = rating.slice();
     const initialValue = 0;
     return {
       ratings: rating,
       average: ((average.reduce((pv, cv) => pv + cv, initialValue)) / rating.length).toString().slice(0, 3),
-      recPercent: ((recPercent.length / rating.length) * 100).toString().slice(0, 4),
+      recPercent,
     };
   }
 
@@ -62,11 +72,12 @@ class RatingAndReview extends React.Component {
   }
 
   render() {
+    console.log('RR props: ', this.props)
     const { show, rbfilteredReviews } = this.state;
     if (this.props.reviews.length === 0) {
       return <div />;
     }
-    const ratingBreakdown = this.filtered(this.props.reviews);
+    const ratingBreakdown = this.filtered(this.props.reviews, this.props.recommended);
 
     return (
       <div className="eric-RR-container">
