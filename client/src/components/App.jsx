@@ -280,7 +280,7 @@ class App extends React.Component {
               reviews={reviews}
               page={reviewPage}
               product={productInfo.name}
-              produuctId={productId}
+              productId={productId}
               characteristics={characteristics}
               recommended={recommended}
             />
