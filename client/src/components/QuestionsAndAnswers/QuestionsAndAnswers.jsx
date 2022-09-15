@@ -1,4 +1,6 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import QandASearch from './QandASearch.jsx';
 import QuestionItem from './QuestionItem.jsx';
@@ -10,15 +12,30 @@ import './QandAStyles.css';
 class QandA extends React.Component {
   constructor(props) {
     super(props);
+
+    const {
+      info,
+    } = this.props;
+
     this.state = {
       query: '',
+      qaQuestion: '',
+      qaAnswer: '',
+      qaNickname: '',
+      qaEmail: '',
       isExpanded: false,
       isQuestioning: false,
-      list: JSON.parse(JSON.stringify(this.props.info)),
+      isAnswering: false,
+      list: JSON.parse(JSON.stringify(info)),
     };
+
     this.handleClick = this.handleClick.bind(this);
     this.handleExpand = this.handleExpand.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleQuestion = this.handleQuestion.bind(this);
+    this.handleAnswer = this.handleAnswer.bind(this);
+    this.handleNickname = this.handleNickname.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
   }
 
   // componentDidUpdate(prevProps, prevState) {
@@ -57,40 +74,85 @@ class QandA extends React.Component {
     }
   }
 
+  handleQuestion(event) {
+    this.setState({ qaQuestion: event.target.value });
+  }
+
+  handleAnswer(event) {
+    this.setState({ qaAnswer: event.target.value });
+  }
+
+  handleNickname(event) {
+    this.setState({ qaNickname: event.target.value });
+  }
+
+  handleEmail(event) {
+    this.setState({ qaEmail: event.target.value });
+  }
+
   render() {
     const {
-      isExpanded, query, isQuestioning, list,
+      isExpanded,
+      query,
+      qaQuestion,
+      qaAnswer,
+      qaNickname,
+      qaEmail,
+      isQuestioning,
+      isAnswering,
+      list,
     } = this.state;
-    const { info, product } = this.props;
+
+    const {
+      product,
+    } = this.props;
+
     return (
       <div className="kris-qanda">
         <h4>QUESTIONS AND ANSWERS</h4>
         <QandASearch search={query} change={this.handleChange} />
         {
-            list.results.map((qanda, key) => {
-              if (!isExpanded && key >= 2) {
-                return (<div />);
-              }
+          list.results.map((qanda, key) => {
+            if (!isExpanded && key >= 2) {
+              return (<div />);
+            }
 
-              return (
-                <>
-                  <QuestionItem
-                    question={qanda.question_body}
-                    qid={qanda.question_id}
-                    helpful={qanda.question_helpfulness}
-                    item={product}
-                    id={key}
-                  />
-                  <AnswerItem answers={qanda.answers} expanded={isExpanded} id={key} />
-                </>
-              );
-            })
-          }
+            return (
+              <>
+                <QuestionItem
+                  question={qanda.question_body}
+                  qid={qanda.question_id}
+                  helpful={qanda.question_helpfulness}
+                  product={product}
+                  show={isAnswering}
+                  answer={qaAnswer}
+                  answerChange={this.handleAnswer}
+                  nickname={qaNickname}
+                  nicknameChange={this.handleNickname}
+                  email={qaEmail}
+                  emailChange={this.handleEmail}
+                  close={() => { this.handleClick('isAnswering', !isAnswering); }}
+                  id={key}
+                />
+                <AnswerItem
+                  answers={qanda.answers}
+                  expanded={isExpanded}
+                />
+              </>
+            );
+          })
+        }
         <QuestionModal
           show={isQuestioning}
           product={product}
+          question={qaQuestion}
+          questionChange={this.handleQuestion}
+          nickname={qaNickname}
+          nicknameChange={this.handleNickname}
+          email={qaEmail}
+          emailChange={this.handleEmail}
           close={() => { this.handleClick('isQuestioning', !isQuestioning); }}
-          submit={() => { console.log('submit was clicked'); }}
+          submit={() => { console.log(`Q: ${qaQuestion}\nN: ${qaNickname}\nE: ${qaEmail}`); }}
         />
         <button className="navButton" type="button" onClick={this.handleExpand}>{(isExpanded ? 'collapse answers' : 'see more answers')}</button>
         <button className="navButton" type="button" onClick={() => { this.handleClick('isQuestioning', !isQuestioning); }}>ask a question</button>
@@ -98,5 +160,10 @@ class QandA extends React.Component {
     );
   }
 }
+
+QandA.propTypes = {
+  info: PropTypes.object.isRequired,
+  product: PropTypes.string.isRequired,
+};
 
 export default QandA;
