@@ -64,11 +64,14 @@ class Gallery extends React.Component {
       <button
         type="button"
         className="keith-main-photo"
+        title="Main Photo"
         onClick={handleExpandClick}
         onMouseMove={zoomed ? this.handleZoomMouseMove : () => {}}
         style={{
           width: expandedView ? expandedWidth : '675px',
           height: expandedView ? expandedHeight : '450px',
+          justifyContent: zoomed ? 'flex-end' : 'space-between',
+          alignItems: zoomed ? 'flex-start' : 'flex-end',
           transition: 'width .5s, height .5s',
           cursor: hover ? hoverStyle : 'default',
           backgroundImage: `url(${mainImage})`,
@@ -83,20 +86,35 @@ class Gallery extends React.Component {
         alt="main image"
       >
         {!zoomed && (
-          <ThumbnailCarousel
-            key={startIndex}
-            startIndex={startIndex}
-            endIndex={endIndex}
-            photos={photos}
-            thumbIndex={thumbIndex}
-            onMouseLeave={onMouseEnter}
-            onMouseEnter={onMouseLeave}
-            handleThumbChange={handleThumbChange}
-            handleUpArrowClick={handleUpArrowClick}
-            handleDownArrowClick={handleDownArrowClick}
-          />
+          <>
+            <ThumbnailCarousel
+              key={startIndex}
+              startIndex={startIndex}
+              endIndex={endIndex}
+              photos={photos}
+              thumbIndex={thumbIndex}
+              onMouseLeave={onMouseEnter}
+              onMouseEnter={onMouseLeave}
+              handleThumbChange={handleThumbChange}
+              handleUpArrowClick={handleUpArrowClick}
+              handleDownArrowClick={handleDownArrowClick}
+            />
+            <div className="keith-lr-arrows-row" onMouseEnter={onMouseLeave} onMouseLeave={onMouseEnter}>
+              {thumbIndex > 0 && (
+                <tr className="keith-lr-arrow-container">
+                  <MdKeyboardArrowLeft className="keith-lr-arrow-button" onClick={handleUpArrowClick} />
+                </tr>
+              )}
+              {thumbIndex < photos.length - 1 && (
+                <tr className="keith-lr-arrow-container">
+                  <MdKeyboardArrowRight className="keith-lr-arrow-button" onClick={handleDownArrowClick} />
+                </tr>
+              )}
+            </div>
+          </>
+
         )}
-        <div className="keith-lr-arrows-row" onMouseEnter={onMouseLeave} onMouseLeave={onMouseEnter}>
+        {/* <div className="keith-lr-arrows-row" onMouseEnter={onMouseLeave} onMouseLeave={onMouseEnter}>
           {(!zoomed && thumbIndex > 0) && (
             <tr className="keith-lr-arrow-container">
               <MdKeyboardArrowLeft className="keith-lr-arrow-button" onClick={handleUpArrowClick} />
@@ -107,7 +125,7 @@ class Gallery extends React.Component {
               <MdKeyboardArrowRight className="keith-lr-arrow-button" onClick={handleDownArrowClick} />
             </tr>
           )}
-        </div>
+        </div> */}
         <div className="keith-fullscreen-exit-container">
           {expandedView && <MdFullscreenExit className="keith-fullscreen-exit" onMouseLeave={onMouseEnter} onMouseEnter={onMouseLeave} onClick={handleUnexpandClick} />}
         </div>
