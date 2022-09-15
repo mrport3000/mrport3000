@@ -25,7 +25,7 @@ class QandA extends React.Component {
       qaEmail: '',
       isExpanded: false,
       isQuestioning: false,
-      isAnswering: false,
+      // isAnswering: false,
       list: JSON.parse(JSON.stringify(info)),
     };
 
@@ -99,7 +99,7 @@ class QandA extends React.Component {
       qaNickname,
       qaEmail,
       isQuestioning,
-      isAnswering,
+      // isAnswering,
       list,
     } = this.state;
 
@@ -124,14 +124,14 @@ class QandA extends React.Component {
                   qid={qanda.question_id}
                   helpful={qanda.question_helpfulness}
                   product={product}
-                  show={isAnswering}
+                  // show={isAnswering}
                   answer={qaAnswer}
                   answerChange={this.handleAnswer}
                   nickname={qaNickname}
                   nicknameChange={this.handleNickname}
                   email={qaEmail}
                   emailChange={this.handleEmail}
-                  close={() => { this.handleClick('isAnswering', !isAnswering); }}
+                  // close={() => { this.handleClick('isAnswering', !isAnswering); }}
                   id={key}
                 />
                 <AnswerItem
