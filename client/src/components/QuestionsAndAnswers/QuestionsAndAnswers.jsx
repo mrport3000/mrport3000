@@ -13,7 +13,9 @@ class QandA extends React.Component {
   constructor(props) {
     super(props);
 
-    const { info } = this.props;
+    const {
+      info,
+    } = this.props;
 
     this.state = {
       query: '',

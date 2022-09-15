@@ -3,35 +3,30 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { format } from 'date-fns';
 
-const example = {
-  5986889: {
-    id: 5986889,
-    body: 'test',
-    date: '2022-07-21T00:00:00.000Z',
-    answerer_name: 'david',
-    helpfulness: 0,
-    photos: [],
-  },
-  5987205: {
-    id: 5987205,
-    body: 'good stuff',
-    date: '2022-07-24T00:00:00.000Z',
-    answerer_name: 'miras',
-    helpfulness: 0,
-    photos: [],
-  },
-};
+// const example = {
+//   5986889: {
+//     id: 5986889,
+//     body: 'test',
+//     date: '2022-07-21T00:00:00.000Z',
+//     answerer_name: 'david',
+//     helpfulness: 0,
+//     photos: [],
+//   },
+//   5987205: {
+//     id: 5987205,
+//     body: 'good stuff',
+//     date: '2022-07-24T00:00:00.000Z',
+//     answerer_name: 'miras',
+//     helpfulness: 0,
+//     photos: [],
+//   },
+// };
 
 function AnswerItem(props) {
-  const { answers, expanded } = props;
-
-  // const answerHelpful = (id) => {
-  //   axios.get(`/qanda/answer/helpful/${id}`).then((result)=>{
-  //     console.log(result);
-  //   }).catch((err) => {
-  //     console.log(err);
-  //   });
-  // };
+  const {
+    answers,
+    expanded,
+  } = props;
 
   return (
     <div className="kris-AnswerItem">
@@ -49,10 +44,10 @@ function AnswerItem(props) {
               <p className="kris-AnswerAuth">
                 {`\nby: ${answer.answerer_name}, ${format(new Date(answer.date), 'MM/dd/yyyy')}`}
               </p>
-              {/* <p className="kris-AnswerDate">
-                {`, ${format(new Date(answer.date), 'MM/dd/yyyy')}`}
-              </p> */}
-              <button className="kris-answerHelpful" type="button" onClick={() => (axios.get(`/qanda/answer/helpful/${answer.id}`))}>{`Helpful?(${answer.helpfulness})`}</button>
+              <button
+                className="kris-answerHelpful"
+                type="button"
+                onClick={() => (axios.get(`/qanda/answer/helpful/${answer.id}`))}>{`Helpful?(${answer.helpfulness})`}</button>
               <button className="kris-answerReported" type="button" onClick={() => (axios.get(`/qanda/answer/reported/${answer.id}`))}>Report</button>
             </div>
           );

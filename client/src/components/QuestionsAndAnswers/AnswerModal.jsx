@@ -12,6 +12,7 @@ function AnswerModal(props) {
     nicknameChange,
     email,
     emailChange,
+    id,
     close,
     submit,
   } = props;
@@ -25,7 +26,7 @@ function AnswerModal(props) {
       <div className="kris-modal-content">
         <div className="kris-modal-header">
           <h4 className="kris-modal-title">Submit your answer</h4>
-          <h5 className="kris-modal-subtitle">{`${product} : ${question}`}</h5>
+          <h5 className="kris-modal-subtitle">{`${product} : ${question} (id no.${id})`}</h5>
         </div>
         <div className="kris-modal-body">
           <div className="kris-modal-aAnswer">
@@ -83,6 +84,7 @@ AnswerModal.propTypes = {
   nicknameChange: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
   emailChange: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
   close: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
 };

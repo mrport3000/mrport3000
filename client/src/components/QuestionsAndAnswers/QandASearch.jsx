@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function QandASearch(props) {
-  const { search, change } = props;
+  const {
+    search,
+    change,
+  } = props;
 
   return (
     <div className="kris-QandASearch">

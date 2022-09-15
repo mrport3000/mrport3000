@@ -39,13 +39,14 @@ function QuestionItem(props) {
       <AnswerModal
         show={show}
         product={product}
-        question={question.padStart(question.length + 1, ' ')}
+        question={question}
         answer={answer}
         answerChange={answerChange}
         nickname={nickname}
         nicknameChange={nicknameChange}
         email={email}
         emailChange={emailChange}
+        id={qid}
         close={close}
         submit={() => { console.log(`A: ${answer}\nN: ${nickname}\nE: ${email}`); }}
       />
