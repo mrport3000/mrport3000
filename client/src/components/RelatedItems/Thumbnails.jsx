@@ -36,7 +36,9 @@ function Thumbnails({ product, handleThumbnailClick }) {
     <div className="duke-thumb-carousel-container">
       {thumbStart > 0 && (
       <div>
-        <MdArrowBackIos onClick={decrement} />
+        <IconContext.Provider value={{ className: "duke-thumbnail-arrow-button" }}>
+          <MdArrowBackIos onClick={decrement} />
+        </IconContext.Provider>
       </div>
       )}
       {thumbnailURLs.map((url, index) => (
@@ -52,7 +54,9 @@ function Thumbnails({ product, handleThumbnailClick }) {
       ))}
       {thumbEnd < thumbnailStorage.length && (
       <div>
-        <MdArrowForwardIos onClick={increment} />
+        <IconContext.Provider value={{ className: "duke-thumbnail-arrow-button" }}>
+          <MdArrowForwardIos onClick={increment} />
+        </IconContext.Provider>
       </div>
       )}
     </div>
