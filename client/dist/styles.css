@@ -111,6 +111,46 @@ header {
   width: 100%;
 }
 
+.footer-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+  background-color: #fff;
+  color: black;
+}
+
+#dark .footer-container {
+  background-color: #181818;
+  color: #F5F5F5;
+}
+
+.dual-plug-container {
+  margin-top: 20px;
+}
+
+.dual-plug-container:hover .female-plug{
+  margin-left: 20px;
+}
+
+#dark .dual-plug-container:hover .female-plug{
+  margin-left: -18px;
+}
+
+.dual-plugs {
+  height: 50px;
+  width: auto;
+}
+
+.female-plug {
+  margin-left: -18px;
+}
+
+#dark .female-plug {
+  margin-left: 20px;
+}
+
 .keith-overview-div {
   margin: 0px;
   padding: 40px;

@@ -11,7 +11,6 @@ function Title({ toggleTheme }) {
         </div>
         <div className="header-right">
           <h3>Your shortcut to the <span className="highlight">best deals</span> on the web</h3>
-          <button type="button" onClick={toggleTheme}>Activate</button>
         </div>
       </div>
     </header>

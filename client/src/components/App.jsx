@@ -12,6 +12,7 @@ import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
 import ErrorBoundary from './ErrorBoundary.jsx';
 import withClickData from './withClickData.jsx';
 import Title from './Title.jsx';
+import Footer from './Footer.jsx';
 
 const defaultId = 71701;
 
@@ -37,7 +38,7 @@ class App extends React.Component {
       startIndex: 0,
       endIndex: null,
       thumbIndex: 0,
-      theme: 'dark',
+      theme: 'light',
     };
 
     this.scrollTarget = React.createRef();
@@ -312,6 +313,7 @@ class App extends React.Component {
     this.setState({
       theme: toggleValue,
     });
+    window.scrollTo(0, 0);
   }
 
   // getInitialData(productId) {
@@ -430,6 +432,9 @@ class App extends React.Component {
             />
           </ErrorBoundary>
         </div>
+        <ErrorBoundary>
+          <Footer toggleTheme={this.toggleTheme} theme={theme} />
+        </ErrorBoundary>
       </div>
     );
   }
