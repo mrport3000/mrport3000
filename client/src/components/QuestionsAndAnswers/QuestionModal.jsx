@@ -1,7 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function QuestionModal(props) {
-  if (!props.show) {
+  const {
+    show,
+    product,
+    question,
+    questionChange,
+    nickname,
+    nicknameChange,
+    email,
+    emailChange,
+    close,
+    submit,
+  } = props;
+
+  if (!show) {
     return null;
   }
 
@@ -10,7 +24,7 @@ function QuestionModal(props) {
       <div className="kris-modal-content">
         <div className="kris-modal-header">
           <h4 className="kris-modal-title">Ask Your Question</h4>
-          <h5 className="kris-modal-subtitle">{`About the ${props.product}`}</h5>
+          <h5 className="kris-modal-subtitle">{`About the ${product}`}</h5>
         </div>
         <div className="kris-modal-body">
           <div className="kris-modal-qQuestion">
@@ -20,6 +34,8 @@ function QuestionModal(props) {
               className="kris-modal-input-question"
               type="text"
               maxLength="1000"
+              value={question}
+              onChange={questionChange}
             />
           </div>
           <div className="kris-modal-qNickname">
@@ -30,6 +46,8 @@ function QuestionModal(props) {
               type="text"
               maxLength="60"
               placeholder="Example: jackson11!"
+              value={nickname}
+              onChange={nicknameChange}
             />
           </div>
           <div className="kris-modal-qEmail">
@@ -40,16 +58,31 @@ function QuestionModal(props) {
               type="text"
               maxLength="60"
               placeholder="Why did you like the product or not?”"
+              value={email}
+              onChange={emailChange}
             />
           </div>
         </div>
         <div className="kris-modal-footer">
-          <button className="navButton" type="button" onClick={props.close}>Close</button>
-          <button className="navButton" type="button" onClick={props.submit}>Submit Question</button>
+          <button className="navButton" type="button" onClick={close}>Close</button>
+          <button className="navButton" type="button" onClick={submit}>Submit Question</button>
         </div>
       </div>
     </div>
   );
 }
+
+QuestionModal.propTypes = {
+  show: PropTypes.bool.isRequired,
+  product: PropTypes.string.isRequired,
+  question: PropTypes.string.isRequired,
+  questionChange: PropTypes.func.isRequired,
+  nickname: PropTypes.string.isRequired,
+  nicknameChange: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
+  emailChange: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
+  submit: PropTypes.func.isRequired,
+};
 
 export default QuestionModal;
