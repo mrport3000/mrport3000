@@ -37,7 +37,7 @@ class App extends React.Component {
       startIndex: 0,
       endIndex: null,
       thumbIndex: 0,
-      theme: 'light',
+      theme: 'dark',
     };
 
     this.scrollTarget = React.createRef();
