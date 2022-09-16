@@ -65,6 +65,7 @@ function ProductCard({ product, handleModalButtonClick, handleProductCardClick }
         <Thumbnails
           product={product}
           handleThumbnailClick={handleThumbnailClick}
+          previewPhoto={previewPhoto}
         />
         )}
       </div>
