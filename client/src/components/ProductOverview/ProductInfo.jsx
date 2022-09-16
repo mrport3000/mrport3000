@@ -17,16 +17,16 @@ function ProductInfo({
   if (reviewCount > 0) {
     return (
       <>
-        <div>
+        <div className="keith-review">
           {StarRating({ rating })}
-          <span className="keith-review" onClick={executeScroll}>{`Read ${reviewCount} reviews`}</span>
+          <div className="keith-read-review" onClick={executeScroll}>{`Read ${reviewCount} reviews`}</div>
         </div>
         <h4 className="keith-category">{category}</h4>
         <h1 className="keith-product-name">{name}</h1>
         {price}
         <p className="keith-style">
           <b>{'Style > '}</b>
-          {styleName}
+          <em>{styleName}</em>
         </p>
       </>
     );

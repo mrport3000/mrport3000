@@ -101,14 +101,14 @@ class Gallery extends React.Component {
             />
             <div className="keith-lr-arrows-row" onMouseEnter={onMouseLeave} onMouseLeave={onMouseEnter}>
               {thumbIndex > 0 && (
-                <tr className="keith-lr-arrow-container">
+                <div className="keith-lr-arrow-container">
                   <MdKeyboardArrowLeft className="keith-lr-arrow-button" onClick={handleUpArrowClick} />
-                </tr>
+                </div>
               )}
               {thumbIndex < photos.length - 1 && (
-                <tr className="keith-lr-arrow-container">
+                <div className="keith-lr-arrow-container">
                   <MdKeyboardArrowRight className="keith-lr-arrow-button" onClick={handleDownArrowClick} />
-                </tr>
+                </div>
               )}
             </div>
           </>

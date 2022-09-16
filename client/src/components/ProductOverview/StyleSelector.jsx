@@ -7,9 +7,10 @@ export default function StyleSelector({ productStyles, handleStyleChange, styleI
   const thumbnailTable = [];
   let thumbnailRow = [];
   for (let i = 0; i < productStyles.length; i += 1) {
-    const cell = {};
-    cell[i] = productStyles[i].photos[0].thumbnail_url;
-    thumbnailRow.push(cell);
+    const style = {};
+    const styleName = productStyles[i].name;
+    style[styleName] = productStyles[i].photos[0].thumbnail_url;
+    thumbnailRow.push(style);
     if (thumbnailRow.length === 4) {
       thumbnailTable.push(thumbnailRow);
       thumbnailRow = [];
@@ -23,11 +24,12 @@ export default function StyleSelector({ productStyles, handleStyleChange, styleI
       <tbody>
         {thumbnailTable.map((row, i) => (
           <tr key={i}>
-            {row.map((cell) => (
+            {row.map((style, j) => (
               <StyleIcon
-                url={Object.values(cell)[0]}
-                key={Object.keys(cell)[0]}
-                index={Number(Object.keys(cell)[0])}
+                url={Object.values(style)[0]}
+                key={Object.keys(style)[0]}
+                index={i * 4 + j}
+                name={Object.keys(style)[0]}
                 styleIndex={styleIndex}
                 handleStyleChange={handleStyleChange}
               />
