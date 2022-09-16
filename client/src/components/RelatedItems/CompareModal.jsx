@@ -43,13 +43,14 @@ function CompareModal({
     (
       <div className="duke-modal">
         <div className="duke-modal-content">
+          <p>Product Comparison</p>
           <div className="duke-modal-body">
             <table>
               <thead>
                 <tr>
-                  <th className="duke-table-sides">{currProduct.name}</th>
-                  <th className="duke-table-middle">&nbsp;</th>
-                  <th className="duke-table-sides">{cardProduct.name}</th>
+                  <th className="duke-table-sides duke-table-head">{currProduct.name}</th>
+                  <th className="duke-table-middle" id="duke-table-head-middle">&nbsp;</th>
+                  <th className="duke-table-sides duke-table-head">{cardProduct.name}</th>
                 </tr>
               </thead>
               <tbody>
@@ -65,12 +66,5 @@ function CompareModal({
     ), document.getElementById('root'),
   );
 }
-
-// CompareModal.propTypes = {
-//   show: PropTypes.bool.isRequired,
-//   handleModalButtonClick: PropTypes.func.isRequired,
-//   cardProduct: PropTypes.shape({}),
-//   currProduct: PropTypes.shape({}),
-// };
 
 export default CompareModal;
