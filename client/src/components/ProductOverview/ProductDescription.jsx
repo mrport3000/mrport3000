@@ -13,13 +13,19 @@ function ProductDescription({ productInfo, handleUnexpandClick }) {
         <p>{description}</p>
       </div>
       <div className="keith-feature-div">
-        {features.map((feature, index) => (
-          <div className="keith-feature" key={index}>
-            <MdCheck />
-            <b>{`  ${feature.feature}: `}</b>
-            <span>{`${feature.value}`}</span>
-          </div>
-        ))}
+        {features.map((feature, index) => {
+          if (feature.value && feature.value[0] === '"') {
+            feature.value = feature.value.slice(1, -1);
+          }
+          return (
+            feature.value && (
+              <div className="keith-feature" key={index}>
+                <MdCheck />
+                <b>{`  ${feature.feature}: `}</b>
+                <span>{`${feature.value}`}</span>
+              </div>
+            ));
+        })}
       </div>
     </div>
   );
