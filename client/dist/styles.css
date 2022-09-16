@@ -275,7 +275,17 @@ header {
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.15);
 }
 
-.keith-review:hover {
+.keith-review {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: '10px';
+}
+
+.keith-read-review:hover {
   text-decoration: underline;
   text-decoration-color: #353535;
 }
@@ -283,7 +293,7 @@ header {
 .keith-category {
   color: #353535;
   text-transform: uppercase;
-  margin: 15px 0px 0px 0px;
+  margin: 20px 0px 0px 0px;
 }
 
 #dark .keith-category {
@@ -344,7 +354,7 @@ header {
 }
 
 .keith-sale-price {
-  color: red
+  color: #ba181b
 }
 
 .keith-price {
@@ -397,12 +407,13 @@ header {
   display: flex;
   width: 100%;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-content: space-between;
 }
 
 .keith-add-cart {
   margin: 10px;
-  background-color: #48BF84;
+  background-color: #3C6E71;
   border: none;
   border-radius: 10px;
   color: white;
@@ -417,6 +428,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  gap: 20px;
 }
 
 .keith-special-message {
