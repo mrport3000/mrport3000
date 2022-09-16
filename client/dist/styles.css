@@ -696,10 +696,11 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 }
 
 #dark .duke-modal {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.85);
 }
 
 .duke-modal-content {
@@ -775,8 +776,8 @@ header {
 }
 
 #dark .duke-table-middle {
-  background-color: #d6d6d6;
-  color: black;
+  background-color: #353535;
+  color: #F5F5F5;
 }
 
 .duke-table-sides {
@@ -788,8 +789,8 @@ header {
 }
 
 #dark .duke-table-sides {
-  background-color: #0A0A0A;
-  color: #F5F5F5;
+  background-color: #F5F5F5;
+  color: #0A0A0A;
 }
 
 .duke-table-head {
@@ -797,6 +798,10 @@ header {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.20);
   color: white;
   font-size: 1.2rem;
+}
+
+#dark .duke-table-head {
+  background-color: #F76C5E;
 }
 
 #duke-table-head-middle {

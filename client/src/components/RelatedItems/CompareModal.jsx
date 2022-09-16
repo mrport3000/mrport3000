@@ -39,31 +39,29 @@ function CompareModal({
     );
   });
 
-  return ReactDOM.createPortal(
-    (
-      <div className="duke-modal">
-        <div className="duke-modal-content">
-          <p>Product Comparison</p>
-          <div className="duke-modal-body">
-            <table>
-              <thead>
-                <tr>
-                  <th className="duke-table-sides duke-table-head">{currProduct.name}</th>
-                  <th className="duke-table-middle" id="duke-table-head-middle">&nbsp;</th>
-                  <th className="duke-table-sides duke-table-head">{cardProduct.name}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rowCreator}
-              </tbody>
-            </table>
-          </div>
-          <div className="duke-modal-footer">
-            <button type="button" className="duke-button" onClick={handleModalButtonClick}>Close</button>
-          </div>
+  return (
+    <div className="duke-modal">
+      <div className="duke-modal-content">
+        <p>Product Comparison</p>
+        <div className="duke-modal-body">
+          <table>
+            <thead>
+              <tr>
+                <th className="duke-table-sides duke-table-head">{currProduct.name}</th>
+                <th className="duke-table-middle" id="duke-table-head-middle">&nbsp;</th>
+                <th className="duke-table-sides duke-table-head">{cardProduct.name}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rowCreator}
+            </tbody>
+          </table>
+        </div>
+        <div className="duke-modal-footer">
+          <button type="button" className="duke-button" onClick={handleModalButtonClick}>Close</button>
         </div>
       </div>
-    ), document.getElementById('root'),
+    </div>
   );
 }
 
