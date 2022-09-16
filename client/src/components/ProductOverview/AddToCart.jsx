@@ -130,7 +130,7 @@ class AddToCart extends React.Component {
       <div className="keith-cart-div">
         <p className="keith-special-message"><b>{specialMessage}</b></p>
         <div className="keith-size-quantity-div">
-          <div style={{ width: '200px' }}>
+          <div style={{ width: '180px' }}>
             <Select
               openMenuOnFocus
               style={{ margin: '20px' }}
@@ -138,9 +138,10 @@ class AddToCart extends React.Component {
               options={sizeOptions}
               onChange={this.changeSize}
               placeholder="Select Size"
+              for="size"
             />
           </div>
-          <div style={{ width: '100px' }}>
+          <div style={{ width: '80px' }}>
             <Select
               openMenuOnFocus
               style={{ margin: '20px' }}
@@ -150,6 +151,7 @@ class AddToCart extends React.Component {
               onChange={this.changeQuantity}
               isDisabled={!sizeIsSelected}
               placeholder={placeholder}
+              for="quantity"
             />
           </div>
         </div>
