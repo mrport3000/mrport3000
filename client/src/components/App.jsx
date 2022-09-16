@@ -347,6 +347,7 @@ class App extends React.Component {
     const QandAWithClickData = withClickData(QandA);
     const RatingAndReviewWithClickData = withClickData(RatingAndReview);
     const TitleWithClickData = withClickData(Title);
+    const FooterWithClickData = withClickData(Footer);
 
     const {
       productId,
@@ -433,7 +434,7 @@ class App extends React.Component {
           </ErrorBoundary>
         </div>
         <ErrorBoundary>
-          <Footer toggleTheme={this.toggleTheme} theme={theme} />
+          <FooterWithClickData toggleTheme={this.toggleTheme} theme={theme} />
         </ErrorBoundary>
       </div>
     );
