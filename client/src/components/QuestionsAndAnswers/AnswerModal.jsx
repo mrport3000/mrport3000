@@ -8,29 +8,21 @@ class AnswerModal extends React.Component {
     const {
       product,
       question,
-      answer,
       answerChange,
-      nickname,
       nicknameChange,
-      email,
       emailChange,
       id,
       close,
-      submit,
     } = this.props;
 
     this.state = {
       product,
       question,
-      answer,
       answerChange,
-      nickname,
       nicknameChange,
-      email,
       emailChange,
       id,
       close,
-      submit,
     };
   }
 
@@ -38,18 +30,19 @@ class AnswerModal extends React.Component {
     const {
       product,
       question,
-      answer,
       answerChange,
-      nickname,
       nicknameChange,
-      email,
       emailChange,
       id,
       close,
-      submit,
     } = this.state;
 
-    const { show } = this.props;
+    const {
+      show,
+      nickname,
+      email,
+      userAnswer,
+    } = this.props;
 
     if (!show) {
       return null;
@@ -70,7 +63,7 @@ class AnswerModal extends React.Component {
                 className="kris-modal-input-question"
                 type="text"
                 maxLength="1000"
-                value={answer}
+                value={userAnswer}
                 onChange={answerChange}
               />
             </div>
@@ -101,7 +94,18 @@ class AnswerModal extends React.Component {
           </div>
           <div className="kris-modal-footer">
             <button className="navButton" type="button" onClick={close}>Close</button>
-            <button className="navButton" type="button" onClick={submit}>Submit Answer</button>
+            <button
+              className="navButton"
+              type="button"
+              onClick={() => {
+                console.log(`A: ${userAnswer}\nN: ${nickname}\nE: ${email}`);
+                event.preventDefault();
+                close();
+              }}
+            >
+              Submit Answer
+
+            </button>
           </div>
         </div>
       </div>
@@ -110,10 +114,10 @@ class AnswerModal extends React.Component {
 }
 
 AnswerModal.propTypes = {
+  userAnswer: PropTypes.string.isRequired,
   show: PropTypes.bool.isRequired,
   product: PropTypes.string.isRequired,
   question: PropTypes.string.isRequired,
-  answer: PropTypes.string.isRequired,
   answerChange: PropTypes.func.isRequired,
   nickname: PropTypes.string.isRequired,
   nicknameChange: PropTypes.func.isRequired,
@@ -121,7 +125,6 @@ AnswerModal.propTypes = {
   emailChange: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
   close: PropTypes.func.isRequired,
-  submit: PropTypes.func.isRequired,
 };
 
 export default AnswerModal;

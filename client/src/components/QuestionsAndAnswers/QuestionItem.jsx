@@ -14,33 +14,23 @@ class QuestionItem extends React.Component {
       qid,
       helpful,
       product,
-      // show,
-      answer,
-      answerChange,
-      nickname,
       nicknameChange,
-      email,
       emailChange,
-      // close,
     } = this.props;
 
     this.state = {
+      userAnswer: '',
       isAnswering: false,
       question,
       qid,
       helpful,
       product,
-      // show,
-      answer,
-      answerChange,
-      nickname,
       nicknameChange,
-      email,
       emailChange,
-      // close,
     };
 
     this.handleAnswering = this.handleAnswering.bind(this);
+    this.handleUserAnswerChange = this.handleUserAnswerChange.bind(this);
   }
 
   handleAnswering() {
@@ -48,22 +38,27 @@ class QuestionItem extends React.Component {
     this.setState({ isAnswering: !isAnswering });
   }
 
+  handleUserAnswerChange(event) {
+    this.setState({ userAnswer: event.target.value });
+    event.preventDefault();
+  }
+
   render() {
     const {
+      userAnswer,
       isAnswering,
       question,
       qid,
       helpful,
       product,
-      // show,
-      answer,
-      answerChange,
-      nickname,
       nicknameChange,
-      email,
       emailChange,
-      // close,
     } = this.state;
+
+    const {
+      nickname,
+      email,
+    } = this.props;
 
     return (
       <div className="kris-QuestionItem">
@@ -85,17 +80,15 @@ class QuestionItem extends React.Component {
           show={isAnswering}
           product={product}
           question={question}
-          answer={answer}
-          answerChange={answerChange}
+          userAnswer={userAnswer}
+          answerChange={this.handleUserAnswerChange}
           nickname={nickname}
           nicknameChange={nicknameChange}
           email={email}
           emailChange={emailChange}
           id={qid}
           close={this.handleAnswering}
-          submit={() => { console.log(`A: ${answer}\nN: ${nickname}\nE: ${email}`); }}
         />
-
       </div>
     );
   }
@@ -106,17 +99,10 @@ QuestionItem.propTypes = {
   qid: PropTypes.number.isRequired,
   helpful: PropTypes.number.isRequired,
   product: PropTypes.string.isRequired,
-  // show: PropTypes.bool.isRequired,
-  answer: PropTypes.string.isRequired,
-  answerChange: PropTypes.func.isRequired,
   nickname: PropTypes.string.isRequired,
   nicknameChange: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
   emailChange: PropTypes.func.isRequired,
-  // close: PropTypes.func.isRequired,
 };
-
-// close={() => { this.handleClick('isAnswering', !isAnswering); }}
-// id={key}
 
 export default QuestionItem;

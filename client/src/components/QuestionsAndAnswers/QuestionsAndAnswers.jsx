@@ -20,12 +20,10 @@ class QandA extends React.Component {
     this.state = {
       query: '',
       qaQuestion: '',
-      qaAnswer: '',
-      qaNickname: '',
-      qaEmail: '',
+      nickname: '',
+      email: '',
       isExpanded: false,
       isQuestioning: false,
-      // isAnswering: false,
       list: JSON.parse(JSON.stringify(info)),
     };
 
@@ -33,7 +31,6 @@ class QandA extends React.Component {
     this.handleExpand = this.handleExpand.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleQuestion = this.handleQuestion.bind(this);
-    this.handleAnswer = this.handleAnswer.bind(this);
     this.handleNickname = this.handleNickname.bind(this);
     this.handleEmail = this.handleEmail.bind(this);
   }
@@ -45,6 +42,7 @@ class QandA extends React.Component {
 
   handleClick(key, value) {
     this.setState({ [key]: value });
+    console.log('CLICK HANDLED');
   }
 
   handleExpand() {
@@ -78,16 +76,12 @@ class QandA extends React.Component {
     this.setState({ qaQuestion: event.target.value });
   }
 
-  handleAnswer(event) {
-    this.setState({ qaAnswer: event.target.value });
-  }
-
   handleNickname(event) {
-    this.setState({ qaNickname: event.target.value });
+    this.setState({ nickname: event.target.value });
   }
 
   handleEmail(event) {
-    this.setState({ qaEmail: event.target.value });
+    this.setState({ email: event.target.value });
   }
 
   render() {
@@ -95,11 +89,9 @@ class QandA extends React.Component {
       isExpanded,
       query,
       qaQuestion,
-      qaAnswer,
-      qaNickname,
-      qaEmail,
+      nickname,
+      email,
       isQuestioning,
-      // isAnswering,
       list,
     } = this.state;
 
@@ -124,14 +116,10 @@ class QandA extends React.Component {
                   qid={qanda.question_id}
                   helpful={qanda.question_helpfulness}
                   product={product}
-                  // show={isAnswering}
-                  answer={qaAnswer}
-                  answerChange={this.handleAnswer}
-                  nickname={qaNickname}
+                  nickname={nickname}
                   nicknameChange={this.handleNickname}
-                  email={qaEmail}
+                  email={email}
                   emailChange={this.handleEmail}
-                  // close={() => { this.handleClick('isAnswering', !isAnswering); }}
                   id={key}
                 />
                 <AnswerItem
@@ -147,12 +135,17 @@ class QandA extends React.Component {
           product={product}
           question={qaQuestion}
           questionChange={this.handleQuestion}
-          nickname={qaNickname}
+          nickname={nickname}
           nicknameChange={this.handleNickname}
-          email={qaEmail}
+          email={email}
           emailChange={this.handleEmail}
-          close={() => { this.handleClick('isQuestioning', !isQuestioning); }}
-          submit={() => { console.log(`Q: ${qaQuestion}\nN: ${qaNickname}\nE: ${qaEmail}`); }}
+          close={() => {
+            this.handleClick('isQuestioning', !isQuestioning);
+          }}
+          submit={() => {
+            this.handleClick('isQuestioning', !isQuestioning);
+            console.log(`Q: ${qaQuestion}\nN: ${nickname}\nE: ${email}`);
+          }}
         />
         <button className="navButton" type="button" onClick={this.handleExpand}>{(isExpanded ? 'collapse answers' : 'see more answers')}</button>
         <button className="navButton" type="button" onClick={() => { this.handleClick('isQuestioning', !isQuestioning); }}>ask a question</button>
