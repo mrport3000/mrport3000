@@ -29,7 +29,6 @@ class SortReviews extends React.Component {
   }
 
   moreReviews() {
-    // let { reviewCount } = this.state;
     this.setState({ reviewCount: this.state.reviewCount += 2 }, console.log('state after: ', this.state.reviewCount));
   }
 

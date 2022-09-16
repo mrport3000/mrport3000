@@ -50,9 +50,7 @@ export default class ReviewModal extends React.Component {
       characteristics,
     };
 
-    //console.log('formattedReview: ', formattedReview);
-
-    axios.post(`/reviews`, formattedReview)
+    axios.post('/reviews', formattedReview)
       .then((response) => {
         console.log('Successfully sent: ', response);
       });
@@ -60,7 +58,6 @@ export default class ReviewModal extends React.Component {
   }
 
   onChangeValue(e) {
-    // console.log('on change name: ', e.target.name)
     this.setState({ [e.target.name]: e.target.value });
   }
 
@@ -89,7 +86,6 @@ export default class ReviewModal extends React.Component {
 
     axios.post('https://api.cloudinary.com/v1_1/deitkdfiq/image/upload', formData)
       .then((response) => {
-        // console.log('uploadImage response: ', response.data.secure_url);
         const fileObj = response.data;
         const url = response.data.secure_url;
         this.setState({ imgFiles: imgFiles.concat([url]) });
@@ -97,7 +93,6 @@ export default class ReviewModal extends React.Component {
   }
 
   render() {
-    // console.log('Modal Props: ', this.props);
     const { characteristics } = this.props;
     const { imgFiles } = this.state;
     if (!this.props.show) {
@@ -155,7 +150,6 @@ export default class ReviewModal extends React.Component {
                 {
                Object.keys(characteristics).map((char) => {
                  if (char === 'Size') {
-                   //  console.log('Size Id: ', this.props.characteristics['Size'].id)
                    return (
                      <div className="eric-RR-cSize">
                        <div className="eric-RR-cTitle"> Size: </div>
@@ -294,7 +288,6 @@ export default class ReviewModal extends React.Component {
                      </div>
                    );
                  }
-
                  // end of map//
                })
               }
@@ -337,9 +330,6 @@ export default class ReviewModal extends React.Component {
                 <input type="text" name="email" maxLength="60" placeholder="Example: jackson11@email.com" value={this.state.value} onChange={this.onChangeValue} required />
               </label>
             </div>
-            {/* <div className="eric-RR-modalSubmit">
-              <button type="button">Submit</button>
-            </div> */}
             <button type="submit">Submit</button>
           </form>
         </div>

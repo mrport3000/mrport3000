@@ -2,7 +2,6 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 
-// import StarRating from '../RelatedItems/StarRating.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 import SortReviews from './SortReviews.jsx';

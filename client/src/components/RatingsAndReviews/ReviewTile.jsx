@@ -24,11 +24,14 @@ class ReviewTile extends React.Component {
   handleClick(e) {
     const reviewId = this.props.review.review_id;
     if (e.target.name === 'helpful') {
-      // axios PUT request
       axios.get(`/reviews/${reviewId}/helpful`)
         .then((result) => {
-          console.log('success: ', result);
           this.setState({ helpful: true });
+        });
+    } else if (e.target.name === 'report') {
+      axios.get(`/reviews/${reviewId}/report`)
+        .then((result) => {
+          console.log('Successfully Reported: ', result);
         });
     }
   }
@@ -44,7 +47,6 @@ class ReviewTile extends React.Component {
   }
 
   render() {
-    console.log('ReviewTile props: ', this.props);
     const { expanded, helpful, clickedImg } = this.state;
     let reviewBody;
     let recommend;
