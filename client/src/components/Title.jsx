@@ -1,7 +1,7 @@
 import React from 'react';
 import plugIcon from '../../dist/lib/Plug-icon.png';
 
-function Title() {
+function Title({ toggleTheme }) {
   return (
     <header>
       <div className="header-container">
