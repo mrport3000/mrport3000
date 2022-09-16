@@ -23,8 +23,6 @@ class RelatedProducts extends React.Component {
     this.handleForwardArrowClick = this.handleForwardArrowClick.bind(this);
     this.handleModalButtonClick = this.handleModalButtonClick.bind(this);
     this.getRelatedProductsInfo = this.getRelatedProductsInfo.bind(this);
-    // this.getProductInfo = this.getProductInfo.bind(this);
-    // this.getProductStyles = this.getProductStyles.bind(this);
   }
 
   componentDidMount() {
@@ -73,36 +71,6 @@ class RelatedProducts extends React.Component {
     // Show modal
     this.setState((prevState) => ({ show: !prevState.show }));
   }
-
-  // getProductInfo(id) {
-  //   return axios.get(`/productinfo/${id}`)
-  //     .then((result) => result.data)
-  //     .catch((err) => console.log(err));
-  // }
-
-  // getProductStyles(id) {
-  //   return axios.get(`/styles/${id}`)
-  //     .then((result) => result.data)
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
-
-  // // need to change id key to make identifiable second
-  // getAverageReviews(id) {
-  //   return axios.get(`/reviews/${id}`)
-  //     .then((result) => result.data)
-  //     .then((product) => {
-  //       // replace product_id key to prevent overwriting properties when merging object
-  //       product.review_id = product.product_id;
-  //       product.ratings = averageRating(product.ratings) || 0;
-  //       delete product.product_id;
-  //       return product;
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }
 
   getRelatedProductsInfo(id) {
     return axios.get(`/related/${id}`)

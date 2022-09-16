@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { IconContext } from 'react-icons';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 
-function Thumbnails({ product, handleThumbnailClick }) {
+function Thumbnails({ product, handleThumbnailClick, previewPhoto }) {
   const [thumbStart, setThumbStart] = useState(0);
   const [thumbEnd, setThumbEnd] = useState(4);
 
@@ -48,7 +48,12 @@ function Thumbnails({ product, handleThumbnailClick }) {
           type="button"
           aria-label="Mute volume"
           value={url}
-          style={{ backgroundImage: `url(${url})` }}
+          style={
+            {
+              backgroundImage: `url(${url})`,
+              border: previewPhoto === url ? '4px solid #F76C5E' : 'none',
+            }
+          }
           onClick={handleThumbnailClick}
         />
       ))}
