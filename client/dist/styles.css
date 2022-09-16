@@ -135,16 +135,16 @@ header {
 }
 
 #dark .dual-plug-container:hover .female-plug{
-  margin-left: -18px;
+  margin-left: -27.5px;
 }
 
 .dual-plugs {
-  height: 50px;
+  height: 75px;
   width: auto;
 }
 
 .female-plug {
-  margin-left: -18px;
+  margin-left: -27.5px;
 }
 
 #dark .female-plug {
