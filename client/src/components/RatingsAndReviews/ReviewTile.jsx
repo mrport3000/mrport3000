@@ -1,4 +1,6 @@
 import React from 'react';
+
+import axios from 'axios';
 import { format } from 'date-fns';
 import { GrCheckmark } from 'react-icons/gr';
 import StarRating from '../RelatedItems/StarRating.jsx';
@@ -10,23 +12,41 @@ class ReviewTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      expanded: false,
+      helpful: null,
       clickedImg: null,
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleImgClick = this.handleImgClick.bind(this);
+    this.expandTextBody = this.expandTextBody.bind(this);
   }
 
   handleClick(e) {
-    console.log('Yes was clicked!');
+    const reviewId = this.props.review.review_id;
+    if (e.target.name === 'helpful') {
+      // axios PUT request
+      axios.get(`/reviews/${reviewId}/helpful`)
+        .then((result) => {
+          console.log('success: ', result);
+          this.setState({ helpful: true });
+        });
+    }
   }
 
   handleImgClick(imgUrl) {
-    console.log('imgUrl: ', imgUrl)
     this.setState({ clickedImg: imgUrl });
   }
 
+  expandTextBody(text) {
+    const { expanded } = this.state;
+    const storedText = text;
+    return expanded ? storedText : text.toString().split('').slice(0, 250);
+  }
+
   render() {
-    const { clickedImg } = this.state;
+    console.log('ReviewTile props: ', this.props);
+    const { expanded, helpful, clickedImg } = this.state;
+    let reviewBody;
     let recommend;
     let photos;
     if (this.props.review.recommend) {
@@ -49,6 +69,32 @@ class ReviewTile extends React.Component {
       );
     }
 
+    if (this.props.review.body.length >= 250) {
+      reviewBody = (
+        <div className="eric-RR-tBodyContainer">
+          <div className="eric-RR-tBodyText">
+            {this.expandTextBody(this.props.review.body)}
+          </div>
+          <div className="eric-RR-tBodyMore">
+            <span
+              onClick={() => this.setState({ expanded: true })}
+              hidden={expanded === true ? 'hidden' : ''}
+            >
+              Show more
+            </span>
+          </div>
+        </div>
+      );
+    } else {
+      reviewBody = (
+        <div className="eric-RR-tBodyContainer">
+          <div className="eric-RR-tBodyText">
+            {this.props.review.body}
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className="eric-RR-tileEntryContainer">
         <div className="eric-RR-tileRatingAndUsername">
@@ -67,7 +113,7 @@ class ReviewTile extends React.Component {
             {this.props.review.summary}
           </div>
           <div className="eric-RR-tileBody">
-            {this.props.review.body}
+            {reviewBody}
           </div>
           <div className="eric-RR-tileRecommend">
             {recommend}
@@ -83,13 +129,13 @@ class ReviewTile extends React.Component {
           <div className="eric-RR-tileHelpful">
             Was this review helpful?
             {' '}
-            <a onClick={this.handleClick}>Yes</a>
+            <button type="button" name="helpful" onClick={this.handleClick} disabled={helpful === true}>Yes</button>
             {' '}
             (
-            {this.props.review.helpfulness}
+            { helpful === null ? this.props.review.helpfulness : this.props.review.helpfulness + 1}
             ) |
             {' '}
-            <a>Report</a>
+            <button type="button" name="report" onClick={this.handleClick}>Report</button>
           </div>
         </div>
         {clickedImg && (<ImageModal clickedImg={clickedImg} handleClick={this.handleImgClick} />)}

@@ -32,7 +32,6 @@ class RatingBreakdown extends React.Component {
   }
 
   resetStarFilter(currState) {
-    console.log('currState: ', currState);
     this.setState({
       fiveStar: 0,
       fourStar: 0,

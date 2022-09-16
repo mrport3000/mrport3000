@@ -6,24 +6,8 @@ const formData = require('express-form-data');
 const axios = require('axios');
 const fileUpload = require('express-fileupload');
 const RelatedRoute = require('./Routing/RelatedRoute');
-// const os = require('os');
 
 const app = express();
-
-// const options = {
-//   uploadDir: os.tmpdir(),
-//   autoClean: true,
-// };
-
-// app.use(express.urlencoded({ extended: true }));
-// // parse data with connect-multiparty.
-// app.use(formData.parse(options));
-// // delete from the request all empty files (size == 0)
-// app.use(formData.format());
-// // change the file objects to fs.ReadStream
-// app.use(formData.stream());
-// // union the body and the files
-// app.use(formData.union());
 
 const { PORT } = process.env;
 const headers = {
@@ -105,25 +89,33 @@ app.get('/reviews/:id', (req, res) => {
 app.get('/reviews/meta/:id', (req, res) => {
   const { sortTerm } = req.query;
   if (sortTerm) {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.id}&sort=${sortTerm}`, headers)
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.id}&sort=${sortTerm}&count=50`, headers)
       .then((result) => res.send(result.data))
       .catch((err) => console.log(err));
   } else {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.id}`, headers)
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.id}&count=50`, headers)
       .then((result) => res.send(result.data))
       .catch((err) => console.log(err));
   }
 });
 
 app.post('/reviews', (req, res) => {
-  console.log('review: ', req.body);
-  axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`, req.body, headers)
+  axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', req.body, headers)
     .then((result) => {
-      console.log('success: ', result);
       res.send(result);
     })
     .catch((err) => console.log(err));
 });
+
+app.get('/reviews/:review_id/helpful', (req, res) => {
+  console.log('helpful result: ', req.params.review_id);
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${req.params.review_id}/helpful`, {}, headers)
+    .then((result) => {
+      res.sendStatus(204);
+    })
+    .catch((err) => console.log(err));
+});
+// .catch((err) => console.log(err))
 
 app.post('/cart', (req, res) => {
   axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/cart', {

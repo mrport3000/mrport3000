@@ -96,6 +96,21 @@
   width: 500px;
 }
 
+.eric-RR-tBodyContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.eric-RR-tBodyText {
+  width: 500px;
+  height: 100px;
+  overflow: auto;
+}
+
+.eric-RR-tBodyMore {
+  text-align: center;
+}
+
 .eric-RR-tileRatingAndUsername {
   display: flex;
   flex-direction: row;
@@ -132,6 +147,7 @@
   border-radius: 15px;
   margin-left: 2.5px;
   margin-right: 2.5px;
+  cursor: pointer;
 }
 
 /* ///review tile photo modal/// */
@@ -174,9 +190,14 @@
   border-radius: 30px;
 }
 
-/* .eric-RR-tileHelpful a{
+.eric-RR-tileHelpful button{
   text-decoration: underline;
-} */
+  background:none;
+  border:none;
+  margin:0;
+  padding:0;
+  cursor: pointer;
+}
 
 .eric-rr-rbButton {
   background:none;

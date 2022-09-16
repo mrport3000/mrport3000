@@ -95,7 +95,7 @@ class SortReviews extends React.Component {
           </div>
         </div>
         <div className="eric-RR-reviewContainer">
-          <ReviewsList reviews={dynamicProps} />
+          <ReviewsList reviews={dynamicProps} productId={this.props.productId}/>
         </div>
         <div className="eric-RR-sortBottomNavBar">
           <div className="eric-RR-moreReviewsContainer">

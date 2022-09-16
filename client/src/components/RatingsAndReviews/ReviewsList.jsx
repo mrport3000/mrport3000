@@ -17,7 +17,7 @@ class ReviewsList extends React.Component {
       <div className="eric-RR-reviewListContainer">
         {
             this.props.reviews.map((review) => (
-              <ReviewTile review={review} />
+              <ReviewTile review={review} productId={this.props.productId} />
             ))
           }
       </div>
