@@ -12,6 +12,7 @@ import RatingAndReview from './RatingsAndReviews/RatingAndReview.jsx';
 import ErrorBoundary from './ErrorBoundary.jsx';
 import withClickData from './withClickData.jsx';
 import Title from './Title.jsx';
+import Footer from './Footer.jsx';
 
 const defaultId = 71701;
 
@@ -37,6 +38,7 @@ class App extends React.Component {
       startIndex: 0,
       endIndex: null,
       thumbIndex: 0,
+      theme: 'light',
     };
 
     this.scrollTarget = React.createRef();
@@ -51,6 +53,7 @@ class App extends React.Component {
     this.toggleOutfit = this.toggleOutfit.bind(this);
     this.handleProductCardClick = this.handleProductCardClick.bind(this);
     this.executeScroll = this.executeScroll.bind(this);
+    this.toggleTheme = this.toggleTheme.bind(this);
   }
 
   componentDidMount() {
@@ -303,6 +306,16 @@ class App extends React.Component {
     }
   }
 
+  toggleTheme(e) {
+    e.preventDefault();
+    const { theme } = this.state;
+    let toggleValue = theme === 'light' ? 'dark' : 'light';
+    this.setState({
+      theme: toggleValue,
+    });
+    window.scrollTo(0, 0);
+  }
+
   // getInitialData(productId) {
   //   const req1 = axios.get(`/productinfo/${productId}`);
   //   const req2 = axios.get(`/styles/${productId}`);
@@ -334,6 +347,7 @@ class App extends React.Component {
     const QandAWithClickData = withClickData(QandA);
     const RatingAndReviewWithClickData = withClickData(RatingAndReview);
     const TitleWithClickData = withClickData(Title);
+    const FooterWithClickData = withClickData(Footer);
 
     const {
       productId,
@@ -352,6 +366,7 @@ class App extends React.Component {
       startIndex,
       endIndex,
       thumbIndex,
+      theme,
     } = this.state;
 
     if (!productInfo || !productStyles) {
@@ -359,9 +374,9 @@ class App extends React.Component {
     }
 
     return (
-      <>
+      <div className="app" id={theme}>
         <ErrorBoundary>
-          <TitleWithClickData />
+          <TitleWithClickData toggleTheme={this.toggleTheme} />
         </ErrorBoundary>
         <ErrorBoundary>
           <ProductOverviewWithClickData
@@ -418,7 +433,10 @@ class App extends React.Component {
             />
           </ErrorBoundary>
         </div>
-      </>
+        <ErrorBoundary>
+          <FooterWithClickData toggleTheme={this.toggleTheme} theme={theme} />
+        </ErrorBoundary>
+      </div>
     );
   }
 }
