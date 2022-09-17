@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 class AnswerModal extends React.Component {
   constructor(props) {
@@ -99,6 +100,18 @@ class AnswerModal extends React.Component {
               type="button"
               onClick={() => {
                 console.log(`A: ${userAnswer}\nN: ${nickname}\nE: ${email}`);
+
+                axios.post(`/qanda/question/${id}/submitanswer`, {
+                  body: userAnswer,
+                  name: nickname,
+                  email,
+                  photos: [''],
+                }).then((response) => {
+                  console.log(response);
+                }).catch((error) => {
+                  console.log(error);
+                });
+
                 event.preventDefault();
                 close();
               }}

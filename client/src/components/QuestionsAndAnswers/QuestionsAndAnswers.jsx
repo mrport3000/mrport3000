@@ -132,6 +132,7 @@ class QandA extends React.Component {
         }
         <QuestionModal
           show={isQuestioning}
+          pid={Number(list.product_id)}
           product={product}
           question={qaQuestion}
           questionChange={this.handleQuestion}
@@ -142,12 +143,15 @@ class QandA extends React.Component {
           close={() => {
             this.handleClick('isQuestioning', !isQuestioning);
           }}
-          submit={() => {
-            this.handleClick('isQuestioning', !isQuestioning);
-            console.log(`Q: ${qaQuestion}\nN: ${nickname}\nE: ${email}`);
-          }}
         />
-        <button className="navButton" type="button" onClick={this.handleExpand}>{(isExpanded ? 'collapse answers' : 'see more answers')}</button>
+        <button
+          className="navButton"
+          type="button"
+          // style={{ visibility: list.length >= 2 ? 'visible' : 'hidden' }}
+          onClick={this.handleExpand}
+        >
+          {(isExpanded ? 'collapse answers' : 'see more answers')}
+        </button>
         <button className="navButton" type="button" onClick={() => { this.handleClick('isQuestioning', !isQuestioning); }}>ask a question</button>
       </div>
     );

@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 function QuestionModal(props) {
   const {
+    pid,
     show,
     product,
     question,
@@ -12,7 +14,6 @@ function QuestionModal(props) {
     email,
     emailChange,
     close,
-    submit,
   } = props;
 
   if (!show) {
@@ -65,7 +66,27 @@ function QuestionModal(props) {
         </div>
         <div className="kris-modal-footer">
           <button className="navButton" type="button" onClick={close}>Close</button>
-          <button className="navButton" type="button" onClick={submit}>Submit Question</button>
+          <button
+            className="navButton"
+            type="button"
+            onClick={() => {
+              axios.post('/qanda/question/', {
+                body: question,
+                name: nickname,
+                email,
+                product_id: pid,
+              }).then((response) => {
+                console.log(response);
+              }).catch((error) => {
+                console.log(error);
+              });
+
+              event.preventDefault();
+              close();
+            }}
+          >
+            Submit Question
+          </button>
         </div>
       </div>
     </div>
@@ -73,6 +94,7 @@ function QuestionModal(props) {
 }
 
 QuestionModal.propTypes = {
+  pid: PropTypes.number.isRequired,
   show: PropTypes.bool.isRequired,
   product: PropTypes.string.isRequired,
   question: PropTypes.string.isRequired,
@@ -82,7 +104,6 @@ QuestionModal.propTypes = {
   email: PropTypes.string.isRequired,
   emailChange: PropTypes.func.isRequired,
   close: PropTypes.func.isRequired,
-  submit: PropTypes.func.isRequired,
 };
 
 export default QuestionModal;
