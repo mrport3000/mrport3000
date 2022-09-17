@@ -379,7 +379,7 @@ class App extends React.Component {
           <TitleWithClickData toggleTheme={this.toggleTheme} />
         </ErrorBoundary>
         <ErrorBoundary>
-          <ProductOverviewWithClickData
+          <ProductOverview
             key={productInfo.id}
             productInfo={productInfo}
             productStyles={productStyles}
