@@ -25,18 +25,21 @@ function ProductBreakdown(props) {
     }
     return arr;
   };
-
+  console.log('props: ', props)
   return (
     <div className="eric-RR-productBreakdownContainer">
       {
       Object.keys(props.features).map((char, index) => {
         const charFeatures = formatDiv(char);
-
+        const charValue = props.features[char].value;
+        const cValPercent = (charValue * 100) / 5;
+        console.log('charvalue: ', charValue)
         return (
           <div className="eric-RR-pbCharacteristic" key={index}>
             <div className="eric-RR-pbTitleBreakdown">{charFeatures[0]}</div>
+            <div className="eric-rr-pbArrow"></div>
             <div className="eric-RR-pbScale">
-              <div className="eric-RR-pbLeft">
+                <div className="eric-RR-pbLeft">
                 <div className="eric-RR-lVisual"></div>
                 <div className="eric-RR-lText">{charFeatures[1]}</div>
               </div>
