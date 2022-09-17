@@ -1,3 +1,4 @@
+
 .eric-RR-container {
   display: flex;
   justify-content: space-evenly;
@@ -552,6 +553,14 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#F76C5E", en
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.eric-RR-pbScale::before {
+  content: '▼';
+  display: flex;
+  /* left: var(--characteristics-bar) ; */
+  position: relative;
+  z-index: 2;
 }
 
 .eric-RR-pbLeft, .eric-RR-pbCenter, .eric-RR-pbRight {

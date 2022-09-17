@@ -33,11 +33,12 @@ function ProductBreakdown(props) {
         const charFeatures = formatDiv(char);
         const charValue = props.features[char].value;
         const cValPercent = (charValue * 100) / 5;
-        console.log('charvalue: ', charValue)
+        let finalPercent = Number(cValPercent) + '%';
+        console.log('charvalue: ', typeof finalPercent)
         return (
           <div className="eric-RR-pbCharacteristic" key={index}>
             <div className="eric-RR-pbTitleBreakdown">{charFeatures[0]}</div>
-            <div className="eric-rr-pbArrow"></div>
+            <div className="eric-rr-pbArrow" style={{left: Number(finalPercent) }}></div>
             <div className="eric-RR-pbScale">
                 <div className="eric-RR-pbLeft">
                 <div className="eric-RR-lVisual"></div>
