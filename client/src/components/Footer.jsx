@@ -3,9 +3,9 @@ import MalePlugSVG from './IconComponents/MalePlugSVG.jsx';
 import FemalePlugSVG from './IconComponents/FemalePlugSVG.jsx'
 
 function Footer({ toggleTheme, theme }) {
-  const statement = theme === 'light' ? 'Click Below To Pull The Plug...' : 'Ready To Turn The Lights Back On? Click Below';
+  const statement = theme === 'light' ? 'Click Below To Pull The Plug...' : 'Click Below To Turn The Lights Back On...';
 
-  const [fill, setFill] = useState(theme === 'light' ? '#48BF84' : '#F5F5F5');
+  const [fill, setFill] = useState(theme === 'light' ? '#F5F5F5' : '#F5F5F5');
 
   const onEnter = () => {
     if (theme === 'light') {
@@ -17,7 +17,7 @@ function Footer({ toggleTheme, theme }) {
 
   const onLeave = () => {
     if (theme === 'light') {
-      setFill('#48BF84');
+      setFill('#F5F5F5');
     } else {
       setFill('#F5F5F5');
     }

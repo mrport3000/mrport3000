@@ -114,18 +114,6 @@ class Gallery extends React.Component {
           </>
 
         )}
-        {/* <div className="keith-lr-arrows-row" onMouseEnter={onMouseLeave} onMouseLeave={onMouseEnter}>
-          {(!zoomed && thumbIndex > 0) && (
-            <tr className="keith-lr-arrow-container">
-              <MdKeyboardArrowLeft className="keith-lr-arrow-button" onClick={handleUpArrowClick} />
-            </tr>
-          )}
-          {(!zoomed && thumbIndex < photos.length - 1) && (
-            <tr className="keith-lr-arrow-container">
-              <MdKeyboardArrowRight className="keith-lr-arrow-button" onClick={handleDownArrowClick} />
-            </tr>
-          )}
-        </div> */}
         <div className="keith-fullscreen-exit-container">
           {expandedView && <MdFullscreenExit className="keith-fullscreen-exit" onMouseLeave={onMouseEnter} onMouseEnter={onMouseLeave} onClick={handleUnexpandClick} />}
         </div>

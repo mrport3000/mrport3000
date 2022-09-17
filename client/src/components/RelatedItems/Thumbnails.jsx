@@ -32,6 +32,10 @@ function Thumbnails({ product, handleThumbnailClick, previewPhoto }) {
 
   const thumbnailURLs = thumbnailStorage.slice(thumbStart, thumbEnd);
 
+  if (thumbnailStorage.length === 0) {
+    return <div />;
+  }
+
   return (
     <div className="duke-thumb-carousel-container">
       {thumbStart > 0 && (
