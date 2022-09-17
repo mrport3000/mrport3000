@@ -24,6 +24,7 @@ class QandA extends React.Component {
       email: '',
       isExpanded: false,
       isQuestioning: false,
+      isSearching: false,
       list: JSON.parse(JSON.stringify(info)),
     };
 
@@ -35,10 +36,17 @@ class QandA extends React.Component {
     this.handleEmail = this.handleEmail.bind(this);
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   console.log('PREV STATE: ', prevState);
-  //   console.log('PREV PROPS: ', prevProps);
-  // }
+  componentDidUpdate(prevProps) {
+    const { query, isSearching } = this.state;
+    const list = JSON.parse(JSON.stringify(prevProps.info));
+
+    if (query.length === 0 && isSearching) {
+      this.setState({
+        list,
+        isSearching: false,
+      });
+    }
+  }
 
   handleClick(key, value) {
     this.setState({ [key]: value });
@@ -60,15 +68,11 @@ class QandA extends React.Component {
           queriedQuestions.push(question);
         }
       });
-
       list.results = queriedQuestions;
-
-      this.setState({ list });
-    } else {
-      // console.log('ELSE HIT');
-      // const { olist } = this.state;
-      // console.log('Original Info: ', olist);
-      // this.setState(prevState);
+      this.setState({
+        list,
+        isSearching: true,
+      });
     }
   }
 

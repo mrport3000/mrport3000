@@ -111,10 +111,6 @@ app.get('/reviews/meta/:id', (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-app.post('/reviews', (req, res) => {
-  console.log('review: ', req.body);
-=======
 app.get('/reviews/:review_id/helpful', (req, res) => {
   axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${req.params.review_id}/helpful`, {}, headers)
     .then((result) => {
@@ -133,7 +129,6 @@ app.get('/reviews/:review_id/report', (req, res) => {
 });
 
 app.post('/reviews', (req, res) => {
->>>>>>> 9707b5d73d6d68fe1efa53bfa5aaa80174446ef5
   axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', req.body, headers)
     .then((result) => {
       res.send(result);

@@ -54,13 +54,13 @@ class AnswerModal extends React.Component {
         <div className="kris-modal-content">
           <div className="kris-modal-header">
             <h4 className="kris-modal-title">Submit your answer</h4>
-            <h5 className="kris-modal-subtitle">{`${product} : ${question} (id no.${id})`}</h5>
+            <h5 className="kris-modal-subtitle">{`${product} : ${question}`}</h5>
           </div>
           <div className="kris-modal-body">
             <div className="kris-modal-aAnswer">
-              Answer:
+              <p className="kris-p">Your Answer (mandatory)</p>
               <br />
-              <input
+              <textarea
                 className="kris-modal-input-question"
                 type="text"
                 maxLength="1000"
@@ -69,25 +69,26 @@ class AnswerModal extends React.Component {
               />
             </div>
             <div className="kris-modal-aNickname">
-              Nickname:
+              <p className="kris-p">What is your nickname (mandatory)</p>
               <br />
               <input
                 className="kris-modal-input-nickname"
                 type="text"
                 maxLength="60"
-                placeholder="Example: jackson11!"
+                placeholder="Example: jackson543!"
                 value={nickname}
                 onChange={nicknameChange}
               />
+              <p className="kris-p-small">For privacy reasons, do not use your full name or email address</p>
             </div>
             <div className="kris-modal-aEmail">
-              Email:
+              <p className="kris-p">Your email (mandatory)</p>
               <br />
               <input
                 className="kris-modal-input-email"
                 type="text"
                 maxLength="60"
-                placeholder="Why did you like the product or not?”"
+                placeholder="Example: jack@email.com"
                 value={email}
                 onChange={emailChange}
               />

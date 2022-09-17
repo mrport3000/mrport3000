@@ -47,7 +47,7 @@ class QuestionItem extends React.Component {
     const {
       userAnswer,
       isAnswering,
-      question,
+      // question,
       qid,
       helpful,
       product,
@@ -56,6 +56,7 @@ class QuestionItem extends React.Component {
     } = this.state;
 
     const {
+      question,
       nickname,
       email,
     } = this.props;
@@ -67,7 +68,7 @@ class QuestionItem extends React.Component {
           {question.padStart(question.length + 1, ' ')}
         </h3>
         <div className="kris-qNav">
-          <button className="kris-inputButtons" type="button" onClick={() => (axios.get(`/qanda/question/helpful/${qid}`))}>{`Helpful?(${helpful})`}</button>
+          <button className="kris-inputButtons" type="button" onClick={() => (axios.get(`/qanda/question/helpful/${qid}`))}>{`Helpful? (${helpful})`}</button>
           <button className="kris-inputButtons" type="button" onClick={() => (axios.get(`/qanda/question/reported/${qid}`))}>Report</button>
           <button
             className="kris-inputButtons"

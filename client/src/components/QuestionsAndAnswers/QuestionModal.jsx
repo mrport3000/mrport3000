@@ -29,9 +29,9 @@ function QuestionModal(props) {
         </div>
         <div className="kris-modal-body">
           <div className="kris-modal-qQuestion">
-            Question:
+            <p className="kris-p">Your Question (mandatory)</p>
             <br />
-            <input
+            <textarea
               className="kris-modal-input-question"
               type="text"
               maxLength="1000"
@@ -40,7 +40,7 @@ function QuestionModal(props) {
             />
           </div>
           <div className="kris-modal-qNickname">
-            Nickname:
+            <p className="kris-p">What is your nickname (mandatory)</p>
             <br />
             <input
               className="kris-modal-input-nickname"
@@ -50,9 +50,10 @@ function QuestionModal(props) {
               value={nickname}
               onChange={nicknameChange}
             />
+            <p className="kris-p-small">For privacy reasons, do not use your full name or email address.</p>
           </div>
           <div className="kris-modal-qEmail">
-            Email:
+            <p className="kris-p">Your email (mandatory)</p>
             <br />
             <input
               className="kris-modal-input-email"
