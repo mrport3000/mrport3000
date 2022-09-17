@@ -101,16 +101,18 @@ class QandA extends React.Component {
 
     return (
       <div className="kris-qanda">
-        <h4>QUESTIONS AND ANSWERS</h4>
-        <QandASearch search={query} change={this.handleChange} />
-        {
+        <div className="kris-qanda-Inner">
+
+          <h2 className="kris-qaTitle">QUESTIONS AND ANSWERS</h2>
+          <QandASearch search={query} change={this.handleChange} />
+          {
           list.results.map((qanda, key) => {
             if (!isExpanded && key >= 2) {
               return (<div />);
             }
 
             return (
-              <>
+              <div className="kris-qaItem">
                 <QuestionItem
                   question={qanda.question_body}
                   qid={qanda.question_id}
@@ -126,33 +128,36 @@ class QandA extends React.Component {
                   answers={qanda.answers}
                   expanded={isExpanded}
                 />
-              </>
+              </div>
             );
           })
         }
-        <QuestionModal
-          show={isQuestioning}
-          pid={Number(list.product_id)}
-          product={product}
-          question={qaQuestion}
-          questionChange={this.handleQuestion}
-          nickname={nickname}
-          nicknameChange={this.handleNickname}
-          email={email}
-          emailChange={this.handleEmail}
-          close={() => {
-            this.handleClick('isQuestioning', !isQuestioning);
-          }}
-        />
-        <button
-          className="navButton"
-          type="button"
+          <QuestionModal
+            show={isQuestioning}
+            pid={Number(list.product_id)}
+            product={product}
+            question={qaQuestion}
+            questionChange={this.handleQuestion}
+            nickname={nickname}
+            nicknameChange={this.handleNickname}
+            email={email}
+            emailChange={this.handleEmail}
+            close={() => {
+              this.handleClick('isQuestioning', !isQuestioning);
+            }}
+          />
+          <div className="kris-qaFooter">
+            <button
+              className="navButton"
+              type="button"
           // style={{ visibility: list.length >= 2 ? 'visible' : 'hidden' }}
-          onClick={this.handleExpand}
-        >
-          {(isExpanded ? 'collapse answers' : 'see more answers')}
-        </button>
-        <button className="navButton" type="button" onClick={() => { this.handleClick('isQuestioning', !isQuestioning); }}>ask a question</button>
+              onClick={this.handleExpand}
+            >
+              {(isExpanded ? 'collapse answers' : 'see more answers')}
+            </button>
+            <button className="navButton" type="button" onClick={() => { this.handleClick('isQuestioning', !isQuestioning); }}>ask a question</button>
+          </div>
+        </div>
       </div>
     );
   }

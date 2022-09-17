@@ -44,11 +44,16 @@ function AnswerItem(props) {
               <p className="kris-AnswerAuth">
                 {`\nby: ${answer.answerer_name}, ${format(new Date(answer.date), 'MM/dd/yyyy')}`}
               </p>
-              <button
-                className="kris-answerHelpful"
-                type="button"
-                onClick={() => (axios.get(`/qanda/answer/helpful/${answer.id}`))}>{`Helpful?(${answer.helpfulness})`}</button>
-              <button className="kris-answerReported" type="button" onClick={() => (axios.get(`/qanda/answer/reported/${answer.id}`))}>Report</button>
+              <div className="kris-aNav">
+                <button
+                  className="kris-inputButtons"
+                  type="button"
+                  onClick={() => (axios.get(`/qanda/answer/helpful/${answer.id}`))}
+                >
+                  {`Helpful?(${answer.helpfulness})`}
+                </button>
+                <button className="kris-inputButtons" type="button" onClick={() => (axios.get(`/qanda/answer/reported/${answer.id}`))}>Report</button>
+              </div>
             </div>
           );
         })

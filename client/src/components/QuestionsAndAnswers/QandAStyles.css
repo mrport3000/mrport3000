@@ -1,8 +1,22 @@
 .kris-qanda{
   font-family: Helvetica, sans-serif;
-  justify-content: left;
-  width: 100%;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  /* width: 100%; */
   margin: 15px 0px 15px 30px;
+  max-width: 1500px;
+}
+
+.kris-qanda-Inner{
+  margin-left: auto;
+  margin-right: auto
+}
+
+.kris-qaTitle{
+  font-size: 32px;
+  color: #353535;
+  /* margin: 0px 0px 30px 5%; */
 }
 
 .kris-SearchBar{
@@ -17,10 +31,11 @@
 }
 
 .kris-Answer{
-  margin-left: 25px;
-  border: 1px solid black;
+  border: 1px solid white;
+  border-radius: 10px;
   padding: 25px;
-  margin:10px;
+  box-shadow: 0px 5px 10px rgb(0 0 0 / 15%);
+  margin: 10px;
 }
 
 .kris-AnswerBody{
@@ -28,24 +43,84 @@
   margin-bottom: 10px;
 }
 
-.kris-answerHelpful{
-  margin: 10px 10px 10px 0px;
+.kris-inputButtons{
+  margin: 10px;
+  background-color: #F76C5E;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  width: 120px;
+  height: 35px;
 }
 
 .kris-answerReported{
-  margin: 10px 10px 10px 0px;
+  margin: 10px;
+  background-color: #3C6E71;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
 
 .kris-questionHelpful{
-  margin: 10px 10px 10px 0px;
+  margin: 10px;
+  background-color: #3C6E71;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
 
 .kris-questionReported{
-  margin: 10px 10px 10px 0px;
+  margin: 10px;
+  background-color: #3C6E71;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
 
+.kris-qaItem{
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0px 5px 10px rgb(0 0 0 / 15%);
+  margin: 10px;
+  background-color: #F5F5F5;
+}
 
+.kris-AnswerAuth{
+  display: inline;
+}
 
+.kris-qNav{
+  display: block;
+}
+
+.kris-aNav{
+  display: block;
+}
+
+.kris-QuestionBody {
+  display: inline;
+}
 
 .kris-modal{
   position: fixed;

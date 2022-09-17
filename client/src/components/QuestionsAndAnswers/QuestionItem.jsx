@@ -62,19 +62,21 @@ class QuestionItem extends React.Component {
 
     return (
       <div className="kris-QuestionItem">
-        <h3>
+        <h3 className="kris-QuestionBody">
           Q:
           {question.padStart(question.length + 1, ' ')}
         </h3>
-        <button className="kris-questionHelpful" type="button" onClick={() => (axios.get(`/qanda/question/helpful/${qid}`))}>{`Helpful?(${helpful})`}</button>
-        <button className="kris-questionReported" type="button" onClick={() => (axios.get(`/qanda/question/reported/${qid}`))}>Report</button>
-        <button
-          className="kris-answerSubmitted"
-          type="button"
-          onClick={this.handleAnswering}
-        >
-          add an answer
-        </button>
+        <div className="kris-qNav">
+          <button className="kris-inputButtons" type="button" onClick={() => (axios.get(`/qanda/question/helpful/${qid}`))}>{`Helpful?(${helpful})`}</button>
+          <button className="kris-inputButtons" type="button" onClick={() => (axios.get(`/qanda/question/reported/${qid}`))}>Report</button>
+          <button
+            className="kris-inputButtons"
+            type="button"
+            onClick={this.handleAnswering}
+          >
+            add an answer
+          </button>
+        </div>
 
         <AnswerModal
           show={isAnswering}

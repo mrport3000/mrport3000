@@ -93,7 +93,7 @@ class AnswerModal extends React.Component {
               />
             </div>
           </div>
-          <div className="kris-modal-footer">
+          <div className="kris-aModalNav">
             <button className="navButton" type="button" onClick={close}>Close</button>
             <button
               className="navButton"
@@ -111,13 +111,11 @@ class AnswerModal extends React.Component {
                 }).catch((error) => {
                   console.log(error);
                 });
-
                 event.preventDefault();
                 close();
               }}
             >
               Submit Answer
-
             </button>
           </div>
         </div>
