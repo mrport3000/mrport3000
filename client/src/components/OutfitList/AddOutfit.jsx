@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import SalmonPlus from '../../../dist/lib/Salmon_Plus.png';
+import WhitePlus from '../../../dist/lib/White_Plus.png';
+import BlackPlus from '../../../dist/lib/Black_Plus.png';
 
-function AddOutfit({ handleAddOutfitClick }) {
+function AddOutfit({ handleAddOutfitClick, theme }) {
+  const plusSign = theme === 'light' ? SalmonPlus : WhitePlus;
   return (
     <button type="submit" className="duke-addoutfit-container" onClick={handleAddOutfitClick}>
-      <img className="duke-addoutfit-image" src="https://cdn-icons-png.flaticon.com/512/32/32339.png" alt="add outfit" />
+      <img className="duke-addoutfit-image" src={plusSign} alt="add outfit" />
       <p>Add to Outfit</p>
     </button>
   );
