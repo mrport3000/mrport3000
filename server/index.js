@@ -2,28 +2,12 @@ require('dotenv').config();
 
 const express = require('express');
 const compression = require('compression');
-const formData = require('express-form-data');
+// const formData = require('express-form-data');
 const axios = require('axios');
-const fileUpload = require('express-fileupload');
+// const fileUpload = require('express-fileupload');
 const RelatedRoute = require('./Routing/RelatedRoute');
-// const os = require('os');
 
 const app = express();
-
-// const options = {
-//   uploadDir: os.tmpdir(),
-//   autoClean: true,
-// };
-
-// app.use(express.urlencoded({ extended: true }));
-// // parse data with connect-multiparty.
-// app.use(formData.parse(options));
-// // delete from the request all empty files (size == 0)
-// app.use(formData.format());
-// // change the file objects to fs.ReadStream
-// app.use(formData.stream());
-// // union the body and the files
-// app.use(formData.union());
 
 const { PORT } = process.env;
 const headers = {
@@ -36,20 +20,20 @@ app.use(compression());
 app.use(express.static('client/dist'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(fileUpload());
+// app.use(fileUpload());
 
 app.get('/productinfo/:id', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.id}`, headers)
     .then((result) => {
       res.send(result.data);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.send(err));
 });
 
 app.get('/styles/:id', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.params.id}/styles`, headers)
     .then((result) => res.send(result.data))
-    .catch((err) => console.log(err));
+    .catch((err) => res.send(err));
 });
 
 app.use('/related', RelatedRoute);
@@ -69,7 +53,7 @@ app.post('/qanda/question/:id/submitanswer', (req, res) => {
 app.post('/qanda/question', (req, res) => {
   axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions', req.body, headers)
     .then((result) => res.send(result.data))
-    .catch((err) => console.log(err));
+    .catch((err) => res.send(err));
 });
 
 app.get('/qanda/question/helpful/:id', (req, res) => {
@@ -78,7 +62,7 @@ app.get('/qanda/question/helpful/:id', (req, res) => {
       console.log(`Question ${req.params.id} marked helpful`);
       res.sendStatus(204);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.send(err));
 });
 
 app.get('/qanda/question/reported/:id', (req, res) => {
@@ -87,7 +71,7 @@ app.get('/qanda/question/reported/:id', (req, res) => {
       console.log(`Question ${req.params.id} marked reported`);
       res.sendStatus(204);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.send(err));
 });
 
 app.get('/qanda/answer/helpful/:id', (req, res) => {
@@ -96,7 +80,7 @@ app.get('/qanda/answer/helpful/:id', (req, res) => {
       console.log(`Answer ${req.params.id} marked helpful`);
       res.sendStatus(204);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.send(err));
 });
 
 app.get('/qanda/answer/reported/:id', (req, res) => {
@@ -105,36 +89,56 @@ app.get('/qanda/answer/reported/:id', (req, res) => {
       console.log(`Answer ${req.params.id} marked reported`);
       res.sendStatus(204);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.send(err));
 });
 
 app.get('/reviews/:id', (req, res) => {
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta/?product_id=${req.params.id}`, headers)
     .then((result) => res.send(result.data))
-    .catch((err) => console.log(err));
+    .catch((err) => res.send(err));
 });
 
 app.get('/reviews/meta/:id', (req, res) => {
   const { sortTerm } = req.query;
   if (sortTerm) {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.id}&sort=${sortTerm}`, headers)
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.id}&sort=${sortTerm}&count=50`, headers)
       .then((result) => res.send(result.data))
-      .catch((err) => console.log(err));
+      .catch((err) => res.send(err));
   } else {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.id}`, headers)
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${req.params.id}&count=50`, headers)
       .then((result) => res.send(result.data))
-      .catch((err) => console.log(err));
+      .catch((err) => res.send(err));
   }
 });
 
+<<<<<<< HEAD
 app.post('/reviews', (req, res) => {
   console.log('review: ', req.body);
+=======
+app.get('/reviews/:review_id/helpful', (req, res) => {
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${req.params.review_id}/helpful`, {}, headers)
+    .then((result) => {
+      res.sendStatus(204);
+    })
+    .catch((err) => res.send(err));
+});
+
+app.get('/reviews/:review_id/report', (req, res) => {
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${req.params.review_id}/report`, {}, headers)
+    .then((result) => {
+      console.log('put result: ', result);
+      res.sendStatus(204);
+    })
+    .catch((err) => res.send(err));
+});
+
+app.post('/reviews', (req, res) => {
+>>>>>>> 9707b5d73d6d68fe1efa53bfa5aaa80174446ef5
   axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', req.body, headers)
     .then((result) => {
-      console.log('success: ', result);
       res.send(result);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.send(err));
 });
 
 app.post('/cart', (req, res) => {
@@ -142,13 +146,13 @@ app.post('/cart', (req, res) => {
     sku_id: req.body.sku_id,
     // count: req.body.count,
   }, headers).then((result) => res.send(result.data))
-    .catch((err) => console.log(err));
+    .catch((err) => res.send(err));
 });
 
 app.post('/interactions', (req, res) => {
   axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/interactions', req.body, headers)
     .then((result) => res.send(result.data))
-    .catch((err) => console.log(err));
+    .catch((err) => res.send(err));
 });
 
 app.listen(PORT, () => {

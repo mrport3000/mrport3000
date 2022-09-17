@@ -7,17 +7,16 @@ class ReviewsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      reportedId: [],
     };
   }
 
   render() {
-    //console.log('Incoming sortedReviews Props: ', this.props.reviews)
     return (
       <div className="eric-RR-reviewListContainer">
         {
-            this.props.reviews.map((review) => (
-              <ReviewTile review={review} />
+            this.props.reviews.map((review, index) => (
+              <ReviewTile key={index} review={review} productId={this.props.productId} />
             ))
           }
       </div>
