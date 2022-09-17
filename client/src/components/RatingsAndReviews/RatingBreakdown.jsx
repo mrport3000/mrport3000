@@ -66,7 +66,7 @@ class RatingBreakdown extends React.Component {
             <StarRating rating={Number(this.props.ratings.average)} />
           </div>
         </div>
-        <div className="eric-RR-ratingBreakdown">
+        <div className="eric-RR-ratingContainer">
           <div className="eric-RR-breakdownText">
             {this.props.ratings.recPercent}
             % of reviews recommend this product

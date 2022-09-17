@@ -114,12 +114,13 @@ export default class ReviewModal extends React.Component {
                 {' '}
                 {this.props.productName}
               </h4>
+              <hr></hr>
             </div>
             <div className="eric-RR-modalRating">
               <ModalStarRating liftRating={this.liftStarRating} />
             </div>
             <div className="eric-RR-recommendProduct">
-
+              <hr></hr>
               <div>
                 Do you recommend this product?
               </div>
@@ -131,7 +132,7 @@ export default class ReviewModal extends React.Component {
                 {' '}
                 No
               </div>
-
+              <hr></hr>
             </div>
             <div className="eric-RR-characteristics">
 
