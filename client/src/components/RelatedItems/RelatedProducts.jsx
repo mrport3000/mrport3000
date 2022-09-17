@@ -26,27 +26,19 @@ class RelatedProducts extends React.Component {
   }
 
   componentDidMount() {
-    console.log('component did mount hit');
     this.adjustForScreenSize();
     this.getRelatedProductsInfo(this.props.productId);
   }
 
   componentDidUpdate(prevProps) {
     const { defaultEndIndex } = this.state;
-    console.log('PRE PROPS', prevProps.productId);
-    console.log('CURRENT PROPS', this.props.productId);
     if (prevProps.productId !== this.props.productId) {
-      console.log('INSIDE COMPONENT UPDATE IF STATEMENT');
       this.getRelatedProductsInfo(this.props.productId);
       this.setState({
         startIndex: 0,
         endIndex: defaultEndIndex,
       });
     }
-  }
-
-  componentWillUnmount(e) {
-    console.log('COMPONENT DID UNMOUNT', e);
   }
 
   handleBackArrowClick() {
