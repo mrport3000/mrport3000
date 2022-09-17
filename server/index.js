@@ -55,7 +55,19 @@ app.get('/styles/:id', (req, res) => {
 app.use('/related', RelatedRoute);
 
 app.get('/qanda/:id', (req, res) => {
-  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/?product_id=${req.params.id}`, headers)
+  axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/?product_id=${req.params.id}&count=1000`, headers)
+    .then((result) => res.send(result.data))
+    .catch((err) => console.log(err));
+});
+
+app.post('/qanda/question/:id/submitanswer', (req, res) => {
+  axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions/${req.params.id}/answers`, req.body, headers)
+    .then((result) => res.send(result.data))
+    .catch((err) => console.log(err));
+});
+
+app.post('/qanda/question', (req, res) => {
+  axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions', req.body, headers)
     .then((result) => res.send(result.data))
     .catch((err) => console.log(err));
 });
@@ -117,7 +129,7 @@ app.get('/reviews/meta/:id', (req, res) => {
 
 app.post('/reviews', (req, res) => {
   console.log('review: ', req.body);
-  axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`, req.body, headers)
+  axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews', req.body, headers)
     .then((result) => {
       console.log('success: ', result);
       res.send(result);
