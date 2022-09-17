@@ -32,10 +32,7 @@ class RelatedProducts extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { defaultEndIndex } = this.state;
-    // console.log('PRE PROPS', prevProps.productId);
-    // console.log('CURRENT PROPS', this.props.productId);
     if (prevProps.productId !== this.props.productId) {
-      // console.log('INSIDE COMPONENT UPDATE IF STATEMENT');
       this.getRelatedProductsInfo(this.props.productId);
       this.setState({
         startIndex: 0,

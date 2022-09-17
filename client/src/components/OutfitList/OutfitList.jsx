@@ -80,7 +80,7 @@ class OutfitList extends React.Component {
   render() {
     const { startIndex, endIndex } = this.state;
     const {
-      outfits, handleAddOutfitClick, handleRemoveOutfitClick,
+      outfits, handleAddOutfitClick, handleRemoveOutfitClick, theme
     } = this.props;
     return (
       <div className="duke-outfit-container">
@@ -99,6 +99,7 @@ class OutfitList extends React.Component {
             )}
             <AddOutfit
               handleAddOutfitClick={handleAddOutfitClick}
+              theme={theme}
             />
             {
               outfits.map((product, index) => {

@@ -413,6 +413,7 @@ class App extends React.Component {
             handleAddOutfitClick={this.handleAddOutfitClick}
             handleRemoveOutfitClick={this.handleRemoveOutfitClick}
             rating={rating}
+            theme={theme}
           />
         </ErrorBoundary>
         <ErrorBoundary>

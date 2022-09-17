@@ -116,9 +116,14 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 50px;
-  background-color: #fff;
-  color: black;
+  padding: 30px;
+  background-color: #F76C5E;
+  color: white;
+}
+
+.footer-container h4 {
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 
 #dark .footer-container {
@@ -467,7 +472,7 @@ header {
 
 .duke-products-container {
   width: 100%;
-  padding: 40px 20px 50px 20px;
+  padding: 40px 0px 50px 0px;
   background-color: #F5F5F5;
   border-top: 1px solid #d7d6d6;
 }
@@ -513,7 +518,7 @@ header {
 }
 
 #dark .duke-card-container {
-  background-color: #F5F5F5;
+  background-color: #181818;
   box-shadow: 0px 5px 15px rgba(0, 0, 0);
 }
 
@@ -532,8 +537,11 @@ header {
 }
 
 #dark .duke-card-header {
+  box-sizing: border-box;
   background: rgb(245,245,245,.25);
   background: radial-gradient(circle, rgba(245,245,245,.25) 0%, rgba(49,49,51,0.9682466736694678) 55%, rgba(22,22,24,1) 76%);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .duke-card-preview-image {
@@ -557,7 +565,7 @@ header {
 }
 
 #dark .duke-outfit-header {
-  background: radial-gradient(circle, rgba(245,245,245,1) 0%, rgba(245,245,245,1) 51%, rgba(247,108,94,1) 95%);
+  background: #141414;
 }
 
 .duke-outfit-preview-image {
@@ -579,11 +587,12 @@ header {
 .duke-productcard-body h1, h2, h3, h4, h5, p {
   margin: 0px;
   padding: 0px;
-  font-size: 1rem;
+  font-size: 1.15rem;
 }
 
 .duke-productcard-body {
-  padding: 5px 10px 5px 10px;
+  box-sizing: border-box;
+  padding: 10px 20px 10px 20px;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -591,6 +600,13 @@ header {
   justify-content: space-evenly;
   height: 40%;
   width: 100%;
+}
+
+#dark .duke-productcard-body {
+  background-color: black;
+  color: #f5f5f5;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .duke-card-image {
@@ -629,12 +645,8 @@ header {
 .duke-outfit-container {
   width: 100%;
   background-color: #F76C5E;
-  padding: 40px 20px 50px 20px;
+  padding: 40px 0px 50px 0px;
   position: relative;
-}
-
-#dark .duke-outfit-container {
-  background-color: #181818;
 }
 
 .duke-outfit-inner {
@@ -679,10 +691,19 @@ header {
   border-radius: 10px;
 }
 
+.duke-addoutfit-container p {
+  margin-top: 30px;
+  font-size: 1.5rem;
+  color: #F76C5E;
+}
+
 #dark .duke-addoutfit-container {
-  background: #161618;
-  background: radial-gradient(circle, rgba(245,245,245,1) 0%, rgba(245,245,245,1) 51%, rgba(247,108,94,1) 95%);
+  background: #181818;
   box-shadow: 0px 5px 15px rgba(0, 0, 0);
+}
+
+#dark .duke-addoutfit-container p {
+  color: #f5f5f5;
 }
 
 .duke-addoutfit-image {
