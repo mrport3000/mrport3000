@@ -276,6 +276,8 @@ class App extends React.Component {
                       recommended: results.data.recommended,
                       outfits,
                       savedToOutfit,
+                      startIndex: 0,
+                      thumbIndex: 0,
                       endIndex,
                     });
                     window.history.pushState({ productId }, '', `?productId=${productId}&styleId=${styleId}`);
