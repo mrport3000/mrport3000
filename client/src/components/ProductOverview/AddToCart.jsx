@@ -2,6 +2,7 @@
 import React from 'react';
 import Select from 'react-select';
 import StarButton from './StarButton.jsx';
+import CartModal from './CartModal.jsx';
 import { availableSizes } from '../../utilities';
 import axios from 'axios';
 
@@ -15,6 +16,7 @@ class AddToCart extends React.Component {
       quantityAvailable: null,
       selectedSku: null,
       specialMessage: ' ',
+      showModal: false,
     };
 
     this.sizeRef = React.createRef();
@@ -77,7 +79,14 @@ class AddToCart extends React.Component {
         count: selectedQuantity,
       }).then((response) => {
         if (response.status === 200 || 201) {
-          alert('Added to cart!');
+          this.setState({
+            showModal: true,
+          });
+          setTimeout(() => {
+            this.setState({
+              showModal: false,
+            });
+          }, 2000);
         }
       });
     }
@@ -88,7 +97,9 @@ class AddToCart extends React.Component {
       quantityAvailable,
       sizeIsSelected,
       selectedSize,
+      selectedQuantity,
       specialMessage,
+      showModal,
     } = this.state;
     const {
       skus,
@@ -157,7 +168,17 @@ class AddToCart extends React.Component {
         </div>
         <div className="keith-cart-star-div">
           <button className="keith-add-cart" type="button" onClick={this.addToCart}>Add to Cart</button>
-          <StarButton toggleOutfit={toggleOutfit} savedToOutfit={savedToOutfit} productInfo={productInfo}/>
+          <CartModal
+            showModal={showModal}
+            quantity={selectedQuantity}
+            size={selectedSize}
+            name={productInfo.name}
+          />
+          <StarButton
+            toggleOutfit={toggleOutfit}
+            savedToOutfit={savedToOutfit}
+            productInfo={productInfo}
+          />
         </div>
       </div>
     );
