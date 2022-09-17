@@ -66,3 +66,5 @@ function CompareModal({
 }
 
 export default CompareModal;
+
+// Automerge

@@ -191,3 +191,5 @@ class RelatedProducts extends React.Component {
 // };
 
 export default RelatedProducts;
+
+// Automerge

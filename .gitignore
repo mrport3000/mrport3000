@@ -4,6 +4,8 @@ node_modules
 /client/dist/bundle.js.LICENSE.txt
 /client/src/config.js
 /package-lock.json
+/Main.pem
+/login.sh
 
 .env
 

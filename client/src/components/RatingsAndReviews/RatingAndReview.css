@@ -1,25 +1,22 @@
-
 .eric-RR-container {
   display: flex;
-  justify-content: space-evenly;
-  width: 100%;
+  justify-content: space-between;
+  width: 82%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1500px;
 }
 
 .eric-RR-sort {
+  display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px 45px 35px 45px;
-  width: 600px;
+  padding: 20px;
+  width: 100%;
   border-radius: 10px;
   font-family: Helvetica, sans-serif;
   background-color: white;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 15%);
-}
-
-.eric-RR-sortReviews {
-  margin-left: 10px;
-  display: flex;
-  flex-direction: column;
 }
 
 .eric-RR-productAverageText {
@@ -71,13 +68,14 @@
 
 .eric-RR-productBreakdown {
   height: 350px;
-  width: 350px;
+  box-sizing: border-box;
+  width: 100%;
   margin-top: 20px;
   border-radius: 10px;
   font-family: Helvetica, sans-serif;
   background-color: white;
   box-shadow: 0px 5px 10px rgb(0 0 0 / 15%);
-  padding: 20px 45px 35px 45px;
+  padding: 20px;
 }
 
 .eric-RR-breakdownText {
@@ -87,8 +85,8 @@
 
 .eric-RR-sortReviews {
   display: flex;
-  height: 50px;
-  width: 500px;
+  width: 52.5%;
+  flex-direction: column;
 }
 
 .eric-RR-reviewLength {
@@ -273,10 +271,11 @@
 
 .eric-RR-productRatingContainer {
   display: flex;
+  box-sizing: border-box;
   flex-direction: column;
   height: 325px;
-  width: 350px;
-  padding: 20px 45px 35px 45px;
+  width: 100%;
+  padding: 20px;
   display: flex;
   border-radius: 10px;
   font-family: Helvetica, sans-serif;
@@ -289,9 +288,7 @@
 }
 
 .eric-RR-breakdown {
-  justify-content: center;
-  align-items: center;
-  padding: 0px 5px 0px 5px;
+  width: 42.5%;
 }
 
 .eric-RR-5starContainer, .eric-RR-4starContainer,
