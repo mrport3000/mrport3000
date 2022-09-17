@@ -29,7 +29,6 @@ class SortReviews extends React.Component {
   }
 
   moreReviews() {
-    // let { reviewCount } = this.state;
     this.setState({ reviewCount: this.state.reviewCount += 2 }, console.log('state after: ', this.state.reviewCount));
   }
 
@@ -95,7 +94,7 @@ class SortReviews extends React.Component {
           </div>
         </div>
         <div className="eric-RR-reviewContainer">
-          <ReviewsList reviews={dynamicProps} />
+          <ReviewsList reviews={dynamicProps} productId={this.props.productId}/>
         </div>
         <div className="eric-RR-sortBottomNavBar">
           <div className="eric-RR-moreReviewsContainer">

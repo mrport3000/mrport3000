@@ -48,7 +48,7 @@ class ModalStarRating extends React.Component {
                   />
                   <FaStar
                     className="eric-RR-star"
-                    color={ratingVal <= setRating ? '#3C6E71' : '#353535'}
+                    color={ratingVal <= setRating ? '#F76C5E' : '#353535'}
                     size={55}
                   />
                 </label>

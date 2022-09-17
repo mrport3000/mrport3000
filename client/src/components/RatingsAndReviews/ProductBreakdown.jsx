@@ -1,11 +1,8 @@
 import React from 'react';
 
 import './RatingAndReview.css';
-// import productBreakdownPlaceholder from './assets/Product-breakdown-placeholder.png';
 
 function ProductBreakdown(props) {
-  // console.log('Product Breakdown props: ', props.features);
-
   const formatDiv = (key) => {
     const arr = [];
     if (key === 'Size') {
@@ -26,20 +23,17 @@ function ProductBreakdown(props) {
     if (key === 'Fit') {
       arr.push(key, 'Runs tight', 'Perfect', 'Runs long');
     }
-    // console.log('props.feature values: ', key);
-    // console.log('inner arr: ', arr)
     return arr;
   };
 
   return (
     <div className="eric-RR-productBreakdownContainer">
       {
-      Object.keys(props.features).map((char) => {
-        // console.log('map char: ', char);
+      Object.keys(props.features).map((char, index) => {
         const charFeatures = formatDiv(char);
 
         return (
-          <div className="eric-RR-pbCharacteristic">
+          <div className="eric-RR-pbCharacteristic" key={index}>
             <div className="eric-RR-pbTitleBreakdown">{charFeatures[0]}</div>
             <div className="eric-RR-pbScale">
               <div className="eric-RR-pbLeft">
