@@ -34,7 +34,7 @@ function ProductBreakdown(props) {
         const charValue = props.features[char].value;
         const cValPercent = (charValue * 100) / 5;
         let finalPercent = Number(cValPercent) + '%';
-        console.log('charvalue: ', finalPercent)
+        console.log('charvalue: ', cValPercent)
         return (
           <div className="eric-RR-pbCharacteristic" key={index}>
             <div className="eric-RR-pbTitleBreakdown">{charFeatures[0]}</div>
