@@ -33,14 +33,22 @@ function AnswerItem(props) {
       {
         Object.keys(answers).map((key, index) => {
           const answer = answers[key];
+          let photos;
+
           if (!expanded && index >= 2) {
             return null;
           }
+
+          if (answer.photos.length > 0) {
+            photos = answer.photos.map((photo) => <img className="kris-answer-photo" alt="invalid" src={photo} />);
+          }
+
           return (
             <div className="kris-Answer" id={key}>
               <h4 className="kris-AnswerBody">
                 {`A:${answer.body.padStart(answer.body.length + 1, ' ')}\n`}
               </h4>
+              {photos}
               <p className="kris-AnswerAuth">
                 {`\nby: ${answer.answerer_name}, ${format(new Date(answer.date), 'MM/dd/yyyy')}`}
               </p>

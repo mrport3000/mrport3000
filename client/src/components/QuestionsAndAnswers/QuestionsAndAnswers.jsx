@@ -31,6 +31,7 @@ class QandA extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleExpand = this.handleExpand.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleAnswersChange = this.handleAnswersChange.bind(this);
     this.handleQuestion = this.handleQuestion.bind(this);
     this.handleNickname = this.handleNickname.bind(this);
     this.handleEmail = this.handleEmail.bind(this);
@@ -50,7 +51,6 @@ class QandA extends React.Component {
 
   handleClick(key, value) {
     this.setState({ [key]: value });
-    console.log('CLICK HANDLED');
   }
 
   handleExpand() {
@@ -74,6 +74,12 @@ class QandA extends React.Component {
         isSearching: true,
       });
     }
+  }
+
+  handleAnswersChange(key, answers) {
+    const { list } = this.state;
+    list.results[key].answers = answers;
+    this.setState({ list });
   }
 
   handleQuestion(event) {
@@ -110,32 +116,33 @@ class QandA extends React.Component {
           <h2 className="kris-qaTitle">QUESTIONS AND ANSWERS</h2>
           <QandASearch search={query} change={this.handleChange} />
           {
-          list.results.map((qanda, key) => {
-            if (!isExpanded && key >= 2) {
-              return (<div />);
-            }
+            list.results.map((qanda, key) => {
+              if (!isExpanded && key >= 2) {
+                return (<div />);
+              }
 
-            return (
-              <div className="kris-qaItem">
-                <QuestionItem
-                  question={qanda.question_body}
-                  qid={qanda.question_id}
-                  helpful={qanda.question_helpfulness}
-                  product={product}
-                  nickname={nickname}
-                  nicknameChange={this.handleNickname}
-                  email={email}
-                  emailChange={this.handleEmail}
-                  id={key}
-                />
-                <AnswerItem
-                  answers={qanda.answers}
-                  expanded={isExpanded}
-                />
-              </div>
-            );
-          })
-        }
+              return (
+                <div className="kris-qaItem">
+                  <QuestionItem
+                    question={qanda.question_body}
+                    qid={qanda.question_id}
+                    helpful={qanda.question_helpfulness}
+                    product={product}
+                    nickname={nickname}
+                    nicknameChange={this.handleNickname}
+                    email={email}
+                    emailChange={this.handleEmail}
+                    answersChange={this.handleAnswersChange}
+                    id={key}
+                  />
+                  <AnswerItem
+                    answers={qanda.answers}
+                    expanded={isExpanded}
+                  />
+                </div>
+              );
+            })
+          }
           <QuestionModal
             show={isQuestioning}
             pid={Number(list.product_id)}
@@ -154,10 +161,10 @@ class QandA extends React.Component {
             <button
               className="navButton"
               type="button"
-          // style={{ visibility: list.length >= 2 ? 'visible' : 'hidden' }}
+              // style={{ visibility: (list.length >= 2 ? 'visible' : 'hidden') }}
               onClick={this.handleExpand}
             >
-              {(isExpanded ? 'collapse answers' : 'see more answers')}
+              {(isExpanded ? 'collapse' : 'see all')}
             </button>
             <button className="navButton" type="button" onClick={() => { this.handleClick('isQuestioning', !isQuestioning); }}>ask a question</button>
           </div>
