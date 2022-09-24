@@ -43,6 +43,8 @@ class AnswerModal extends React.Component {
       nickname,
       email,
       userAnswer,
+      index,
+      answersChange,
     } = this.props;
 
     if (!show) {
@@ -92,7 +94,11 @@ class AnswerModal extends React.Component {
                 value={email}
                 onChange={emailChange}
               />
+              <p className="kris-p-small">For authentication reasons, you will not be emailed</p>
             </div>
+          </div>
+          <div className="kris-fileUpload">
+            <input type="file" />
           </div>
           <div className="kris-aModalNav">
             <button className="navButton" type="button" onClick={close}>Close</button>
@@ -100,15 +106,17 @@ class AnswerModal extends React.Component {
               className="navButton"
               type="button"
               onClick={() => {
-                console.log(`A: ${userAnswer}\nN: ${nickname}\nE: ${email}`);
-
                 axios.post(`/qanda/question/${id}/submitanswer`, {
                   body: userAnswer,
                   name: nickname,
                   email,
                   photos: [''],
-                }).then((response) => {
-                  console.log(response);
+                }).then(() => {
+                  axios.get(`/qanda/answers/${id}`).then((result) => {
+                    answersChange(index, result.data.results);
+                  }).catch((error) => {
+                    console.log(error);
+                  });
                 }).catch((error) => {
                   console.log(error);
                 });
@@ -118,6 +126,25 @@ class AnswerModal extends React.Component {
             >
               Submit Answer
             </button>
+            {/* <button
+              className="navButton"
+              type="button"
+              onClick={() => {
+                axios.get(`/qanda/answers/${id}`).then((response) => {
+                  console.log('HERE IS YOUR QUESTION INDEX MOTHERFUCKER: ', index);
+                  console.log('HERE ARE YOU ANSWERS MOTHERFUCKER:', response.data.results);
+                  answersChange(index, response.data.results);
+                }).catch((error) => {
+                  console.log(error);
+                });
+                event.preventDefault();
+                close();
+              }}
+            >
+              TEST
+              {' '}
+
+            </button> */}
           </div>
         </div>
       </div>
@@ -126,6 +153,8 @@ class AnswerModal extends React.Component {
 }
 
 AnswerModal.propTypes = {
+  answersChange: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
   userAnswer: PropTypes.string.isRequired,
   show: PropTypes.bool.isRequired,
   product: PropTypes.string.isRequired,

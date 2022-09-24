@@ -63,6 +63,7 @@ function QuestionModal(props) {
               value={email}
               onChange={emailChange}
             />
+            <p className="kris-p-small">For authentication reasons, you will not be emailed</p>
           </div>
         </div>
         <div className="kris-modal-footer">
@@ -71,19 +72,22 @@ function QuestionModal(props) {
             className="navButton"
             type="button"
             onClick={() => {
-              axios.post('/qanda/question/', {
-                body: question,
-                name: nickname,
-                email,
-                product_id: pid,
-              }).then((response) => {
-                console.log(response);
-              }).catch((error) => {
-                console.log(error);
-              });
-
-              event.preventDefault();
-              close();
+              if (question && nickname && email) {
+                axios.post('/qanda/question/', {
+                  body: question,
+                  name: nickname,
+                  email,
+                  product_id: pid,
+                }).then((response) => {
+                  console.log(response);
+                }).catch((error) => {
+                  console.log(error);
+                });
+                event.preventDefault();
+                close();
+              } else {
+                (`you still need stuff`)
+              }
             }}
           >
             Submit Question

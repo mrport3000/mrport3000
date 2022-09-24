@@ -16,6 +16,7 @@ class QuestionItem extends React.Component {
       product,
       nicknameChange,
       emailChange,
+      id,
     } = this.props;
 
     this.state = {
@@ -27,6 +28,7 @@ class QuestionItem extends React.Component {
       product,
       nicknameChange,
       emailChange,
+      id,
     };
 
     this.handleAnswering = this.handleAnswering.bind(this);
@@ -53,12 +55,14 @@ class QuestionItem extends React.Component {
       product,
       nicknameChange,
       emailChange,
+      id,
     } = this.state;
 
     const {
       question,
       nickname,
       email,
+      answersChange,
     } = this.props;
 
     return (
@@ -89,7 +93,9 @@ class QuestionItem extends React.Component {
           nicknameChange={nicknameChange}
           email={email}
           emailChange={emailChange}
+          answersChange={answersChange}
           id={qid}
+          index={id}
           close={this.handleAnswering}
         />
       </div>
@@ -98,6 +104,8 @@ class QuestionItem extends React.Component {
 }
 
 QuestionItem.propTypes = {
+  answersChange: PropTypes.func.isRequired,
+  id: PropTypes.number.isRequired,
   question: PropTypes.string.isRequired,
   qid: PropTypes.number.isRequired,
   helpful: PropTypes.number.isRequired,

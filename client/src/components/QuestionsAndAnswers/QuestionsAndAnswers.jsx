@@ -31,6 +31,7 @@ class QandA extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleExpand = this.handleExpand.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleAnswersChange = this.handleAnswersChange.bind(this);
     this.handleQuestion = this.handleQuestion.bind(this);
     this.handleNickname = this.handleNickname.bind(this);
     this.handleEmail = this.handleEmail.bind(this);
@@ -76,6 +77,16 @@ class QandA extends React.Component {
     }
   }
 
+  handleAnswersChange(key, answers) {
+    let list = this.state.list;
+    console.log('BEF : ', list.results[key].answers);
+    console.log('KEY : ', key);
+    list.results[key].answers = answers;
+    this.setState({ list });
+    console.log('ANS : ', answers);
+    console.log('AFT : ', list.results[key].answers);
+  }
+
   handleQuestion(event) {
     this.setState({ qaQuestion: event.target.value });
   }
@@ -105,6 +116,9 @@ class QandA extends React.Component {
 
     return (
       <div className="kris-qanda">
+        {
+          console.log('LIST: ', list)
+        }
         <div className="kris-qanda-Inner">
 
           <h2 className="kris-qaTitle">QUESTIONS AND ANSWERS</h2>
@@ -126,6 +140,7 @@ class QandA extends React.Component {
                   nicknameChange={this.handleNickname}
                   email={email}
                   emailChange={this.handleEmail}
+                  answersChange={this.handleAnswersChange}
                   id={key}
                 />
                 <AnswerItem
