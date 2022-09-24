@@ -51,7 +51,6 @@ class QandA extends React.Component {
 
   handleClick(key, value) {
     this.setState({ [key]: value });
-    console.log('CLICK HANDLED');
   }
 
   handleExpand() {
@@ -78,13 +77,9 @@ class QandA extends React.Component {
   }
 
   handleAnswersChange(key, answers) {
-    let list = this.state.list;
-    console.log('BEF : ', list.results[key].answers);
-    console.log('KEY : ', key);
+    const { list } = this.state;
     list.results[key].answers = answers;
     this.setState({ list });
-    console.log('ANS : ', answers);
-    console.log('AFT : ', list.results[key].answers);
   }
 
   handleQuestion(event) {
@@ -116,9 +111,6 @@ class QandA extends React.Component {
 
     return (
       <div className="kris-qanda">
-        {
-          console.log('LIST: ', list)
-        }
         <div className="kris-qanda-Inner">
 
           <h2 className="kris-qaTitle">QUESTIONS AND ANSWERS</h2>
@@ -169,7 +161,7 @@ class QandA extends React.Component {
             <button
               className="navButton"
               type="button"
-          // style={{ visibility: list.length >= 2 ? 'visible' : 'hidden' }}
+              // style={{ visibility: (list.length >= 2 ? 'visible' : 'hidden') }}
               onClick={this.handleExpand}
             >
               {(isExpanded ? 'collapse' : 'see all')}

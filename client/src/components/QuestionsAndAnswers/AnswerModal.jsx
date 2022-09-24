@@ -39,7 +39,6 @@ class AnswerModal extends React.Component {
 
     axios.post('https://api.cloudinary.com/v1_1/dtlm8exth/image/upload', formData)
       .then((response) => {
-        console.log('RESPONSE: ', response.data.secure_url);
         answerPhotos.push(response.data.secure_url);
         this.setState({ answerPhotos });
       });
@@ -74,13 +73,11 @@ class AnswerModal extends React.Component {
     const photoAdd = this.handlePhotoAdd;
 
     if (answerPhotos.length > 0) {
-      photos = answerPhotos.map((photo) => <img className="kris-answer-photo" alt="replace me" src={photo.url} />);
+      photos = answerPhotos.map((photo) => <img className="kris-answer-photo" alt="invalid" src={photo.url} />);
     }
 
     function upload() {
-      console.log('WE REACHED UPLOAD');
       if (answerPhotos.length >= 5) {
-        console.log('WE ARE IN HERE FOR SOME REASON');
         return null;
       }
 

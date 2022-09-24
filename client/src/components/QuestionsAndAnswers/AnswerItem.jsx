@@ -40,7 +40,7 @@ function AnswerItem(props) {
           }
 
           if (answer.photos.length > 0) {
-            photos = answer.photos.map((photo) => <img className="kris-answer-photo" alt="replace me" src={photo} />);
+            photos = answer.photos.map((photo) => <img className="kris-answer-photo" alt="invalid" src={photo} />);
           }
 
           return (
