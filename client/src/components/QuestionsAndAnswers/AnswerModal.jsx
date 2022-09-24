@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -24,7 +25,24 @@ class AnswerModal extends React.Component {
       emailChange,
       id,
       close,
+      answerPhotos: [],
     };
+
+    this.handlePhotoAdd = this.handlePhotoAdd.bind(this);
+  }
+
+  handlePhotoAdd(photo) {
+    const { answerPhotos } = this.state;
+    const formData = new FormData();
+    formData.append('file', photo[0]);
+    formData.append('upload_preset', 'FEC-Atelier-QA-Photo-Upload');
+
+    axios.post('https://api.cloudinary.com/v1_1/dtlm8exth/image/upload', formData)
+      .then((response) => {
+        console.log('RESPONSE: ', response.data.secure_url);
+        answerPhotos.push(response.data.secure_url);
+        this.setState({ answerPhotos });
+      });
   }
 
   render() {
@@ -36,6 +54,7 @@ class AnswerModal extends React.Component {
       emailChange,
       id,
       close,
+      answerPhotos,
     } = this.state;
 
     const {
@@ -49,6 +68,28 @@ class AnswerModal extends React.Component {
 
     if (!show) {
       return null;
+    }
+
+    let photos;
+    const photoAdd = this.handlePhotoAdd;
+
+    if (answerPhotos.length > 0) {
+      photos = answerPhotos.map((photo) => <img className="kris-answer-photo" alt="replace me" src={photo.url} />);
+    }
+
+    function upload() {
+      console.log('WE REACHED UPLOAD');
+      if (answerPhotos.length >= 5) {
+        console.log('WE ARE IN HERE FOR SOME REASON');
+        return null;
+      }
+
+      return (
+        <label className="custom-file-upload">
+          <input type="file" onChange={(event) => { photoAdd(event.target.files); }} />
+          Upload Photos
+        </label>
+      );
     }
 
     return (
@@ -98,11 +139,8 @@ class AnswerModal extends React.Component {
             </div>
           </div>
           <div className="kris-fileUpload">
-            {/* <input className="kris-fileUploadButton" type="file" /> */}
-            <label className="custom-file-upload">
-              <input type="file" />
-              Upload Photos
-            </label>
+            {upload()}
+            {photos}
           </div>
           <div className="kris-aModalNav">
             <button className="navButton" type="button" onClick={close}>Close</button>
@@ -114,7 +152,7 @@ class AnswerModal extends React.Component {
                   body: userAnswer,
                   name: nickname,
                   email,
-                  photos: [''],
+                  photos: answerPhotos,
                 }).then(() => {
                   axios.get(`/qanda/answers/${id}`).then((result) => {
                     answersChange(index, result.data.results);
