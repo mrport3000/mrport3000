@@ -172,7 +172,7 @@ class QandA extends React.Component {
           // style={{ visibility: list.length >= 2 ? 'visible' : 'hidden' }}
               onClick={this.handleExpand}
             >
-              {(isExpanded ? 'collapse answers' : 'see more answers')}
+              {(isExpanded ? 'collapse' : 'see all')}
             </button>
             <button className="navButton" type="button" onClick={() => { this.handleClick('isQuestioning', !isQuestioning); }}>ask a question</button>
           </div>

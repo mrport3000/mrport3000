@@ -98,7 +98,11 @@ class AnswerModal extends React.Component {
             </div>
           </div>
           <div className="kris-fileUpload">
-            <input type="file" />
+            {/* <input className="kris-fileUploadButton" type="file" /> */}
+            <label className="custom-file-upload">
+              <input type="file" />
+              Upload Photos
+            </label>
           </div>
           <div className="kris-aModalNav">
             <button className="navButton" type="button" onClick={close}>Close</button>
@@ -126,25 +130,6 @@ class AnswerModal extends React.Component {
             >
               Submit Answer
             </button>
-            {/* <button
-              className="navButton"
-              type="button"
-              onClick={() => {
-                axios.get(`/qanda/answers/${id}`).then((response) => {
-                  console.log('HERE IS YOUR QUESTION INDEX MOTHERFUCKER: ', index);
-                  console.log('HERE ARE YOU ANSWERS MOTHERFUCKER:', response.data.results);
-                  answersChange(index, response.data.results);
-                }).catch((error) => {
-                  console.log(error);
-                });
-                event.preventDefault();
-                close();
-              }}
-            >
-              TEST
-              {' '}
-
-            </button> */}
           </div>
         </div>
       </div>
