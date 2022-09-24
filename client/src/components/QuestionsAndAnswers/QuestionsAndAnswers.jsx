@@ -116,33 +116,33 @@ class QandA extends React.Component {
           <h2 className="kris-qaTitle">QUESTIONS AND ANSWERS</h2>
           <QandASearch search={query} change={this.handleChange} />
           {
-          list.results.map((qanda, key) => {
-            if (!isExpanded && key >= 2) {
-              return (<div />);
-            }
+            list.results.map((qanda, key) => {
+              if (!isExpanded && key >= 2) {
+                return (<div />);
+              }
 
-            return (
-              <div className="kris-qaItem">
-                <QuestionItem
-                  question={qanda.question_body}
-                  qid={qanda.question_id}
-                  helpful={qanda.question_helpfulness}
-                  product={product}
-                  nickname={nickname}
-                  nicknameChange={this.handleNickname}
-                  email={email}
-                  emailChange={this.handleEmail}
-                  answersChange={this.handleAnswersChange}
-                  id={key}
-                />
-                <AnswerItem
-                  answers={qanda.answers}
-                  expanded={isExpanded}
-                />
-              </div>
-            );
-          })
-        }
+              return (
+                <div className="kris-qaItem">
+                  <QuestionItem
+                    question={qanda.question_body}
+                    qid={qanda.question_id}
+                    helpful={qanda.question_helpfulness}
+                    product={product}
+                    nickname={nickname}
+                    nicknameChange={this.handleNickname}
+                    email={email}
+                    emailChange={this.handleEmail}
+                    answersChange={this.handleAnswersChange}
+                    id={key}
+                  />
+                  <AnswerItem
+                    answers={qanda.answers}
+                    expanded={isExpanded}
+                  />
+                </div>
+              );
+            })
+          }
           <QuestionModal
             show={isQuestioning}
             pid={Number(list.product_id)}
