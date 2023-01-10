@@ -37,6 +37,6 @@ AUTH = github api key
 
 ## Contributers
 [Keith Hall](https://github.com/jkeithhall): Product Overview<br>
-[Duke Romkey](https://github.com/dukeromkey): Related Items & Outfits<br>
+[Duke Romkey](https://github.com/dukeromkey): Related Products & Outfits<br>
 [Kris Opeda](https://github.com/kopeda): Questions & Answers<br>
 [Eric Kalin](https://github.com/ekalin12): Ratings & Reviews<br>
