@@ -32,7 +32,7 @@ PORT = 3000
 NODE_ENV = false
 AUTH = github api key
 ```
-- run `npm start`
+- run `npm server`
 -navigate to localhost:3000
 
 ## Contributers
